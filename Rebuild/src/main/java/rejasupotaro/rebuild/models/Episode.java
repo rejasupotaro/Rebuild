@@ -1,5 +1,12 @@
 package rejasupotaro.rebuild.models;
 
+import android.net.Uri;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rejasupotaro.asyncrssclient.models.RssItem;
+
 public class Episode {
 
     private String mTitle;
@@ -8,7 +15,7 @@ public class Episode {
 
     private String mDescription;
 
-    private String mEnclosure;
+    private Uri mEnclosure;
 
     private String mShowNotes;
 
@@ -28,7 +35,7 @@ public class Episode {
         return mPostedAt;
     }
 
-    public String getEnclosure() {
+    public Uri getEnclosure() {
         return mEnclosure;
     }
 
@@ -44,26 +51,38 @@ public class Episode {
         return mCommentedCount;
     }
 
-    private Episode(String title, String description, String postedAt, String enclosure,
-                    String showNotes, int favoritedCount, int commentedCount) {
+    private Episode(String title, String description, String postedAt, Uri enclosure,
+                    String showNotes) {
         mTitle = title;
         mDescription = description;
         mPostedAt = postedAt;
         mEnclosure = enclosure;
         mShowNotes = showNotes;
-        mFavoritedCount = favoritedCount;
-        mCommentedCount = commentedCount;
+    }
+
+    public static Episode newEpisodeFromEntity(RssItem rssItem) {
+        return new Episode(
+                rssItem.getTitle(),
+                rssItem.getDescription(),
+                rssItem.getPubDate(),
+                rssItem.getMediaEnclosure().getUrl(),
+                "");
+    }
+
+    public static List<Episode> newEpisodeFromEntity(List<RssItem> rssItemList) {
+        List<Episode> episodeList = new ArrayList<Episode>();
+        for (RssItem rssItem : rssItemList) {
+            episodeList.add(newEpisodeFromEntity(rssItem));
+        }
+        return episodeList;
     }
 
     public static Episode newDummyInstance() {
-        Episode episode = new Episode(
+        return new Episode(
                 "24: Go, Mavericks, LinkedIn Intro (typester)",
                 "Daisuke Muraseさん (@typester) をゲストに迎えて、Go, OS X Mavericks, Safari Notifications, LinkedIn Intro, Tweetbot などについて話しました。",
                 "Thu, 31 Oct 2013 00:00:00 -0700",
-                "http://tracking.feedpress.it/link/1949/5437/podcast-ep24.mp3",
-                "",
-                3,
-                3);
-        return episode;
+                Uri.parse("http://tracking.feedpress.it/link/1949/5437/podcast-ep24.mp3"),
+                "");
     }
 }
