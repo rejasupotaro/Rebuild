@@ -10,6 +10,7 @@ apply plugin: 'android'
 
 repositories {
     mavenCentral()
+    maven { url 'https://raw.github.com/rejasupotaro/AsyncRssClient/master/AsyncRssClient/repository' }
 }
 
 android {
@@ -25,4 +26,5 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:18.0.0'
     compile 'org.roboguice:roboguice:2.0'
+    compile 'rejasupotaro:async-rss-client:0.0.2'
 }
