@@ -10,8 +10,8 @@ import java.util.List;
 
 import rejasupotaro.asyncrssclient.AsyncRssClient;
 import rejasupotaro.asyncrssclient.AsyncRssResponseHandler;
-import rejasupotaro.asyncrssclient.models.RssFeed;
-import rejasupotaro.asyncrssclient.models.RssItem;
+import rejasupotaro.asyncrssclient.RssFeed;
+import rejasupotaro.asyncrssclient.RssItem;
 import rejasupotaro.rebuild.models.Episode;
 
 public class EpisodeClient {

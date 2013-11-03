@@ -5,7 +5,7 @@ import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
 
-import rejasupotaro.asyncrssclient.models.RssItem;
+import rejasupotaro.asyncrssclient.RssItem;
 
 public class Episode {
 
@@ -63,7 +63,7 @@ public class Episode {
     public static Episode newEpisodeFromEntity(RssItem rssItem) {
         return new Episode(
                 rssItem.getTitle(),
-                rssItem.getDescription(),
+                rssItem.getSubtitle(),
                 rssItem.getPubDate(),
                 rssItem.getMediaEnclosure().getUrl(),
                 "");
