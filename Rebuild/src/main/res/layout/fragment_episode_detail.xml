@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/drag_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sliding_panel_height">
+
+        <TextView
+            android:text="SlidingUpPanelLayout"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:background="@drawable/bg_rebuild"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" />
+
+</LinearLayout>
