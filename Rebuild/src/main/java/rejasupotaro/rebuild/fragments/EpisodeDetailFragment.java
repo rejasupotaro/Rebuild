@@ -4,12 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
 import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 
 public class EpisodeDetailFragment extends RoboFragment {
+
+    @InjectView(R.id.episode_title)
+    private TextView mEpisodeTitleTextView;
+
+    @InjectView(R.id.episode_description)
+    private TextView mEpisodeDescriptionTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,6 +30,7 @@ public class EpisodeDetailFragment extends RoboFragment {
     }
 
     public void setup(Episode episode) {
-
+        mEpisodeTitleTextView.setText(episode.getTitle());
+        mEpisodeDescriptionTextView.setText(episode.getDescription());
     }
 }

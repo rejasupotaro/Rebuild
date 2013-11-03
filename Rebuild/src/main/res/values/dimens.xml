@@ -1,3 +1,5 @@
 <resources>
-    <dimen name="sliding_panel_height">48dp</dimen>
+    <dimen name="sliding_up_panel_height">48dp</dimen>
+    <dimen name="padding_common">6dp</dimen>
+    <dimen name="padding_episode_title">12dp</dimen>
 </resources>

@@ -5,8 +5,9 @@
 
     <RelativeLayout
         android:id="@+id/drag_view"
+        android:background="@color/defaul_actionbar_color"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sliding_panel_height">
+        android:layout_height="@dimen/sliding_up_panel_height">
 
         <TextView
             android:text="SlidingUpPanelLayout"
@@ -16,9 +17,37 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:background="@drawable/bg_rebuild"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp" />
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:background="@drawable/bg_rebuild"
+            android:layout_width="match_parent"
+            android:layout_height="140dp" />
+
+        <TextView
+            android:id="@+id/episode_title"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_episode_title"
+            android:padding="@dimen/padding_episode_title"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+    <TextView
+        android:id="@+id/episode_description"
+        android:padding="@dimen/padding_common"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:background="@color/defaul_actionbar_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sliding_up_panel_height"/>
 </LinearLayout>
