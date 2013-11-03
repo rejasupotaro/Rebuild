@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.models.Episode;
 import roboguice.fragment.RoboFragment;
 
 public class EpisodeDetailFragment extends RoboFragment {
@@ -18,5 +19,9 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    public void setup(Episode episode) {
+
     }
 }

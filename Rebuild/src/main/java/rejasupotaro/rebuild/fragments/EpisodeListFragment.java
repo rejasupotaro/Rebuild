@@ -1,7 +1,10 @@
 package rejasupotaro.rebuild.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ListView;
 
 import com.google.inject.Inject;
 
@@ -16,7 +19,19 @@ import roboguice.fragment.RoboListFragment;
 public class EpisodeListFragment extends RoboListFragment {
 
     @Inject
-    android.view.LayoutInflater mLayoutInflater;
+    private LayoutInflater mLayoutInflater;
+
+    private OnEpisodeSelectListener mListener;
+
+    public static interface OnEpisodeSelectListener {
+        public void onSelect(Episode episode);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mListener = (OnEpisodeSelectListener) activity;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -38,5 +53,11 @@ public class EpisodeListFragment extends RoboListFragment {
 
         EpisodeListAdapter episodeListAdapter = new EpisodeListAdapter(getActivity(), 0, episodeList);
         setListAdapter(episodeListAdapter);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        mListener.onSelect((Episode) l.getItemAtPosition(position));
     }
 }

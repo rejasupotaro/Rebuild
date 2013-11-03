@@ -1,17 +1,19 @@
 package rejasupotaro.rebuild.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.View;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
+import rejasupotaro.rebuild.fragments.EpisodeListFragment;
+import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.views.SlidingUpPanelLayout;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
 
-public class MainActivity extends RoboFragmentActivity {
-
-    private static final float SLIDING_PANEL_ANCHOR_POINT = 0.3f;
+public class MainActivity extends RoboFragmentActivity implements EpisodeListFragment.OnEpisodeSelectListener {
 
     private static final float SLIDING_PANEL_SLIDE_OFFSET = 0.2f;
 
@@ -26,12 +28,11 @@ public class MainActivity extends RoboFragmentActivity {
     }
 
     private void setupSlidingPanel() {
-        SlidingUpPanelLayout slidingPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_panel_layout);
-        slidingPanelLayout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));
-        slidingPanelLayout.setAnchorPoint(SLIDING_PANEL_ANCHOR_POINT);
-        slidingPanelLayout.setPanelHeight(getResources().getDimensionPixelSize(R.dimen.sliding_panel_height));
-        slidingPanelLayout.setPanelSlideListener(mPanelSlideListener);
-        slidingPanelLayout.setDragView(mDragView);
+        SlidingUpPanelLayout slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel_layout);
+        slidingUpPanelLayout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));
+        slidingUpPanelLayout.setPanelHeight(getResources().getDimensionPixelSize(R.dimen.sliding_panel_height));
+        slidingUpPanelLayout.setPanelSlideListener(mPanelSlideListener);
+        slidingUpPanelLayout.setDragView(mDragView);
     }
 
     private SlidingUpPanelLayout.PanelSlideListener mPanelSlideListener = new SlidingUpPanelLayout.PanelSlideListener() {
@@ -69,4 +70,16 @@ public class MainActivity extends RoboFragmentActivity {
         return true;
     }
 
+    @Override
+    public void onSelect(Episode episode) {
+        SlidingUpPanelLayout slidingUpPanelLayout =
+                (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel_layout);
+        slidingUpPanelLayout.expandPane();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        EpisodeDetailFragment episodeDetailFragment =
+                (EpisodeDetailFragment) fragmentManager.findFragmentById(R.id.fragment_episode_detail);
+        episodeDetailFragment.setup(episode);
+    }
 }
