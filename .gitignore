@@ -1,0 +1,15 @@
+*.iml
+*.iws
+*.ipr
+.idea/
+.gradle/
+local.properties
+
+*/build/
+secret.gradle
+
+*~
+*.swp
+.DS_Store
+
+com_crashlytics_export_strings.xml
