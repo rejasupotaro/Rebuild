@@ -40,13 +40,7 @@ public class EpisodeDetailFragment extends RoboFragment {
         mEpisodeDescriptionTextView.setText(episode.getDescription());
         mMediaDurationTextView.setText(episode.getDuration());
 
-        try {
-            PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-            podcastPlayer.setDataSource(getActivity(), episode.getEnclosure());
-            podcastPlayer.prepare();
-            podcastPlayer.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        podcastPlayer.play(getActivity(), episode.getEnclosure());
     }
 }
