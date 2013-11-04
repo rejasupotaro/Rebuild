@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.asyncrssclient.RssItem;
+import rejasupotaro.rebuild.utils.StringUtils;
 
 public class Episode {
 
@@ -54,7 +55,7 @@ public class Episode {
     private Episode(String title, String description, String postedAt, Uri enclosure,
                     String showNotes) {
         mTitle = title;
-        mDescription = description;
+        mDescription = StringUtils.removeNewLines(description);
         mPostedAt = postedAt;
         mEnclosure = enclosure;
         mShowNotes = showNotes;
