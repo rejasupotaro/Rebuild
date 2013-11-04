@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
@@ -36,5 +39,14 @@ public class EpisodeDetailFragment extends RoboFragment {
         mEpisodeTitleTextView.setText(episode.getTitle());
         mEpisodeDescriptionTextView.setText(episode.getDescription());
         mMediaDurationTextView.setText(episode.getDuration());
+
+        try {
+            PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+            podcastPlayer.setDataSource(getActivity(), episode.getEnclosure());
+            podcastPlayer.prepare();
+            podcastPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

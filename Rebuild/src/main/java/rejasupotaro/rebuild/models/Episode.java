@@ -17,8 +17,6 @@ import rejasupotaro.rebuild.utils.StringUtils;
 @Table(name = "episodes")
 public class Episode extends Model {
 
-    public static final String TAG = Episode.class.getSimpleName();
-
     @Column(name = "title")
     private String mTitle;
 
