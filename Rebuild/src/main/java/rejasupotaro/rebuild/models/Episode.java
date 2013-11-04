@@ -2,6 +2,10 @@ package rejasupotaro.rebuild.models;
 
 import android.net.Uri;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,25 +13,37 @@ import rejasupotaro.asyncrssclient.RssItem;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 
-public class Episode {
+@Table(name = "episodes")
+public class Episode extends Model {
 
     public static final String TAG = Episode.class.getSimpleName();
 
+    @Column(name = "title")
     private String mTitle;
 
+    @Column(name = "posted_at")
     private String mPostedAt;
 
+    @Column(name = "description")
     private String mDescription;
 
+    @Column(name = "enclosure")
     private Uri mEnclosure;
 
+    @Column(name = "duration")
     private String mDuration;
 
+    @Column(name = "show_notes")
     private String mShowNotes;
 
+    @Column(name = "favorited_count")
     private int mFavoritedCount;
 
+    @Column(name = "commented_count")
     private int mCommentedCount;
+
+    @Column(name = "media_local_path")
+    private String mMediaLocalPath;
 
     public String getTitle() {
         return mTitle;
@@ -59,6 +75,10 @@ public class Episode {
 
     public int getCommentedCount() {
         return mCommentedCount;
+    }
+
+    public String getMediaLocalPath() {
+        return mMediaLocalPath;
     }
 
     private Episode(String title, String description, String postedAt, Uri enclosure,
