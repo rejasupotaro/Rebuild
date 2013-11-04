@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.io.IOException;
 
+import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.Timer;
 
 public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPreparedListener {
@@ -16,6 +17,8 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
     private static PodcastPlayer sInstance;
 
     private Timer mTimer;
+
+    private Episode mEpisode;
 
     private StateChangedListener mStateChangedListener;
 
@@ -30,6 +33,11 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         return sInstance;
     }
 
+    public boolean isSameEpisode(Episode other) {
+        if (mEpisode == null) return false;
+        return mEpisode == other;
+    }
+
     public void setCurrentTimeListener(final CurrentTimeListener currentTimeListener) {
         mTimer = new Timer(new Timer.Callback() {
             @Override
@@ -40,17 +48,18 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         mTimer.start();
     }
 
-    public void play(Context context, Uri uri, StateChangedListener stateChangedListener) {
+    public void play(Context context, Episode episode, StateChangedListener stateChangedListener) {
+        mEpisode = episode;
         mStateChangedListener = stateChangedListener;
 
         reset();
         try {
             Context applicationContext = context.getApplicationContext();
-            setDataSource(applicationContext, uri);
+            setDataSource(applicationContext, episode.getEnclosure());
             prepareAsync();
             setOnPreparedListener(this);
         } catch (IOException e) {
-            Log.e(TAG, "An error occurred while preparing data source: " + uri.toString());
+            Log.e(TAG, "An error occurred while preparing data source: " + episode.getEnclosure().toString());
         }
     }
 

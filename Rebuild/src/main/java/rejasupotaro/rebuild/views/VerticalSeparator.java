@@ -3,7 +3,6 @@ package rejasupotaro.rebuild.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import rejasupotaro.rebuild.R;
 
@@ -15,6 +14,6 @@ public class VerticalSeparator extends View {
 
     public VerticalSeparator(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setBackgroundResource(R.color.smoke_black);
+        setBackgroundResource(R.color.dark_gray);
     }
 }

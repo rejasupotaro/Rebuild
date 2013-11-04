@@ -5,13 +5,13 @@
 
     <rejasupotaro.rebuild.views.VerticalSeparator
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp" />
 
-    <include layout="@layout/sliding_up_panel_drag_view"/>
+    <include layout="@layout/sliding_up_panel_drag_view" />
 
     <rejasupotaro.rebuild.views.VerticalSeparator
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         <ImageView
             android:background="@drawable/bg_on_the_air"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="240dp" />
 
         <TextView
             android:id="@+id/episode_title"
@@ -33,6 +33,20 @@
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@+id/media_play_button_on_image_cover"
+            android:background="@color/smoke_black"
+            android:layout_width="match_parent"
+            android:layout_height="240dp">
+
+            <ImageView
+                android:background="@drawable/media_play_button_on_image"
+                android:layout_gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="60dp" />
+
+        </FrameLayout>
 
     </FrameLayout>
 
@@ -47,7 +61,7 @@
             android:id="@+id/miyagawa"
             android:background="@drawable/miyagawa"
             android:layout_width="50dp"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
 
         <TextView
             android:id="@+id/episode_description"
@@ -57,13 +71,13 @@
             android:layout_toRightOf="@+id/miyagawa"
             android:layout_marginLeft="@dimen/padding_frame"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
     <rejasupotaro.rebuild.views.MediaControllerView
         android:id="@+id/media_controller_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

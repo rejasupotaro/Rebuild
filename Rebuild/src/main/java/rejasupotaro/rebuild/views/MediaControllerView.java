@@ -21,8 +21,6 @@ public class MediaControllerView extends LinearLayout {
 
     private ImageView mMediaPlayButton;
 
-    private Episode mCurrentEpisode;
-
     private SeekBar mMediaSeekBar;
 
     public MediaControllerView(Context context) {
@@ -48,24 +46,11 @@ public class MediaControllerView extends LinearLayout {
         addView(view, params);
     }
 
-    public boolean isSameEpisode(Episode episode) {
-        if (mCurrentEpisode == null) return false;
-        return mCurrentEpisode == episode;
-    }
-
-    public void setEpisode(Context context, Episode episode) {
-        if (isSameEpisode(episode)) return;
-        mCurrentEpisode = episode;
+    public void setEpisode(Episode episode) {
+        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        if (podcastPlayer.isSameEpisode(episode)) return;
 
         mMediaDurationTextView.setText(episode.getDuration());
-
-        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        podcastPlayer.play(context, episode.getEnclosure(), new PodcastPlayer.StateChangedListener() {
-            @Override
-            public void onStart() {
-                mMediaPlayButton.setBackgroundResource(android.R.drawable.ic_media_pause);
-            }
-        });
 
         podcastPlayer.setCurrentTimeListener(new PodcastPlayer.CurrentTimeListener() {
             @Override
@@ -89,6 +74,17 @@ public class MediaControllerView extends LinearLayout {
 
         mMediaSeekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
         mMediaSeekBar.setEnabled(false);
+    }
+
+    public void play(Context context, Episode episode) {
+        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        podcastPlayer.play(context, episode, new PodcastPlayer.StateChangedListener() {
+            @Override
+            public void onStart() {
+                mMediaPlayButton.setBackgroundResource(android.R.drawable.ic_media_pause);
+            }
+        });
+
     }
 
     public void updateCurrentTime(int currentPosition) {
