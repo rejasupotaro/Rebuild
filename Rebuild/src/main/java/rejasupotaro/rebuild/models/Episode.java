@@ -21,6 +21,8 @@ public class Episode {
 
     private Uri mEnclosure;
 
+    private String mDuration;
+
     private String mShowNotes;
 
     private int mFavoritedCount;
@@ -43,6 +45,10 @@ public class Episode {
         return mEnclosure;
     }
 
+    public String getDuration() {
+        return mDuration;
+    }
+
     public String getShowNotes() {
         return mShowNotes;
     }
@@ -56,11 +62,12 @@ public class Episode {
     }
 
     private Episode(String title, String description, String postedAt, Uri enclosure,
-                    String showNotes) {
+                    String duration, String showNotes) {
         mTitle = title;
         mDescription = StringUtils.removeNewLines(description);
         mPostedAt = DateUtils.formatPubDate(postedAt);
         mEnclosure = enclosure;
+        mDuration = duration;
         mShowNotes = showNotes;
     }
 
@@ -70,6 +77,7 @@ public class Episode {
                 rssItem.getSubtitle(),
                 rssItem.getPubDate(),
                 rssItem.getMediaEnclosure().getUrl(),
+                rssItem.getDuration(),
                 "");
     }
 
@@ -87,6 +95,7 @@ public class Episode {
                 "Daisuke Muraseさん (@typester) をゲストに迎えて、Go, OS X Mavericks, Safari Notifications, LinkedIn Intro, Tweetbot などについて話しました。",
                 "Thu, 31 Oct 2013 00:00:00 -0700",
                 Uri.parse("http://tracking.feedpress.it/link/1949/5437/podcast-ep24.mp3"),
+                "54:32",
                 "");
     }
 }

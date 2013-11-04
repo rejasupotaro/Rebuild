@@ -19,6 +19,9 @@ public class EpisodeDetailFragment extends RoboFragment {
     @InjectView(R.id.episode_description)
     private TextView mEpisodeDescriptionTextView;
 
+    @InjectView(R.id.media_duration)
+    private TextView mMediaDurationTextView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_episode_detail, container, false);
@@ -32,5 +35,6 @@ public class EpisodeDetailFragment extends RoboFragment {
     public void setup(Episode episode) {
         mEpisodeTitleTextView.setText(episode.getTitle());
         mEpisodeDescriptionTextView.setText(episode.getDescription());
+        mMediaDurationTextView.setText(episode.getDuration());
     }
 }

@@ -3,6 +3,6 @@
 
     <string name="app_name">Rebuild</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="default_duration">00:00</string>
 
 </resources>
