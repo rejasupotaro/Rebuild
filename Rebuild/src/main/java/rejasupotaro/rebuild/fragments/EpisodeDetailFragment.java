@@ -6,11 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.IOException;
-
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.utils.DateUtils;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -21,6 +20,9 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     @InjectView(R.id.episode_description)
     private TextView mEpisodeDescriptionTextView;
+
+    @InjectView(R.id.media_current_time)
+    private TextView mMediaCurrentTimeTextView;
 
     @InjectView(R.id.media_duration)
     private TextView mMediaDurationTextView;
@@ -42,5 +44,11 @@ public class EpisodeDetailFragment extends RoboFragment {
 
         PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         podcastPlayer.play(getActivity(), episode.getEnclosure());
+        podcastPlayer.setCurrentTimeListener(new PodcastPlayer.CurrentTimeListener() {
+            @Override
+            public void onTick(int currentPosition) {
+                mMediaCurrentTimeTextView.setText(DateUtils.formatCurrentTime(currentPosition));
+            }
+        });
     }
 }

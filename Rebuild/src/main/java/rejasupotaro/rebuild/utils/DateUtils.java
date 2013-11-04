@@ -14,6 +14,11 @@ public final class DateUtils {
 
     private DateUtils() {}
 
+    public static String formatCurrentTime(int currentTime) {
+        DateFormat formatter = new SimpleDateFormat("mm:ss");
+        return formatter.format(new Date(currentTime));
+    }
+
     /**
      * FIXME: This is terrible code... I should fix it soon.
      * @param source pubDate

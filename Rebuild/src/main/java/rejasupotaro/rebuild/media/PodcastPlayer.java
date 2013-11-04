@@ -7,11 +7,15 @@ import android.util.Log;
 
 import java.io.IOException;
 
+import rejasupotaro.rebuild.utils.Timer;
+
 public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPreparedListener {
 
     public static final String TAG = PodcastPlayer.class.getSimpleName();
 
     private static PodcastPlayer sInstance;
+
+    private Timer mTimer;
 
     private PodcastPlayer() {
         super();
@@ -22,6 +26,16 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
             sInstance = new PodcastPlayer();
         }
         return sInstance;
+    }
+
+    public void setCurrentTimeListener(final CurrentTimeListener listener) {
+        mTimer = new Timer(new Timer.Callback() {
+            @Override
+            public void tick(long timeMillis) {
+                listener.onTick(getCurrentPosition());
+            }
+        });
+        mTimer.start();
     }
 
     public void play(Context context, Uri uri) {
@@ -42,5 +56,9 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
     @Override
     public void onPrepared(MediaPlayer mp) {
         start();
+    }
+
+    public static interface CurrentTimeListener {
+        public void onTick(int currentPosition);
     }
 }
