@@ -17,6 +17,8 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     private Timer mTimer;
 
+    private StateChangedListener mStateChangedListener;
+
     private PodcastPlayer() {
         super();
     }
@@ -28,17 +30,19 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         return sInstance;
     }
 
-    public void setCurrentTimeListener(final CurrentTimeListener listener) {
+    public void setCurrentTimeListener(final CurrentTimeListener currentTimeListener) {
         mTimer = new Timer(new Timer.Callback() {
             @Override
             public void tick(long timeMillis) {
-                listener.onTick(getCurrentPosition());
+                currentTimeListener.onTick(getCurrentPosition());
             }
         });
         mTimer.start();
     }
 
-    public void play(Context context, Uri uri) {
+    public void play(Context context, Uri uri, StateChangedListener stateChangedListener) {
+        mStateChangedListener = stateChangedListener;
+
         if (isPlaying()) {
             reset();
         }
@@ -55,7 +59,12 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     @Override
     public void onPrepared(MediaPlayer mp) {
+        mStateChangedListener.onStart();
         start();
+    }
+
+    public static interface StateChangedListener {
+        public void onStart();
     }
 
     public static interface CurrentTimeListener {
