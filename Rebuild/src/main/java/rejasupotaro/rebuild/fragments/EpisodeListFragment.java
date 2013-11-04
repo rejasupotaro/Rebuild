@@ -44,7 +44,7 @@ public class EpisodeListFragment extends RoboListFragment {
         getListView().setFadingEdgeLength(0);
         getListView().addHeaderView(mLayoutInflater.inflate(R.layout.header_episode_list, null));
 
-        mClient.request(getActivity(), new EpisodeClient.EpisodeClientResponseHandler() {
+        mClient.request(new EpisodeClient.EpisodeClientResponseHandler() {
             @Override
             public void onSuccess(List<Episode> episodeList) {
                 setupEpisodeListView(episodeList);

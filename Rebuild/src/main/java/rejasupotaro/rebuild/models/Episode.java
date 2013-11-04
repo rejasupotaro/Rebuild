@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,8 +82,13 @@ public class Episode extends Model {
         return mMediaLocalPath;
     }
 
+    public Episode() {
+        super();
+    }
+
     private Episode(String title, String description, String postedAt, Uri enclosure,
                     String duration, String showNotes) {
+        super();
         mTitle = title;
         mDescription = StringUtils.removeNewLines(description);
         mPostedAt = DateUtils.formatPubDate(postedAt);
@@ -107,6 +113,19 @@ public class Episode extends Model {
             episodeList.add(newEpisodeFromEntity(rssItem));
         }
         return episodeList;
+    }
+
+    public static List<Episode> find() {
+        return new Select().from(Episode.class).orderBy("id ASC").execute();
+    }
+
+    public void upsert() {
+        Episode other = new Select().from(Episode.class).where("title=?", mTitle).executeSingle();
+        if (other == null) {
+            save();
+        } else {
+            // TODO: update
+        }
     }
 
     public static Episode newDummyInstance() {

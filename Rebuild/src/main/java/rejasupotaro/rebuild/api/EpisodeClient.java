@@ -1,6 +1,5 @@
 package rejasupotaro.rebuild.api;
 
-import android.content.Context;
 import android.util.Log;
 
 import org.apache.http.Header;
@@ -26,8 +25,12 @@ public class EpisodeClient {
         public void onFailure();
     }
 
-    public void request(Context context, final EpisodeClientResponseHandler handler) {
-        final Context applicationContext = context.getApplicationContext();
+    public void request(final EpisodeClientResponseHandler handler) {
+        List<Episode> episodeList = Episode.find();
+        if (episodeList != null && episodeList.size() > 0) {
+            handler.onSuccess(episodeList);
+            return;
+        }
 
         sAsyncRssClient.read(
                 "http://feeds.rebuild.fm/rebuildfm",
@@ -36,6 +39,11 @@ public class EpisodeClient {
                     public void onSuccess(RssFeed rssFeed) {
                         List<RssItem> rssItemList = rssFeed.getRssItemList();
                         List<Episode> episodeList = Episode.newEpisodeFromEntity(rssItemList);
+
+                        for (Episode episode : episodeList) {
+                            episode.upsert();
+                        }
+
                         handler.onSuccess(episodeList);
                     }
 
