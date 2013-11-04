@@ -40,7 +40,7 @@
             android:id="@+id/episode_title"
             android:textSize="24sp"
             android:textColor="@android:color/white"
-            android:background="@drawable/bg_episode_title"
+            android:background="@drawable/gradient_shadow"
             android:padding="@dimen/padding_contents"
             android:layout_gravity="bottom"
             android:gravity="center"

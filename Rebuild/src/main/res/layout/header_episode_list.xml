@@ -7,9 +7,26 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"/>
 
-    <ImageView
-        android:background="@drawable/bg_rebuild"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:background="@drawable/bg_rebuild"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"/>
+
+        <TextView
+            android:text="A Podcast by Tatsuhiko Miyagawa. Talking about Tech, Software Development and Gadgets."
+            android:textSize="8sp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/gradient_shadow"
+            android:padding="@dimen/padding_frame"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
 
 </LinearLayout>
