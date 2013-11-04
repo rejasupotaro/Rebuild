@@ -20,6 +20,8 @@ public class MediaControllerView extends LinearLayout {
 
     private ImageView mMediaPlayButton;
 
+    private Episode mCurrentEpisode;
+
     public MediaControllerView(Context context) {
         super(context);
         setupView(context);
@@ -42,7 +44,15 @@ public class MediaControllerView extends LinearLayout {
         addView(view, params);
     }
 
+    public boolean isSameEpisode(Episode episode) {
+        if (mCurrentEpisode == null) return false;
+        return mCurrentEpisode == episode;
+    }
+
     public void setEpisode(Context context, Episode episode) {
+        if (isSameEpisode(episode)) return;
+        mCurrentEpisode = episode;
+
         mMediaDurationTextView.setText(episode.getDuration());
 
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();

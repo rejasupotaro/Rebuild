@@ -35,6 +35,8 @@ public class EpisodeDetailFragment extends RoboFragment {
     }
 
     public void setup(Episode episode) {
+        if (mMediaControllerView.isSameEpisode(episode)) return;
+
         mEpisodeTitleTextView.setText(episode.getTitle());
         mEpisodeDescriptionTextView.setText(episode.getDescription());
         mMediaControllerView.setEpisode(getActivity(), episode);
