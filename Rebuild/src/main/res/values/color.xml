@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="defaul_actionbar_color">#222222</color>
+    <color name="base_color_gray">#f2f1ed</color>
+    <color name="base_color_light_gray">#faf9f5</color>
+    <color name="smoke_black">#222222</color>
 </resources>

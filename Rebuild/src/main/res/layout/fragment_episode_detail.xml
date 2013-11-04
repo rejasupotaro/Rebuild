@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:id="@+id/drag_view"
-        android:background="@color/defaul_actionbar_color"
+        android:background="@color/smoke_black"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sliding_up_panel_height">
 
@@ -31,7 +31,7 @@
             android:textSize="24sp"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_episode_title"
-            android:padding="@dimen/padding_episode_title"
+            android:padding="@dimen/padding_contents"
             android:layout_gravity="bottom"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -41,13 +41,13 @@
 
     <TextView
         android:id="@+id/episode_description"
-        android:padding="@dimen/padding_common"
+        android:padding="@dimen/padding_frame"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <RelativeLayout
-        android:background="@color/defaul_actionbar_color"
+        android:background="@color/smoke_black"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sliding_up_panel_height"/>
 </LinearLayout>

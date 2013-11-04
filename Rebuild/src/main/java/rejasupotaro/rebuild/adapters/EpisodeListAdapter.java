@@ -15,8 +15,9 @@ import rejasupotaro.rebuild.models.Episode;
 public class EpisodeListAdapter extends ArrayAdapter<Episode> {
 
     private static class ViewHolder {
-        TextView titleTextView;
         TextView postedAtTextView;
+        TextView titleTextView;
+        TextView subtitleTextView;
     }
 
     private LayoutInflater mLayoutInflater;
@@ -33,8 +34,9 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
             convertView = mLayoutInflater.inflate(R.layout.list_item_episode, null);
 
             holder = new ViewHolder();
-            holder.titleTextView = (TextView) convertView.findViewById(R.id.episode_title);
             holder.postedAtTextView = (TextView) convertView.findViewById(R.id.episode_posted_at);
+            holder.titleTextView = (TextView) convertView.findViewById(R.id.episode_title);
+            holder.subtitleTextView = (TextView) convertView.findViewById(R.id.episode_subtitle);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -42,8 +44,9 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
 
         Episode episode = getItem(position);
 
+        holder.postedAtTextView.setText("Oct 31 2013");//episode.getPostedAt());
         holder.titleTextView.setText(episode.getTitle());
-        holder.postedAtTextView.setText(episode.getPostedAt());
+        holder.subtitleTextView.setText(episode.getDescription());
 
         return convertView;
     }

@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/fragment_episode_list"
         class="rejasupotaro.rebuild.fragments.EpisodeListFragment"
-        android:background="@android:color/darker_gray"
+        android:background="@color/base_color_gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
