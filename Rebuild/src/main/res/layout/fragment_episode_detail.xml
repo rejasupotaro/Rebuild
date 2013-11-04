@@ -61,16 +61,8 @@
 
     </RelativeLayout>
 
-    <rejasupotaro.rebuild.views.VerticalSeparator
+    <rejasupotaro.rebuild.views.MediaControllerView
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-
-    <include layout="@layout/view_media_seekbar"/>
-
-    <rejasupotaro.rebuild.views.VerticalSeparator
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-
-    <include layout="@layout/view_media_controller"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
