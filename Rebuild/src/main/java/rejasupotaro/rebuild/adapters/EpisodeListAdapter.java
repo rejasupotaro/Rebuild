@@ -44,7 +44,7 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
 
         Episode episode = getItem(position);
 
-        holder.postedAtTextView.setText("Oct 31 2013");//episode.getPostedAt());
+        holder.postedAtTextView.setText(episode.getPostedAt());
         holder.titleTextView.setText(episode.getTitle());
         holder.subtitleTextView.setText(episode.getDescription());
 

@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.asyncrssclient.RssItem;
+import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 
 public class Episode {
+
+    public static final String TAG = Episode.class.getSimpleName();
 
     private String mTitle;
 
@@ -56,7 +59,7 @@ public class Episode {
                     String showNotes) {
         mTitle = title;
         mDescription = StringUtils.removeNewLines(description);
-        mPostedAt = postedAt;
+        mPostedAt = DateUtils.formatPubDate(postedAt);
         mEnclosure = enclosure;
         mShowNotes = showNotes;
     }
