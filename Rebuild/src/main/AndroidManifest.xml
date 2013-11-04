@@ -11,12 +11,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="rejasupotaro.rebuild.RebuildApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="AA_DB_NAME" android:value="rebuild.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+
         <activity
-            android:name=".activities.MainActivity"
+            android:name="rejasupotaro.rebuild.activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
