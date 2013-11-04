@@ -43,10 +43,7 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
     public void play(Context context, Uri uri, StateChangedListener stateChangedListener) {
         mStateChangedListener = stateChangedListener;
 
-        if (isPlaying()) {
-            reset();
-        }
-
+        reset();
         try {
             Context applicationContext = context.getApplicationContext();
             setDataSource(applicationContext, uri);
