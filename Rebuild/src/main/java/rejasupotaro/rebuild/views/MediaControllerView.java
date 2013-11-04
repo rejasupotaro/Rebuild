@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
@@ -21,6 +22,8 @@ public class MediaControllerView extends LinearLayout {
     private ImageView mMediaPlayButton;
 
     private Episode mCurrentEpisode;
+
+    private SeekBar mMediaSeekBar;
 
     public MediaControllerView(Context context) {
         super(context);
@@ -40,6 +43,7 @@ public class MediaControllerView extends LinearLayout {
         mMediaCurrentTimeTextView = (TextView) view.findViewById(R.id.media_current_time);
         mMediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
         mMediaPlayButton = (ImageView) view.findViewById(R.id.media_play_button);
+        mMediaSeekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
 
         addView(view, params);
     }
@@ -82,9 +86,13 @@ public class MediaControllerView extends LinearLayout {
                 }
             }
         });
+
+        mMediaSeekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
+        mMediaSeekBar.setEnabled(false);
     }
 
     public void updateCurrentTime(int currentPosition) {
         mMediaCurrentTimeTextView.setText(DateUtils.formatCurrentTime(currentPosition));
+        mMediaSeekBar.setProgress(currentPosition);
     }
 }
