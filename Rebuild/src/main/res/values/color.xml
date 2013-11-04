@@ -3,4 +3,5 @@
     <color name="base_color_gray">#f2f1ed</color>
     <color name="base_color_light_gray">#faf9f5</color>
     <color name="smoke_black">#222222</color>
+    <color name="smoke_white">#aaffffff</color>
 </resources>

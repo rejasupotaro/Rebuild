@@ -38,12 +38,13 @@
 
         <TextView
             android:id="@+id/episode_title"
-            android:textSize="24sp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/gradient_shadow"
+            android:textSize="@dimen/primary_text_size"
+            android:textStyle="bold"
+            android:background="@color/smoke_white"
             android:padding="@dimen/padding_contents"
             android:layout_gravity="bottom"
-            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -55,6 +56,11 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <View
+        android:background="@color/smoke_black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
     <RelativeLayout
         android:background="@color/base_color_light_gray"
