@@ -82,4 +82,15 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
                 (EpisodeDetailFragment) fragmentManager.findFragmentById(R.id.fragment_episode_detail);
         episodeDetailFragment.setup(episode);
     }
+
+    @Override
+    public void onBackPressed() {
+        SlidingUpPanelLayout slidingUpPanelLayout =
+                (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel_layout);
+        if (slidingUpPanelLayout.isExpanded()) {
+            slidingUpPanelLayout.collapsePane();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
