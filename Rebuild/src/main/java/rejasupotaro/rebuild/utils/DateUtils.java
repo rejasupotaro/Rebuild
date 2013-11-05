@@ -16,9 +16,14 @@ public final class DateUtils {
 
     public static int durationToInt(String duration) {
         String[] dateStructure = duration.split(":");
-        int m = Integer.valueOf(dateStructure[0]);
-        int s = Integer.valueOf(dateStructure[1]);
-        return (m * 60 + s) * 1000;
+
+        int sec = 0;
+        for (int i = 0; i < dateStructure.length - 1; i++) {
+            sec = (sec + Integer.valueOf(dateStructure[i])) * 60;
+        }
+        sec += Integer.valueOf(dateStructure[dateStructure.length - 1]);
+
+        return sec * 1000;
     }
 
     public static String formatCurrentTime(int currentTime) {
@@ -37,7 +42,10 @@ public final class DateUtils {
         try {
             DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss zzz", Locale.US);
             Date date = formatter.parse(source);
-            output = monthToName(date.getMonth() + 1) + " " + (date.getDate()) + " " + (1900 + date.getYear());
+            int month = date.getMonth() + 1;
+            int day = date.getDate();
+            int year = 1900 + date.getYear();
+            output = monthToName(month) + " " + (day < 10 ? "0" + day : day) + " " + year;
         } catch (ParseException e) {
             Log.e(TAG, e.toString(), e);
         }

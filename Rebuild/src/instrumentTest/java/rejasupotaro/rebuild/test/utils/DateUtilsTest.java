@@ -19,6 +19,10 @@ public class DateUtilsTest extends AndroidTestCase {
             String duration = "51:34";
             assertEquals(3094000, DateUtils.durationToInt(duration));
         }
+        {
+            String duration = "1:02:13";
+            assertEquals(3733000, DateUtils.durationToInt(duration));
+        }
     }
 
     public void testFormatCurrentTime() {
