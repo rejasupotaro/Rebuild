@@ -41,15 +41,20 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     public void setup(final Episode episode) {
         PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        if (podcastPlayer.isSameEpisode(episode)) return;
+        if (podcastPlayer.isSameEpisode(episode)) {
+            mMediaPlayButtonOnImageCover.setVisibility(View.GONE);
+            return;
+        }
 
         mEpisodeTitleTextView.setText(episode.getTitle());
         mEpisodeDescriptionTextView.setText(episode.getDescription());
-        mMediaControllerView.setEpisode(episode);
 
+        mMediaPlayButtonOnImageCover.setVisibility(View.VISIBLE);
+        mMediaPlayButtonOnImageCover.setAlpha(1);
         mMediaPlayButtonOnImageCover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mMediaControllerView.setEpisode(episode);
                 mMediaControllerView.play(getActivity(), episode);
                 UiAnimations.fadeOut(mMediaPlayButtonOnImageCover, 300, 1000);
             }
