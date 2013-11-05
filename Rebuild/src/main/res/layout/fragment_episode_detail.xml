@@ -58,20 +58,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/miyagawa"
-            android:background="@drawable/miyagawa"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
-
         <TextView
             android:id="@+id/episode_description"
-            android:background="@drawable/border"
             android:textSize="@dimen/secondary_text_size"
             android:padding="@dimen/padding_frame"
             android:layout_toRightOf="@+id/miyagawa"
             android:layout_marginLeft="@dimen/padding_frame"
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
