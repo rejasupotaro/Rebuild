@@ -58,9 +58,10 @@
 
     </FrameLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:padding="@dimen/padding_frame"
         android:background="@color/base_color_gray"
+        android:orientation="vertical"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -69,13 +70,22 @@
             android:id="@+id/episode_description"
             android:textSize="@dimen/secondary_text_size"
             android:padding="@dimen/padding_frame"
-            android:layout_toRightOf="@+id/miyagawa"
-            android:layout_marginLeft="@dimen/padding_frame"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </RelativeLayout>
+        <rejasupotaro.rebuild.views.VerticalSeparator
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:textSize="@dimen/secondary_text_size"
+            android:padding="@dimen/padding_frame"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <rejasupotaro.rebuild.views.MediaControllerView
         android:id="@+id/media_controller_view"
