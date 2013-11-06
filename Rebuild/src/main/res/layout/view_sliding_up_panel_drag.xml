@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/sliding_up_panel_height">
+
+    <ImageView
+        android:id="@+id/sliding_up_panel_drag_view_comment_button"
+        android:background="@drawable/ic_comment"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
+
+    <TextView
+        android:id="@+id/sliding_up_panel_drag_view_episode_title"
+        android:text="SlidingUpPanelLayout"
+        android:layout_centerVertical="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginRight="@dimen/padding_frame"
+        android:layout_toLeftOf="@+id/sliding_up_panel_drag_view_comment_button"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
+

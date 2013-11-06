@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
+import java.util.List;
+
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
@@ -15,10 +17,14 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.MediaControllerView;
+import rejasupotaro.rebuild.views.SlidingUpPanelDragView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 public class EpisodeDetailFragment extends RoboFragment {
+
+    @InjectView(R.id.sliding_up_panel_drag_view)
+    private SlidingUpPanelDragView mSlidingUpPanelDragView;
 
     @InjectView(R.id.episode_title)
     private TextView mEpisodeTitleTextView;
@@ -69,10 +75,13 @@ public class EpisodeDetailFragment extends RoboFragment {
                 UiAnimations.fadeOut(mMediaPlayButtonOnImageCover, 300, 1000);
             }
         });
+
+        mSlidingUpPanelDragView.setEpisode(episode);
     }
 
     @Subscribe
     public void onLoadEpisodeListComplete(LoadEpisodeListCompleteEvent event) {
-        // impl me
+        List<Episode> episodeList = event.getEpisodeList();
+        mSlidingUpPanelDragView.setEpisode(episodeList.get(0));
     }
 }

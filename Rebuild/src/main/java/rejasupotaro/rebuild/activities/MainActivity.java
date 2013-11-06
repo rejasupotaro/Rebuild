@@ -17,7 +17,7 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
 
     private static final float SLIDING_PANEL_SLIDE_OFFSET = 0.2f;
 
-    @InjectView(R.id.drag_view)
+    @InjectView(R.id.sliding_up_panel_drag_view)
     private View mDragView;
 
     @Override
