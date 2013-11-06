@@ -6,6 +6,7 @@
     android:layout_height="@dimen/sliding_up_panel_height">
 
     <TextView
+        android:id="@+id/sliding_up_panel_episode_title"
         android:text="SlidingUpPanelLayout"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"

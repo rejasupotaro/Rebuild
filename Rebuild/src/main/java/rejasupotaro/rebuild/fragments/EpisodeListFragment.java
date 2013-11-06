@@ -13,6 +13,8 @@ import java.util.List;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.EpisodeListAdapter;
 import rejasupotaro.rebuild.api.EpisodeClient;
+import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import roboguice.fragment.RoboListFragment;
@@ -48,6 +50,7 @@ public class EpisodeListFragment extends RoboListFragment {
             @Override
             public void onSuccess(List<Episode> episodeList) {
                 setupEpisodeListView(episodeList);
+                BusProvider.getInstance().post(new LoadEpisodeListCompleteEvent(episodeList));
             }
 
             @Override

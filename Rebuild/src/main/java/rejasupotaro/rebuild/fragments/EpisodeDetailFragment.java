@@ -1,13 +1,16 @@
 package rejasupotaro.rebuild.fragments;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
+
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.UiAnimations;
@@ -31,12 +34,19 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        BusProvider.getInstance().register(this);
         return inflater.inflate(R.layout.fragment_episode_detail, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        BusProvider.getInstance().unregister(this);
     }
 
     public void setup(final Episode episode) {
@@ -59,5 +69,10 @@ public class EpisodeDetailFragment extends RoboFragment {
                 UiAnimations.fadeOut(mMediaPlayButtonOnImageCover, 300, 1000);
             }
         });
+    }
+
+    @Subscribe
+    public void onLoadEpisodeListComplete(LoadEpisodeListCompleteEvent event) {
+        // impl me
     }
 }
