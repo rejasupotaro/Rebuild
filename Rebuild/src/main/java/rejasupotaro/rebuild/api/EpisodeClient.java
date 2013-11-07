@@ -29,9 +29,12 @@ public class EpisodeClient {
         List<Episode> episodeList = Episode.find();
         if (episodeList != null && episodeList.size() > 0) {
             handler.onSuccess(episodeList);
-            return;
         }
 
+        requestNetwork(handler);
+    }
+
+    private void requestNetwork(final EpisodeClientResponseHandler handler) {
         sAsyncRssClient.read(
                 "http://feeds.rebuild.fm/rebuildfm",
                 new AsyncRssResponseHandler() {
@@ -63,5 +66,6 @@ public class EpisodeClient {
                     }
                 }
         );
+
     }
 }
