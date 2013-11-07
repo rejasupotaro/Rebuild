@@ -39,6 +39,8 @@ public class EpisodeDetailFragment extends RoboFragment {
     @InjectView(R.id.media_play_button_on_image_cover)
     private View mMediaPlayButtonOnImageCover;
 
+    private Episode mEpisode;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         BusProvider.getInstance().register(this);
@@ -62,6 +64,7 @@ public class EpisodeDetailFragment extends RoboFragment {
             mMediaPlayButtonOnImageCover.setVisibility(View.GONE);
             return;
         }
+        mEpisode = episode;
 
         mEpisodeTitleTextView.setText(episode.getTitle());
         mEpisodeDescriptionTextView.setText(episode.getDescription());
@@ -87,6 +90,7 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     @Subscribe
     public void onLoadEpisodeListComplete(LoadEpisodeListCompleteEvent event) {
+        if (mEpisode != null) return;
         List<Episode> episodeList = event.getEpisodeList();
         mSlidingUpPanelDragView.setEpisode(episodeList.get(0));
     }
