@@ -1,12 +1,15 @@
 package rejasupotaro.rebuild.models;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,7 @@ import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 
 @Table(name = "episodes")
-public class Episode extends Model {
+public class Episode extends Model implements Parcelable {
 
     @Column(name = "title")
     private String mTitle;
@@ -134,5 +137,46 @@ public class Episode extends Model {
                 Uri.parse("http://tracking.feedpress.it/link/1949/5437/podcast-ep24.mp3"),
                 "54:32",
                 "");
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mTitle);
+        dest.writeString(mPostedAt);
+        dest.writeString(mDescription);
+        dest.writeString(mEnclosure.toString());
+        dest.writeString(mDuration);
+        dest.writeString(mShowNotes);
+        dest.writeInt(mFavoritedCount);
+        dest.writeInt(mCommentedCount);
+        dest.writeString(mMediaLocalPath);
+    }
+
+    public static final Parcelable.Creator<Episode> CREATOR
+            = new Parcelable.Creator<Episode>() {
+        public Episode createFromParcel(Parcel in) {
+            return new Episode(in);
+        }
+
+        public Episode[] newArray(int size) {
+            return new Episode[size];
+        }
+    };
+
+    private Episode(Parcel in) {
+        mTitle = in.readString();
+        mPostedAt = in.readString();
+        mDescription = in.readString();
+        mEnclosure = Uri.parse(in.readString());
+        mDuration = in.readString();
+        mShowNotes = in.readString();
+        mFavoritedCount = in.readInt();
+        mCommentedCount = in.readInt();
+        mMediaLocalPath = in.readString();
     }
 }

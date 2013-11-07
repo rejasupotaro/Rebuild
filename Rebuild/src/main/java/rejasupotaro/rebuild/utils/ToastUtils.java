@@ -12,6 +12,7 @@ public final class ToastUtils {
     }
 
     public static void show(Context context, String message) {
+        if (message == null) return;
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }

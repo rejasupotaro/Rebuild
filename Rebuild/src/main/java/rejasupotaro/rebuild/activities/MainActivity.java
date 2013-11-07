@@ -1,5 +1,6 @@
 package rejasupotaro.rebuild.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -19,8 +20,16 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
 
     private static final float SLIDING_PANEL_SLIDE_OFFSET = 0.2f;
 
+    private static final String EXTRA_EPISODE = "extra_episode";
+
     @InjectView(R.id.sliding_up_panel_drag_view)
     private View mDragView;
+
+    public static Intent createIntent(Context context, Episode episode) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(EXTRA_EPISODE, episode);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,19 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         setContentView(R.layout.activity_main);
         setupSlidingPanel();
         setupPodcastPlayerService();
+        parseIntent(getIntent());
+    }
+
+    private void parseIntent(Intent intent) {
+        if (intent == null) {
+            return;
+        }
+        Episode episode = intent.getParcelableExtra(EXTRA_EPISODE);
+        if (episode == null) {
+            return;
+        }
+        getActionBar().hide();
+        openEpisodeDetailFragment(episode);
     }
 
     private void setupSlidingPanel() {
@@ -79,12 +101,15 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
 
     @Override
     public void onSelect(Episode episode) {
+        openEpisodeDetailFragment(episode);
+    }
+
+    private void openEpisodeDetailFragment(Episode episode) {
         SlidingUpPanelLayout slidingUpPanelLayout =
                 (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel_layout);
         slidingUpPanelLayout.expandPane();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-
         EpisodeDetailFragment episodeDetailFragment =
                 (EpisodeDetailFragment) fragmentManager.findFragmentById(R.id.fragment_episode_detail);
         episodeDetailFragment.setup(episode);

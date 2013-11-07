@@ -2,7 +2,6 @@ package rejasupotaro.rebuild.media;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.util.Log;
 
 import java.io.IOException;
@@ -31,6 +30,10 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
             sInstance = new PodcastPlayer();
         }
         return sInstance;
+    }
+
+    public Episode getEpisode() {
+        return mEpisode;
     }
 
     public boolean isSameEpisode(Episode other) {

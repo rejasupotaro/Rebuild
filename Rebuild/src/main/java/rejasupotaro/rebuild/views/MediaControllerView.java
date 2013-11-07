@@ -9,6 +9,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.PodcastPauseButtonClickEvent;
+import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.DateUtils;
@@ -46,7 +49,7 @@ public class MediaControllerView extends LinearLayout {
         addView(view, params);
     }
 
-    public void setEpisode(Episode episode) {
+    public void setEpisode(final Episode episode) {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         if (podcastPlayer.isSameEpisode(episode)) return;
 
@@ -65,9 +68,11 @@ public class MediaControllerView extends LinearLayout {
                 if (podcastPlayer.isPlaying()) {
                     mMediaPlayButton.setBackgroundResource(android.R.drawable.ic_media_play);
                     podcastPlayer.pause();
+                    BusProvider.getInstance().post(new PodcastPauseButtonClickEvent());
                 } else {
                     mMediaPlayButton.setBackgroundResource(android.R.drawable.ic_media_pause);
                     podcastPlayer.start();
+                    BusProvider.getInstance().post(new PodcastPlayButtonClickEvent(episode));
                 }
             }
         });
