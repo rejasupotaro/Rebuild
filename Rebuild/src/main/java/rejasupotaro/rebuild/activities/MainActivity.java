@@ -1,5 +1,6 @@
 package rejasupotaro.rebuild.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.fragments.EpisodeListFragment;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.views.SlidingUpPanelLayout;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
@@ -25,6 +27,7 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupSlidingPanel();
+        setupPodcastPlayerService();
     }
 
     private void setupSlidingPanel() {
@@ -33,6 +36,10 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         slidingUpPanelLayout.setPanelHeight(getResources().getDimensionPixelSize(R.dimen.sliding_up_panel_height));
         slidingUpPanelLayout.setPanelSlideListener(mPanelSlideListener);
         slidingUpPanelLayout.setDragView(mDragView);
+    }
+
+    private void setupPodcastPlayerService() {
+        startService(new Intent(this, PodcastPlayerService.class));
     }
 
     private SlidingUpPanelLayout.PanelSlideListener mPanelSlideListener = new SlidingUpPanelLayout.PanelSlideListener() {

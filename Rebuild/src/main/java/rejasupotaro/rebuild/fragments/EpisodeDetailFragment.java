@@ -13,6 +13,7 @@ import java.util.List;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
+import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.UiAnimations;
@@ -70,13 +71,18 @@ public class EpisodeDetailFragment extends RoboFragment {
         mMediaPlayButtonOnImageCover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMediaControllerView.setEpisode(episode);
-                mMediaControllerView.play(getActivity(), episode);
-                UiAnimations.fadeOut(mMediaPlayButtonOnImageCover, 300, 1000);
+                onPodcastPlayButtonClick(episode);
             }
         });
 
         mSlidingUpPanelDragView.setEpisode(episode);
+    }
+
+    private void onPodcastPlayButtonClick(Episode episode) {
+        BusProvider.getInstance().post(new PodcastPlayButtonClickEvent(episode));
+        mMediaControllerView.setEpisode(episode);
+        mMediaControllerView.play(getActivity(), episode);
+        UiAnimations.fadeOut(mMediaPlayButtonOnImageCover, 300, 1000);
     }
 
     @Subscribe
