@@ -43,11 +43,11 @@ public class EpisodeClient {
                         List<RssItem> rssItemList = rssFeed.getRssItemList();
                         List<Episode> episodeList = Episode.newEpisodeFromEntity(rssItemList);
 
-                        for (Episode episode : episodeList) {
-                            episode.upsert();
+                        if (Episode.deleteAndSave(episodeList)) {
+                            handler.onSuccess(episodeList);
+                        } else {
+                            // nothing to do
                         }
-
-                        handler.onSuccess(episodeList);
                     }
 
                     @Override

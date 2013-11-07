@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 import java.io.Serializable;
@@ -118,6 +119,26 @@ public class Episode extends Model implements Parcelable {
 
     public static List<Episode> find() {
         return new Select().from(Episode.class).orderBy("id ASC").execute();
+    }
+
+    public static boolean deleteAndSave(List<Episode> episodeList) {
+        boolean isUpdated = false;
+        if (episodeList == null || episodeList.size() == 0) {
+            return isUpdated;
+        }
+
+        int count = new Select().from(Episode.class).execute().size();
+        if (count == episodeList.size()) {
+            return isUpdated;
+        }
+
+        new Delete().from(Episode.class).execute();
+        for (Episode episode : episodeList) {
+            episode.save();
+        }
+        isUpdated = true;
+
+        return isUpdated;
     }
 
     public void upsert() {
