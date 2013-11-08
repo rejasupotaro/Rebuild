@@ -21,6 +21,9 @@ import rejasupotaro.rebuild.utils.StringUtils;
 @Table(name = "episodes")
 public class Episode extends Model implements Parcelable {
 
+    @Column(name = "episode_id")
+    private int mEpisodeId;
+
     @Column(name = "title")
     private String mTitle;
 
@@ -50,6 +53,10 @@ public class Episode extends Model implements Parcelable {
 
     @Column(name = "media_local_path")
     private String mMediaLocalPath;
+
+    public int getEpisodeId() {
+        return mEpisodeId;
+    }
 
     public String getTitle() {
         return mTitle;
@@ -95,9 +102,15 @@ public class Episode extends Model implements Parcelable {
         super();
     }
 
-    private Episode(String title, String description, Uri link, String postedAt, Uri enclosure,
-                    String duration, String showNotes) {
+    public boolean isSameId(Episode episode) {
+        if (episode == null) return false;
+        return (mEpisodeId == episode.getEpisodeId());
+    }
+
+    private Episode(int episodeId, String title, String description, Uri link, String postedAt,
+                    Uri enclosure, String duration, String showNotes) {
         super();
+        mEpisodeId = episodeId;
         mTitle = title;
         mDescription = StringUtils.removeNewLines(description);
         mLink = link;
@@ -109,6 +122,7 @@ public class Episode extends Model implements Parcelable {
 
     public static Episode newEpisodeFromEntity(RssItem rssItem) {
         return new Episode(
+                buildIdFromLink(rssItem.getLink()),
                 rssItem.getTitle(),
                 rssItem.getSubtitle(),
                 rssItem.getLink(),
@@ -126,28 +140,38 @@ public class Episode extends Model implements Parcelable {
         return episodeList;
     }
 
-    public static List<Episode> find() {
-        return new Select().from(Episode.class).orderBy("id ASC").execute();
+    private static int buildIdFromLink(Uri uri) {
+        String path = uri.getPath();
+        String formattedId = path.substring(1);
+        if (formattedId.endsWith("/")) {
+            formattedId = formattedId.substring(0, formattedId.length() - 1);
+        }
+        return Integer.valueOf(formattedId);
     }
 
-    public static boolean deleteAndSave(List<Episode> episodeList) {
-        boolean isUpdated = false;
-        if (episodeList == null || episodeList.size() == 0) {
-            return isUpdated;
-        }
+    public static List<Episode> find() {
+        return new Select().from(Episode.class).orderBy("episode_id DESC").execute();
+    }
 
-        int count = new Select().from(Episode.class).execute().size();
-        if (count == episodeList.size()) {
-            return isUpdated;
+    public static boolean refreshTable(List<Episode> episodeList) {
+        boolean shouldUpdateListView = false;
+        if (episodeList == null || episodeList.size() == 0) {
+            return shouldUpdateListView;
         }
 
         new Delete().from(Episode.class).execute();
         for (Episode episode : episodeList) {
             episode.save();
         }
-        isUpdated = true;
 
-        return isUpdated;
+        int count = new Select().from(Episode.class).execute().size();
+        if (count == episodeList.size()) {
+            shouldUpdateListView = false;
+        } else {
+            shouldUpdateListView = true;
+        }
+
+        return shouldUpdateListView;
     }
 
     public void upsert() {
