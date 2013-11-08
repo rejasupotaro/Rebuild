@@ -29,4 +29,7 @@ dependencies {
     compile 'org.roboguice:roboguice:2.0'
     compile 'rejasupotaro:async-rss-client:0.0.3'
     compile 'com.squareup:otto:1.3.2'
+
+    instrumentTestCompile fileTree(dir: 'src/instrumentTest/libs', include: '*.jar')
+    instrumentTestCompile 'com.squareup:fest-android:1.0.7'
 }
