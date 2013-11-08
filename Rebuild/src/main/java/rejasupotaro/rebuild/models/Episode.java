@@ -106,7 +106,7 @@ public class Episode extends Model implements Parcelable {
                 rssItem.getPubDate(),
                 rssItem.getMediaEnclosure().getUrl(),
                 rssItem.getDuration(),
-                "");
+                rssItem.getDescription());
     }
 
     public static List<Episode> newEpisodeFromEntity(List<RssItem> rssItemList) {

@@ -18,6 +18,7 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.MediaControllerView;
+import rejasupotaro.rebuild.views.ShowNotesView;
 import rejasupotaro.rebuild.views.SlidingUpPanelDragView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
@@ -38,6 +39,9 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     @InjectView(R.id.media_start_button_on_image_cover)
     private View mMediaStartButtonOnImageCover;
+
+    @InjectView(R.id.episode_show_notes)
+    private ShowNotesView mShowNotesView;
 
     private Episode mEpisode;
 
@@ -66,6 +70,7 @@ public class EpisodeDetailFragment extends RoboFragment {
         mEpisodeDescriptionTextView.setText(episode.getDescription());
         mSlidingUpPanelDragView.setEpisode(episode);
         mMediaControllerView.setEpisode(episode);
+        mShowNotesView.setEpisode(episode);
     }
 
     private void setupMediaStartButtonOnImageCover(final Episode episode) {

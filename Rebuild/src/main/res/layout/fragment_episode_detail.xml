@@ -15,77 +15,88 @@
         android:gravity="center"
         android:padding="@dimen/padding_contents"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sliding_up_panel_height"/>
+        android:layout_height="@dimen/sliding_up_panel_height" />
 
     <rejasupotaro.rebuild.views.VerticalSeparator
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:background="@drawable/bg_on_the_air"
-            android:layout_width="match_parent"
-            android:layout_height="240dp" />
-
-        <TextView
-            android:id="@+id/episode_title"
-            android:textSize="@dimen/primary_text_size"
-            android:textStyle="bold"
-            android:background="@color/smoke_white"
-            android:padding="@dimen/padding_contents"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <FrameLayout
-            android:id="@+id/media_start_button_on_image_cover"
-            android:background="@color/smoke_black"
-            android:layout_width="match_parent"
-            android:layout_height="240dp">
-
-            <ImageView
-                android:background="@drawable/media_start_button_on_image"
-                android:layout_gravity="center"
-                android:layout_width="60dp"
-                android:layout_height="60dp" />
-
-        </FrameLayout>
-
-    </FrameLayout>
-
-    <LinearLayout
-        android:padding="@dimen/padding_frame"
-        android:background="@color/base_color_gray"
-        android:orientation="vertical"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/episode_description"
-            android:textSize="@dimen/secondary_text_size"
-            android:padding="@dimen/padding_frame"
-            android:gravity="center"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <rejasupotaro.rebuild.views.VerticalSeparator
-            android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:textSize="@dimen/secondary_text_size"
-            android:padding="@dimen/padding_frame"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                <ImageView
+                    android:background="@drawable/bg_on_the_air"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/episode_title"
+                    android:textSize="@dimen/primary_text_size"
+                    android:textStyle="bold"
+                    android:background="@color/smoke_white"
+                    android:padding="@dimen/padding_contents"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <FrameLayout
+                    android:id="@+id/media_start_button_on_image_cover"
+                    android:background="@color/smoke_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp">
+
+                    <ImageView
+                        android:background="@drawable/media_start_button_on_image"
+                        android:layout_gravity="center"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp" />
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:padding="@dimen/padding_frame"
+                android:background="@color/base_color_gray"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/episode_description"
+                    android:textSize="@dimen/secondary_text_size"
+                    android:padding="@dimen/padding_frame"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <rejasupotaro.rebuild.views.VerticalSeparator
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <rejasupotaro.rebuild.views.ShowNotesView
+                    android:id="@+id/episode_show_notes"
+                    android:padding="@dimen/padding_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <rejasupotaro.rebuild.views.MediaControllerView
         android:id="@+id/media_controller_view"
