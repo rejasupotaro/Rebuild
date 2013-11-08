@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import rejasupotaro.rebuild.utils.IntentUtils;
+
 public class LinkTextView extends TextView {
 
     public LinkTextView(Context context) {
@@ -22,9 +24,7 @@ public class LinkTextView extends TextView {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse(link);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                context.startActivity(intent);
+                IntentUtils.openBrowser(context, link);
             }
         });
     }
