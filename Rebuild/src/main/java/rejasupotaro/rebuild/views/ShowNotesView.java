@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.views;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -38,34 +39,46 @@ public class ShowNotesView extends LinearLayout {
     }
 
     public void setEpisode(Episode episode) {
-        List<TextView> showNoteLinkTextList = buildShowNotes(episode.getShowNotes());
+        List<TextView> showNoteLinkTextList = LinkParser.buildShowNotes(mContext, episode.getShowNotes());
         for (TextView linkText : showNoteLinkTextList) {
             mLinkTextList.addView(linkText);
         }
     }
 
-    private List<TextView> buildShowNotes(String source) {
-        List<TextView> linkTextList = new ArrayList<TextView>();
-        String[] links = substringDescription(source).split("<li>");
-        for (String link : links) {
-            if (!link.startsWith("<a href=")) continue;
-            LinkTextView linkText = new LinkTextView(mContext, getText(link), getHref(link));
-            linkTextList.add(linkText);
+    public static class LinkParser {
+
+        public static List<TextView> buildShowNotes(Context context, String source) {
+            List<TextView> linkTextList = new ArrayList<TextView>();
+            String[] links = substringDescription(source).split("<li>");
+            for (String link : links) {
+                if (!link.startsWith("<a href=")) continue;
+                LinkTextView linkText = new LinkTextView(context, getText(link), getHref(link));
+                linkTextList.add(linkText);
+            }
+            return linkTextList;
         }
-        return linkTextList;
-    }
 
-    private String substringDescription(String source) {
-        int startIndex = source.indexOf("<h3>");
-        if (startIndex == -1) return "";
-        return source.substring(startIndex, source.length());
-    }
+        public static String substringDescription(String source) {
+            if (TextUtils.isEmpty(source)) return "";
+            int startIndex = source.indexOf("<h3>");
+            if (startIndex < 0) return "";
+            return source.substring(startIndex, source.length());
+        }
 
-    private String getHref(String source) {
-        return source.substring(source.indexOf("href=\"") + 6, source.indexOf(">") - 1);
-    }
+        public static String getHref(String source) {
+            if (TextUtils.isEmpty(source)) return "";
+            int startIndex = source.indexOf("href=\"");
+            int endIndex = source.indexOf(">");
+            if (startIndex < 0 || endIndex < 0) return "";
+            return source.substring(startIndex + 6, endIndex - 1);
+        }
 
-    private String getText(String source) {
-        return source.substring(source.indexOf(">") + 1, source.indexOf("</"));
+        public static String getText(String source) {
+            if (TextUtils.isEmpty(source)) return "";
+            int startIndex = source.indexOf(">");
+            int endIndex = source.indexOf("</");
+            if (startIndex < 0 || endIndex < 0) return "";
+            return source.substring(startIndex + 1, endIndex);
+        }
     }
 }
