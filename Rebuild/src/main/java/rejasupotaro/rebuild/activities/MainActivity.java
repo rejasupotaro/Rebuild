@@ -59,7 +59,7 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         slidingUpPanelLayout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));
         slidingUpPanelLayout.setPanelHeight(getResources().getDimensionPixelSize(R.dimen.sliding_up_panel_height));
         slidingUpPanelLayout.setPanelSlideListener(mPanelSlideListener);
-        slidingUpPanelLayout.setDragView(mSlidingUpPanelDragView);
+        slidingUpPanelLayout.setDragView(mSlidingUpPanelDragView.getDragView());
     }
 
     private void setupPodcastPlayerService() {

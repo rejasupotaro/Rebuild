@@ -24,11 +24,14 @@ public class Episode extends Model implements Parcelable {
     @Column(name = "title")
     private String mTitle;
 
-    @Column(name = "posted_at")
-    private String mPostedAt;
-
     @Column(name = "description")
     private String mDescription;
+
+    @Column(name = "link")
+    private Uri mLink;
+
+    @Column(name = "posted_at")
+    private String mPostedAt;
 
     @Column(name = "enclosure")
     private Uri mEnclosure;
@@ -54,6 +57,10 @@ public class Episode extends Model implements Parcelable {
 
     public String getDescription() {
         return mDescription;
+    }
+
+    public Uri getLink() {
+        return mLink;
     }
 
     public String getPostedAt() {
@@ -88,11 +95,12 @@ public class Episode extends Model implements Parcelable {
         super();
     }
 
-    private Episode(String title, String description, String postedAt, Uri enclosure,
+    private Episode(String title, String description, Uri link, String postedAt, Uri enclosure,
                     String duration, String showNotes) {
         super();
         mTitle = title;
         mDescription = StringUtils.removeNewLines(description);
+        mLink = link;
         mPostedAt = DateUtils.formatPubDate(postedAt);
         mEnclosure = enclosure;
         mDuration = duration;
@@ -103,6 +111,7 @@ public class Episode extends Model implements Parcelable {
         return new Episode(
                 rssItem.getTitle(),
                 rssItem.getSubtitle(),
+                rssItem.getLink(),
                 rssItem.getPubDate(),
                 rssItem.getMediaEnclosure().getUrl(),
                 rssItem.getDuration(),
@@ -150,16 +159,6 @@ public class Episode extends Model implements Parcelable {
         }
     }
 
-    public static Episode newDummyInstance() {
-        return new Episode(
-                "24: Go, Mavericks, LinkedIn Intro (typester)",
-                "Daisuke Muraseさん (@typester) をゲストに迎えて、Go, OS X Mavericks, Safari Notifications, LinkedIn Intro, Tweetbot などについて話しました。",
-                "Thu, 31 Oct 2013 00:00:00 -0700",
-                Uri.parse("http://tracking.feedpress.it/link/1949/5437/podcast-ep24.mp3"),
-                "54:32",
-                "");
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -168,8 +167,9 @@ public class Episode extends Model implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mTitle);
-        dest.writeString(mPostedAt);
         dest.writeString(mDescription);
+        dest.writeString(mLink.toString());
+        dest.writeString(mPostedAt);
         dest.writeString(mEnclosure.toString());
         dest.writeString(mDuration);
         dest.writeString(mShowNotes);
@@ -191,8 +191,9 @@ public class Episode extends Model implements Parcelable {
 
     private Episode(Parcel in) {
         mTitle = in.readString();
-        mPostedAt = in.readString();
         mDescription = in.readString();
+        mLink = Uri.parse(in.readString());
+        mPostedAt = in.readString();
         mEnclosure = Uri.parse(in.readString());
         mDuration = in.readString();
         mShowNotes = in.readString();
