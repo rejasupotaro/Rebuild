@@ -32,7 +32,7 @@ public final class StringUtils {
     }
 
     private static String appendHref(String text, String url) {
-        return "<a href=\"" + url + "\">" + text + "</a>";
+        return "<a href=\"https://twitter.com/" + url + "\">" + text + "</a>";
     }
 
     private static String getTwitterName(String source) {

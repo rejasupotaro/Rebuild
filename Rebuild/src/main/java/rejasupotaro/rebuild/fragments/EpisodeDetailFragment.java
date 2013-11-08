@@ -1,6 +1,9 @@
 package rejasupotaro.rebuild.fragments;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.MediaControllerView;
 import rejasupotaro.rebuild.views.ShowNotesView;
@@ -54,6 +58,7 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mEpisodeDescriptionTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
@@ -67,7 +72,8 @@ public class EpisodeDetailFragment extends RoboFragment {
 
         setupMediaStartButtonOnImageCover(episode);
         mEpisodeTitleTextView.setText(episode.getTitle());
-        mEpisodeDescriptionTextView.setText(episode.getDescription());
+        mEpisodeDescriptionTextView.setText(
+                Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
         mSlidingUpPanelDragView.setEpisode(episode);
         mMediaControllerView.setEpisode(episode);
         mShowNotesView.setEpisode(episode);
