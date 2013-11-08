@@ -3,7 +3,7 @@ Rebuild.fm for Android
 
 under development...
 
-<img src="http://gifzo.net/BMGAuhNs2g9.gif" width="240px">
+<img src="http://gifzo.net/Qg2ZkrGkR9.gif" width="240px">
 
 Contributing
 ------
