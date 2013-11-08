@@ -10,8 +10,10 @@ import android.view.View;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.fragments.EpisodeListFragment;
+import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
+import rejasupotaro.rebuild.views.SlidingUpPanelDragView;
 import rejasupotaro.rebuild.views.SlidingUpPanelLayout;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
@@ -23,7 +25,7 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
     private static final String EXTRA_EPISODE = "extra_episode";
 
     @InjectView(R.id.sliding_up_panel_drag_view)
-    private View mDragView;
+    private SlidingUpPanelDragView mSlidingUpPanelDragView;
 
     public static Intent createIntent(Context context, Episode episode) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -41,23 +43,23 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
     }
 
     private void parseIntent(Intent intent) {
-        if (intent == null) {
-            return;
-        }
+        if (intent == null) return;
+
         Episode episode = intent.getParcelableExtra(EXTRA_EPISODE);
-        if (episode == null) {
-            return;
-        }
+        if (episode == null) return;
+
         getActionBar().hide();
         openEpisodeDetailFragment(episode);
     }
 
     private void setupSlidingUpPanel() {
+        mSlidingUpPanelDragView.setEpisode(PodcastPlayer.getInstance().getEpisode());
+
         SlidingUpPanelLayout slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel_layout);
         slidingUpPanelLayout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));
         slidingUpPanelLayout.setPanelHeight(getResources().getDimensionPixelSize(R.dimen.sliding_up_panel_height));
         slidingUpPanelLayout.setPanelSlideListener(mPanelSlideListener);
-        slidingUpPanelLayout.setDragView(mDragView);
+        slidingUpPanelLayout.setDragView(mSlidingUpPanelDragView);
     }
 
     private void setupPodcastPlayerService() {
@@ -80,16 +82,13 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         }
 
         @Override
-        public void onPanelExpanded(View panel) {
-        }
+        public void onPanelExpanded(View panel) {}
 
         @Override
-        public void onPanelCollapsed(View panel) {
-        }
+        public void onPanelCollapsed(View panel) {}
 
         @Override
-        public void onPanelAnchored(View panel) {
-        }
+        public void onPanelAnchored(View panel) {}
     };
 
 

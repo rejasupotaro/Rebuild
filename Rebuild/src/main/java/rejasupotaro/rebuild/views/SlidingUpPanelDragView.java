@@ -41,6 +41,7 @@ public class SlidingUpPanelDragView extends RelativeLayout {
     }
 
     public void setEpisode(Episode episode) {
+        if (episode == null) return;
         mEpisodeTextView.setText(episode.getTitle());
     }
 }

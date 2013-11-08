@@ -36,8 +36,8 @@ public class EpisodeDetailFragment extends RoboFragment {
     @InjectView(R.id.media_controller_view)
     private MediaControllerView mMediaControllerView;
 
-    @InjectView(R.id.media_play_button_on_image_cover)
-    private View mMediaPlayButtonOnImageCover;
+    @InjectView(R.id.media_start_button_on_image_cover)
+    private View mMediaStartButtonOnImageCover;
 
     private Episode mEpisode;
 
@@ -59,39 +59,46 @@ public class EpisodeDetailFragment extends RoboFragment {
     }
 
     public void setup(final Episode episode) {
-        PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        if (podcastPlayer.isSameEpisode(episode)) {
-            mMediaPlayButtonOnImageCover.setVisibility(View.GONE);
-            return;
-        }
         mEpisode = episode;
 
+        setupMediaStartButtonOnImageCover(episode);
         mEpisodeTitleTextView.setText(episode.getTitle());
         mEpisodeDescriptionTextView.setText(episode.getDescription());
-
-        mMediaPlayButtonOnImageCover.setVisibility(View.VISIBLE);
-        mMediaPlayButtonOnImageCover.setAlpha(1);
-        mMediaPlayButtonOnImageCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onPodcastPlayButtonClick(episode);
-            }
-        });
-
         mSlidingUpPanelDragView.setEpisode(episode);
+        mMediaControllerView.setEpisode(episode);
+    }
+
+    private void setupMediaStartButtonOnImageCover(final Episode episode) {
+        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
+            mMediaStartButtonOnImageCover.setVisibility(View.GONE);
+        } else {
+            mMediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
+            mMediaStartButtonOnImageCover.setAlpha(1);
+            mMediaStartButtonOnImageCover.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onPodcastPlayButtonClick(episode);
+                }
+            });
+        }
     }
 
     private void onPodcastPlayButtonClick(Episode episode) {
         BusProvider.getInstance().post(new PodcastPlayButtonClickEvent(episode));
         mMediaControllerView.setEpisode(episode);
-        mMediaControllerView.play(getActivity(), episode);
-        UiAnimations.fadeOut(mMediaPlayButtonOnImageCover, 300, 1000);
+        mMediaControllerView.start(getActivity(), episode);
+        UiAnimations.fadeOut(mMediaStartButtonOnImageCover, 300, 1000);
     }
 
     @Subscribe
     public void onLoadEpisodeListComplete(LoadEpisodeListCompleteEvent event) {
         if (mEpisode != null) return;
         List<Episode> episodeList = event.getEpisodeList();
-        mSlidingUpPanelDragView.setEpisode(episodeList.get(0));
+
+        if (episodeList == null || episodeList.size() == 0) return;
+        Episode episode = episodeList.get(0);
+
+        if (PodcastPlayer.getInstance().isPlaying()) return;
+        mSlidingUpPanelDragView.setEpisode(episode);
     }
 }

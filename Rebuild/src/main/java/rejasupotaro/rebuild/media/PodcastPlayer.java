@@ -36,9 +36,9 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         return mEpisode;
     }
 
-    public boolean isSameEpisode(Episode other) {
+    public boolean isPlayingEpisode(Episode other) {
         if (mEpisode == null) return false;
-        return mEpisode == other;
+        return mEpisode.getTitle().equals(other.getTitle());
     }
 
     public void setCurrentTimeListener(final CurrentTimeListener currentTimeListener) {
@@ -51,7 +51,7 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         mTimer.start();
     }
 
-    public void play(Context context, Episode episode, StateChangedListener stateChangedListener) {
+    public void start(Context context, Episode episode, StateChangedListener stateChangedListener) {
         mEpisode = episode;
         mStateChangedListener = stateChangedListener;
 

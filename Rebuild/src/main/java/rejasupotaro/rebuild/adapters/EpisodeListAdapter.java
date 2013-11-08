@@ -15,9 +15,9 @@ import rejasupotaro.rebuild.models.Episode;
 public class EpisodeListAdapter extends ArrayAdapter<Episode> {
 
     private static class ViewHolder {
-        TextView postedAtTextView;
-        TextView titleTextView;
-        TextView subtitleTextView;
+        private TextView postedAtTextView;
+        private TextView titleTextView;
+        private TextView subtitleTextView;
     }
 
     private LayoutInflater mLayoutInflater;
@@ -29,17 +29,16 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (null == convertView) {
+        ViewHolder holder = (convertView == null ? null : (ViewHolder) convertView.getTag());
+        if (!(holder instanceof ViewHolder)) {
             convertView = mLayoutInflater.inflate(R.layout.list_item_episode, null);
 
             holder = new ViewHolder();
             holder.postedAtTextView = (TextView) convertView.findViewById(R.id.episode_posted_at);
             holder.titleTextView = (TextView) convertView.findViewById(R.id.episode_title);
             holder.subtitleTextView = (TextView) convertView.findViewById(R.id.episode_subtitle);
+
             convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
         }
 
         Episode episode = getItem(position);

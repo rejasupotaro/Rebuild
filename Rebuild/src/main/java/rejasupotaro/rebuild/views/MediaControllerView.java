@@ -50,17 +50,32 @@ public class MediaControllerView extends LinearLayout {
     }
 
     public void setEpisode(final Episode episode) {
-        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        if (podcastPlayer.isSameEpisode(episode)) return;
+        setupSeekBar(episode);
+        setupControllerView(episode);
+    }
 
+    private void setupSeekBar(Episode episode) {
         mMediaDurationTextView.setText(episode.getDuration());
+        PodcastPlayer.getInstance().setCurrentTimeListener(
+                new PodcastPlayer.CurrentTimeListener() {
+                    @Override
+                    public void onTick(int currentPosition) {
+                        updateCurrentTime(currentPosition);
+                    }
+                });
 
-        podcastPlayer.setCurrentTimeListener(new PodcastPlayer.CurrentTimeListener() {
-            @Override
-            public void onTick(int currentPosition) {
-                updateCurrentTime(currentPosition);
-            }
-        });
+        mMediaSeekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
+        mMediaSeekBar.setEnabled(false);
+    }
+
+    private void setupControllerView(final Episode episode) {
+        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+
+        if (podcastPlayer.isPlaying()) {
+            mMediaPlayButton.setBackgroundResource(android.R.drawable.ic_media_pause);
+        } else {
+            mMediaPlayButton.setBackgroundResource(android.R.drawable.ic_media_play);
+        }
 
         mMediaPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,20 +91,16 @@ public class MediaControllerView extends LinearLayout {
                 }
             }
         });
-
-        mMediaSeekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
-        mMediaSeekBar.setEnabled(false);
     }
 
-    public void play(Context context, Episode episode) {
+    public void start(Context context, Episode episode) {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        podcastPlayer.play(context, episode, new PodcastPlayer.StateChangedListener() {
+        podcastPlayer.start(context, episode, new PodcastPlayer.StateChangedListener() {
             @Override
             public void onStart() {
                 mMediaPlayButton.setBackgroundResource(android.R.drawable.ic_media_pause);
             }
         });
-
     }
 
     public void updateCurrentTime(int currentPosition) {
