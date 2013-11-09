@@ -53,7 +53,9 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
     }
 
     private void setupSlidingUpPanel() {
-        mSlidingUpPanelDragView.setEpisode(PodcastPlayer.getInstance().getEpisode());
+        Episode episode = PodcastPlayer.getInstance().getEpisode();
+
+        mSlidingUpPanelDragView.setEpisode(episode);
 
         SlidingUpPanelLayout slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel_layout);
         slidingUpPanelLayout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));

@@ -15,7 +15,7 @@
 
 
     <RelativeLayout
-        android:background="@color/base_color_light_gray"
+        android:background="@color/dark_gray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sliding_up_panel_height">
 

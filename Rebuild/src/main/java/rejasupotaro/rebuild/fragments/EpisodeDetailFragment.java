@@ -111,5 +111,7 @@ public class EpisodeDetailFragment extends RoboFragment {
 
         if (PodcastPlayer.getInstance().isPlaying()) return;
         mSlidingUpPanelDragView.setEpisode(episode);
+
+        setup(episode);
     }
 }

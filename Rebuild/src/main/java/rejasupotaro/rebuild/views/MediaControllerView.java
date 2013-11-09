@@ -60,7 +60,11 @@ public class MediaControllerView extends LinearLayout {
                 new PodcastPlayer.CurrentTimeListener() {
                     @Override
                     public void onTick(int currentPosition) {
-                        updateCurrentTime(currentPosition);
+                        if (PodcastPlayer.getInstance().getEpisode() == null) {
+                            updateCurrentTime(0);
+                        } else {
+                            updateCurrentTime(currentPosition);
+                        }
                     }
                 });
 

@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:clickable="true"
+    android:background="@color/base_color_light_gray"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +11,6 @@
 
     <rejasupotaro.rebuild.views.SlidingUpPanelDragView
         android:id="@+id/sliding_up_panel_drag_view"
-        android:background="@color/base_color_light_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/padding_contents"
