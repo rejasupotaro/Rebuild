@@ -20,9 +20,9 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
-import rejasupotaro.rebuild.test.views.MediaControllerView;
-import rejasupotaro.rebuild.test.views.ShowNotesView;
-import rejasupotaro.rebuild.test.views.SlidingUpPanelDragView;
+import rejasupotaro.rebuild.views.MediaControllerView;
+import rejasupotaro.rebuild.views.ShowNotesView;
+import rejasupotaro.rebuild.views.SlidingUpPanelDragView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 

@@ -13,8 +13,8 @@ import rejasupotaro.rebuild.fragments.EpisodeListFragment;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
-import rejasupotaro.rebuild.test.views.SlidingUpPanelDragView;
-import rejasupotaro.rebuild.test.views.SlidingUpPanelLayout;
+import rejasupotaro.rebuild.views.SlidingUpPanelDragView;
+import rejasupotaro.rebuild.views.SlidingUpPanelLayout;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
 

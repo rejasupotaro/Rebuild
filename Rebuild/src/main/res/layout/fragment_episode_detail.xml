@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <rejasupotaro.rebuild.test.views.VerticalSeparator
+    <rejasupotaro.rebuild.views.VerticalSeparator
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 
-    <rejasupotaro.rebuild.test.views.SlidingUpPanelDragView
+    <rejasupotaro.rebuild.views.SlidingUpPanelDragView
         android:id="@+id/sliding_up_panel_drag_view"
         android:layout_gravity="center"
         android:gravity="center"
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/sliding_up_panel_height" />
 
-    <rejasupotaro.rebuild.test.views.VerticalSeparator
+    <rejasupotaro.rebuild.views.VerticalSeparator
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 
@@ -84,11 +84,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <rejasupotaro.rebuild.test.views.VerticalSeparator
+                <rejasupotaro.rebuild.views.VerticalSeparator
                     android:layout_width="match_parent"
                     android:layout_height="1dp" />
 
-                <rejasupotaro.rebuild.test.views.ShowNotesView
+                <rejasupotaro.rebuild.views.ShowNotesView
                     android:id="@+id/episode_show_notes"
                     android:padding="@dimen/padding_frame"
                     android:layout_width="match_parent"
@@ -98,7 +98,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <rejasupotaro.rebuild.test.views.MediaControllerView
+    <rejasupotaro.rebuild.views.MediaControllerView
         android:id="@+id/media_controller_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

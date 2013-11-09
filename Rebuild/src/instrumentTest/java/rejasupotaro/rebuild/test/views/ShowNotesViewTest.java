@@ -5,6 +5,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import rejasupotaro.rebuild.views.ShowNotesView;
+
 public class ShowNotesViewTest extends AndroidTestCase {
 
     public void testBuildShowNotes() {

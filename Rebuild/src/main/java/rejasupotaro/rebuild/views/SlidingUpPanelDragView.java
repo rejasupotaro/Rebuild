@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.test.views;
+package rejasupotaro.rebuild.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
