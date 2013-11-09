@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <rejasupotaro.rebuild.views.VerticalSeparator
+    <rejasupotaro.rebuild.test.views.VerticalSeparator
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 
     <include layout="@layout/view_media_seekbar" />
 
-    <rejasupotaro.rebuild.views.VerticalSeparator
+    <rejasupotaro.rebuild.test.views.VerticalSeparator
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 

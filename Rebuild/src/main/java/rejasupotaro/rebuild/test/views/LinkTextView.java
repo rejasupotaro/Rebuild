@@ -1,10 +1,7 @@
-package rejasupotaro.rebuild.views;
+package rejasupotaro.rebuild.test.views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 

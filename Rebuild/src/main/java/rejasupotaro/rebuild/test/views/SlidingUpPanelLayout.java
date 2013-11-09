@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.views;
+package rejasupotaro.rebuild.test.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;

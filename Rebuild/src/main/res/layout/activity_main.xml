@@ -1,4 +1,4 @@
-<rejasupotaro.rebuild.views.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<rejasupotaro.rebuild.test.views.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/sliding_up_panel_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,5 +17,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</rejasupotaro.rebuild.views.SlidingUpPanelLayout>
+</rejasupotaro.rebuild.test.views.SlidingUpPanelLayout>
 
