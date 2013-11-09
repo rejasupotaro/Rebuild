@@ -1,7 +1,12 @@
 Rebuild.fm for Android
 ======
 
-under development...
+About Rebuild
+------
+A [Podcast](http://rebuild.fm/) by [Tatsuhiko Miyagawa](https://twitter.com/miyagawa). Talking about Tech, Software Development and Gadgets.
+
+Screenshot
+------
 
 <img src="http://gifzo.net/GPb6EuPILd.gif" width="240px">
 
