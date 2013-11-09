@@ -45,13 +45,13 @@ public class StringUtilsTest extends AndroidTestCase {
         {
             String source = "伊藤直也さん(@naoya_ito)をゲストに迎えてポッドキャスト、LTSV、RubyMotion、Perlなどについて話しました。";
             assertEquals(
-                    "伊藤直也さん(<a href=\"naoya_ito\">@naoya_ito</a>)をゲストに迎えてポッドキャスト、LTSV、RubyMotion、Perlなどについて話しました。",
+                    "伊藤直也さん(<a href=\"https://twitter.com/naoya_ito\">@naoya_ito</a>)をゲストに迎えてポッドキャスト、LTSV、RubyMotion、Perlなどについて話しました。",
                     StringUtils.buildTwitterLinkText(source));
         }
         {
             String source = "伊藤直也さん (@naoya_ito)、宮下剛輔さん (@gosukenator) をゲストに迎えて、Immutable Infrastructure, Docker, Packer, Serf などについて話しました。";
             assertEquals(
-                    "伊藤直也さん (<a href=\"naoya_ito\">@naoya_ito</a>)、宮下剛輔さん (<a href=\"gosukenator\">@gosukenator</a>) をゲストに迎えて、Immutable Infrastructure, Docker, Packer, Serf などについて話しました。",
+                    "伊藤直也さん (<a href=\"https://twitter.com/naoya_ito\">@naoya_ito</a>)、宮下剛輔さん (<a href=\"https://twitter.com/gosukenator\">@gosukenator</a>) をゲストに迎えて、Immutable Infrastructure, Docker, Packer, Serf などについて話しました。",
                     StringUtils.buildTwitterLinkText(source));
         }
     }
