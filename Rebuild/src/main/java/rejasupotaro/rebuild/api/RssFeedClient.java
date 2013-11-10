@@ -1,10 +1,7 @@
 package rejasupotaro.rebuild.api;
 
-import android.util.Log;
-
 import org.apache.http.Header;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import rejasupotaro.asyncrssclient.AsyncRssClient;

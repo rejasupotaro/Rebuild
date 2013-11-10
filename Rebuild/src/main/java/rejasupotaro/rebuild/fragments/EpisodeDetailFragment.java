@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.inject.Inject;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
@@ -27,6 +29,9 @@ import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 public class EpisodeDetailFragment extends RoboFragment {
+
+    @Inject
+    private EpisodeDownloadClient mEpisodeDownloadClient;
 
     @InjectView(R.id.sliding_up_panel_drag_view)
     private SlidingUpPanelDragView mSlidingUpPanelDragView;
@@ -95,9 +100,12 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     private void onPodcastPlayButtonClick(Episode episode) {
         BusProvider.getInstance().post(new PodcastPlayButtonClickEvent(episode));
+
         mMediaControllerView.setEpisode(episode);
         mMediaControllerView.start(getActivity(), episode);
         UiAnimations.fadeOut(mMediaStartButtonOnImageCover, 300, 1000);
+
+        mEpisodeDownloadClient.download(getActivity(), episode);
     }
 
     @Subscribe

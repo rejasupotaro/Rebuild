@@ -38,7 +38,7 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupSlidingUpPanel();
-        setupPodcastPlayerService();
+        startServices();
         parseIntent(getIntent());
     }
 
@@ -64,7 +64,7 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         slidingUpPanelLayout.setDragView(mSlidingUpPanelDragView.getDragView());
     }
 
-    private void setupPodcastPlayerService() {
+    private void startServices() {
         startService(new Intent(this, PodcastPlayerService.class));
     }
 
@@ -84,13 +84,16 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         }
 
         @Override
-        public void onPanelExpanded(View panel) {}
+        public void onPanelExpanded(View panel) {
+        }
 
         @Override
-        public void onPanelCollapsed(View panel) {}
+        public void onPanelCollapsed(View panel) {
+        }
 
         @Override
-        public void onPanelAnchored(View panel) {}
+        public void onPanelAnchored(View panel) {
+        }
     };
 
 
