@@ -12,7 +12,7 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.EpisodeListAdapter;
-import rejasupotaro.rebuild.api.EpisodeClient;
+import rejasupotaro.rebuild.api.RssFeedClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
@@ -25,7 +25,7 @@ public class EpisodeListFragment extends RoboListFragment {
     private LayoutInflater mLayoutInflater;
 
     @Inject
-    private EpisodeClient mClient;
+    private RssFeedClient mClient;
 
     private OnEpisodeSelectListener mListener;
 
@@ -53,7 +53,7 @@ public class EpisodeListFragment extends RoboListFragment {
     }
 
     private void requestFeed() {
-        mClient.request(new EpisodeClient.EpisodeClientResponseHandler() {
+        mClient.request(new RssFeedClient.EpisodeClientResponseHandler() {
             @Override
             public void onSuccess(List<Episode> episodeList) {
                 setupEpisodeListView(episodeList);

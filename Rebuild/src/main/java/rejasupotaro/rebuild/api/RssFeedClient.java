@@ -14,9 +14,9 @@ import rejasupotaro.asyncrssclient.RssItem;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.ListUtils;
 
-public class EpisodeClient {
+public class RssFeedClient {
 
-    private static final String TAG = EpisodeClient.class.getSimpleName();
+    private static final String TAG = RssFeedClient.class.getSimpleName();
 
     private static final String REBUILD_FEED_URL = "http://feeds.rebuild.fm/rebuildfm";
 
