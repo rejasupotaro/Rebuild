@@ -14,9 +14,13 @@ import rejasupotaro.asyncrssclient.RssItem;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.ListUtils;
 
-public class RssFeedClient {
+public class RssFeedClient extends AbstractHttpClient {
 
     private static final String TAG = RssFeedClient.class.getSimpleName();
+
+    protected String getTag() {
+        return TAG;
+    }
 
     private static final String REBUILD_FEED_URL = "http://feeds.rebuild.fm/rebuildfm";
 
@@ -72,19 +76,5 @@ public class RssFeedClient {
                                      byte[] body, Throwable throwable) {
         dumpError(headers, body, throwable);
         handler.onFailure();
-    }
-
-    private void dumpError(Header[] headers, byte[] body, Throwable throwable) {
-        for (Header header : headers) {
-            Log.e(TAG, header.getName() + " => " + header.getValue());
-        }
-
-        try {
-            Log.e(TAG, new String(body, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        Log.e(TAG, throwable.toString());
     }
 }

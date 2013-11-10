@@ -97,6 +97,10 @@ public class Episode extends Model implements Parcelable {
         return mMediaLocalPath;
     }
 
+    public void setMediaLocalPath(String mediaLocalPath) {
+        mMediaLocalPath = mediaLocalPath;
+    }
+
     public Episode() {
         super();
     }
