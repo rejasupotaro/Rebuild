@@ -2,6 +2,7 @@ package rejasupotaro.rebuild.media;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.IOException;
@@ -56,8 +57,12 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
         reset();
         try {
-            Context applicationContext = context.getApplicationContext();
-            setDataSource(applicationContext, episode.getEnclosure());
+            if (!TextUtils.isEmpty(episode.getMediaLocalPath())) {
+                setDataSource(episode.getMediaLocalPath());
+            } else {
+                Context applicationContext = context.getApplicationContext();
+                setDataSource(applicationContext, episode.getEnclosure());
+            }
             prepareAsync();
             setOnPreparedListener(this);
         } catch (IOException e) {

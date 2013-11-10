@@ -7,8 +7,8 @@ import android.os.Parcelable;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
-import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
+import com.activeandroid.query.Update;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,15 +156,18 @@ public class Episode extends Model implements Parcelable {
         return new Select().from(Episode.class).orderBy("episode_id DESC").execute();
     }
 
+    public static Episode findById(int episodeId) {
+        return new Select().from(Episode.class).where("episode_id=?", episodeId).executeSingle();
+    }
+
     public static boolean refreshTable(List<Episode> episodeList) {
         boolean shouldUpdateListView = false;
         if (episodeList == null || episodeList.size() == 0) {
             return shouldUpdateListView;
         }
 
-        new Delete().from(Episode.class).execute();
         for (Episode episode : episodeList) {
-            episode.save();
+            episode.upsert();
         }
 
         int count = new Select().from(Episode.class).execute().size();
@@ -177,13 +180,28 @@ public class Episode extends Model implements Parcelable {
         return shouldUpdateListView;
     }
 
-    public void upsert() {
-        Episode other = new Select().from(Episode.class).where("title=?", mTitle).executeSingle();
-        if (other == null) {
+    private void upsert() {
+        Episode episode =
+                new Select().from(Episode.class).where("episode_id=?", mEpisodeId).executeSingle();
+        if (episode == null) {
             save();
         } else {
-            // TODO: update
+            update();
         }
+    }
+
+    public void update() {
+        new Update(Episode.class)
+                .set("title=?,description=?,link=?,posted_at=?,enclosure=?,duration=?,show_notes=?",
+                        mTitle,
+                        mDescription,
+                        mLink,
+                        mPostedAt,
+                        mEnclosure,
+                        mDuration,
+                        mShowNotes)
+                .where("episode_id=?", mEpisodeId)
+                .execute();
     }
 
     @Override

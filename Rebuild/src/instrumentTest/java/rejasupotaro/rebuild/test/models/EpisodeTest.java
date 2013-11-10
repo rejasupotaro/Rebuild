@@ -10,7 +10,8 @@ import rejasupotaro.robotgirl.RobotGirl;
 
 public class EpisodeTest extends AndroidTestCase {
 
-    public void testIsSameId() throws InstantiationException, IllegalAccessException {
+    @Override
+    public void setUp() throws InstantiationException, IllegalAccessException {
         RobotGirl.init(getContext(), UriTypeSerializer.class)
                 .define(new Factory("episode1", Episode.class) {
                     @Override
@@ -33,7 +34,9 @@ public class EpisodeTest extends AndroidTestCase {
                         return bundle;
                     }
                 });
+    }
 
+    public void testIsSameId() {
         Episode episode1 = RobotGirl.build("episode1");
         Episode episode2 = RobotGirl.build("episode2");
         Episode episode3 = RobotGirl.build("episode3");
