@@ -32,6 +32,7 @@
             </intent-filter>
         </activity>
         <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService" />
+        <service android:name=".services.EpisodeDownloadService" />
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.MediaControllerView;
@@ -105,7 +106,10 @@ public class EpisodeDetailFragment extends RoboFragment {
         mMediaControllerView.start(getActivity(), episode);
         UiAnimations.fadeOut(mMediaStartButtonOnImageCover, 300, 1000);
 
-        mEpisodeDownloadClient.download(getActivity(), episode);
+        if (!mEpisode.hasMediaDataInLocal()) {
+            getActivity().startService(
+                    EpisodeDownloadService.createIntent(getActivity(), episode));
+        }
     }
 
     @Subscribe

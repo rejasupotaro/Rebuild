@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.asyncrssclient.RssItem;
+import rejasupotaro.rebuild.media.MediaFileManager;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 
@@ -204,6 +205,18 @@ public class Episode extends Model implements Parcelable {
                 .execute();
     }
 
+    public void insertMediaLocalPath(String mediaLocalPath) {
+        mMediaLocalPath = mediaLocalPath;
+        new Update(Episode.class)
+                .set("media_local_path=?", mediaLocalPath)
+                .where("episode_id=?", mEpisodeId)
+                .execute();
+    }
+
+    public boolean hasMediaDataInLocal() {
+        return MediaFileManager.exists(getMediaLocalPath());
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -211,6 +224,7 @@ public class Episode extends Model implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mEpisodeId);
         dest.writeString(mTitle);
         dest.writeString(mDescription);
         dest.writeString(mLink.toString());
@@ -235,6 +249,7 @@ public class Episode extends Model implements Parcelable {
     };
 
     private Episode(Parcel in) {
+        mEpisodeId = in.readInt();
         mTitle = in.readString();
         mDescription = in.readString();
         mLink = Uri.parse(in.readString());
