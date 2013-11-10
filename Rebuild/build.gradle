@@ -10,9 +10,8 @@ apply plugin: 'android'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://raw.github.com/rejasupotaro/AsyncRssClient/master/AsyncRssClient/repository'
-    }
+    maven { url 'https://raw.github.com/rejasupotaro/AsyncRssClient/master/AsyncRssClient/repository' }
+    maven { url 'https://raw.github.com/rejasupotaro/RobotGirl/master/RobotGirl/repository' }
 }
 
 android {
@@ -56,4 +55,9 @@ android {
         instrumentTestCompile fileTree(dir: 'src/instrumentTest/libs', include: '*.jar')
         instrumentTestCompile 'com.squareup:fest-android:1.0.7'
     }
+}
+
+configurations.all {
+    // check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }

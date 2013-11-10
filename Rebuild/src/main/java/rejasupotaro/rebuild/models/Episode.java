@@ -10,7 +10,6 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
