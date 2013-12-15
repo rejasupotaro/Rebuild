@@ -1,12 +1,16 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.6.3'
+        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
     }
 }
+
 apply plugin: 'android'
+apply plugin: 'android-test'
 
 repositories {
     mavenCentral()
@@ -38,9 +42,9 @@ android {
             runProguard false
         }
         release {
-            signingConfig signingConfigs.release
             debuggable false
             runProguard true
+            signingConfig signingConfigs.release
             proguardFile file('./proguard-release.txt')
         }
     }
@@ -55,10 +59,9 @@ android {
 
         instrumentTestCompile fileTree(dir: 'src/instrumentTest/libs', include: '*.jar')
         instrumentTestCompile 'com.squareup:fest-android:1.0.7'
-    }
-}
 
-configurations.all {
-    // check for updates every build
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        testCompile 'junit:junit:4.10'
+        testCompile 'org.robolectric:robolectric:2.1.+'
+        testCompile 'com.squareup:fest-android:1.0.+'
+    }
 }
