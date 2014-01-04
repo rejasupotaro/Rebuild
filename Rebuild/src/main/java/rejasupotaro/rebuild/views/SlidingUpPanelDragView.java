@@ -15,7 +15,7 @@ public class SlidingUpPanelDragView extends RelativeLayout {
 
     private TextView mEpisodeTextView;
 
-    private Button mPostButton;
+    private View mPostButton;
 
     public SlidingUpPanelDragView(Context context) {
         super(context);
@@ -32,7 +32,7 @@ public class SlidingUpPanelDragView extends RelativeLayout {
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         View view = inflate(context, R.layout.view_sliding_up_panel_drag, null);
         mEpisodeTextView = (TextView) view.findViewById(R.id.sliding_up_panel_drag_view_episode_title);
-        mPostButton = (Button) view.findViewById(R.id.sliding_up_panel_drag_view_comment_button);
+        mPostButton = view.findViewById(R.id.sliding_up_panel_drag_view_comment_button);
         addView(view, params);
     }
 
