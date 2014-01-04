@@ -1,9 +1,10 @@
 package rejasupotaro.rebuild.adapters;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -18,34 +19,38 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
         private TextView postedAtTextView;
         private TextView titleTextView;
         private TextView subtitleTextView;
+
+        public ViewHolder(View root) {
+            this.postedAtTextView = (TextView) root.findViewById(R.id.episode_posted_at);
+            this.titleTextView = (TextView) root.findViewById(R.id.episode_title);
+            this.subtitleTextView = (TextView) root.findViewById(R.id.episode_subtitle);
+        }
     }
 
-    private LayoutInflater mLayoutInflater;
+    private Context mContext;
 
     public EpisodeListAdapter(Context context, int resource, List<Episode> episodeList) {
         super(context, resource, episodeList);
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mContext = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = (convertView == null ? null : (ViewHolder) convertView.getTag());
-        if (!(holder instanceof ViewHolder)) {
-            convertView = mLayoutInflater.inflate(R.layout.list_item_episode, null);
-
-            holder = new ViewHolder();
-            holder.postedAtTextView = (TextView) convertView.findViewById(R.id.episode_posted_at);
-            holder.titleTextView = (TextView) convertView.findViewById(R.id.episode_title);
-            holder.subtitleTextView = (TextView) convertView.findViewById(R.id.episode_subtitle);
-
+        if (convertView == null) {
+            convertView = View.inflate(mContext, R.layout.list_item_episode, null);
+            ViewHolder holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
 
+        ViewHolder holder = (ViewHolder) convertView.getTag();
         Episode episode = getItem(position);
 
         holder.postedAtTextView.setText(episode.getPostedAt());
         holder.titleTextView.setText(episode.getTitle());
         holder.subtitleTextView.setText(episode.getDescription());
+
+        Animation slideInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in);
+        convertView.startAnimation(slideInAnimation);
 
         return convertView;
     }
