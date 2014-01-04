@@ -1,17 +1,19 @@
 package rejasupotaro.rebuild.views;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.dialogs.ShareEpisodeDialog;
 import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.rebuild.utils.IntentUtils;
 
 public class SlidingUpPanelDragView extends RelativeLayout {
+
+    private static final String TAG = SlidingUpPanelDragView.class.getSimpleName();
 
     private TextView mEpisodeTextView;
 
@@ -48,7 +50,10 @@ public class SlidingUpPanelDragView extends RelativeLayout {
                 new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        IntentUtils.sendPostIntent(getContext(), buildPostMessage(episode));
+                        String message = buildPostMessage(episode);
+                        ShareEpisodeDialog dialog = ShareEpisodeDialog.newInstance(message);
+                        FragmentActivity activity = (FragmentActivity) getContext();
+                        dialog.show(activity.getSupportFragmentManager(), TAG);
                     }
                 });
     }
