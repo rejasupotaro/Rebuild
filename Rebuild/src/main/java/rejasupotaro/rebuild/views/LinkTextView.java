@@ -1,24 +1,24 @@
 package rejasupotaro.rebuild.views;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
 
+import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.utils.IntentUtils;
 
-public class LinkTextView extends TextView {
+public class LinkTextView {
 
-    public LinkTextView(Context context) {
-        super(context);
+    private TextView mView;
+
+    public TextView getView() {
+        return mView;
     }
 
     public LinkTextView(final Context context, String text, final String link) {
-        super(context);
-        setText("▶ " + text);
-        setTypeface(null, Typeface.ITALIC);
-        setTextColor(context.getResources().getColor(android.R.color.holo_blue_light));
-        setOnClickListener(new OnClickListener() {
+        mView = (TextView) View.inflate(context, R.layout.link_text_view, null);
+        mView.setText("▶ " + text);
+        mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentUtils.openBrowser(context, link);

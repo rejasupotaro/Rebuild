@@ -53,7 +53,7 @@ public class ShowNotesView extends LinearLayout {
             for (String link : links) {
                 if (!link.startsWith("<a href=")) continue;
                 LinkTextView linkText = new LinkTextView(context, getText(link), getHref(link));
-                linkTextList.add(linkText);
+                linkTextList.add(linkText.getView());
             }
             return linkTextList;
         }
