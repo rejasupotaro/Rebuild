@@ -39,6 +39,7 @@ public class ShowNotesView extends LinearLayout {
     }
 
     public void setEpisode(Episode episode) {
+        mLinkTextList.removeAllViews();
         List<TextView> showNoteLinkTextList = LinkParser.buildShowNotes(mContext, episode.getShowNotes());
         for (TextView linkText : showNoteLinkTextList) {
             mLinkTextList.addView(linkText);
