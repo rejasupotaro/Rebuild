@@ -59,6 +59,6 @@ public class SlidingUpPanelDragView extends RelativeLayout {
     }
 
     private String buildPostMessage(Episode episode) {
-        return " / " + episode.getTitle() + " " + episode.getLink();
+        return " / " + episode.getTitle() + " " + episode.getLink() + " #rebuildfm";
     }
 }
