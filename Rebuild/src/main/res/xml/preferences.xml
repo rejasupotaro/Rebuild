@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_title_notification">
+        <CheckBoxPreference
+            android:title="@string/pref_title_notification_episodes"
+            android:summary="@string/pref_summary_notification_episodes" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="MORE">
+        <Preference android:title="@string/pref_title_website">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://rebuild.fm/" />
+        </Preference>
+        <Preference android:title="@string/pref_title_about" />
+        <Preference android:title="@string/pref_title_licenses" />
+    </PreferenceCategory>
+</PreferenceScreen>

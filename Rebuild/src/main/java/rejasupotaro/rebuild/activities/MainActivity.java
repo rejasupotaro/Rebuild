@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import rejasupotaro.rebuild.R;
@@ -128,5 +129,15 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(SettingsActivity.createIntent(this));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
