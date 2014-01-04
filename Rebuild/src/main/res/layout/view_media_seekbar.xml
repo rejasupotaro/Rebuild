@@ -1,5 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:paddingTop="@dimen/padding_seekbar"
+    android:paddingBottom="@dimen/padding_seekbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

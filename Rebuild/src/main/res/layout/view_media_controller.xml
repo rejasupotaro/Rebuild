@@ -15,20 +15,19 @@
 
 
     <RelativeLayout
-        android:background="@color/dark_gray"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sliding_up_panel_height">
+        android:layout_height="@dimen/media_controller_view_height">
 
         <ImageView
             android:id="@+id/media_play_button"
-            android:background="@android:drawable/ic_media_play"
+            android:src="@android:drawable/ic_media_play"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/media_ff_button"
-            android:background="@android:drawable/ic_media_ff"
+            android:src="@android:drawable/ic_media_ff"
             android:layout_toRightOf="@+id/media_play_button"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
@@ -37,7 +36,7 @@
 
         <ImageView
             android:id="@+id/media_rew_button"
-            android:background="@android:drawable/ic_media_rew"
+            android:src="@android:drawable/ic_media_rew"
             android:layout_toLeftOf="@+id/media_play_button"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"

@@ -1,5 +1,8 @@
 <resources>
     <dimen name="sliding_up_panel_height">48dp</dimen>
+    <dimen name="media_controller_view_height">64dp</dimen>
+
+    <dimen name="padding_seekbar">8dp</dimen>
     <dimen name="padding_frame">6dp</dimen>
     <dimen name="padding_contents">12dp</dimen>
 
