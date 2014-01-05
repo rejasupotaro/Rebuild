@@ -8,7 +8,15 @@ A [Podcast](http://rebuild.fm/) by [Tatsuhiko Miyagawa](https://twitter.com/miya
 Screenshot
 ------
 
+<img src="http://gifzo.net/y5tOJSI4VL.gif" width="240px">
+
+<!-- Sat Nov 9 11:04:06 2013
 <img src="http://gifzo.net/GPb6EuPILd.gif" width="240px">
+-->
+
+<!-- Mon Nov 4 20:10:17 2013
+<img src="http://gifzo.net/3bOYvQ5Hzc.gif" width="240px">
+-->
 
 Contributing
 ------
