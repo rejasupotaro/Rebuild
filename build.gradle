@@ -1,1 +1,3 @@
-apply from: 'secret.gradle'
+if (new File('hello.txt').exists()) {
+    apply from: 'secret.gradle'
+}

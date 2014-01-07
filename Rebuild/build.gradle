@@ -27,12 +27,14 @@ android {
         targetSdkVersion 18
     }
 
-    signingConfigs {
-        release {
-            storeFile file('rebuild.keystore')
-            storePassword project.storePassword
-            keyAlias project.keyAlias
-            keyPassword project.keyPassword
+    if (new File('rebuild.keystore').exists()) {
+        signingConfigs {
+            release {
+                storeFile file('rebuild.keystore')
+                storePassword project.storePassword
+                keyAlias project.keyAlias
+                keyPassword project.keyPassword
+            }
         }
     }
 
@@ -41,11 +43,13 @@ android {
             debuggable true
             runProguard false
         }
-        release {
-            debuggable false
-            runProguard true
-            signingConfig signingConfigs.release
-            proguardFile file('./proguard-release.txt')
+        if (signingConfigs.hasProperty('release')) {
+            release {
+                debuggable false
+                runProguard true
+                signingConfig signingConfigs.release
+                proguardFile file('./proguard-release.txt')
+            }
         }
     }
 
