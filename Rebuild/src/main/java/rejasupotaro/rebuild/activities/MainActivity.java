@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import javax.inject.Inject;
+
+import rejasupotaro.rebuild.ErrorReporter;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.fragments.EpisodeListFragment;
@@ -28,6 +31,9 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
     @InjectView(R.id.sliding_up_panel_drag_view)
     private SlidingUpPanelDragView mSlidingUpPanelDragView;
 
+    @Inject
+    private ErrorReporter mErrorReporter;
+
     public static Intent createIntent(Context context, Episode episode) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(EXTRA_EPISODE, episode);
@@ -35,8 +41,15 @@ public class MainActivity extends RoboFragmentActivity implements EpisodeListFra
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onDestroy() {
+        mErrorReporter.unregisterActivity();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mErrorReporter.registerActivity(this);
         setContentView(R.layout.activity_main);
         setupSlidingUpPanel();
         startServices();

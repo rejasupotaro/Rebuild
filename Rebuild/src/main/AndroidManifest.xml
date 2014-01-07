@@ -36,8 +36,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.SettingsActivity"></activity>
         <activity
-            android:name=".activities.SettingsActivity" />
+            android:name=".activities.ReportActivity"
+            android:theme="@style/Theme.Transparent">
+        </activity>
 
         <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService" />
         <service android:name=".services.EpisodeDownloadService" />

@@ -17,4 +17,9 @@
     <string name="pref_title_website">Rebuild.fm website</string>
     <string name="pref_title_about">About this app</string>
     <string name="pref_title_licenses">Licenses</string>
+
+    <string name="report_dialog_title">Sorry...</string>
+    <string name="report_dialog_body">"Unfortunately, This application has stopped"</string>
+    <string name="report_dialog_positive_button">report</string>
+
 </resources>
