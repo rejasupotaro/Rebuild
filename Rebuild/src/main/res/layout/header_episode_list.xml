@@ -25,7 +25,7 @@
 
         </LinearLayout>
 
-        <TextView
+        <rejasupotaro.rebuild.views.FontAwesomeTextView
             android:id="@+id/link_text_twitter"
             android:text="twitter"
             android:layout_marginRight="@dimen/padding_contents"
@@ -33,7 +33,7 @@
             android:layout_alignParentRight="true"
             style="@style/HeaderLinkText" />
 
-        <TextView
+        <rejasupotaro.rebuild.views.FontAwesomeTextView
             android:id="@+id/link_text_website"
             android:text="website"
             android:layout_toLeftOf="@+id/link_text_twitter"

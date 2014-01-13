@@ -20,8 +20,8 @@ import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.ToastUtils;
+import rejasupotaro.rebuild.views.FontAwesomeTextView;
 import roboguice.fragment.RoboListFragment;
-import roboguice.inject.InjectView;
 
 public class EpisodeListFragment extends RoboListFragment {
 
@@ -59,14 +59,19 @@ public class EpisodeListFragment extends RoboListFragment {
     }
 
     private void setupHeaderLinkText(View header) {
-        header.findViewById(R.id.link_text_website).setOnClickListener(new View.OnClickListener() {
+        FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_website);
+        websiteLinkText.prepend(0xF015);
+        websiteLinkText.findViewById(R.id.link_text_website).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://rebuild.fm"));
                 startActivity(intent);
             }
         });
-        header.findViewById(R.id.link_text_twitter).setOnClickListener(new View.OnClickListener() {
+
+        FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_twitter);
+        twitterLinkText.prepend(0xF099);
+        twitterLinkText.findViewById(R.id.link_text_twitter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), TwitterWidgetActivity.class));
