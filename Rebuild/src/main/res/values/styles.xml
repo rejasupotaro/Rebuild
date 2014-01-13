@@ -18,6 +18,28 @@
         <item name="android:windowActionBarOverlay">true</item>
     </style>
 
+    <style name="RebuildLogText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:shadowColor">@color/smoke_black</item>
+        <item name="android:shadowDx">8</item>
+        <item name="android:shadowDy">8</item>
+        <item name="android:shadowRadius">8</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="HeaderLinkText">
+        <item name="android:textSize">10dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/smoke_black</item>
+        <item name="android:padding">@dimen/padding_frame</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="DialogButtonText">
         <item name="android:textSize">@dimen/primary_text_size</item>
         <item name="android:textStyle">bold</item>

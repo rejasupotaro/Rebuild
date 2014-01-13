@@ -2,6 +2,7 @@ package rejasupotaro.rebuild.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,18 @@ public class EpisodeListFragment extends RoboListFragment {
         getListView().setFadingEdgeLength(0);
         View header = mLayoutInflater.inflate(R.layout.header_episode_list, null);
         getListView().addHeaderView(header);
-        header.setOnClickListener(new View.OnClickListener() {
+        setupHeaderLinkText(header);
+    }
+
+    private void setupHeaderLinkText(View header) {
+        header.findViewById(R.id.link_text_website).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://rebuild.fm"));
+                startActivity(intent);
+            }
+        });
+        header.findViewById(R.id.link_text_twitter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), TwitterWidgetActivity.class));
