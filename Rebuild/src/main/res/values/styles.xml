@@ -30,13 +30,13 @@
     </style>
 
     <style name="HeaderLinkText">
-        <item name="android:textSize">10dp</item>
+        <item name="android:textSize">@dimen/tertiary_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@color/smoke_black</item>
-        <item name="android:padding">@dimen/padding_frame</item>
+        <item name="android:background">@drawable/bg_header_link_text</item>
+        <item name="android:padding">@dimen/padding_contents</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_width">84dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 

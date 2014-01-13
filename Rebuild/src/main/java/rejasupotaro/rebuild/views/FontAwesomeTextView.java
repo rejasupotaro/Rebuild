@@ -9,6 +9,7 @@ public class FontAwesomeTextView extends TextView {
 
     private static final String FONT_FILE_NAME = "fontawesome-webfont.ttf";
 
+    // See {@linktourl http://fortawesome.github.io/Font-Awesome/icons/}
     private static Typeface sTypeface;
 
     public FontAwesomeTextView(Context context, AttributeSet attrs) {
