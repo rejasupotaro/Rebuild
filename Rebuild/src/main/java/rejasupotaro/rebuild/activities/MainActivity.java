@@ -19,10 +19,9 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.views.SlidingUpPanelDragView;
 import rejasupotaro.rebuild.views.SlidingUpPanelLayout;
-import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
 
-public class MainActivity extends RoboFragmentActivity implements EpisodeListFragment.OnEpisodeSelectListener {
+public class MainActivity extends RoboActionBarActivity implements EpisodeListFragment.OnEpisodeSelectListener {
 
     private static final float SLIDING_PANEL_SLIDE_OFFSET = 0.2f;
 

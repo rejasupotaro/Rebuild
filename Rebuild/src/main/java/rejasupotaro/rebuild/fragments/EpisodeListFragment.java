@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.google.inject.Inject;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.activities.TwitterWidgetActivity;
 import rejasupotaro.rebuild.adapters.EpisodeListAdapter;
 import rejasupotaro.rebuild.api.RssFeedClient;
 import rejasupotaro.rebuild.events.BusProvider;
@@ -18,6 +20,7 @@ import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import roboguice.fragment.RoboListFragment;
+import roboguice.inject.InjectView;
 
 public class EpisodeListFragment extends RoboListFragment {
 
@@ -49,7 +52,14 @@ public class EpisodeListFragment extends RoboListFragment {
     private void setupListView() {
         getListView().setDivider(null);
         getListView().setFadingEdgeLength(0);
-        getListView().addHeaderView(mLayoutInflater.inflate(R.layout.header_episode_list, null));
+        View header = mLayoutInflater.inflate(R.layout.header_episode_list, null);
+        getListView().addHeaderView(header);
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), TwitterWidgetActivity.class));
+            }
+        });
     }
 
     private void requestFeed() {
