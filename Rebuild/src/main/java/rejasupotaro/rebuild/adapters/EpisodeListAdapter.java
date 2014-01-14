@@ -49,9 +49,6 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
         holder.titleTextView.setText(episode.getTitle());
         holder.subtitleTextView.setText(episode.getDescription());
 
-        Animation slideInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in);
-        convertView.startAnimation(slideInAnimation);
-
         return convertView;
     }
 }
