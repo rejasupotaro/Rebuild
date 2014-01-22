@@ -12,6 +12,11 @@
                 android:data="http://rebuild.fm/" />
         </Preference>
         <Preference android:title="@string/pref_title_about" />
-        <Preference android:title="@string/pref_title_licenses" />
+        <Preference android:title="@string/pref_title_licenses">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:targetPackage="rejasupotaro.rebuild"
+                    android:targetClass="rejasupotaro.rebuild.activities.LicensesActivity"/>
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

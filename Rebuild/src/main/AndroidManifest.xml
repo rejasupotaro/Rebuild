@@ -44,6 +44,9 @@
             android:name=".activities.ReportActivity"
             android:theme="@style/Theme.Transparent">
         </activity>
+        <activity
+                android:name=".activities.LicensesActivity">
+        </activity>
 
         <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService" />
         <service android:name=".services.EpisodeDownloadService" />

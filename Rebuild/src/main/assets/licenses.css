@@ -1,0 +1,22 @@
+body {
+  font-size: 87.5%;
+  margin: 0;
+  padding: 0;
+  color: #4c4a40;
+  line-height: 1.5;
+}
+
+.license {
+  padding: 0.5em 1.5em;
+  border-bottom: 1px solid #ebeae6
+}
+
+.license h3 {
+  font-size: 129%;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+.license p {
+  margin: 1em 0;
+}
