@@ -1,4 +1,4 @@
-Rebuild.fm for Android
+Rebuild.fm for Android (Unofficial)
 ======
 
 About Rebuild
@@ -8,7 +8,7 @@ A [Podcast](http://rebuild.fm/) by [Tatsuhiko Miyagawa](https://twitter.com/miya
 Screenshot
 ------
 
-<img src="http://gifzo.net/y5tOJSI4VL.gif" width="240px">
+<img src="https://raw2.github.com/rejasupotaro/Rebuild/master/screenshot.png" width="800">
 
 <!-- Sat Nov 9 11:04:06 2013
 <img src="http://gifzo.net/GPb6EuPILd.gif" width="240px">
