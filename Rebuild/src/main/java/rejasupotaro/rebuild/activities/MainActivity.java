@@ -30,9 +30,6 @@ public class MainActivity extends RoboActionBarActivity implements EpisodeListFr
     @InjectView(R.id.sliding_up_panel_drag_view)
     private SlidingUpPanelDragView mSlidingUpPanelDragView;
 
-    @Inject
-    private ErrorReporter mErrorReporter;
-
     public static Intent createIntent(Context context, Episode episode) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(EXTRA_EPISODE, episode);
@@ -40,15 +37,8 @@ public class MainActivity extends RoboActionBarActivity implements EpisodeListFr
     }
 
     @Override
-    public void onDestroy() {
-        mErrorReporter.unregisterActivity();
-        super.onDestroy();
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mErrorReporter.registerActivity(this);
         setContentView(R.layout.activity_main);
         setupSlidingUpPanel();
         startServices();

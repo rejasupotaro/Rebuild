@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.inject.Inject;
@@ -21,15 +23,16 @@ import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
-import roboguice.fragment.RoboListFragment;
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 
-public class EpisodeListFragment extends RoboListFragment {
-
-    @Inject
-    private LayoutInflater mLayoutInflater;
+public class EpisodeListFragment extends RoboFragment {
 
     @Inject
     private RssFeedClient mClient;
+
+    @InjectView(R.id.episode_list_view)
+    private ListView mEpisodeListView;
 
     private OnEpisodeSelectListener mListener;
 
@@ -44,6 +47,13 @@ public class EpisodeListFragment extends RoboListFragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_episode_list, null);
+        return view;
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setupListView();
@@ -51,11 +61,17 @@ public class EpisodeListFragment extends RoboListFragment {
     }
 
     private void setupListView() {
-        getListView().setDivider(null);
-        getListView().setFadingEdgeLength(0);
-        View header = mLayoutInflater.inflate(R.layout.header_episode_list, null);
-        getListView().addHeaderView(header);
+        View header = View.inflate(getActivity(), R.layout.header_episode_list, null);
         setupHeaderLinkText(header);
+        mEpisodeListView.addHeaderView(header);
+
+        mEpisodeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Episode episode = (Episode) mEpisodeListView.getItemAtPosition(position);
+                mListener.onSelect(episode);
+            }
+        });
     }
 
     private void setupHeaderLinkText(View header) {
@@ -71,12 +87,13 @@ public class EpisodeListFragment extends RoboListFragment {
 
         FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_twitter);
         twitterLinkText.prepend(0xF099);
-        twitterLinkText.findViewById(R.id.link_text_twitter).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), TwitterWidgetActivity.class));
-            }
-        });
+        twitterLinkText.findViewById(R.id.link_text_twitter).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(getActivity(), TwitterWidgetActivity.class));
+                    }
+                });
     }
 
     private void requestFeed() {
@@ -96,12 +113,6 @@ public class EpisodeListFragment extends RoboListFragment {
 
     public void setupEpisodeListView(List<Episode> episodeList) {
         EpisodeListAdapter episodeListAdapter = new EpisodeListAdapter(getActivity(), 0, episodeList);
-        setListAdapter(episodeListAdapter);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        mListener.onSelect((Episode) l.getItemAtPosition(position));
+        mEpisodeListView.setAdapter(episodeListAdapter);
     }
 }
