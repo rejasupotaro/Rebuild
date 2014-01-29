@@ -23,6 +23,7 @@ import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
+import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -30,6 +31,9 @@ public class EpisodeListFragment extends RoboFragment {
 
     @Inject
     private RssFeedClient mClient;
+
+    @InjectView(R.id.state_frame_layout)
+    StateFrameLayout mStateFrameLayout;
 
     @InjectView(R.id.episode_list_view)
     private ListView mEpisodeListView;
@@ -97,16 +101,19 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void requestFeed() {
+        mStateFrameLayout.showProgress();
         mClient.request(new RssFeedClient.EpisodeClientResponseHandler() {
             @Override
             public void onSuccess(List<Episode> episodeList) {
                 setupEpisodeListView(episodeList);
                 BusProvider.getInstance().post(new LoadEpisodeListCompleteEvent(episodeList));
+                mStateFrameLayout.showContent();
             }
 
             @Override
             public void onFailure() {
                 ToastUtils.show(getActivity(), "An error occurred while requesting rss feed.");
+                mStateFrameLayout.showError();
             }
         });
     }
