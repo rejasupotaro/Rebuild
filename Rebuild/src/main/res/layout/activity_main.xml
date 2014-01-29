@@ -1,22 +1,15 @@
-<rejasupotaro.rebuild.views.SlidingUpPanelLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/sliding_up_panel_layout"
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        >
     <fragment
             android:id="@+id/fragment_episode_list"
             class="rejasupotaro.rebuild.fragments.EpisodeListFragment"
             android:background="@color/base_color_gray"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    <fragment
-            android:id="@+id/fragment_episode_detail"
-            class="rejasupotaro.rebuild.fragments.EpisodeDetailFragment"
-            android:background="@android:color/darker_gray"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-</rejasupotaro.rebuild.views.SlidingUpPanelLayout>
+            android:layout_height="match_parent"
+            />
+</FrameLayout>
 
