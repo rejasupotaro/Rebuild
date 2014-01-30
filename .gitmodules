@@ -1,0 +1,3 @@
+[submodule "gradle/gradle-android-utils"]
+	path = gradle/gradle-android-utils
+	url = git@github.com:gfx/gradle-android-utils.git
