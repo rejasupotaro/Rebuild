@@ -69,3 +69,5 @@ android {
         testCompile 'com.squareup:fest-android:1.0.+'
     }
 }
+
+makeGrayscaleLauncherIcon(file("src/main"), "ic_launcher.png")
