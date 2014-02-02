@@ -6,6 +6,8 @@
     <dimen name="padding_frame">6dp</dimen>
     <dimen name="padding_contents">12dp</dimen>
 
+    <dimen name="margin_minimum">4dp</dimen>
+
     <dimen name="primary_text_size">18sp</dimen>
     <dimen name="secondary_text_size">14sp</dimen>
     <dimen name="tertiary_text_size">12sp</dimen>

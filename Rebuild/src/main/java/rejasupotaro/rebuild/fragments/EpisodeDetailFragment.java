@@ -46,7 +46,7 @@ public class EpisodeDetailFragment extends RoboFragment {
     @InjectView(R.id.media_controller_view)
     private MediaControllerView mMediaControllerView;
 
-    @InjectView(R.id.media_start_button_on_image_cover)
+    @InjectView(R.id.episode_detail_header_cover)
     private View mMediaStartButtonOnImageCover;
 
     @InjectView(R.id.episode_show_notes)
