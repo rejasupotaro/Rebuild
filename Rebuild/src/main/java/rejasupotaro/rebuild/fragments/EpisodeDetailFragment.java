@@ -57,9 +57,6 @@ public class EpisodeDetailFragment extends RoboFragment {
     @InjectView(R.id.episode_show_notes)
     private ShowNotesView mShowNotesView;
 
-    @InjectView(R.id.episode_share_button)
-    private View mEpisodeShareButton;
-
     private Episode mEpisode;
 
     @Override
@@ -91,20 +88,6 @@ public class EpisodeDetailFragment extends RoboFragment {
         mEpisodeDescriptionTextView.setText(
                 Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
         mShowNotesView.setEpisode(episode);
-
-        mEpisodeShareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String message = buildPostMessage(episode);
-                ShareEpisodeDialog dialog = ShareEpisodeDialog.newInstance(message);
-                FragmentActivity activity = getActivity();
-                dialog.show(activity.getSupportFragmentManager(), TAG);
-            }
-        });
-    }
-
-    private String buildPostMessage(Episode episode) {
-        return " / " + episode.getTitle() + " " + episode.getLink() + " #rebuildfm";
     }
 
     private void setTitle(String title) {

@@ -1,0 +1,11 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rebuild="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_like"
+        android:icon="@android:drawable/star_off"
+        android:title="@string/action_settings"
+        rebuild:showAsAction="always" />
+    <item android:id="@+id/action_share"
+        android:icon="@android:drawable/ic_menu_share"
+        rebuild:showAsAction="always" />
+</menu>

@@ -16,27 +16,6 @@
         >
     </FrameLayout>
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_gravity="right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-        <ImageView
-            android:id="@+id/episode_like_button"
-            android:background="@drawable/episode_like_button"
-            android:layout_margin="@dimen/margin_icon_button"
-            android:layout_width="@dimen/ic_button_secondary"
-            android:layout_height="@dimen/ic_button_secondary"
-            />
-        <ImageView
-            android:id="@+id/episode_share_button"
-            android:background="@drawable/episode_share_button"
-            android:layout_margin="@dimen/margin_icon_button"
-            android:layout_width="@dimen/ic_button_secondary"
-            android:layout_height="@dimen/ic_button_secondary"
-            />
-    </LinearLayout>
-    <LinearLayout
         android:background="@color/smoke_black"
         android:layout_gravity="bottom"
         android:gravity="center"

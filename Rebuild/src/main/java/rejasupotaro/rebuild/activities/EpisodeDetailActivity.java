@@ -8,11 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.dialogs.ShareEpisodeDialog;
 import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.models.Episode;
 import roboguice.inject.InjectExtra;
 
 public class EpisodeDetailActivity extends RoboActionBarActivity{
+
+    private static final String TAG = EpisodeDetailActivity.class.getSimpleName();
 
     private static final String EXTRA_EPISODE = "extra_episode";
 
@@ -45,8 +48,12 @@ public class EpisodeDetailActivity extends RoboActionBarActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.episode_detail, menu);
         return true;
+    }
+
+    private String buildPostMessage(Episode episode) {
+        return " / " + episode.getTitle() + " " + episode.getLink() + " #rebuildfm";
     }
 
     @Override
@@ -55,6 +62,13 @@ public class EpisodeDetailActivity extends RoboActionBarActivity{
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+            case R.id.action_like:
+                break;
+            case R.id.action_share:
+                String message = buildPostMessage(mEpisode);
+                ShareEpisodeDialog dialog = ShareEpisodeDialog.newInstance(message);
+                dialog.show(getSupportFragmentManager(), TAG);
                 break;
             default:
                 result = super.onOptionsItemSelected(item);
