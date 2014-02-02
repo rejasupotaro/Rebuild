@@ -35,7 +35,7 @@
             android:id="@+id/episode_subtitle"
             android:padding="@dimen/padding_contents"
             android:background="@color/base_color_light_gray"
-            android:textSize="@dimen/tertiary_text_size"
+            android:textSize="@dimen/quaternary_text_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/episode_posted_at"
-        android:textSize="@dimen/tertiary_text_size"
+        android:textSize="@dimen/quaternary_text_size"
         android:textColor="@android:color/white"
         android:background="@drawable/posted_at_circle"
         android:gravity="center"

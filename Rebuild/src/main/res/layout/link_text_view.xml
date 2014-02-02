@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="4dp"
+    android:padding="@dimen/padding_frame"
     android:background="@drawable/bg_clickable"
     android:textSize="@dimen/secondary_text_size"
     android:typeface="serif"

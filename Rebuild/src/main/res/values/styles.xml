@@ -30,7 +30,7 @@
     </style>
 
     <style name="HeaderLinkText">
-        <item name="android:textSize">@dimen/tertiary_text_size</item>
+        <item name="android:textSize">@dimen/quaternary_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/bg_header_link_text</item>

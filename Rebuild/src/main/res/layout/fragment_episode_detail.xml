@@ -19,7 +19,7 @@
             >
             <TextView
                 android:id="@+id/episode_description"
-                android:textSize="@dimen/secondary_text_size"
+                android:textSize="@dimen/tertiary_text_size"
                 android:padding="@dimen/padding_frame"
                 android:gravity="center"
                 android:layout_width="match_parent"
