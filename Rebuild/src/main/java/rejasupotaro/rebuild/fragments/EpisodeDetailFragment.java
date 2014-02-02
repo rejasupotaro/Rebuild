@@ -93,12 +93,17 @@ public class EpisodeDetailFragment extends RoboFragment {
         mEpisode = episode;
 
         setupMediaStartButtonOnImageCover(episode);
+        setTitle(episode.getTitle());
         mEpisodeTitleTextView.setText(episode.getTitle());
         mEpisodeDescriptionTextView.setText(
                 Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
         mSlidingUpPanelDragView.setEpisode(episode);
         mMediaControllerView.setEpisode(episode);
         mShowNotesView.setEpisode(episode);
+    }
+
+    private void setTitle(String title) {
+        getActivity().getActionBar().setTitle(title);
     }
 
     private void setupMediaStartButtonOnImageCover(final Episode episode) {
