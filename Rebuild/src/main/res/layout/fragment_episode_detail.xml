@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:clickable="true"
     android:background="@color/base_color_light_gray"
@@ -30,42 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:background="@drawable/miyagawa_in_yapc"
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp" />
-
-                <TextView
-                    android:id="@+id/episode_title"
-                    android:textSize="@dimen/primary_text_size"
-                    android:textStyle="bold"
-                    android:background="@color/smoke_white"
-                    android:padding="@dimen/padding_contents"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <FrameLayout
-                    android:id="@+id/media_start_button_on_image_cover"
-                    android:background="@color/smoke_black"
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp">
-
-                    <ImageView
-                        android:background="@drawable/media_start_button_on_image"
-                        android:layout_gravity="center"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp" />
-
-                </FrameLayout>
-
-            </FrameLayout>
+            <include layout="@layout/header_episode_detail" />
 
             <LinearLayout
                 android:padding="@dimen/padding_frame"
