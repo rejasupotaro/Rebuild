@@ -1,6 +1,5 @@
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:background="@android:color/holo_green_light"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -13,14 +12,6 @@
             >
         <ProgressBar
                 android:background="@drawable/progress"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-        <TextView
-                android:text="progress"
-                android:textSize="@dimen/primary_text_size"
-                android:textColor="@color/dark_gray"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
