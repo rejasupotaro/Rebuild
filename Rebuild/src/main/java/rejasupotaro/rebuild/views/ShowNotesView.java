@@ -1,17 +1,15 @@
 package rejasupotaro.rebuild.views;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.models.Link;
 
 public class ShowNotesView extends LinearLayout {
 
@@ -40,46 +38,10 @@ public class ShowNotesView extends LinearLayout {
 
     public void setEpisode(Episode episode) {
         mLinkTextList.removeAllViews();
-        List<TextView> showNoteLinkTextList = LinkParser.buildShowNotes(mContext, episode.getShowNotes());
-        for (TextView linkText : showNoteLinkTextList) {
-            mLinkTextList.addView(linkText);
-        }
-    }
-
-    public static class LinkParser {
-
-        public static List<TextView> buildShowNotes(Context context, String source) {
-            List<TextView> linkTextList = new ArrayList<TextView>();
-            String[] links = substringDescription(source).split("<li>");
-            for (String link : links) {
-                if (!link.startsWith("<a href=")) continue;
-                LinkTextView linkText = new LinkTextView(context, getText(link), getHref(link));
-                linkTextList.add(linkText.getView());
-            }
-            return linkTextList;
-        }
-
-        public static String substringDescription(String source) {
-            if (TextUtils.isEmpty(source)) return "";
-            int startIndex = source.indexOf("<h3>");
-            if (startIndex < 0) return "";
-            return source.substring(startIndex, source.length());
-        }
-
-        public static String getHref(String source) {
-            if (TextUtils.isEmpty(source)) return "";
-            int startIndex = source.indexOf("href=\"");
-            int endIndex = source.indexOf(">");
-            if (startIndex < 0 || endIndex < 0) return "";
-            return source.substring(startIndex + 6, endIndex - 1);
-        }
-
-        public static String getText(String source) {
-            if (TextUtils.isEmpty(source)) return "";
-            int startIndex = source.indexOf(">");
-            int endIndex = source.indexOf("</");
-            if (startIndex < 0 || endIndex < 0) return "";
-            return source.substring(startIndex + 1, endIndex);
+        List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
+        List<LinkTextView> linkTextViewList = LinkTextView.toLinkTextViewList(mContext, linkList);
+        for (LinkTextView linkTextView : linkTextViewList) {
+            mLinkTextList.addView(linkTextView.getView());
         }
     }
 }
