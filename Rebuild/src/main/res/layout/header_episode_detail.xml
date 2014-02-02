@@ -37,27 +37,19 @@
             />
     </LinearLayout>
     <LinearLayout
-        android:background="@color/smoke_white"
+        android:background="@color/smoke_black"
         android:layout_gravity="bottom"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <ImageView
-            android:background="@drawable/media_play_button"
-            android:layout_margin="@dimen/margin_icon_button"
-            android:layout_gravity="center"
-            android:layout_width="@dimen/ic_button_primary"
-            android:layout_height="@dimen/ic_button_primary"
-            />
-        <TextView
-            android:id="@+id/episode_title"
-            android:textSize="@dimen/primary_text_size"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:padding="@dimen/padding_contents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+        <include layout="@layout/view_media_seekbar" />
     </LinearLayout>
+    <ImageView
+        android:background="@drawable/media_play_button"
+        android:layout_margin="@dimen/margin_icon_button"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/ic_button_primary"
+        android:layout_height="@dimen/ic_button_primary"
+        />
 </FrameLayout>
