@@ -16,27 +16,42 @@
         >
     </FrameLayout>
     <LinearLayout
-        android:background="@color/smoke_white"
-        android:gravity="center"
+        android:orientation="vertical"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
         <ImageView
-            android:background="@drawable/media_play_button"
+            android:id="@+id/episode_share_button"
+            android:background="@drawable/episode_share_button"
             android:layout_margin="@dimen/margin_minimum"
-            android:layout_gravity="center"
+            android:layout_gravity="right"
             android:layout_width="60dp"
             android:layout_height="60dp"
             />
-        <TextView
-            android:id="@+id/episode_title"
-            android:textSize="@dimen/primary_text_size"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:padding="@dimen/padding_contents"
+        <LinearLayout
+            android:background="@color/smoke_white"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:background="@drawable/media_play_button"
+                android:layout_margin="@dimen/margin_minimum"
+                android:layout_gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                />
+            <TextView
+                android:id="@+id/episode_title"
+                android:textSize="@dimen/primary_text_size"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_contents"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+        </LinearLayout>
 </FrameLayout>

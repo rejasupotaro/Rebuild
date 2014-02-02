@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.fragments;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.api.EpisodeDownloadClient;
+import rejasupotaro.rebuild.dialogs.ShareEpisodeDialog;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
@@ -51,6 +53,9 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     @InjectView(R.id.episode_show_notes)
     private ShowNotesView mShowNotesView;
+
+    @InjectView(R.id.episode_share_button)
+    private View mEpisodeShareButton;
 
     private Episode mEpisode;
 
@@ -95,6 +100,20 @@ public class EpisodeDetailFragment extends RoboFragment {
                 Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
         mMediaControllerView.setEpisode(episode);
         mShowNotesView.setEpisode(episode);
+
+        mEpisodeShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String message = buildPostMessage(episode);
+                ShareEpisodeDialog dialog = ShareEpisodeDialog.newInstance(message);
+                FragmentActivity activity = getActivity();
+                dialog.show(activity.getSupportFragmentManager(), TAG);
+            }
+        });
+    }
+
+    private String buildPostMessage(Episode episode) {
+        return " / " + episode.getTitle() + " " + episode.getLink() + " #rebuildfm";
     }
 
     private void setTitle(String title) {
