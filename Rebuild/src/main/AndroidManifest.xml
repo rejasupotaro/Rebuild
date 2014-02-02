@@ -37,6 +37,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.EpisodeDetailActivity">
+        </activity>
+        <activity
             android:name=".activities.TwitterWidgetActivity"
             android:label="@string/label_timeline">
         </activity>

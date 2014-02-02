@@ -36,8 +36,6 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     public static final String TAG = EpisodeDetailFragment.class.getSimpleName();
 
-    private static final String EXTRA_EPISODE = "extra_episode";
-
     @Inject
     private EpisodeDownloadClient mEpisodeDownloadClient;
 
@@ -64,16 +62,6 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     private Episode mEpisode;
 
-    public static EpisodeDetailFragment newInstance(Episode episode) {
-        Bundle args = new Bundle();
-        args.putParcelable(EXTRA_EPISODE, episode);
-
-        EpisodeDetailFragment episodeDetailFragment = new EpisodeDetailFragment();
-        episodeDetailFragment.setArguments(args);
-
-        return episodeDetailFragment;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         BusProvider.getInstance().register(this);
@@ -84,18 +72,15 @@ public class EpisodeDetailFragment extends RoboFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mEpisodeDescriptionTextView.setMovementMethod(LinkMovementMethod.getInstance());
-
-        Episode episode = getArguments().getParcelable(EXTRA_EPISODE);
-        setup(episode);
     }
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         BusProvider.getInstance().unregister(this);
+        super.onDestroyView();
     }
 
-    private void setup(final Episode episode) {
+    public void setup(final Episode episode) {
         mEpisode = episode;
 
         setTitle(episode.getTitle());

@@ -1,0 +1,13 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <fragment
+        android:id="@+id/fragment_episode_detail"
+        class="rejasupotaro.rebuild.fragments.EpisodeDetailFragment"
+        android:background="@color/base_color_gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</FrameLayout>

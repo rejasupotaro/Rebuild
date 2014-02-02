@@ -3,14 +3,10 @@ package rejasupotaro.rebuild.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.fragments.EpisodeListFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
@@ -64,16 +60,7 @@ public class MainActivity extends RoboActionBarActivity
     }
 
     private void openEpisodeDetailFragment(Episode episode) {
-        EpisodeDetailFragment episodeDetailFragment = EpisodeDetailFragment.newInstance(episode);
-        addFragment(episodeDetailFragment, EpisodeDetailFragment.TAG);
-    }
-
-    private void addFragment(Fragment fragment, String tag) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, fragment);
-        fragmentTransaction.addToBackStack(tag);
-        fragmentTransaction.commit();
+        startActivity(EpisodeDetailActivity.createIntent(this, episode));
     }
 
     @Override
