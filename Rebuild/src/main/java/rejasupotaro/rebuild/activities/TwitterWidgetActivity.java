@@ -6,20 +6,24 @@ import android.view.MenuItem;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.utils.StringUtils;
+import rejasupotaro.rebuild.views.StateFrameLayout;
 import rejasupotaro.rebuild.views.TwitterWidgetWebView;
 import roboguice.inject.InjectView;
 
 public class TwitterWidgetActivity extends RoboActionBarActivity {
 
+    @InjectView(R.id.state_frame_layout)
+    private StateFrameLayout mStateFrameLayout;
+
     @InjectView(R.id.twitter_widget)
-    private TwitterWidgetWebView twitterWidgetView;
+    private TwitterWidgetWebView mTwitterWidgetWebView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_widget);
         setupActionBar();
-        twitterWidgetView.init(getApplicationContext());
+        mTwitterWidgetWebView.init(getApplicationContext());
     }
 
     private void setupActionBar() {
