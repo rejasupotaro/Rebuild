@@ -1,8 +1,11 @@
 package rejasupotaro.rebuild.activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.views.TwitterWidgetWebView;
 import roboguice.inject.InjectView;
 
@@ -15,6 +18,30 @@ public class TwitterWidgetActivity extends RoboActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_widget);
+        setupActionBar();
         twitterWidgetView.init(getApplicationContext());
+    }
+
+    private void setupActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+
+        String title = StringUtils.capitalize(getString(R.string.label_timeline));
+        actionBar.setTitle(title);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean result = false;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                result = super.onOptionsItemSelected(item);
+                break;
+        }
+        return result;
     }
 }

@@ -7,6 +7,10 @@ public final class StringUtils {
     private StringUtils() {
     }
 
+    public static String capitalize(String source) {
+        return Character.toUpperCase(source.charAt(0)) + source.substring(1);
+    }
+
     public static String removeNewLines(String source) {
         return source.replaceAll("\n", "");
     }

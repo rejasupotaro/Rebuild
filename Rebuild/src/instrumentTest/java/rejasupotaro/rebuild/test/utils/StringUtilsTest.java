@@ -6,6 +6,11 @@ import rejasupotaro.rebuild.utils.StringUtils;
 
 public class StringUtilsTest extends AndroidTestCase {
 
+    public void testCapitalize() {
+        String source = "abc";
+        assertEquals("Abc", StringUtils.capitalize(source));
+    }
+
     public void testRemoveNewLines() {
         {
             String source = "Hello World!";

@@ -27,7 +27,7 @@
 
         <rejasupotaro.rebuild.views.FontAwesomeTextView
             android:id="@+id/link_text_twitter"
-            android:text="twitter"
+            android:text="@string/label_timeline"
             android:layout_marginRight="@dimen/padding_contents"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
