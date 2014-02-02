@@ -10,6 +10,8 @@ import rejasupotaro.rebuild.views.StateFrameLayout;
 import rejasupotaro.rebuild.views.TwitterWidgetWebView;
 import roboguice.inject.InjectView;
 
+import static rejasupotaro.rebuild.views.TwitterWidgetWebView.*;
+
 public class TwitterWidgetActivity extends RoboActionBarActivity {
 
     @InjectView(R.id.state_frame_layout)
@@ -23,8 +25,25 @@ public class TwitterWidgetActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_widget);
         setupActionBar();
-        mTwitterWidgetWebView.init(getApplicationContext());
+        mTwitterWidgetWebView.init(getApplicationContext(), mLoadListener);
     }
+
+    private LoadListener mLoadListener = new LoadListener() {
+        @Override
+        public void onStart() {
+            mStateFrameLayout.showProgress();
+        }
+
+        @Override
+        public void onError(int errorCode) {
+            mStateFrameLayout.showError();
+        }
+
+        @Override
+        public void onFinish() {
+            mStateFrameLayout.showContent();
+        }
+    };
 
     private void setupActionBar() {
         ActionBar actionBar = getActionBar();

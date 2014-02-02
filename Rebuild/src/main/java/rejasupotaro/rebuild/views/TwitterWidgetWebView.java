@@ -2,12 +2,14 @@ package rejasupotaro.rebuild.views;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import org.apache.http.protocol.HTTP;
 
@@ -20,24 +22,36 @@ import rejasupotaro.rebuild.utils.FileUtils;
 
 public class TwitterWidgetWebView extends WebView {
 
+    public static interface LoadListener {
+        public void onStart();
+        public void onError(int errorCode);
+        public void onFinish();
+    }
+
     private static final String TAG = TwitterWidgetWebView.class.getSimpleName();
 
     private static final String CONTENT_FILE_NAME = "twitter_widget.html";
 
     private Context mContext;
 
+    private LoadListener mLoadListener;
+
     public TwitterWidgetWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public void init(Context context) {
+    public void init(Context context, LoadListener loadListener) {
         mContext = context;
+        mLoadListener = loadListener;
+        setupWebView();
+        load();
+    }
 
+    private void setupWebView() {
         getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         getSettings().setJavaScriptEnabled(true);
         getSettings().setDomStorageEnabled(true);
         setWebChromeClient(new WebChromeClient() {
-
             @Override
             public boolean onConsoleMessage(ConsoleMessage cm) {
                 Log.d("Rebuild", cm.message() + " -- From line "
@@ -47,7 +61,34 @@ public class TwitterWidgetWebView extends WebView {
             }
         });
 
-        load();
+        setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                mLoadListener.onStart();
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return overrideUrlLoadingHandler(url);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description,
+                                        String failingUrl) {
+                mLoadListener.onError(errorCode);
+                super.onReceivedError(view, errorCode, description, failingUrl);
+            }
+
+            public void onPageFinished(WebView view, String url) {
+                mLoadListener.onFinish();
+                super.onPageFinished(view, url);
+            }
+        });
+    }
+
+    private boolean overrideUrlLoadingHandler(String url) {
+        return true;
     }
 
     private void load() {
