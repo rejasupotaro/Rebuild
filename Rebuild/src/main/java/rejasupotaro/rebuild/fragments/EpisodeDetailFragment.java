@@ -25,7 +25,6 @@ import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.MediaControllerView;
 import rejasupotaro.rebuild.views.ShowNotesView;
-import rejasupotaro.rebuild.views.SlidingUpPanelDragView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -37,9 +36,6 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     @Inject
     private EpisodeDownloadClient mEpisodeDownloadClient;
-
-    @InjectView(R.id.sliding_up_panel_drag_view)
-    private SlidingUpPanelDragView mSlidingUpPanelDragView;
 
     @InjectView(R.id.episode_title)
     private TextView mEpisodeTitleTextView;
@@ -97,7 +93,6 @@ public class EpisodeDetailFragment extends RoboFragment {
         mEpisodeTitleTextView.setText(episode.getTitle());
         mEpisodeDescriptionTextView.setText(
                 Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
-        mSlidingUpPanelDragView.setEpisode(episode);
         mMediaControllerView.setEpisode(episode);
         mShowNotesView.setEpisode(episode);
     }
@@ -143,7 +138,6 @@ public class EpisodeDetailFragment extends RoboFragment {
         Episode episode = episodeList.get(0);
 
         if (PodcastPlayer.getInstance().isPlaying()) return;
-        mSlidingUpPanelDragView.setEpisode(episode);
 
         setup(episode);
     }
