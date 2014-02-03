@@ -1,0 +1,19 @@
+machine:
+  environment:
+    ANDROID_HOME: /usr/local/android-sdk-linux
+
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter "android-18,build-tools-19.0.1"
+
+  override:
+    - ./gradlew dependencies
+
+test:
+  override:
+    - ./gradlew test connectedCheck
