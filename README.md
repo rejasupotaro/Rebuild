@@ -1,4 +1,4 @@
-Rebuild.fm for Android (Unofficial) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rejasupotaro/rebuild/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+Rebuild.fm for Android (Unofficial) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rejasupotaro/rebuild/trend.png)](https://bitdeli.com/free "Bitdeli Badge") [![Build Status](https://travis-ci.org/rejasupotaro/Rebuild.png?branch=master)](https://travis-ci.org/rejasupotaro/Rebuild)
 ======
 
 About Rebuild
