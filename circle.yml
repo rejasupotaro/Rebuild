@@ -9,11 +9,11 @@ checkout:
 
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter "android-18,build-tools-19.0.1"
+    - echo y | android update sdk --no-ui --all --filter "android-18,build-tools-19.0.1,sysimg-18,extra-android-support,extra-google-google_play_services,extra-google-gcm,build-tools-18.1.0,extra-google-m2repository,extra-android-m2repository"
 
   override:
-    - ./gradlew dependencies
+    - TERM=dumb ./gradlew dependencies
 
 test:
   override:
-    - ./gradlew test connectedCheck
+    - TERM=dumb ./gradlew test connectedCheck
