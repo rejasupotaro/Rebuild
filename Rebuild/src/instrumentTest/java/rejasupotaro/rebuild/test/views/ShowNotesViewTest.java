@@ -1,28 +1,27 @@
 package rejasupotaro.rebuild.test.views;
 
 import android.test.AndroidTestCase;
-import android.widget.TextView;
 
 import java.util.List;
 
-import rejasupotaro.rebuild.views.ShowNotesView;
+import rejasupotaro.rebuild.models.Link;
 
 public class ShowNotesViewTest extends AndroidTestCase {
 
     public void testBuildShowNotes() {
         {
             String source = null;
-            assertEquals(0, ShowNotesView.LinkParser.buildShowNotes(getContext(), source).size());
+            assertEquals(0, Link.Parser.toLinkList(source).size());
         }
         {
             String source = "";
-            assertEquals(0, ShowNotesView.LinkParser.buildShowNotes(getContext(), source).size());
+            assertEquals(0, Link.Parser.toLinkList(source).size());
         }
         {
             String source = "<li><a href=\"link0\">text0</a></li><li><a href=\"link1\">text1</a></li><li><a href=\"link2\">text2</a></li>";
-            List<TextView> linkTextViewList = ShowNotesView.LinkParser.buildShowNotes(getContext(), source);
-            for (int i = 0; i < linkTextViewList.size(); i++) {
-                assertEquals("text" + i, linkTextViewList.get(i).getText().toString() + i);
+            List<Link> linkList = Link.Parser.toLinkList(source);
+            for (int i = 0; i < linkList.size(); i++) {
+                assertEquals("text" + i, linkList.get(i).getUrl() + i);
             }
         }
     }
@@ -30,45 +29,45 @@ public class ShowNotesViewTest extends AndroidTestCase {
     public void testSubstringDescription() {
         {
             String source = null;
-            assertEquals("", ShowNotesView.LinkParser.substringDescription(source));
+            assertEquals("", Link.Parser.substringDescription(source));
         }
         {
             String source = "";
-            assertEquals("", ShowNotesView.LinkParser.substringDescription(source));
+            assertEquals("", Link.Parser.substringDescription(source));
         }
         {
             String source = "伊藤直也さん (@naoya_ito)、宮下剛輔さん (@gosukenator) をゲストに迎えて、Immutable Infrastructure, Docker, Packer, Serf などについて話しました。<h3>Show Notes</h3>...";
-            assertEquals("<h3>Show Notes</h3>...", ShowNotesView.LinkParser.substringDescription(source));
+            assertEquals("<h3>Show Notes</h3>...", Link.Parser.substringDescription(source));
         }
     }
 
     public void testGetHref() {
         {
             String source = null;
-            assertEquals("", ShowNotesView.LinkParser.getHref(source));
+            assertEquals("", Link.Parser.getHref(source));
         }
         {
             String source = "";
-            assertEquals("", ShowNotesView.LinkParser.getHref(source));
+            assertEquals("", Link.Parser.getHref(source));
         }
         {
             String source = "<a href=\"http://rejasupota.ro/\">Hello World</a>";
-            assertEquals("http://rejasupota.ro/", ShowNotesView.LinkParser.getHref(source));
+            assertEquals("http://rejasupota.ro/", Link.Parser.getHref(source));
         }
     }
 
     public void testGetText() {
         {
             String source = null;
-            assertEquals("", ShowNotesView.LinkParser.getText(source));
+            assertEquals("", Link.Parser.getText(source));
         }
         {
             String source = "";
-            assertEquals("", ShowNotesView.LinkParser.getText(source));
+            assertEquals("", Link.Parser.getText(source));
         }
         {
             String source = "<a href=\"http://rejasupota.ro/\">Hello World</a>";
-            assertEquals("Hello World", ShowNotesView.LinkParser.getText(source));
+            assertEquals("Hello World", Link.Parser.getText(source));
         }
     }
 }
