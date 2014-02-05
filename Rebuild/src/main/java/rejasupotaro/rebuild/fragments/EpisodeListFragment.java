@@ -119,7 +119,7 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     public void setupEpisodeListView(List<Episode> episodeList) {
-        EpisodeListAdapter episodeListAdapter = new EpisodeListAdapter(getActivity(), 0, episodeList);
+        EpisodeListAdapter episodeListAdapter = new EpisodeListAdapter(getActivity(), episodeList);
         mEpisodeListView.setAdapter(episodeListAdapter);
     }
 }

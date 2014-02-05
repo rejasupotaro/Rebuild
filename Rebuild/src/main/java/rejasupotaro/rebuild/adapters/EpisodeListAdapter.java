@@ -16,8 +16,8 @@ import rejasupotaro.rebuild.models.Episode;
 
 public class EpisodeListAdapter extends BindableAdapter<Episode> {
 
-    public EpisodeListAdapter(Context context, int resource, List<Episode> episodeList) {
-        super(context, resource, episodeList);
+    public EpisodeListAdapter(Context context, List<Episode> episodeList) {
+        super(context, episodeList);
     }
 
     @Override
