@@ -43,6 +43,8 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Inject
     private EpisodeDownloadClient mEpisodeDownloadClient;
 
+    private TextView mEpisodeTitleTextView;
+
     private View mMediaStartButtonOnImageCover;
 
     private TextView mMediaCurrentTimeTextView;
@@ -71,6 +73,7 @@ public class EpisodeDetailFragment extends RoboFragment {
     }
 
     private void findViews(View view) {
+        mEpisodeTitleTextView = (TextView) view.findViewById(R.id.episode_title);
         mMediaStartButtonOnImageCover = view.findViewById(R.id.episode_detail_header_cover);
         mMediaCurrentTimeTextView = (TextView) view.findViewById(R.id.media_current_time);
         mMediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
@@ -95,7 +98,7 @@ public class EpisodeDetailFragment extends RoboFragment {
         setupMediaStartButtonOnImageCover(episode);
         setupSeekBar(episode);
 
-        setTitle(episode.getTitle());
+        setTitle(episode);
         mEpisodeDescriptionTextView.setText(
                 Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
     }
@@ -114,8 +117,11 @@ public class EpisodeDetailFragment extends RoboFragment {
         });
     }
 
-    private void setTitle(String title) {
-        getActivity().getActionBar().setTitle(title);
+    private void setTitle(Episode episode) {
+        String originalTitle = episode.getTitle();
+        int startIndex = originalTitle.indexOf(':');
+        getActivity().getActionBar().setTitle("Episode " + originalTitle.substring(0, startIndex));
+        mEpisodeTitleTextView.setText(originalTitle.substring(startIndex + 2));
     }
 
     private void setupSeekBar(final Episode episode) {

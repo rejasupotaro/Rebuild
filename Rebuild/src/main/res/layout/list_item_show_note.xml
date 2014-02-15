@@ -1,6 +1,7 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
+        android:background="@android:color/white"
         android:padding="@dimen/padding_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +14,7 @@
             />
     <TextView
             android:id="@+id/show_note_title"
-            android:textSize="@dimen/secondary_text_size"
+            android:textSize="@dimen/tertiary_text_size"
             android:layout_marginLeft="@dimen/padding_frame"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/list_item_show_note_height"

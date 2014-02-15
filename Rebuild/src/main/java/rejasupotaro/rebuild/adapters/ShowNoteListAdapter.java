@@ -1,7 +1,5 @@
 package rejasupotaro.rebuild.adapters;
 
-import com.squareup.picasso.Picasso;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +22,7 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
 
     @Override
     public View newView(LayoutInflater inflater, int position, ViewGroup container) {
-        return inflater.inflate(R.layout.link_text_view, null);
+        return inflater.inflate(R.layout.list_item_show_note, null);
     }
 
     @Override
