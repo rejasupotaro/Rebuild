@@ -8,7 +8,15 @@ import org.apache.http.protocol.HTTP;
 
 public final class IntentUtils {
 
+    private static final String URL_MIYAGAWA_PROFILE = "https://mobile.twitter.com/miyagawa";
+
     private IntentUtils() {}
+
+    public static void openMiyagawaProfile(Context context) {
+        Uri uri = Uri.parse(URL_MIYAGAWA_PROFILE);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        context.startActivity(intent);
+    }
 
     public static void openBrowser(Context context, String url) {
         Uri uri = Uri.parse(url);

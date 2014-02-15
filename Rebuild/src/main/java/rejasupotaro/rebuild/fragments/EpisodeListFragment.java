@@ -21,6 +21,7 @@ import rejasupotaro.rebuild.api.RssFeedClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
 import rejasupotaro.rebuild.views.StateFrameLayout;
@@ -65,9 +66,8 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void setupListView() {
-        View header = View.inflate(getActivity(), R.layout.header_episode_list, null);
-        setupHeaderLinkText(header);
-        mEpisodeListView.addHeaderView(header, null, false);
+        setupListViewHeader();
+        setupListViewFooter();
 
         mEpisodeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,7 +78,9 @@ public class EpisodeListFragment extends RoboFragment {
         });
     }
 
-    private void setupHeaderLinkText(View header) {
+    private void setupListViewHeader() {
+        View header = View.inflate(getActivity(), R.layout.header_episode_list, null);
+
         FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_website);
         websiteLinkText.prepend(0xF015);
         websiteLinkText.findViewById(R.id.link_text_website).setOnClickListener(new View.OnClickListener() {
@@ -98,6 +100,21 @@ public class EpisodeListFragment extends RoboFragment {
                         startActivity(new Intent(getActivity(), TwitterWidgetActivity.class));
                     }
                 });
+
+        mEpisodeListView.addHeaderView(header, null, false);
+    }
+
+    private void setupListViewFooter() {
+        View footer = View.inflate(getActivity(), R.layout.footer_episode_list, null);
+
+        footer.findViewById(R.id.miyagawa_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtils.openMiyagawaProfile(getActivity());
+            }
+        });
+
+        mEpisodeListView.addFooterView(footer, null, false);
     }
 
     private void requestFeed() {

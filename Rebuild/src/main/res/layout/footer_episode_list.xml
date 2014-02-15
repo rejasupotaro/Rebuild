@@ -1,0 +1,40 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/dark_gray"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_contents"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <TextView
+                android:text="Copyright © 2013-2014 by "
+                android:textSize="@dimen/quaternary_text_size"
+                android:textColor="@color/gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        <TextView
+                android:id="@+id/miyagawa_text"
+                android:text="Tatsuhiko Miyagawa"
+                android:textSize="@dimen/quaternary_text_size"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+    </LinearLayout>
+    <TextView
+            android:text="in San Francisco, CA."
+            android:textSize="@dimen/quaternary_text_size"
+            android:textColor="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+</LinearLayout>
