@@ -86,8 +86,7 @@ public class EpisodeListFragment extends RoboFragment {
         websiteLinkText.findViewById(R.id.link_text_website).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://rebuild.fm"));
-                startActivity(intent);
+                IntentUtils.openRebuildWeb(getActivity());
             }
         });
 
@@ -130,7 +129,7 @@ public class EpisodeListFragment extends RoboFragment {
             @Override
             public void onFailure() {
                 if (shouldShowError()) {
-                    ToastUtils.show(getActivity(), "An error occurred while requesting rss feed.");
+                    ToastUtils.showNetworkError(getActivity());
                     mStateFrameLayout.showError();
                 }
             }

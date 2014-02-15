@@ -10,12 +10,16 @@ public final class IntentUtils {
 
     private static final String URL_MIYAGAWA_PROFILE = "https://mobile.twitter.com/miyagawa";
 
+    private static final String URL_REBUILD = "http://rebuild.fm";
+
     private IntentUtils() {}
 
     public static void openMiyagawaProfile(Context context) {
-        Uri uri = Uri.parse(URL_MIYAGAWA_PROFILE);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        context.startActivity(intent);
+        openBrowser(context, URL_MIYAGAWA_PROFILE);
+    }
+
+    public static void openRebuildWeb(Context context) {
+        openBrowser(context, URL_REBUILD);
     }
 
     public static void openBrowser(Context context, String url) {
