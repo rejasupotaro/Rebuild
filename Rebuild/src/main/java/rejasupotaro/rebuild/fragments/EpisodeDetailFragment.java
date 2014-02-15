@@ -2,7 +2,6 @@ package rejasupotaro.rebuild.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.api.EpisodeDownloadClient;
-import rejasupotaro.rebuild.dialogs.ShareEpisodeDialog;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
@@ -96,6 +94,7 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     private void setupSeekBar(Episode episode) {
         mMediaDurationTextView.setText(episode.getDuration());
+
         PodcastPlayer.getInstance().setCurrentTimeListener(
                 new PodcastPlayer.CurrentTimeListener() {
                     @Override
@@ -108,8 +107,23 @@ public class EpisodeDetailFragment extends RoboFragment {
                     }
                 });
 
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if (!PodcastPlayer.getInstance().isPlaying()) return;
+                PodcastPlayer.getInstance().seekTo(seekBar.getProgress());
+            }
+        });
+
         mSeekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
-        mSeekBar.setEnabled(false);
     }
 
     private void updateCurrentTime(int currentPosition) {
