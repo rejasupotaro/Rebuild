@@ -15,6 +15,28 @@ import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class ShowNoteListAdapter extends BindableAdapter<Link> {
 
+    private static class ViewHolderPair {
+        ViewHolder left;
+        ViewHolder right;
+
+        public ViewHolderPair(View view) {
+            left = new ViewHolder(view.findViewById(R.id.left_item));
+            right = new ViewHolder(view.findViewById(R.id.right_item));
+        }
+
+        private static class ViewHolder {
+            View root;
+            TextView showNoteTitleTextView;
+            ImageView siteThumbnail;
+
+            public ViewHolder(View view) {
+                root = view;
+                showNoteTitleTextView = (TextView) view.findViewById(R.id.show_note_title);
+                siteThumbnail = (ImageView) view.findViewById(R.id.site_thumbnail);
+            }
+        }
+    }
+
     public ShowNoteListAdapter(Context context,
             List<Link> episodeList) {
         super(context, episodeList);
@@ -22,29 +44,30 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
 
     @Override
     public View newView(LayoutInflater inflater, int position, ViewGroup container) {
-        return inflater.inflate(R.layout.list_item_show_note_pair, null);
+        View view = inflater.inflate(R.layout.list_item_show_note_pair, null);
+        ViewHolderPair holderPair = new ViewHolderPair(view);
+        view.setTag(holderPair);
+        return view;
     }
 
     @Override
     public void bindView(Link item, int position, View view) {
-        bindView(view.findViewById(R.id.left_item), position * 2);
-        bindView(view.findViewById(R.id.right_item), position * 2 + 1);
+        ViewHolderPair holderPair = (ViewHolderPair) view.getTag();
+        bindView(holderPair.left, position * 2);
+        bindView(holderPair.right, position * 2 + 1);
     }
 
-    private void bindView(View view, int position) {
+    private void bindView(ViewHolderPair.ViewHolder holder, int position) {
         if (position >= super.getCount()) {
-            view.setVisibility(View.INVISIBLE);
+            holder.root.setVisibility(View.GONE);
             return;
         } else {
-            view.setVisibility(View.VISIBLE);
+            holder.root.setVisibility(View.VISIBLE);
         }
         Link item = getItem(position);
 
-        ImageView siteThumbnail = (ImageView) view.findViewById(R.id.site_thumbnail);
-        PicassoHelper.load(getContext(), siteThumbnail, item.getUrl());
-
-        TextView showNoteTitle = (TextView) view.findViewById(R.id.show_note_title);
-        showNoteTitle.setText(item.getTitle());
+        PicassoHelper.load(getContext(), holder.siteThumbnail, item.getUrl());
+        holder.showNoteTitleTextView.setText(item.getTitle());
     }
 
     @Override
