@@ -8,11 +8,17 @@ import org.apache.http.protocol.HTTP;
 
 public final class IntentUtils {
 
-    private static final String URL_MIYAGAWA_PROFILE = "https://mobile.twitter.com/miyagawa";
+    private static final String URL_MY_PROFILE = "https://twitter.com/rejasupotaro";
+
+    private static final String URL_MIYAGAWA_PROFILE = "https://twitter.com/miyagawa";
 
     private static final String URL_REBUILD = "http://rebuild.fm";
 
     private IntentUtils() {}
+
+    public static void openMyProfile(Context context) {
+        openBrowser(context, URL_MY_PROFILE);
+    }
 
     public static void openMiyagawaProfile(Context context) {
         openBrowser(context, URL_MIYAGAWA_PROFILE);

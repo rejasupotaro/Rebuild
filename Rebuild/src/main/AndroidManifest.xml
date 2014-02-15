@@ -49,7 +49,7 @@
             android:theme="@style/Theme.Transparent">
         </activity>
         <activity
-                android:name=".activities.LicensesActivity">
+                android:name=".activities.AboutActivity">
         </activity>
 
         <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService" />

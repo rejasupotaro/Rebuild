@@ -1,0 +1,40 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <LinearLayout
+            android:id="@+id/rejasupotaro"
+            android:background="@drawable/bg_clickable"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_frame"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+        <ImageView
+            android:src="@drawable/rejasupotaro"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            />
+        <TextView
+                android:text="Copyright © 2013-2014 by rejasupotaro"
+                android:layout_marginLeft="@dimen/padding_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+    </LinearLayout>
+    <TextView
+            android:text="Rebuild for Android, Version 0.0.1"
+            android:layout_marginBottom="@dimen/padding_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    <WebView
+            android:id="@+id/licenses_view"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+</LinearLayout>

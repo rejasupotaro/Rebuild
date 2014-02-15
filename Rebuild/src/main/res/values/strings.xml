@@ -22,8 +22,7 @@
     <string name="pref_summary_notification_episodes">Notify when a new episode appears</string>
     <string name="pref_title_more">MORE</string>
     <string name="pref_title_website">Rebuild.fm website</string>
-    <string name="pref_title_about">About this app</string>
-    <string name="pref_title_licenses">Licenses</string>
+    <string name="pref_title_about">About</string>
 
     <string name="report_dialog_title">Sorry...</string>
     <string name="report_dialog_body">"Unfortunately, This application has stopped"</string>
