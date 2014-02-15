@@ -3,6 +3,7 @@ package rejasupotaro.rebuild.models;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -45,11 +46,8 @@ public class Episode extends Model implements Parcelable {
     @Column(name = "show_notes")
     private String mShowNotes;
 
-    @Column(name = "favorited_count")
-    private int mFavoritedCount;
-
-    @Column(name = "commented_count")
-    private int mCommentedCount;
+    @Column(name = "favorited")
+    private boolean mIsFavorited;
 
     @Column(name = "media_local_path")
     private String mMediaLocalPath;
@@ -86,12 +84,16 @@ public class Episode extends Model implements Parcelable {
         return mShowNotes;
     }
 
-    public int getFavoritedCount() {
-        return mFavoritedCount;
+    public boolean isDownloaded() {
+        return !TextUtils.isEmpty(mMediaLocalPath);
     }
 
-    public int getCommentedCount() {
-        return mCommentedCount;
+    public boolean isFavorited() {
+        return mIsFavorited;
+    }
+
+    public void favorite() {
+        mIsFavorited = true;
     }
 
     public String getMediaLocalPath() {
@@ -232,8 +234,7 @@ public class Episode extends Model implements Parcelable {
         dest.writeString(mEnclosure.toString());
         dest.writeString(mDuration);
         dest.writeString(mShowNotes);
-        dest.writeInt(mFavoritedCount);
-        dest.writeInt(mCommentedCount);
+        dest.writeInt(mIsFavorited ? 1 : 0);
         dest.writeString(mMediaLocalPath);
     }
 
@@ -257,8 +258,7 @@ public class Episode extends Model implements Parcelable {
         mEnclosure = Uri.parse(in.readString());
         mDuration = in.readString();
         mShowNotes = in.readString();
-        mFavoritedCount = in.readInt();
-        mCommentedCount = in.readInt();
+        mIsFavorited = (in.readInt() == 1);
         mMediaLocalPath = in.readString();
     }
 }

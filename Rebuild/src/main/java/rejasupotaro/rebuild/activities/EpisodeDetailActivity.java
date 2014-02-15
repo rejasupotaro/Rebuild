@@ -68,7 +68,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity{
                 DebugUtils.notImplementedYet(this);
                 break;
             case R.id.action_favorite:
-                DebugUtils.notImplementedYet(this);
+                mEpisode.favorite();
                 break;
             case R.id.action_share:
                 String message = buildPostMessage(mEpisode);

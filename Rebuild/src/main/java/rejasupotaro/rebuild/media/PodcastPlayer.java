@@ -58,7 +58,7 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
         reset();
         try {
-            if (!TextUtils.isEmpty(episode.getMediaLocalPath())) {
+            if (episode.isDownloaded()) {
                 setDataSource(episode.getMediaLocalPath());
             } else {
                 Context applicationContext = context.getApplicationContext();
