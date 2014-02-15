@@ -15,7 +15,6 @@
     <style name="RebuildLogText">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:shadowColor">@color/smoke_black</item>
         <item name="android:shadowDx">8</item>
         <item name="android:shadowDy">8</item>
         <item name="android:shadowRadius">8</item>
