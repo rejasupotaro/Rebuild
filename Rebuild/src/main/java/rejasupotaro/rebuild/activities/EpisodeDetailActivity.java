@@ -11,6 +11,7 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.dialogs.ShareEpisodeDialog;
 import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.utils.DebugUtils;
 import roboguice.inject.InjectExtra;
 
 public class EpisodeDetailActivity extends RoboActionBarActivity{
@@ -63,7 +64,11 @@ public class EpisodeDetailActivity extends RoboActionBarActivity{
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.action_like:
+            case R.id.action_download:
+                DebugUtils.notImplementedYet(this);
+                break;
+            case R.id.action_favorite:
+                DebugUtils.notImplementedYet(this);
                 break;
             case R.id.action_share:
                 String message = buildPostMessage(mEpisode);
