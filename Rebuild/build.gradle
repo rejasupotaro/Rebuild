@@ -60,6 +60,7 @@ android {
         compile 'rejasupotaro:async-rss-client:0.0.3'
         compile 'com.squareup:otto:1.3.2'
         compile 'com.loopj.android:android-async-http:1.4.4'
+        compile 'org.apache.commons:commons-lang3:3.1'
 
         instrumentTestCompile fileTree(dir: 'src/instrumentTest/libs', include: '*.jar')
         instrumentTestCompile 'com.squareup:fest-android:1.0.7'

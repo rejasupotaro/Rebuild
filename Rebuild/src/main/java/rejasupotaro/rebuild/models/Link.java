@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.models;
 
-import android.content.Context;
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -58,7 +59,8 @@ public class Link {
             int startIndex = source.indexOf(">");
             int endIndex = source.indexOf("</");
             if (startIndex < 0 || endIndex < 0) return "";
-            return source.substring(startIndex + 1, endIndex);
+            String text = source.substring(startIndex + 1, endIndex);
+            return StringEscapeUtils.unescapeXml(text);
         }
     }
 }
