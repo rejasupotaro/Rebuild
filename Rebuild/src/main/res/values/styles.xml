@@ -1,21 +1,15 @@
 <resources>
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+    <style name="RebuildTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowAnimationStyle">@style/SlideWindowAnimationStyle</item>
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:windowActionBarOverlay">true</item>
+    <style name="SlideWindowAnimationStyle"
+           parent="android:Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_close_exit</item>
     </style>
 
     <style name="RebuildLogText">
