@@ -124,7 +124,12 @@ public class EpisodeDetailFragment extends RoboFragment {
         });
 
         mSeekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
-        mSeekBar.setEnabled(false);
+
+        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
+            mSeekBar.setEnabled(true);
+        } else {
+            mSeekBar.setEnabled(false);
+        }
     }
 
     private void updateCurrentTime(int currentPosition) {
