@@ -2,9 +2,13 @@ package rejasupotaro.rebuild.activities;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import rejasupotaro.rebuild.views.TwitterWidgetWebView;
@@ -19,6 +23,9 @@ public class TwitterWidgetActivity extends RoboActionBarActivity {
 
     @InjectView(R.id.twitter_widget)
     private TwitterWidgetWebView mTwitterWidgetWebView;
+
+    @Inject
+    private MenuDelegate mMenuDelegate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,16 +62,13 @@ public class TwitterWidgetActivity extends RoboActionBarActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        boolean result = false;
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
+        return mMenuDelegate.onItemSelect(item);
     }
 }

@@ -6,15 +6,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.fragments.EpisodeListFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
+import rejasupotaro.rebuild.tools.MenuDelegate;
 
 public class MainActivity extends RoboActionBarActivity
         implements EpisodeListFragment.OnEpisodeSelectListener {
 
     private static final String EXTRA_EPISODE = "extra_episode";
+
+    @Inject
+    private MenuDelegate mMenuDelegate;
 
     public static Intent createIntent(Context context, Episode episode) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -65,11 +71,6 @@ public class MainActivity extends RoboActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                startActivity(SettingsActivity.createIntent(this));
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return mMenuDelegate.onItemSelect(item);
     }
 }

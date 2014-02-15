@@ -9,8 +9,11 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.tools.MenuDelegate;
 
 public class SettingsActivity extends PreferenceActivity {
+
+    private MenuDelegate mMenuDelegate;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, SettingsActivity.class);
@@ -19,6 +22,8 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mMenuDelegate = new MenuDelegate(this);
 
         addPreferencesFromResource(R.xml.preferences);
 
@@ -29,11 +34,6 @@ public class SettingsActivity extends PreferenceActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+        return mMenuDelegate.onItemSelect(item);
     }
 }

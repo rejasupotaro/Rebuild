@@ -7,16 +7,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.dialogs.ShareEpisodeDialog;
 import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.rebuild.utils.DebugUtils;
+import rejasupotaro.rebuild.tools.MenuDelegate;
 import roboguice.inject.InjectExtra;
 
 public class EpisodeDetailActivity extends RoboActionBarActivity{
-
-    private static final String TAG = EpisodeDetailActivity.class.getSimpleName();
 
     private static final String EXTRA_EPISODE = "extra_episode";
 
@@ -28,6 +27,9 @@ public class EpisodeDetailActivity extends RoboActionBarActivity{
         intent.putExtra(EXTRA_EPISODE, episode);
         return intent;
     }
+
+    @Inject
+    private MenuDelegate mMenuDelegate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,32 +55,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity{
         return true;
     }
 
-    private String buildPostMessage(Episode episode) {
-        return " / " + episode.getTitle() + " " + episode.getLink() + " #rebuildfm";
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        boolean result = false;
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            case R.id.action_download:
-                DebugUtils.notImplementedYet(this);
-                break;
-            case R.id.action_favorite:
-                mEpisode.favorite();
-                break;
-            case R.id.action_share:
-                String message = buildPostMessage(mEpisode);
-                ShareEpisodeDialog dialog = ShareEpisodeDialog.newInstance(message);
-                dialog.show(getSupportFragmentManager(), TAG);
-                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
+        Bundle params = new Bundle();
+        params.putParcelable(MenuDelegate.PARAM_EPISODE, mEpisode);
+        return mMenuDelegate.onItemSelect(item, params);
     }
 }

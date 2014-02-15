@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.ErrorReporter;
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.tools.MenuDelegate;
 import roboguice.inject.InjectView;
 
 public class LicensesActivity extends RoboActionBarActivity {
@@ -20,6 +21,9 @@ public class LicensesActivity extends RoboActionBarActivity {
 
     @InjectView(R.id.licenses_view)
     private WebView mLicensesView;
+
+    @Inject
+    private MenuDelegate mMenuDelegate;
 
     @Override
     public void onDestroy() {
@@ -49,15 +53,6 @@ public class LicensesActivity extends RoboActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        boolean result = false;
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
+        return mMenuDelegate.onItemSelect(item);
     }
 }
