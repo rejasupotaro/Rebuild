@@ -14,12 +14,12 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Rebuild"
+                android:text="@string/app_name"
                 android:textSize="28sp"
                 style="@style/RebuildLogText" />
 
             <TextView
-                android:text="A Podcast by Tatsuhiko Miyagawa. Talking about Tech, Software Development and Gadgets."
+                android:text="@string/rebuild_description"
                 android:textSize="8sp"
                 style="@style/RebuildLogText" />
 

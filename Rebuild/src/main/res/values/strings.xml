@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Rebuild</string>
+    <string name="rebuild_description">A Podcast by Tatsuhiko Miyagawa. Talking about Tech, Software Development and Gadgets.</string>
     <string name="share">share</string>
     <string name="cancel">cancel</string>
     <string name="network_error_message">Network error\nPlease check the network</string>
