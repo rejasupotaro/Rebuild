@@ -1,8 +1,7 @@
-<LinearLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:background="@android:color/white"
-        android:padding="@dimen/padding_frame"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -10,14 +9,17 @@
     <ImageView
             android:id="@+id/site_thumbnail"
             android:src="@drawable/ic_launcher"
-            android:layout_width="@dimen/list_item_show_note_height"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/list_item_show_note_height"
             />
     <TextView
             android:id="@+id/show_note_title"
-            android:textSize="@dimen/tertiary_text_size"
-            android:layout_marginLeft="@dimen/padding_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/list_item_show_note_height"
+            android:background="@drawable/gradient_white_shadow"
+            android:padding="@dimen/padding_contents"
+            android:layout_gravity="bottom"
+            android:textSize="@dimen/quaternary_text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             />
-</LinearLayout>
+</FrameLayout>

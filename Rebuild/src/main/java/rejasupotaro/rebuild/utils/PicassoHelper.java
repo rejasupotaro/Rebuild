@@ -18,6 +18,6 @@ public class PicassoHelper {
     }
 
     public static final String buildSiteThumbnailUrl(String linkUrl) {
-        return "http://capture.heartrails.com/128x128?" + linkUrl;
+        return "http://capture.heartrails.com/256x256?" + linkUrl;
     }
 }
