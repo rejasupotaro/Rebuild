@@ -1,6 +1,5 @@
 package rejasupotaro.rebuild.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -8,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -49,6 +50,8 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     private TextView mMediaDurationTextView;
 
+    private CheckBox mMediaStartAndPauseButton;
+
     private SeekBar mSeekBar;
 
     private TextView mEpisodeDescriptionTextView;
@@ -75,6 +78,7 @@ public class EpisodeDetailFragment extends RoboFragment {
         mMediaStartButtonOnImageCover = view.findViewById(R.id.episode_detail_header_cover);
         mMediaCurrentTimeTextView = (TextView) view.findViewById(R.id.media_current_time);
         mMediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
+        mMediaStartAndPauseButton = (CheckBox) view.findViewById(R.id.media_start_and_pause_button);
         mSeekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
         mEpisodeDescriptionTextView = (TextView) view.findViewById(R.id.episode_description);
     }
@@ -93,7 +97,7 @@ public class EpisodeDetailFragment extends RoboFragment {
         findViews(headerView);
         setupListView(episode, headerView);
 
-        setupMediaStartButtonOnImageCover(episode);
+        setupMediaPlayAndPauseButton(episode);
         setupSeekBar(episode);
 
         setTitle(episode);
@@ -167,40 +171,60 @@ public class EpisodeDetailFragment extends RoboFragment {
         mSeekBar.setProgress(currentPosition);
     }
 
-    private void setupMediaStartButtonOnImageCover(final Episode episode) {
+    private void setupMediaPlayAndPauseButton(final Episode episode) {
+        mMediaStartAndPauseButton.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            start(episode);
+                        } else {
+                            pause();
+                        }
+                    }
+                });
+
         if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
             mMediaStartButtonOnImageCover.setVisibility(View.GONE);
         } else {
             mMediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
             mMediaStartButtonOnImageCover.setAlpha(1);
-            mMediaStartButtonOnImageCover.setOnClickListener(new View.OnClickListener() {
+        }
+
+    }
+
+    private void start(Episode episode) {
+        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        if (shouldRestart(episode)) {
+            podcastPlayer.start();
+            mSeekBar.setEnabled(true);
+        } else {
+            podcastPlayer.start(getActivity(), episode, new PodcastPlayer.StateChangedListener() {
                 @Override
-                public void onClick(View v) {
-                    onPodcastPlayButtonClick(episode);
+                public void onStart() {
+                    mSeekBar.setEnabled(true);
                 }
             });
-        }
-    }
 
-    private void onPodcastPlayButtonClick(Episode episode) {
-        start(getActivity(), episode);
-
-        BusProvider.getInstance().post(new PodcastPlayButtonClickEvent(episode));
-        UiAnimations.fadeOut(mMediaStartButtonOnImageCover, 300, 1000);
-        if (!mEpisode.hasMediaDataInLocal()) {
-            getActivity().startService(
-                    EpisodeDownloadService.createIntent(getActivity(), episode));
-        }
-    }
-
-    public void start(Context context, Episode episode) {
-        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        podcastPlayer.start(context, episode, new PodcastPlayer.StateChangedListener() {
-            @Override
-            public void onStart() {
-                mSeekBar.setEnabled(true);
+            BusProvider.getInstance().post(new PodcastPlayButtonClickEvent(episode));
+            UiAnimations.fadeOut(mMediaStartButtonOnImageCover, 300, 1000);
+            if (!mEpisode.hasMediaDataInLocal()) {
+                getActivity().startService(
+                        EpisodeDownloadService.createIntent(getActivity(), episode));
             }
-        });
+        }
+    }
+
+    private boolean shouldRestart(Episode episode) {
+        PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        return (podcastPlayer.isPlayingEpisode(episode)
+                && podcastPlayer.getCurrentPosition() > 0);
+    }
+
+    private void pause() {
+        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        podcastPlayer.pause();
+        mSeekBar.setEnabled(false);
     }
 
     @Subscribe

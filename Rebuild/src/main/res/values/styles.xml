@@ -55,4 +55,7 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="MediaStartAndPauseButton" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/media_start_and_pause_button</item>
+    </style>
 </resources>

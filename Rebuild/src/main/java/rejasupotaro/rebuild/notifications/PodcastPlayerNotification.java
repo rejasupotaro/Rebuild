@@ -58,7 +58,7 @@ public class PodcastPlayerNotification {
         if (TextUtils.isEmpty(action)) return;
 
         if (action.equals(ACTION_PAUSE)) {
-            PodcastPlayer.getInstance().stop();
+            PodcastPlayer.getInstance().pause();
             cancel();
         }
     }
