@@ -92,17 +92,17 @@ public class EpisodeDetailFragment extends RoboFragment {
         getActivity().getActionBar().setTitle(title);
     }
 
-    private void setupSeekBar(Episode episode) {
+    private void setupSeekBar(final Episode episode) {
         mMediaDurationTextView.setText(episode.getDuration());
 
         PodcastPlayer.getInstance().setCurrentTimeListener(
                 new PodcastPlayer.CurrentTimeListener() {
                     @Override
                     public void onTick(int currentPosition) {
-                        if (PodcastPlayer.getInstance().getEpisode() == null) {
-                            updateCurrentTime(0);
-                        } else {
+                        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
                             updateCurrentTime(currentPosition);
+                        } else {
+                            updateCurrentTime(0);
                         }
                     }
                 });
@@ -124,6 +124,7 @@ public class EpisodeDetailFragment extends RoboFragment {
         });
 
         mSeekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
+        mSeekBar.setEnabled(false);
     }
 
     private void updateCurrentTime(int currentPosition) {
@@ -162,7 +163,7 @@ public class EpisodeDetailFragment extends RoboFragment {
         podcastPlayer.start(context, episode, new PodcastPlayer.StateChangedListener() {
             @Override
             public void onStart() {
-                // nothing to do
+                mSeekBar.setEnabled(true);
             }
         });
     }
