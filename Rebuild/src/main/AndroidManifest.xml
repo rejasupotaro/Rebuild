@@ -43,13 +43,17 @@
             android:name=".activities.TwitterWidgetActivity"
             android:label="@string/label_timeline">
         </activity>
-        <activity android:name=".activities.SettingsActivity"></activity>
+        <activity
+                android:name=".activities.SettingsActivity"
+                android:label="@string/activity_settings">
+        </activity>
         <activity
             android:name=".activities.ReportActivity"
             android:theme="@style/Theme.Transparent">
         </activity>
         <activity
-                android:name=".activities.AboutActivity">
+                android:name=".activities.AboutActivity"
+                android:label="@string/activity_about">
         </activity>
 
         <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService" />
