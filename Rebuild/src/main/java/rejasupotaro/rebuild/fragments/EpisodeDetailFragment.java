@@ -66,6 +66,7 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         mEpisodeDescriptionTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 

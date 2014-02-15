@@ -1,40 +1,15 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/base_color_light_gray"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <LinearLayout
-        android:orientation="vertical"
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/base_color_light_gray"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         >
-        <include layout="@layout/header_episode_detail" />
-        <LinearLayout
-            android:padding="@dimen/padding_frame"
-            android:background="@color/base_color_gray"
+    <LinearLayout
             android:orientation="vertical"
-            android:layout_weight="1"
+            android:background="@color/base_color_light_gray"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-            <TextView
-                android:id="@+id/episode_description"
-                android:textSize="@dimen/tertiary_text_size"
-                android:padding="@dimen/padding_frame"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-            <rejasupotaro.rebuild.views.VerticalSeparator
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                />
-            <rejasupotaro.rebuild.views.ShowNotesView
-                android:id="@+id/episode_show_notes"
-                android:padding="@dimen/padding_frame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-        </LinearLayout>
+        <include layout="@layout/header_episode_detail"/>
     </LinearLayout>
 </ScrollView>
