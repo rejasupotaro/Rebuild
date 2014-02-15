@@ -53,15 +53,5 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
-        <rejasupotaro.rebuild.views.VerticalSeparator
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                />
-        <rejasupotaro.rebuild.views.ShowNotesView
-                android:id="@+id/episode_show_notes"
-                android:padding="@dimen/padding_frame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
     </LinearLayout>
 </LinearLayout>

@@ -1,15 +1,13 @@
-<ScrollView
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:background="@color/base_color_light_gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <LinearLayout
-            android:orientation="vertical"
-            android:background="@color/base_color_light_gray"
+    <ListView
+            android:id="@+id/show_note_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
-        <include layout="@layout/header_episode_detail"/>
-    </LinearLayout>
-</ScrollView>
+            />
+</LinearLayout>

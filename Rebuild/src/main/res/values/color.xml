@@ -3,6 +3,7 @@
     <color name="base_color_gray">#f2f1ed</color>
     <color name="base_color_light_gray">#faf9f5</color>
     <color name="dark_gray">#222222</color>
+    <color name="gray">#bebebe</color>
     <color name="smoke_black">#aa000000</color>
     <color name="smoke_white">#aaffffff</color>
     <color name="bg_pressed">#6633B5E5</color>

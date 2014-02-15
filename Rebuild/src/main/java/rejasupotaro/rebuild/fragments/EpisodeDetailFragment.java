@@ -7,26 +7,32 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.adapters.ShowNoteListAdapter;
 import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.DateUtils;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
-import rejasupotaro.rebuild.views.ShowNotesView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -37,23 +43,18 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Inject
     private EpisodeDownloadClient mEpisodeDownloadClient;
 
-    @InjectView(R.id.episode_detail_header_cover)
     private View mMediaStartButtonOnImageCover;
 
-    @InjectView(R.id.media_current_time)
     private TextView mMediaCurrentTimeTextView;
 
-    @InjectView(R.id.media_duration)
     private TextView mMediaDurationTextView;
 
-    @InjectView(R.id.media_seekbar)
     private SeekBar mSeekBar;
 
-    @InjectView(R.id.episode_description)
     private TextView mEpisodeDescriptionTextView;
 
-    @InjectView(R.id.episode_show_notes)
-    private ShowNotesView mShowNotesView;
+    @InjectView(R.id.show_note_list)
+    private ListView mShowNoteListView;
 
     private Episode mEpisode;
 
@@ -66,8 +67,15 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         mEpisodeDescriptionTextView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    private void findViews(View view) {
+        mMediaStartButtonOnImageCover = view.findViewById(R.id.episode_detail_header_cover);
+        mMediaCurrentTimeTextView = (TextView) view.findViewById(R.id.media_current_time);
+        mMediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
+        mSeekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
+        mEpisodeDescriptionTextView = (TextView) view.findViewById(R.id.episode_description);
     }
 
     @Override
@@ -77,16 +85,33 @@ public class EpisodeDetailFragment extends RoboFragment {
     }
 
     public void setup(final Episode episode) {
+        if (episode == null) getActivity().finish();
         mEpisode = episode;
 
-        setTitle(episode.getTitle());
+        View headerView = View.inflate(getActivity(), R.layout.header_episode_detail, null);
+        findViews(headerView);
+        setupListView(episode, headerView);
 
         setupMediaStartButtonOnImageCover(episode);
         setupSeekBar(episode);
 
+        setTitle(episode.getTitle());
         mEpisodeDescriptionTextView.setText(
                 Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
-        mShowNotesView.setEpisode(episode);
+    }
+
+    private void setupListView(Episode episode, View headerView) {
+        mShowNoteListView.addHeaderView(headerView, null, false);
+        List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
+        final ShowNoteListAdapter adapter = new ShowNoteListAdapter(getActivity(), linkList);
+        mShowNoteListView.setAdapter(adapter);
+        mShowNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Link link = adapter.getItem(position);
+                IntentUtils.openBrowser(getActivity(), link.getUrl());
+            }
+        });
     }
 
     private void setTitle(String title) {
