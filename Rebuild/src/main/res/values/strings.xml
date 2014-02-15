@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Rebuild</string>
     <string name="rebuild_description">A Podcast by Tatsuhiko Miyagawa. Talking about Tech, Software Development and Gadgets.</string>
     <string name="share">share</string>
@@ -30,4 +28,5 @@
     <string name="report_dialog_body">"Unfortunately, This application has stopped"</string>
     <string name="report_dialog_positive_button">report</string>
 
+    <string name="notification_pause">Pause</string>
 </resources>
