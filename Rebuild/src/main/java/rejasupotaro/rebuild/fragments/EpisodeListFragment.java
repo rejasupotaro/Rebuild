@@ -112,10 +112,17 @@ public class EpisodeListFragment extends RoboFragment {
 
             @Override
             public void onFailure() {
-                ToastUtils.show(getActivity(), "An error occurred while requesting rss feed.");
-                mStateFrameLayout.showError();
+                if (shouldShowError()) {
+                    ToastUtils.show(getActivity(), "An error occurred while requesting rss feed.");
+                    mStateFrameLayout.showError();
+                }
             }
         });
+    }
+
+    private boolean shouldShowError() {
+        return (mEpisodeListView == null
+                && mEpisodeListView.getCount() == 0);
     }
 
     public void setupEpisodeListView(List<Episode> episodeList) {
