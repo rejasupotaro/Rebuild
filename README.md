@@ -10,7 +10,7 @@ A [Podcast](http://rebuild.fm/) by [Tatsuhiko Miyagawa](https://twitter.com/miya
 Screenshot
 ------
 
-<img src="http://raw2.github.com/rejasupotaro/Rebuild/16572337a23c859e8e2cdbd908ce26d6414190ab/screenshot.png">
+<img src="https://raw2.github.com/rejasupotaro/Rebuild/master/screenshot.png">
 
 <!-- Sun Feb 2
 <img src="https://raw2.github.com/rejasupotaro/Rebuild/master/screenshot.png" width="800">
