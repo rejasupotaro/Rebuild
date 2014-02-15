@@ -83,7 +83,7 @@ public class StateFrameLayout extends FrameLayout {
     }
 
     public void showProgress() {
-        mContentView.setVisibility(View.GONE);
+        mContentView.setVisibility(View.VISIBLE);
         mProgressView.setVisibility(View.VISIBLE);
         mErrorView.setVisibility(View.GONE);
 

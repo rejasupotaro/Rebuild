@@ -33,12 +33,14 @@ import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
+import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 public class EpisodeDetailFragment extends RoboFragment {
 
-    public static final String TAG = EpisodeDetailFragment.class.getSimpleName();
+    @InjectView(R.id.state_frame_layout)
+    private StateFrameLayout mStateFrameLayout;
 
     @Inject
     private EpisodeDownloadClient mEpisodeDownloadClient;
@@ -200,9 +202,11 @@ public class EpisodeDetailFragment extends RoboFragment {
             podcastPlayer.start();
             mSeekBar.setEnabled(true);
         } else {
+            mStateFrameLayout.showProgress();
             podcastPlayer.start(getActivity(), episode, new PodcastPlayer.StateChangedListener() {
                 @Override
                 public void onStart() {
+                    mStateFrameLayout.showContent();
                     mSeekBar.setEnabled(true);
                 }
             });
