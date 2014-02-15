@@ -67,7 +67,7 @@ public class EpisodeListFragment extends RoboFragment {
     private void setupListView() {
         View header = View.inflate(getActivity(), R.layout.header_episode_list, null);
         setupHeaderLinkText(header);
-        mEpisodeListView.addHeaderView(header);
+        mEpisodeListView.addHeaderView(header, null, false);
 
         mEpisodeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
