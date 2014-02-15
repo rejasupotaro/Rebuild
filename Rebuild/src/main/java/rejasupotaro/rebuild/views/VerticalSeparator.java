@@ -14,6 +14,6 @@ public class VerticalSeparator extends View {
 
     public VerticalSeparator(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setBackgroundResource(R.color.dark_gray);
+        setBackgroundResource(R.color.gray);
     }
 }

@@ -1,0 +1,23 @@
+package rejasupotaro.rebuild.utils;
+
+import com.squareup.picasso.Picasso;
+
+import android.content.Context;
+import android.widget.ImageView;
+
+import rejasupotaro.rebuild.R;
+
+public class PicassoHelper {
+
+    public static void load(Context context, ImageView target, String url) {
+        Picasso.with(context)
+                .load(buildSiteThumbnailUrl(url))
+                .placeholder(R.drawable.ic_launcher)
+                .error(R.drawable.ic_launcher)
+                .into(target);
+    }
+
+    public static final String buildSiteThumbnailUrl(String linkUrl) {
+        return "http://capture.heartrails.com/128x128?" + linkUrl;
+    }
+}
