@@ -19,30 +19,23 @@ public class PodcastPlayerNotification {
 
     private static final String ACTION_PAUSE = "action_pause";
 
-    private Context mContext;
-
-    private NotificationManager mNotificationManager;
-
-    public PodcastPlayerNotification(Context context) {
-        mContext = context;
-        mNotificationManager = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
-    }
-
-    public void notity(Episode episode) {
+    public static void notity(Context context, Episode episode) {
         if (episode == null) return;
-        mNotificationManager.notify(NOTIFICATION_ID, build(episode));
+        NotificationManager notificationManager
+                = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(NOTIFICATION_ID, build(context, episode));
     }
 
-    private Notification build(Episode episode) {
-        Intent pauseIntent = new Intent(mContext, PodcastPlayerService.class);
+    private static Notification build(Context context, Episode episode) {
+        Intent pauseIntent = new Intent(context, PodcastPlayerService.class);
         pauseIntent.setAction(ACTION_PAUSE);
-        PendingIntent piPause = PendingIntent.getService(mContext, 0, pauseIntent, 0);
+        PendingIntent piPause = PendingIntent.getService(context, 0, pauseIntent, 0);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentTitle(episode.getTitle());
         builder.setContentText(episode.getDescription());
-        builder.addAction(android.R.drawable.ic_media_pause, mContext.getString(R.string.notification_pause), piPause);
+        builder.addAction(android.R.drawable.ic_media_pause, context.getString(R.string.notification_pause), piPause);
 
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_NO_CLEAR;
@@ -50,16 +43,18 @@ public class PodcastPlayerNotification {
         return notification;
     }
 
-    public void cancel() {
-        mNotificationManager.cancel(NOTIFICATION_ID);
+    public static void cancel(Context context) {
+        NotificationManager notificationManager
+                = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(NOTIFICATION_ID);
     }
 
-    public void handleAction(String action) {
+    public static void handleAction(Context context, String action) {
         if (TextUtils.isEmpty(action)) return;
 
         if (action.equals(ACTION_PAUSE)) {
             PodcastPlayer.getInstance().pause();
-            cancel();
+            cancel(context);
         }
     }
 }

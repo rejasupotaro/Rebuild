@@ -27,6 +27,7 @@ import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.models.Link;
+import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.IntentUtils;
@@ -213,6 +214,8 @@ public class EpisodeDetailFragment extends RoboFragment {
                         EpisodeDownloadService.createIntent(getActivity(), episode));
             }
         }
+
+        PodcastPlayerNotification.notity(getActivity(), episode);
     }
 
     private boolean shouldRestart(Episode episode) {
@@ -225,6 +228,8 @@ public class EpisodeDetailFragment extends RoboFragment {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         podcastPlayer.pause();
         mSeekBar.setEnabled(false);
+
+        PodcastPlayerNotification.cancel(getActivity());
     }
 
     @Subscribe

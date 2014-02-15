@@ -13,17 +13,14 @@ import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 
 public class PodcastPlayerService extends Service {
 
-    private PodcastPlayerNotification mPodcastPlayerNotification;
-
     @Override
     public void onCreate() {
         BusProvider.getInstance().register(this);
-        mPodcastPlayerNotification = new PodcastPlayerNotification(getApplicationContext());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mPodcastPlayerNotification.handleAction(intent.getAction());
+        PodcastPlayerNotification.handleAction(this, intent.getAction());
         return START_NOT_STICKY;
     }
 
@@ -39,11 +36,11 @@ public class PodcastPlayerService extends Service {
 
     @Subscribe
     public void onPodcastPlayButtonClick(PodcastPlayButtonClickEvent event) {
-        mPodcastPlayerNotification.notity(event.getEpisode());
+        PodcastPlayerNotification.notity(this, event.getEpisode());
     }
 
     @Subscribe
     public void onPodcastPauseButtonClick(PodcastPauseButtonClickEvent event) {
-        mPodcastPlayerNotification.cancel();
+        PodcastPlayerNotification.cancel(this);
     }
 }
