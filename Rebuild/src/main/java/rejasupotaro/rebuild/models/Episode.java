@@ -11,6 +11,7 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.activeandroid.query.Update;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import rejasupotaro.rebuild.utils.StringUtils;
 @Table(name = "episodes")
 public class Episode extends Model implements Parcelable {
 
-    @Column(name = "episode_id")
+    @Column(name = "episode_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private int mEpisodeId;
 
     @Column(name = "title")
@@ -102,6 +103,15 @@ public class Episode extends Model implements Parcelable {
 
     public void setMediaLocalPath(String mediaLocalPath) {
         mMediaLocalPath = mediaLocalPath;
+    }
+
+    public void clearCache() {
+        if (TextUtils.isEmpty(mMediaLocalPath)) return;
+
+        File file = new File(mMediaLocalPath);
+        file.delete();
+        mMediaLocalPath = null;
+        save();
     }
 
     public Episode() {

@@ -28,7 +28,7 @@ public class MenuDelegate {
     }
 
     public boolean onItemSelect(MenuItem item, Bundle params) {
-        boolean result = false;
+        boolean result = true;
         switch (item.getItemId()) {
             case android.R.id.home: {
                 mActivity.finish();
@@ -48,6 +48,12 @@ public class MenuDelegate {
                 Episode episode = params.getParcelable(PARAM_EPISODE);
                 String shareText = buildPostMessage(episode);
                 IntentUtils.sendPostIntent(mActivity, shareText);
+                break;
+            }
+            case R.id.action_clear_cache: {
+                //Episode episode = params.getParcelable(PARAM_EPISODE);
+                //episode.clearCache();
+                DebugUtils.notImplementedYet(mActivity);
                 break;
             }
             default: {

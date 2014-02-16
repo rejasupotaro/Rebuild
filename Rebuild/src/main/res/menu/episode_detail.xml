@@ -9,4 +9,8 @@
             android:id="@+id/action_share"
             android:title="@string/action_share"
             rebuild:showAsAction="never"/>
+    <item
+            android:id="@+id/action_clear_cache"
+            android:title="@string/action_clear_cache"
+            rebuild:showAsAction="never"/>
 </menu>

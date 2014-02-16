@@ -20,6 +20,7 @@
     <string name="action_download">Download</string>
     <string name="action_favorite">Favorite</string>
     <string name="action_share">Share</string>
+    <string name="action_clear_cache">Clear Cache</string>
 
     <string name="pref_title_notification">NOTIFICATION</string>
     <string name="pref_title_notification_episodes">Episodes</string>
