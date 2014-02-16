@@ -20,8 +20,6 @@ import rejasupotaro.rebuild.media.MediaFileManager;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 
-import static android.os.Parcelable.Creator;
-
 @Table(name = "episodes")
 public class Episode extends Model implements Parcelable {
 
@@ -51,6 +49,9 @@ public class Episode extends Model implements Parcelable {
 
     @Column(name = "favorited")
     private boolean mIsFavorited;
+
+    @Column(name = "played")
+    private boolean mHasPlayed;
 
     @Column(name = "media_local_path")
     private String mMediaLocalPath;
@@ -97,6 +98,14 @@ public class Episode extends Model implements Parcelable {
 
     public void favorite() {
         mIsFavorited = true;
+    }
+
+    public boolean hasPlayed() {
+        return mHasPlayed;
+    }
+
+    public void play() {
+        mHasPlayed = true;
     }
 
     public String getMediaLocalPath() {
@@ -247,6 +256,7 @@ public class Episode extends Model implements Parcelable {
         dest.writeString(mDuration);
         dest.writeString(mShowNotes);
         dest.writeInt(mIsFavorited ? 1 : 0);
+        dest.writeInt(mHasPlayed ? 1 : 0);
         dest.writeString(mMediaLocalPath);
     }
 
@@ -270,6 +280,7 @@ public class Episode extends Model implements Parcelable {
         mDuration = in.readString();
         mShowNotes = in.readString();
         mIsFavorited = (in.readInt() == 1);
+        mHasPlayed = (in.readInt() == 1);
         mMediaLocalPath = in.readString();
     }
 }
