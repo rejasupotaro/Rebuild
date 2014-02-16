@@ -55,6 +55,7 @@ android {
         debug {
             debuggable true
             runProguard false
+            versionNameSuffix '.debug'
         }
 
         if (releasable) {
