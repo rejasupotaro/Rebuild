@@ -18,6 +18,15 @@ repositories {
     maven { url 'https://raw.github.com/rejasupotaro/RobotGirl/master/RobotGirl/repository' }
 }
 
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 0
+def versionBuild = 0 // bump for dogfood builds, public betas, etc.
+
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
 android {
     compileSdkVersion 18
     buildToolsVersion "19.0.1"
@@ -25,9 +34,13 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 18
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}-${gitSha()}"
     }
 
-    if (new File('rebuild.keystore').exists()) {
+    releasable = new File('../secret.gradle').exists()
+    if (releasable) {
+        apply from: '../secret.gradle'
         signingConfigs {
             release {
                 storeFile file('rebuild.keystore')
@@ -43,11 +56,13 @@ android {
             debuggable true
             runProguard false
         }
-        if (signingConfigs.hasProperty('release')) {
+
+        if (releasable) {
             release {
+                signingConfig signingConfigs.release
                 debuggable false
                 runProguard true
-                signingConfig signingConfigs.release
+                proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
                 proguardFile file('./proguard-release.txt')
             }
         }

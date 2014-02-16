@@ -1,5 +1,1 @@
 apply from: 'gradle/gradle-android-utils/build.gradle'
-
-if (new File('secret.gradle').exists()) {
-    apply from: 'secret.gradle'
-}

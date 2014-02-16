@@ -1,0 +1,88 @@
+-ignorewarnings
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable,*Annotation*,Signature
+
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.app.Fragment
+-keep public class * extends android.support.v4.app.Fragment
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends com.google.inject.AbstractModule
+-keep public class com.android.vending.licensing.ILicensingService
+
+-keep class com.google.inject.** { *; }
+-keep class javax.inject.** { *; }
+-keep class javax.annotation.** { *; }
+-keep class roboguice.** { *; }
+
+-dontoptimize
+
+-keepclasseswithmembers class * { native <methods>; }
+
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+
+-keepclasseswithmembers class * {
+    public <init> (android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init> (android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class **.R$* { public static <fields>; }
+-keepclassmembers class * {
+	@com.google.inject.Inject <init>(...);
+	@com.google.inject.Inject <fields>;
+	@javax.annotation.Nullable <fields>;
+}
+-keepclassmembers class * {
+	void *(net.eworldui.videouploader.events.*);
+}
+-keepclassmembers class * {
+	void *(roboguice.activity.event.*);
+}
+-keepclassmembers class * extends android.webkit.WebChromeClient {
+    *;
+}
+-dontwarn com.google.ads.**
+
+-keepclassmembers class ** {
+    @com.squareup.otto.Subscribe public *;
+    @com.squareup.otto.Produce public *;
+}
+
+# activeandroid
+-libraryjars src/main/libs/ActiveAndroid.jar
+-keep class com.activeandroid.** { *; }
+-keep class com.activeandroid.**.** { *; }
+-keep class * extends com.activeandroid.Model
+-keep class * extends com.activeandroid.serializer.TypeSerializer
+
+-keepattributes Column
+-keepattributes Table
+-keepclasseswithmembers class * { @com.activeandroid.annotation.Column <fields>; }
+
+# gson (library for Json by Google)
+-keep class com.google.gson.** { *; }
+-keep class com.google.gson.stream.** { *; }
+-keep class sun.misc.Unsafe { *; }
+-keepattributes Expose
+-keepattributes SerializedName
+-keepattributes Since
+-keepattributes Until
+-keepclasseswithmembers class * { @com.google.gson.annotations.Expose <fields>; }
+
+# Parcelable
+-keep class * implements android.os.Parcelable {
+    public static android.os.Parcelable$Creator *;
+}
