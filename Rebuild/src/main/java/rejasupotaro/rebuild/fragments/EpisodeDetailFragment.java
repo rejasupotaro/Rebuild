@@ -201,18 +201,22 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     }
 
-    private void start(Episode episode) {
+    private void start(final Episode episode) {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         if (shouldRestart(episode)) {
             podcastPlayer.start();
             mSeekBar.setEnabled(true);
+            PodcastPlayerNotification.notity(getActivity(), episode);
         } else {
             mStateFrameLayout.showProgress();
+            mMediaStartAndPauseButton.setEnabled(false);
             podcastPlayer.start(getActivity(), episode, new PodcastPlayer.StateChangedListener() {
                 @Override
                 public void onStart() {
                     mStateFrameLayout.showContent();
                     mSeekBar.setEnabled(true);
+                    mMediaStartAndPauseButton.setEnabled(true);
+                    PodcastPlayerNotification.notity(getActivity(), episode);
                 }
             });
 
@@ -222,8 +226,6 @@ public class EpisodeDetailFragment extends RoboFragment {
                         EpisodeDownloadService.createIntent(getActivity(), episode));
             }
         }
-
-        PodcastPlayerNotification.notity(getActivity(), episode);
     }
 
     private boolean shouldRestart(Episode episode) {
