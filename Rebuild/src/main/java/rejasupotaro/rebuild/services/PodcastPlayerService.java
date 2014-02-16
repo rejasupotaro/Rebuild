@@ -1,14 +1,10 @@
 package rejasupotaro.rebuild.services;
 
-import com.squareup.otto.Subscribe;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
 import rejasupotaro.rebuild.events.BusProvider;
-import rejasupotaro.rebuild.events.PodcastPauseButtonClickEvent;
-import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 
 public class PodcastPlayerService extends Service {
@@ -32,15 +28,5 @@ public class PodcastPlayerService extends Service {
     @Override
     public void onDestroy() {
         BusProvider.getInstance().unregister(this);
-    }
-
-    @Subscribe
-    public void onPodcastPlayButtonClick(PodcastPlayButtonClickEvent event) {
-        PodcastPlayerNotification.notity(this, event.getEpisode());
-    }
-
-    @Subscribe
-    public void onPodcastPauseButtonClick(PodcastPauseButtonClickEvent event) {
-        PodcastPlayerNotification.cancel(this);
     }
 }

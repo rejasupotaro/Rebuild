@@ -6,7 +6,6 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
@@ -23,14 +22,13 @@ import rejasupotaro.rebuild.adapters.ShowNoteListAdapter;
 import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
-import rejasupotaro.rebuild.events.PodcastPlayButtonClickEvent;
+import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.DateUtils;
-import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.StateFrameLayout;
@@ -204,7 +202,6 @@ public class EpisodeDetailFragment extends RoboFragment {
                 }
             });
 
-            BusProvider.getInstance().post(new PodcastPlayButtonClickEvent(episode));
             UiAnimations.fadeOut(mMediaStartButtonOnImageCover, 300, 1000);
             if (!mEpisode.hasMediaDataInLocal()) {
                 getActivity().startService(
@@ -227,6 +224,11 @@ public class EpisodeDetailFragment extends RoboFragment {
         mSeekBar.setEnabled(false);
 
         PodcastPlayerNotification.cancel(getActivity());
+    }
+
+    @Subscribe
+    public void onReceivePauseAction(ReceivePauseActionEvent event) {
+        mMediaStartAndPauseButton.setChecked(false);
     }
 
     @Subscribe

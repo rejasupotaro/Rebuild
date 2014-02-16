@@ -9,6 +9,8 @@ import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
@@ -29,7 +31,8 @@ public class PodcastPlayerNotification {
     private static Notification build(Context context, Episode episode) {
         Intent pauseIntent = new Intent(context, PodcastPlayerService.class);
         pauseIntent.setAction(ACTION_PAUSE);
-        PendingIntent piPause = PendingIntent.getService(context, 0, pauseIntent, 0);
+        PendingIntent piPause = PendingIntent.getService(
+                context, 0, pauseIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.drawable.ic_launcher);
@@ -55,6 +58,7 @@ public class PodcastPlayerNotification {
         if (action.equals(ACTION_PAUSE)) {
             PodcastPlayer.getInstance().pause();
             cancel(context);
+            BusProvider.getInstance().post(new ReceivePauseActionEvent());
         }
     }
 }
