@@ -113,13 +113,6 @@ public class EpisodeDetailFragment extends RoboFragment {
         List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
         final ShowNoteListAdapter adapter = new ShowNoteListAdapter(getActivity(), linkList);
         mShowNoteListView.setAdapter(adapter);
-        mShowNoteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Link link = adapter.getItem(position);
-                IntentUtils.openBrowser(getActivity(), link.getUrl());
-            }
-        });
     }
 
     private void setTitle(Episode episode) {

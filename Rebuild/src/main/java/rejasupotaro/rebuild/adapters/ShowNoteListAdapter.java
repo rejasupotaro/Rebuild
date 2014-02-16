@@ -11,6 +11,7 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Link;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class ShowNoteListAdapter extends BindableAdapter<Link> {
@@ -59,13 +60,19 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
 
     private void bindView(ViewHolderPair.ViewHolder holder, int position) {
         if (position >= super.getCount()) {
-            holder.root.setVisibility(View.GONE);
+            holder.root.setVisibility(View.INVISIBLE);
             return;
         } else {
             holder.root.setVisibility(View.VISIBLE);
         }
-        Link item = getItem(position);
+        final Link item = getItem(position);
 
+        holder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtils.openBrowser(getContext(), item.getUrl());
+            }
+        });
         PicassoHelper.load(getContext(), holder.siteThumbnail, item.getUrl());
         holder.showNoteTitleTextView.setText(item.getTitle());
     }
