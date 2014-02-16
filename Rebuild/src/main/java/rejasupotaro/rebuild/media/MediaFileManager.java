@@ -4,11 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.apache.http.util.ByteArrayBuffer;
-
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,51 +17,29 @@ public class MediaFileManager {
 
     private static final String TAG = MediaFileManager.class.getSimpleName();
 
-    public static String saveMediaToFile(Context context, byte[] bytes, Episode episode) {
-        String mediaLocalPath = null;
-
-        FileOutputStream outputStream = null;
-        try {
-            File outputFile = createExternalStoragePrivateFile(context, episode);
-            outputStream = new FileOutputStream(outputFile);
-            outputStream.write(bytes);
-
-            mediaLocalPath = outputFile.getPath();
-        } catch (FileNotFoundException e) {
-            Log.e(TAG, "An error occurred while saveing sound", e);
-        } catch (IOException e) {
-            Log.e(TAG, "An error occurred while saveing sound", e);
-        } finally {
-            if (outputStream != null) {
-                FileUtils.close(outputStream);
-            }
-        }
-
-        return mediaLocalPath;
-    }
-
-    public static String saveMediaToFile(Context context, InputStream inputStream, Episode episode) {
+    public static String saveMediaToFile(Context context, InputStream inputStream,
+            Episode episode) {
         BufferedInputStream bufferedInputStream = null;
+        FileOutputStream fileOutputStream = null;
         try {
-            bufferedInputStream = new BufferedInputStream(inputStream);
-            ByteArrayBuffer byteArrayBuffer = new ByteArrayBuffer(50);
-            int read = 0;
-            int bufferSize = 512;
-            byte[] buffer = new byte[bufferSize];
-            while (true) {
-                read = bufferedInputStream.read(buffer);
-                if (read == -1) {
-                    break;
-                }
-                byteArrayBuffer.append(buffer, 0, read);
+            final int BUFFER_SIZE = 23 * 1024;
+            bufferedInputStream = new BufferedInputStream(inputStream, BUFFER_SIZE);
+            File destFile = createExternalStoragePrivateFile(context, episode);
+            fileOutputStream = new FileOutputStream(destFile);
+
+            int actual = 0;
+            byte[] buffer = new byte[BUFFER_SIZE];
+            while ((actual = bufferedInputStream.read(buffer, 0, BUFFER_SIZE)) > 0) {
+                fileOutputStream.write(buffer, 0, actual);
             }
 
-            return saveMediaToFile(context, byteArrayBuffer.toByteArray(), episode);
+            return destFile.getPath();
         } catch (IOException e) {
-            Log.e(TAG, "An error occurred while saveing sound", e);
+            Log.e(TAG, "An error occurred while saving media", e);
             return null;
         } finally {
             FileUtils.close(bufferedInputStream);
+            FileUtils.close(fileOutputStream);
         }
     }
 
@@ -74,7 +49,9 @@ public class MediaFileManager {
     }
 
     public static boolean exists(String filePath) {
-        if (TextUtils.isEmpty(filePath)) return false;
+        if (TextUtils.isEmpty(filePath)) {
+            return false;
+        }
 
         File file = new File(filePath);
         return file.exists();

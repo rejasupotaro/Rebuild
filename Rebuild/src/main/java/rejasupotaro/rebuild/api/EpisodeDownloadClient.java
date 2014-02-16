@@ -4,11 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.apache.http.Header;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -23,27 +18,6 @@ public class EpisodeDownloadClient extends AbstractHttpClient {
 
     protected String getTag() {
         return TAG;
-    }
-
-    private static final AsyncHttpClient sAsyncHttpClient = new AsyncHttpClient();
-
-    public void downloadAsync(final Context context, final Episode episode) {
-        final Context applicationContext = context.getApplicationContext();
-        sAsyncHttpClient.get(episode.getEnclosure().toString(), new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String mediaLocalPath = MediaFileManager.saveMediaToFile(applicationContext, responseBody, episode);
-                if (TextUtils.isEmpty(mediaLocalPath)) {
-                } else {
-                    episode.insertMediaLocalPath(mediaLocalPath);
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                dumpError(headers, responseBody, error);
-            }
-        });
     }
 
     public void download(Context context, final Episode episode) {
