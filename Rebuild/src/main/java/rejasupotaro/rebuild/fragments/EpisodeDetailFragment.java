@@ -29,6 +29,7 @@ import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.DateUtils;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.StateFrameLayout;
@@ -109,9 +110,22 @@ public class EpisodeDetailFragment extends RoboFragment {
     private void setupListView(Episode episode, View headerView) {
         mShowNoteListView.addHeaderView(headerView, null, false);
         List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
-        final ShowNoteListAdapter adapter = new ShowNoteListAdapter(getActivity(), linkList);
+        final ShowNoteListAdapter adapter = new ShowNoteListAdapter(
+                getActivity(), linkList, mItemClickListener);
         mShowNoteListView.setAdapter(adapter);
     }
+
+    private ShowNoteListAdapter.ItemClickListener mItemClickListener = new ShowNoteListAdapter.ItemClickListener() {
+        @Override
+        public void onClick(Link item) {
+            IntentUtils.openBrowser(getActivity(), item.getUrl());
+        }
+
+        @Override
+        public void onLongClick(Link item) {
+            IntentUtils.sendPostIntent(getActivity(), item.getUrl());
+        }
+    };
 
     private void setTitle(Episode episode) {
         String originalTitle = episode.getTitle();

@@ -15,7 +15,7 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import roboguice.inject.InjectExtra;
 
-public class EpisodeDetailActivity extends RoboActionBarActivity{
+public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     private static final String EXTRA_EPISODE = "extra_episode";
 

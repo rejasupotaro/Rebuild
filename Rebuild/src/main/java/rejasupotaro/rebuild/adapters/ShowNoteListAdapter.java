@@ -38,9 +38,12 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
         }
     }
 
+    private ItemClickListener mItemClickListener;
+
     public ShowNoteListAdapter(Context context,
-            List<Link> episodeList) {
+            List<Link> episodeList, ItemClickListener itemClickListener) {
         super(context, episodeList);
+        mItemClickListener = itemClickListener;
     }
 
     @Override
@@ -70,7 +73,14 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentUtils.openBrowser(getContext(), item.getUrl());
+                mItemClickListener.onClick(item);
+            }
+        });
+        holder.root.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mItemClickListener.onLongClick(item);
+                return false;
             }
         });
         PicassoHelper.load(getContext(), holder.siteThumbnail, item.getUrl());
@@ -80,5 +90,10 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
     @Override
     public int getCount() {
         return super.getCount() / 2 + super.getCount() % 2;
+    }
+
+    public static interface ItemClickListener {
+        public void onClick(Link item);
+        public void onLongClick(Link item);
     }
 }

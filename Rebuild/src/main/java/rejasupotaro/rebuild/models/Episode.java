@@ -20,6 +20,8 @@ import rejasupotaro.rebuild.media.MediaFileManager;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 
+import static android.os.Parcelable.Creator;
+
 @Table(name = "episodes")
 public class Episode extends Model implements Parcelable {
 
@@ -248,8 +250,7 @@ public class Episode extends Model implements Parcelable {
         dest.writeString(mMediaLocalPath);
     }
 
-    public static final Parcelable.Creator<Episode> CREATOR
-            = new Parcelable.Creator<Episode>() {
+    public static final Creator<Episode> CREATOR = new Creator<Episode>() {
         public Episode createFromParcel(Parcel in) {
             return new Episode(in);
         }

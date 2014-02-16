@@ -2,12 +2,16 @@ package rejasupotaro.rebuild.models;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Link {
+import static android.os.Parcelable.Creator;
+
+public class Link implements Parcelable {
 
     private String mTitle;
 
@@ -24,6 +28,32 @@ public class Link {
     public Link(String title, String url) {
         mTitle = title;
         mUrl = url;
+    }
+
+    public Link(Parcel in) {
+        mTitle = in.readString();
+        mUrl = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Link> CREATOR = new Creator<Link>() {
+        public Link createFromParcel(Parcel in) {
+            return new Link(in);
+        }
+
+        public Link[] newArray(int size) {
+            return new Link[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mTitle);
+        dest.writeString(mUrl);
     }
 
     public static class Parser {
