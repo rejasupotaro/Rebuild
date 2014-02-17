@@ -27,7 +27,7 @@
                 />
     </LinearLayout>
     <TextView
-            android:text="Rebuild for Android, Version 0.0.1"
+            android:text="Rebuild for Android, Version 0.1.2"
             android:layout_marginBottom="@dimen/padding_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
