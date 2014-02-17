@@ -53,8 +53,6 @@
                     style="@style/MediaStartAndPauseButton"
                     android:layout_marginLeft="@dimen/margin_icon_button"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     />
             <include layout="@layout/view_media_seekbar"/>
         </LinearLayout>
