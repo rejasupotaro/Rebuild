@@ -180,6 +180,15 @@ public class EpisodeDetailFragment extends RoboFragment {
     }
 
     private void setupMediaPlayAndPauseButton(final Episode episode) {
+        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
+            mMediaStartAndPauseButton.setChecked(true);
+            mMediaStartButtonOnImageCover.setVisibility(View.GONE);
+        } else {
+            mMediaStartAndPauseButton.setChecked(false);
+            mMediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
+            mMediaStartButtonOnImageCover.setAlpha(1);
+        }
+
         mMediaStartAndPauseButton.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -191,14 +200,6 @@ public class EpisodeDetailFragment extends RoboFragment {
                         }
                     }
                 });
-
-        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
-            mMediaStartButtonOnImageCover.setVisibility(View.GONE);
-        } else {
-            mMediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
-            mMediaStartButtonOnImageCover.setAlpha(1);
-        }
-
     }
 
     private void start(final Episode episode) {
