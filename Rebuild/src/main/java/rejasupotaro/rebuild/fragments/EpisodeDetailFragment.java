@@ -213,10 +213,14 @@ public class EpisodeDetailFragment extends RoboFragment {
             podcastPlayer.start(getActivity(), episode, new PodcastPlayer.StateChangedListener() {
                 @Override
                 public void onStart() {
-                    mStateFrameLayout.showContent();
-                    mSeekBar.setEnabled(true);
-                    mMediaStartAndPauseButton.setEnabled(true);
-                    PodcastPlayerNotification.notity(getActivity(), episode);
+                    if (getActivity() == null) {
+                        pause();
+                    } else {
+                        mStateFrameLayout.showContent();
+                        mSeekBar.setEnabled(true);
+                        mMediaStartAndPauseButton.setEnabled(true);
+                        PodcastPlayerNotification.notity(getActivity(), episode);
+                    }
                 }
             });
 

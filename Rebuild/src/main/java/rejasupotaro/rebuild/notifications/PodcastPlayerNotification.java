@@ -22,7 +22,7 @@ public class PodcastPlayerNotification {
     private static final String ACTION_PAUSE = "action_pause";
 
     public static void notity(Context context, Episode episode) {
-        if (episode == null) return;
+        if (episode == null || context == null) return;
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, build(context, episode));
@@ -47,6 +47,7 @@ public class PodcastPlayerNotification {
     }
 
     public static void cancel(Context context) {
+        if (context == null) return;
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(NOTIFICATION_ID);
