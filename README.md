@@ -24,6 +24,15 @@ Screenshot
 <img src="http://gifzo.net/3bOYvQ5Hzc.gif" width="240px">
 -->
 
+Installation
+------
+
+```
+$ git clone https://github.com/rejasupotaro/Rebuild.git
+$ cd Rebuild
+$ ./gradlew installDebug
+```
+
 Contributing
 ------
 
