@@ -30,6 +30,7 @@ Installation
 ```
 $ git clone https://github.com/rejasupotaro/Rebuild.git
 $ cd Rebuild
+$ git submodule update --init
 $ ./gradlew installDebug
 ```
 
