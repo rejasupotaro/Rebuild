@@ -9,8 +9,6 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.os.Parcelable.Creator;
-
 public class Link implements Parcelable {
 
     private String mTitle;
@@ -60,6 +58,10 @@ public class Link implements Parcelable {
 
         public static List<Link> toLinkList(String source) {
             List<Link> linkList = new ArrayList<Link>();
+            if (TextUtils.isEmpty(source)) {
+                return linkList;
+            }
+
             String[] lines = substringDescription(source).split("<li>");
             for (String line : lines) {
                 if (!line.startsWith("<a href=")) continue;

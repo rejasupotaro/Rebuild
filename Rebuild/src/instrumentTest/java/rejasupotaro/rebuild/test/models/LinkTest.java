@@ -1,14 +1,15 @@
-package rejasupotaro.rebuild.test.views;
+package rejasupotaro.rebuild.test.models;
 
-import android.test.AndroidTestCase;
+import android.test.InstrumentationTestCase;
 
 import java.util.List;
 
 import rejasupotaro.rebuild.models.Link;
+import rejasupotaro.rebuild.test.AssetsUtils;
 
-public class ShowNotesViewTest extends AndroidTestCase {
+public class LinkTest extends InstrumentationTestCase {
 
-    public void testBuildShowNotes() {
+    public void testSourceToLinkList() {
         {
             String source = null;
             assertEquals(0, Link.Parser.toLinkList(source).size());
@@ -23,6 +24,11 @@ public class ShowNotesViewTest extends AndroidTestCase {
             for (int i = 0; i < linkList.size(); i++) {
                 assertEquals("text" + i, linkList.get(i).getUrl() + i);
             }
+        }
+        {
+            String source = AssetsUtils.read(getInstrumentation(), "show_notes.txt");
+            List<Link> linkList = Link.Parser.toLinkList(source);
+            assertEquals(18, linkList.size());
         }
     }
 

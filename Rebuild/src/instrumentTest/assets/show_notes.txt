@@ -1,0 +1,22 @@
+<p>伊藤直也さん (<a href="https://twitter.com/naoya_ito">@naoya_ito</a>) をゲストに迎えて、Flappy Bird、iOSゲーム、リモートワークなどについて話しました。</p>
+<h3>Show Notes</h3>
+<ul>
+    <li><a href="http://d.hatena.ne.jp/naoya/20140212/1392203174">Rebuild #29 でアプリのレビューをして欲しいと話したらたくさんレビューが来た</a></li>
+    <li><a href="http://www.theverge.com/2014/2/11/5400488/flappy-bird-pulled-because-it-became-addictive">&#39;Flappy Bird&#39; creator breaks silence, says he pulled hit game because it was &#39;addictive&#39;</a></li>
+    <li><a href="http://kotaku.com/the-flappy-bird-fiasco-1519938266">The Flappy Bird Fiasco</a></li>
+    <li><a href="https://twitter.com/dongatory/status/432095426854912000">dongatory: I can call &#39;Flappy Bird&#39; is a success of mine. But it also ruins my simple life.</a></li>
+    <li><a href="https://itunes.apple.com/us/app/threes!/id779157948?mt=8">Threes!</a></li>
+    <li><a href="http://techcrunch.com/2014/02/12/canabalt-super-hexagon-flappy-bird/">Creators Of &quot;Super Hexagon&quot; and &quot;Canabalt&quot; Build Fantastic Tributes To Flappy Bird</a></li>
+    <li><a href="http://itch.io/jam/flappyjam">Flappy Jam - itch.io</a></li>
+    <li><a href="http://weblog.bulknews.net/post/73858251716/ps-vita-tv-mini-review">PS Vita TV mini review - Tatsuhiko Miyagawa&#39;s blog</a></li>
+    <li><a href="http://techcrunch.com/2014/01/29/nintendo-retro/">Nintendo: It&#39;s Dangerous To Go Alone! Take This.</a></li>
+    <li><a href="http://www.amazon.co.jp/dp/4152094338/bulknews-22">強いチームはオフィスを捨てる: 37シグナルズが考える「働き方革命」</a></li>
+    <li><a href="https://support.google.com/chrome/answer/2364824?hl=en">Manage multiple users on Chrome</a></li>
+    <li><a href="https://chrome.google.com/webstore/detail/stayfocusd/laankejkbhbdhmipfmgcngdelahlfoji?hl=en">Chrome Web Store - StayFocusd</a></li>
+    <li><a href="https://twitter.com/naoya_ito/status/434185701198798849">naoya_ito: 僕がしたいのは情報共有というよりは感情の共有なんだなということが自分で話しててわかってきた</a></li>
+    <li><a href="http://blog.travis-ci.com/2014-02-03-how-we-manage-work-in-a-remote-team/">The Travis CI Blog: How We Manage Work in a Remote Team</a></li>
+    <li><a href="http://www.lgtm.in/">LGTM.in/g</a></li>
+    <li><a href="https://speakerdeck.com/holman/how-github-works-v2?slide=111">GitHub Team (How GitHub Works)</a></li>
+    <li><a href="https://github.com/miyagawa/hubot-standup">miyagawa/hubot-standup</a></li>
+    <li><a href="http://wired.jp/2014/02/05/video-ars-rolls-in-with-a-telepresence-robot/">米国で導入が始まったテレプレゼンス・ロボット</a></li>
+</ul>
