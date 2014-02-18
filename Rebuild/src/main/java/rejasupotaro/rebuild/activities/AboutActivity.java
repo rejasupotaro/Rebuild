@@ -8,7 +8,6 @@ import android.webkit.WebView;
 
 import javax.inject.Inject;
 
-import rejasupotaro.rebuild.ErrorReporter;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.IntentUtils;
@@ -17,9 +16,6 @@ import roboguice.inject.InjectView;
 public class AboutActivity extends RoboActionBarActivity {
 
     private static final String LICENSES_FILE_PATH = "file:///android_asset/licenses.html";
-
-    @Inject
-    private ErrorReporter mErrorReporter;
 
     @InjectView(R.id.licenses_view)
     private WebView mLicensesView;
@@ -31,15 +27,8 @@ public class AboutActivity extends RoboActionBarActivity {
     private MenuDelegate mMenuDelegate;
 
     @Override
-    public void onDestroy() {
-        mErrorReporter.unregisterActivity();
-        super.onDestroy();
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mErrorReporter.registerActivity(this);
         setContentView(R.layout.activity_about);
         setupActionBar();
         setupLicensesView();
