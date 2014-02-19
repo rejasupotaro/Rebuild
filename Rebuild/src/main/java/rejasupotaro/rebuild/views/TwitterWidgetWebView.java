@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,6 +27,7 @@ public class TwitterWidgetWebView extends WebView {
         public void onStart();
         public void onError(int errorCode);
         public void onFinish();
+        public void onSearch(String url);
     }
 
     private static final String TAG = TwitterWidgetWebView.class.getSimpleName();
@@ -62,6 +64,8 @@ public class TwitterWidgetWebView extends WebView {
         });
 
         setWebViewClient(new WebViewClient() {
+            private static final String URL_TWITTER_SEARCH = "https://twitter.com/search";
+
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 mLoadListener.onStart();
@@ -83,6 +87,14 @@ public class TwitterWidgetWebView extends WebView {
             public void onPageFinished(WebView view, String url) {
                 mLoadListener.onFinish();
                 super.onPageFinished(view, url);
+            }
+
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+                if (url.startsWith(URL_TWITTER_SEARCH)) {
+                    mLoadListener.onSearch(url);
+                }
+                return null;
             }
         });
     }

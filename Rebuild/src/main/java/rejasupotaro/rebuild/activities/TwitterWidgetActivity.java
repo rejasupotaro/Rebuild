@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.tools.MenuDelegate;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import rejasupotaro.rebuild.views.TwitterWidgetWebView;
@@ -49,6 +50,12 @@ public class TwitterWidgetActivity extends RoboActionBarActivity {
         @Override
         public void onFinish() {
             mStateFrameLayout.showContent();
+        }
+
+        @Override
+        public void onSearch(String url) {
+            IntentUtils.openBrowser(TwitterWidgetActivity.this, url);
+            finish();
         }
     };
 
