@@ -137,11 +137,6 @@ public class Episode extends Model implements Parcelable {
         super();
     }
 
-    public boolean isSameId(Episode episode) {
-        if (episode == null) return false;
-        return (mEpisodeId == episode.getEpisodeId());
-    }
-
     public boolean isSameEpisode(Episode episode) {
         if (TextUtils.isEmpty(mTitle) || episode == null) {
             return false;

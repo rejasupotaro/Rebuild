@@ -38,7 +38,7 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     public boolean isPlayingEpisode(Episode other) {
         if (other == null) return false;
-        return other.isSameId(mEpisode);
+        return other.isSameEpisode(mEpisode);
     }
 
     public void setCurrentTimeListener(final CurrentTimeListener currentTimeListener) {
