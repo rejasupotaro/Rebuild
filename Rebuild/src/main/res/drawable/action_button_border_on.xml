@@ -3,7 +3,7 @@
         android:shape="rectangle"
         >
     <stroke
-            android:width="1px"
+            android:width="@dimen/action_button_border_width"
             android:color="@color/base_color_gray"
             />
     <corners

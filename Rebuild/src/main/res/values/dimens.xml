@@ -8,6 +8,8 @@
 
     <dimen name="margin_icon_button">6dp</dimen>
 
+    <dimen name="action_button_border_width">2dp</dimen>
+
     <dimen name="ic_button_primary">56dp</dimen>
     <dimen name="ic_button_secondary">40dp</dimen>
 
