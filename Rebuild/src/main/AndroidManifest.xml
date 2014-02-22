@@ -53,6 +53,10 @@
                 android:name=".activities.AboutActivity"
                 android:label="@string/activity_about">
         </activity>
+        <activity
+                android:name=".activities.LicensesActivity"
+                android:label="@string/activity_licenses">
+        </activity>
 
         <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService" />
         <service android:name=".services.EpisodeDownloadService" />
