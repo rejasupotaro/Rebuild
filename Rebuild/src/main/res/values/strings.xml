@@ -7,6 +7,9 @@
     <string name="rebuild_description">A Podcast by Tatsuhiko Miyagawa. Talking about Tech, Software Development and Gadgets.</string>
     <string name="share">share</string>
     <string name="cancel">cancel</string>
+    <string name="download">Download</string>
+    <string name="downloading">Downloading...</string>
+    <string name="clear_cache">Clear Cache</string>
     <string name="network_error">Network error\nPlease check the network</string>
     <string name="network_error_message">An error occurred while requesting rss feed.</string>
     <string name="not_implemented_yet">Not implemented yet</string>
@@ -19,10 +22,10 @@
     <string name="share_episode">Share Episode</string>
 
     <string name="action_settings">Settings</string>
-    <string name="action_download">Download</string>
+    <string name="action_download">@string/download</string>
     <string name="action_favorite">Favorite</string>
     <string name="action_share">Share</string>
-    <string name="action_clear_cache">Clear Cache</string>
+    <string name="action_clear_cache">@string/clear_cache</string>
 
     <string name="pref_title_notification">NOTIFICATION</string>
     <string name="pref_key_notification_episodes">notification_episodes</string>

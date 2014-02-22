@@ -1,5 +1,6 @@
 package rejasupotaro.rebuild.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -21,6 +22,7 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.ShowNoteListAdapter;
 import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
@@ -28,10 +30,12 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
+import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
+import rejasupotaro.rebuild.views.FontAwesomeTextView;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
@@ -58,10 +62,15 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     private TextView mEpisodeDescriptionTextView;
 
+    private FontAwesomeTextView mEpisodeDownloadButton;
+
     @InjectView(R.id.show_note_list)
     private ListView mShowNoteListView;
 
     private Episode mEpisode;
+
+    @Inject
+    private OnContextExecutor mOnContextExecutor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,6 +92,7 @@ public class EpisodeDetailFragment extends RoboFragment {
         mMediaStartAndPauseButton = (CheckBox) view.findViewById(R.id.media_start_and_pause_button);
         mSeekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
         mEpisodeDescriptionTextView = (TextView) view.findViewById(R.id.episode_description);
+        mEpisodeDownloadButton = (FontAwesomeTextView) view.findViewById(R.id.episode_download_button);
     }
 
     @Override
@@ -98,6 +108,8 @@ public class EpisodeDetailFragment extends RoboFragment {
         View headerView = View.inflate(getActivity(), R.layout.header_episode_detail, null);
         findViews(headerView);
         setupListView(episode, headerView);
+
+        setupDownloadButton(episode);
 
         setupMediaPlayAndPauseButton(episode);
         setupSeekBar(episode);
@@ -160,7 +172,8 @@ public class EpisodeDetailFragment extends RoboFragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (!PodcastPlayer.getInstance().isPlaying()) return;
+                if (!PodcastPlayer.getInstance().isPlaying())
+                    return;
                 PodcastPlayer.getInstance().seekTo(seekBar.getProgress());
             }
         });
@@ -177,6 +190,34 @@ public class EpisodeDetailFragment extends RoboFragment {
     private void updateCurrentTime(int currentPosition) {
         mMediaCurrentTimeTextView.setText(DateUtils.formatCurrentTime(currentPosition));
         mSeekBar.setProgress(currentPosition);
+    }
+
+    private void setupDownloadButton(final Episode episode) {
+        mEpisodeDownloadButton.setEnabled(true);
+        if (episode.isDownloaded()) {
+            mEpisodeDownloadButton.setText(getString(R.string.clear_cache));
+            mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.MINUS);
+            mEpisodeDownloadButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    episode.clearCache();
+                    setupDownloadButton(episode);
+                }
+            });
+        } else {
+            mEpisodeDownloadButton.setText(getString(R.string.download));
+            mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.DOWNLOAD);
+            mEpisodeDownloadButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mEpisodeDownloadButton.setEnabled(false);
+                    Intent intent = EpisodeDownloadService.createIntent(getActivity(), episode);
+                    getActivity().startService(intent);
+                    mEpisodeDownloadButton.setText(getString(R.string.downloading));
+                    mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
+                }
+            });
+        }
     }
 
     private void setupMediaPlayAndPauseButton(final Episode episode) {
@@ -241,6 +282,16 @@ public class EpisodeDetailFragment extends RoboFragment {
         mSeekBar.setEnabled(false);
 
         PodcastPlayerNotification.cancel(getActivity());
+    }
+
+    @Subscribe
+    public void onEpisodeDownloadComplete(final DownloadEpisodeCompleteEvent event) {
+        mOnContextExecutor.execute(getActivity(), new Runnable() {
+            @Override
+            public void run() {
+                setupDownloadButton(event.getEpisode());
+            }
+        });
     }
 
     @Subscribe

@@ -38,22 +38,10 @@ public class MenuDelegate {
                 mActivity.startActivity(SettingsActivity.createIntent(mActivity));
                 break;
             }
-            case R.id.action_favorite: {
-                //Episode episode = params.getParcelable(PARAM_EPISODE);
-                //episode.favorite();
-                DebugUtils.notImplementedYet(mActivity);
-                break;
-            }
             case R.id.action_share: {
                 Episode episode = params.getParcelable(PARAM_EPISODE);
                 String shareText = buildPostMessage(episode);
                 IntentUtils.sendPostIntent(mActivity, shareText);
-                break;
-            }
-            case R.id.action_clear_cache: {
-                //Episode episode = params.getParcelable(PARAM_EPISODE);
-                //episode.clearCache();
-                DebugUtils.notImplementedYet(mActivity);
                 break;
             }
             default: {

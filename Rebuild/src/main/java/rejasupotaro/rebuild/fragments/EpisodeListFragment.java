@@ -82,7 +82,7 @@ public class EpisodeListFragment extends RoboFragment {
         View header = View.inflate(getActivity(), R.layout.header_episode_list, null);
 
         FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_website);
-        websiteLinkText.prepend(0xF015);
+        websiteLinkText.prepend(FontAwesomeTextView.Icon.HOME);
         websiteLinkText.findViewById(R.id.link_text_website).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +91,7 @@ public class EpisodeListFragment extends RoboFragment {
         });
 
         FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_twitter);
-        twitterLinkText.prepend(0xF099);
+        twitterLinkText.prepend(FontAwesomeTextView.Icon.TWITTER);
         twitterLinkText.findViewById(R.id.link_text_twitter).setOnClickListener(
                 new View.OnClickListener() {
                     @Override

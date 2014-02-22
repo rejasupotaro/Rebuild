@@ -24,6 +24,10 @@ public class FontAwesomeTextView extends TextView {
         setTypeface(sTypeface);
     }
 
+    public void prepend(Icon icon) {
+        prepend(icon.getUnicode());
+    }
+
     public void prepend(int unicode) {
         String icon = String.valueOf((char) unicode);
         setText(icon + " " + getText().toString());
@@ -31,5 +35,24 @@ public class FontAwesomeTextView extends TextView {
 
     private static Typeface getTypefaceFromAssets(Context context, String path) {
         return Typeface.createFromAsset(context.getAssets(), path);
+    }
+
+    public static enum Icon {
+        HOME(0xF015),
+        TWITTER(0xF099),
+        DOWNLOAD(0xF019),
+        TRASH(0xF014),
+        MINUS(0xF146),
+        SPINNER(0xF110);
+
+        private int unicode;
+
+        public int getUnicode() {
+            return unicode;
+        }
+
+        private Icon(int unicode) {
+            this.unicode = unicode;
+        }
     }
 }
