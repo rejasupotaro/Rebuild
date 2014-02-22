@@ -15,13 +15,19 @@ import roboguice.inject.InjectView;
 
 public class AboutActivity extends RoboActionBarActivity {
 
-    private static final String LICENSES_FILE_PATH = "file:///android_asset/licenses.html";
+    private static final String ABOUT_FILE_PATH = "file:///android_asset/about.html";
 
-    @InjectView(R.id.licenses_view)
-    private WebView mLicensesView;
+    @InjectView(R.id.about_view)
+    private WebView mAboutView;
+
+    @InjectView(R.id.rebuildfm)
+    private View mListItemRebuild;
 
     @InjectView(R.id.rejasupotaro)
-    private View mMyImageView;
+    private View mListItemRejasupotaro;
+
+    @InjectView(R.id.hotchemi)
+    private View mListItemHotchemi;
 
     @Inject
     private MenuDelegate mMenuDelegate;
@@ -31,6 +37,7 @@ public class AboutActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         setupActionBar();
+        setupProfileView();
         setupLicensesView();
     }
 
@@ -40,16 +47,30 @@ public class AboutActivity extends RoboActionBarActivity {
         actionBar.setHomeButtonEnabled(true);
     }
 
-    private void setupLicensesView() {
-        mMyImageView.setOnClickListener(new View.OnClickListener() {
+    private void setupProfileView() {
+        mListItemRebuild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentUtils.openMyProfile(AboutActivity.this);
+                IntentUtils.openGitHubRepository(AboutActivity.this);
             }
         });
+        mListItemRejasupotaro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtils.openMyTwitter(AboutActivity.this);
+            }
+        });
+        mListItemHotchemi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtils.openTwitterProfile(AboutActivity.this, "hotchemi");
+            }
+        });
+    }
 
-        mLicensesView.getSettings().setJavaScriptEnabled(false);
-        mLicensesView.loadUrl(LICENSES_FILE_PATH);
+    private void setupLicensesView() {
+        mAboutView.getSettings().setJavaScriptEnabled(false);
+        mAboutView.loadUrl(ABOUT_FILE_PATH);
     }
 
     @Override

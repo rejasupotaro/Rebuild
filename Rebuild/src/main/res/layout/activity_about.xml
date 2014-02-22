@@ -1,40 +1,114 @@
-<LinearLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
     <LinearLayout
-            android:id="@+id/rejasupotaro"
-            android:background="@drawable/bg_clickable"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_frame"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-        <ImageView
-            android:src="@drawable/rejasupotaro"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            />
-        <TextView
-                android:text="Copyright © 2013-2014 by rejasupotaro"
-                android:layout_marginLeft="@dimen/padding_frame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-    </LinearLayout>
-    <TextView
-            android:text="Rebuild for Android, Version 0.1.2"
-            android:layout_marginBottom="@dimen/padding_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    <WebView
-            android:id="@+id/licenses_view"
-            android:layout_weight="1"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-</LinearLayout>
+            android:layout_height="match_parent"
+            >
+        <TextView
+                android:text="About this app"
+                style="@style/AboutListItemHeader"
+                />
+        <rejasupotaro.rebuild.views.VerticalSeparator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+        <LinearLayout
+                android:id="@+id/rebuildfm"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_clickable"
+                android:padding="@dimen/padding_contents"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            <ImageView
+                    android:src="@drawable/ic_launcher"
+                    style="@style/AboutListItemImage"
+                    />
+            <TextView
+                    android:text="Rebuild for Android, Version 0.2.0\nCopyright © 2013 by rejasupotaro"
+                    style="@style/AboutListItemText"
+                    />
+        </LinearLayout>
+        <rejasupotaro.rebuild.views.VerticalSeparator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+        <TextView
+                android:text="Developer"
+                style="@style/AboutListItemHeader"
+                />
+        <rejasupotaro.rebuild.views.VerticalSeparator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+        <LinearLayout
+                android:id="@+id/rejasupotaro"
+                android:background="@drawable/bg_clickable"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_contents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            <ImageView
+                    android:src="@drawable/rejasupotaro"
+                    style="@style/AboutListItemImage"
+                    />
+            <TextView
+                    android:text="rejasupotaro"
+                    style="@style/AboutListItemText"
+                    />
+        </LinearLayout>
+        <rejasupotaro.rebuild.views.VerticalSeparator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+        <TextView
+                android:text="Contributors"
+                style="@style/AboutListItemHeader"
+                />
+        <rejasupotaro.rebuild.views.VerticalSeparator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+        <LinearLayout
+                android:id="@+id/hotchemi"
+                android:background="@drawable/bg_clickable"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_contents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            <ImageView
+                    android:src="@drawable/hotchemi"
+                    style="@style/AboutListItemImage"
+                    />
+            <TextView
+                    android:text="hotchemi"
+                    style="@style/AboutListItemText"
+                    />
+        </LinearLayout>
+        <rejasupotaro.rebuild.views.VerticalSeparator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+        <TextView
+                android:text="Recent changes"
+                style="@style/AboutListItemHeader"
+                />
+        <rejasupotaro.rebuild.views.VerticalSeparator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+        <WebView
+                android:id="@+id/about_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+</ScrollView>
