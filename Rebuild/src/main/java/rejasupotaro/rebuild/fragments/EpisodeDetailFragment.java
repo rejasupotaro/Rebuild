@@ -226,10 +226,6 @@ public class EpisodeDetailFragment extends RoboFragment {
             });
 
             UiAnimations.fadeOut(mMediaStartButtonOnImageCover, 300, 1000);
-            if (!mEpisode.hasMediaDataInLocal()) {
-                getActivity().startService(
-                        EpisodeDownloadService.createIntent(getActivity(), episode));
-            }
         }
     }
 
