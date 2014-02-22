@@ -1,1 +1,2 @@
 apply from: 'gradle/gradle-android-utils/build.gradle'
+apply from: 'https://raw2.github.com/rejasupotaro/sdk_manager/master/sdk_manager.gradle'
