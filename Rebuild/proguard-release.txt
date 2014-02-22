@@ -12,6 +12,8 @@
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends com.google.inject.AbstractModule
 -keep public class com.android.vending.licensing.ILicensingService
+-keep public class rejasupotaro.rebuild.tools.MainThreadExecutor
+-keep public class rejasupotaro.rebuild.tools.OnContextExecutor
 
 -keep class com.google.inject.** { *; }
 -keep class javax.inject.** { *; }
