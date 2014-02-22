@@ -13,7 +13,6 @@ public class PicassoHelper {
         Picasso.with(context)
                 .load(buildSiteThumbnailUrl(url))
                 .placeholder(R.drawable.loading)
-                .error(R.drawable.ic_launcher)
                 .into(target);
     }
 
