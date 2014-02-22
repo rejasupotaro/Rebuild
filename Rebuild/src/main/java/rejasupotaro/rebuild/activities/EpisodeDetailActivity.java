@@ -28,9 +28,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         return intent;
     }
 
-    @Inject
-    private MenuDelegate mMenuDelegate;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,18 +44,5 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.episode_detail, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Bundle params = new Bundle();
-        params.putParcelable(MenuDelegate.PARAM_EPISODE, Episode.findById(mEpisodeId));
-        return mMenuDelegate.onItemSelect(item, params);
     }
 }

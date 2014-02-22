@@ -47,16 +47,14 @@
                 android:layout_height="wrap_content"
                 >
             <rejasupotaro.rebuild.views.FontAwesomeTextView
+                    android:id="@+id/episode_share_button"
+                    android:text="@string/share"
+                    style="@style/ActionButton"
+                    />
+            <rejasupotaro.rebuild.views.FontAwesomeTextView
                     android:id="@+id/episode_download_button"
                     android:text="@string/download"
-                    android:textStyle="bold"
-                    android:textColor="@color/base_color_gray"
-                    android:background="@drawable/action_button_border"
-                    android:layout_margin="@dimen/padding_frame"
-                    android:padding="@dimen/padding_frame"
-                    android:layout_gravity="right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/ActionButton"
                     />
             <LinearLayout
                     android:id="@+id/media_control_view"

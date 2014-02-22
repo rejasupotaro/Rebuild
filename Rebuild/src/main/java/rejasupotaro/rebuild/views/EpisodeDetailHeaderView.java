@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -25,6 +24,7 @@ import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
@@ -49,6 +49,8 @@ public class EpisodeDetailHeaderView extends LinearLayout {
 
     private TextView mEpisodeDescriptionTextView;
 
+    private FontAwesomeTextView mEpisodeShareButton;
+
     private FontAwesomeTextView mEpisodeDownloadButton;
 
     public EpisodeDetailHeaderView(Context context, LoadListener loadListener) {
@@ -71,6 +73,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         mMediaStartAndPauseButton = (CheckBox) view.findViewById(R.id.media_start_and_pause_button);
         mSeekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
         mEpisodeDescriptionTextView = (TextView) view.findViewById(R.id.episode_description);
+        mEpisodeShareButton = (FontAwesomeTextView) view.findViewById(R.id.episode_share_button);
         mEpisodeDownloadButton = (FontAwesomeTextView) view.findViewById(R.id.episode_download_button);
 
         addView(view, params);
@@ -92,6 +95,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
 
         setupMediaPlayAndPauseButton(episode);
+        setupShareButton(episode);
         setupDownloadButton(episode);
         setupSeekBar(episode);
     }
@@ -160,10 +164,19 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         PodcastPlayerNotification.cancel(getContext());
     }
 
+    private void setupShareButton(final Episode episode) {
+        mEpisodeShareButton.prepend(FontAwesomeTextView.Icon.SHARE);
+        mEpisodeShareButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtils.shareEpisode(getContext(), episode);
+            }
+        });
+    }
+
     private void setupDownloadButton(final Episode episode) {
         mEpisodeDownloadButton.setEnabled(true);
         if (episode.isDownloaded()) {
-            Log.e("debugging", "isDownloaded");
             mEpisodeDownloadButton.setText(getContext().getString(R.string.clear_cache));
             mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.MINUS);
             mEpisodeDownloadButton.setOnClickListener(new View.OnClickListener() {
@@ -174,12 +187,10 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 }
             });
         } else if (EpisodeDownloadService.isDownloading(episode)) {
-            Log.e("debugging", "isDownloading");
             mEpisodeDownloadButton.setEnabled(false);
             mEpisodeDownloadButton.setText(getContext().getString(R.string.downloading));
             mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
         } else {
-            Log.e("debugging", "isNotDownloaded");
             mEpisodeDownloadButton.setText(getContext().getString(R.string.download));
             mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.DOWNLOAD);
             mEpisodeDownloadButton.setOnClickListener(new View.OnClickListener() {

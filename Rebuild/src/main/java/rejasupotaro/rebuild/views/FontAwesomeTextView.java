@@ -43,7 +43,8 @@ public class FontAwesomeTextView extends TextView {
         DOWNLOAD(0xF019),
         TRASH(0xF014),
         MINUS(0xF146),
-        SPINNER(0xF110);
+        SPINNER(0xF110),
+        SHARE(0xF045);
 
         private int unicode;
 

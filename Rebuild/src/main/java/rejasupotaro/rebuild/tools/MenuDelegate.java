@@ -38,12 +38,6 @@ public class MenuDelegate {
                 mActivity.startActivity(SettingsActivity.createIntent(mActivity));
                 break;
             }
-            case R.id.action_share: {
-                Episode episode = params.getParcelable(PARAM_EPISODE);
-                String shareText = buildPostMessage(episode);
-                IntentUtils.sendPostIntent(mActivity, shareText);
-                break;
-            }
             default: {
                 result = mActivity.onOptionsItemSelected(item);
                 break;
@@ -51,9 +45,4 @@ public class MenuDelegate {
         }
         return result;
     }
-
-    private String buildPostMessage(Episode episode) {
-        return " / " + episode.getTitle() + " " + episode.getLink() + " #rebuildfm";
-    }
-
 }
