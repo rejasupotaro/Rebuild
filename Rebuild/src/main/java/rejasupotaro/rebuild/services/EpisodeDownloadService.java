@@ -4,12 +4,10 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.rebuild.utils.ToastUtils;
 
 public class EpisodeDownloadService extends IntentService {
 
@@ -37,7 +35,6 @@ public class EpisodeDownloadService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Episode episode = intent.getParcelableExtra(EXTRA_EPISODE);
         sEpisodeDownloadClient.download(getApplicationContext(), episode);
-        ToastUtils.show(this, getString(R.string.episode_download_completed, episode.getTitle()));
         episode.save();
         BusProvider.getInstance().post(new DownloadEpisodeCompleteEvent(episode));
     }

@@ -34,6 +34,7 @@ import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
+import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
 import rejasupotaro.rebuild.views.StateFrameLayout;
@@ -289,7 +290,10 @@ public class EpisodeDetailFragment extends RoboFragment {
         mOnContextExecutor.execute(getActivity(), new Runnable() {
             @Override
             public void run() {
-                setupDownloadButton(event.getEpisode());
+                Episode episode = event.getEpisode();
+                ToastUtils.show(getActivity(),
+                        getString(R.string.episode_download_completed, episode.getTitle()));
+                setupDownloadButton(episode);
             }
         });
     }
