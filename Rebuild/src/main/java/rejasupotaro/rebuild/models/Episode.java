@@ -89,7 +89,7 @@ public class Episode extends Model implements Parcelable {
     }
 
     public boolean isDownloaded() {
-        if (!TextUtils.isEmpty(mMediaLocalPath)) {
+        if (TextUtils.isEmpty(mMediaLocalPath)) {
             return false;
         }
 
@@ -140,6 +140,14 @@ public class Episode extends Model implements Parcelable {
     public boolean isSameId(Episode episode) {
         if (episode == null) return false;
         return (mEpisodeId == episode.getEpisodeId());
+    }
+
+    public boolean isSameEpisode(Episode episode) {
+        if (TextUtils.isEmpty(mTitle) || episode == null) {
+            return false;
+        }
+
+        return (mTitle.equals(episode.getTitle()));
     }
 
     private Episode(int episodeId, String title, String description, Uri link, String postedAt,

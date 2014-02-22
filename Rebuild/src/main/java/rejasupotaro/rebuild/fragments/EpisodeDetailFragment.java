@@ -205,6 +205,10 @@ public class EpisodeDetailFragment extends RoboFragment {
                     setupDownloadButton(episode);
                 }
             });
+        } else if (EpisodeDownloadService.isDownloading(episode)) {
+            mEpisodeDownloadButton.setEnabled(false);
+            mEpisodeDownloadButton.setText(getString(R.string.downloading));
+            mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
         } else {
             mEpisodeDownloadButton.setText(getString(R.string.download));
             mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.DOWNLOAD);
