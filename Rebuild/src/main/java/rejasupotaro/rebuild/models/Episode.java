@@ -89,7 +89,15 @@ public class Episode extends Model implements Parcelable {
     }
 
     public boolean isDownloaded() {
-        return !TextUtils.isEmpty(mMediaLocalPath);
+        if (!TextUtils.isEmpty(mMediaLocalPath)) {
+            return false;
+        }
+
+        boolean result = MediaFileManager.exists(mMediaLocalPath);
+        if (!result) {
+            mMediaLocalPath = null;
+        }
+        return result;
     }
 
     public boolean isFavorited() {
@@ -234,10 +242,6 @@ public class Episode extends Model implements Parcelable {
                 .set("media_local_path=?", mediaLocalPath)
                 .where("episode_id=?", mEpisodeId)
                 .execute();
-    }
-
-    public boolean hasMediaDataInLocal() {
-        return MediaFileManager.exists(getMediaLocalPath());
     }
 
     @Override
