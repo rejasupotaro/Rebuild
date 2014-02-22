@@ -10,7 +10,6 @@ buildscript {
 }
 
 apply plugin: 'android'
-apply plugin: 'android-test'
 
 repositories {
     mavenCentral()
@@ -83,10 +82,6 @@ android {
 
         instrumentTestCompile fileTree(dir: 'src/instrumentTest/libs', include: '*.jar')
         instrumentTestCompile 'com.squareup:fest-android:1.0.7'
-
-        testCompile 'junit:junit:4.10'
-        testCompile 'org.robolectric:robolectric:2.1.+'
-        testCompile 'com.squareup:fest-android:1.0.+'
     }
 }
 
