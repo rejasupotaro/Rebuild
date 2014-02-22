@@ -45,4 +45,18 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
     }
+
+    @Inject
+    private MenuDelegate mMenuDelegate;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return mMenuDelegate.onItemSelect(item);
+    }
 }
