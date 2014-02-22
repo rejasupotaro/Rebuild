@@ -6,17 +6,17 @@ body {
   line-height: 1.5;
 }
 
-.license {
+.section {
   padding: 0.5em 1.5em;
   border-bottom: 1px solid #ebeae6
 }
 
-.license h3 {
+.section h3 {
   font-size: 129%;
   font-weight: bold;
   margin: 1em 0;
 }
 
-.license p {
+.section p {
   margin: 1em 0;
 }
