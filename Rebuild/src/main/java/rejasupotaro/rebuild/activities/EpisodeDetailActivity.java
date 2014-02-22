@@ -17,14 +17,14 @@ import roboguice.inject.InjectExtra;
 
 public class EpisodeDetailActivity extends RoboActionBarActivity {
 
-    private static final String EXTRA_EPISODE = "extra_episode";
+    private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
-    @InjectExtra(value = EXTRA_EPISODE)
-    private Episode mEpisode;
+    @InjectExtra(value = EXTRA_EPISODE_ID)
+    private int mEpisodeId;
 
-    public static Intent createIntent(Context context, Episode episode) {
+    public static Intent createIntent(Context context, int episodeId) {
         Intent intent = new Intent(context, EpisodeDetailActivity.class);
-        intent.putExtra(EXTRA_EPISODE, episode);
+        intent.putExtra(EXTRA_EPISODE_ID, episodeId);
         return intent;
     }
 
@@ -40,7 +40,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
         EpisodeDetailFragment episodeDetailFragment =
                 (EpisodeDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_episode_detail);
-        episodeDetailFragment.setup(mEpisode);
+        episodeDetailFragment.setup(Episode.findById(mEpisodeId));
     }
 
     private void setupActionBar() {
@@ -58,7 +58,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Bundle params = new Bundle();
-        params.putParcelable(MenuDelegate.PARAM_EPISODE, mEpisode);
+        params.putParcelable(MenuDelegate.PARAM_EPISODE, Episode.findById(mEpisodeId));
         return mMenuDelegate.onItemSelect(item, params);
     }
 }

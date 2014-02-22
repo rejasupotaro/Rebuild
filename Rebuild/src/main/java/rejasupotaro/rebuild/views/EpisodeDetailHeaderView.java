@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -162,6 +163,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
     private void setupDownloadButton(final Episode episode) {
         mEpisodeDownloadButton.setEnabled(true);
         if (episode.isDownloaded()) {
+            Log.e("debugging", "isDownloaded");
             mEpisodeDownloadButton.setText(getContext().getString(R.string.clear_cache));
             mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.MINUS);
             mEpisodeDownloadButton.setOnClickListener(new View.OnClickListener() {
@@ -172,10 +174,12 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 }
             });
         } else if (EpisodeDownloadService.isDownloading(episode)) {
+            Log.e("debugging", "isDownloading");
             mEpisodeDownloadButton.setEnabled(false);
             mEpisodeDownloadButton.setText(getContext().getString(R.string.downloading));
             mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
         } else {
+            Log.e("debugging", "isNotDownloaded");
             mEpisodeDownloadButton.setText(getContext().getString(R.string.download));
             mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.DOWNLOAD);
             mEpisodeDownloadButton.setOnClickListener(new View.OnClickListener() {

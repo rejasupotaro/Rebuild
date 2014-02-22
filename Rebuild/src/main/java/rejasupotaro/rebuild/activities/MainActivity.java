@@ -66,7 +66,7 @@ public class MainActivity extends RoboActionBarActivity
     }
 
     private void openEpisodeDetailFragment(Episode episode) {
-        startActivity(EpisodeDetailActivity.createIntent(this, episode));
+        startActivity(EpisodeDetailActivity.createIntent(this, episode.getEpisodeId()));
     }
 
     @Override
