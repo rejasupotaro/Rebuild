@@ -196,23 +196,16 @@ public class Episode extends Model implements Parcelable {
     }
 
     public static boolean refreshTable(List<Episode> episodeList) {
-        boolean shouldUpdateListView = false;
         if (episodeList == null || episodeList.size() == 0) {
-            return shouldUpdateListView;
+            return false;
         }
 
+        int count = new Select().from(Episode.class).execute().size();
         for (Episode episode : episodeList) {
             episode.upsert();
         }
 
-        int count = new Select().from(Episode.class).execute().size();
-        if (count == episodeList.size()) {
-            shouldUpdateListView = false;
-        } else {
-            shouldUpdateListView = true;
-        }
-
-        return shouldUpdateListView;
+        return (count != episodeList.size());
     }
 
     private void upsert() {
