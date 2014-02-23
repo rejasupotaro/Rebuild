@@ -30,7 +30,7 @@
                     style="@style/AboutListItemImage"
                     />
             <TextView
-                    android:text="Rebuild for Android, Version 0.2.0\nCopyright © 2013 by rejasupotaro"
+                    android:text="Rebuild for Android, Version 0.2.2\nCopyright © 2013 by rejasupotaro"
                     style="@style/AboutListItemText"
                     />
         </LinearLayout>
