@@ -23,6 +23,7 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
+import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.EpisodeDetailHeaderView;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.fragment.RoboFragment;
@@ -74,7 +75,6 @@ public class EpisodeDetailFragment extends RoboFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mEpisodeDetailHeaderView.onActivityCreated();
-        mShowNoteListView.addHeaderView(mEpisodeDetailHeaderView, null, false);
     }
 
     @Override
@@ -99,6 +99,8 @@ public class EpisodeDetailFragment extends RoboFragment {
         List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
         final ShowNoteListAdapter adapter = new ShowNoteListAdapter(
                 getActivity(), linkList, mItemClickListener);
+
+        ViewUtils.addHeaderView(mShowNoteListView, mEpisodeDetailHeaderView);
         mShowNoteListView.setAdapter(adapter);
     }
 

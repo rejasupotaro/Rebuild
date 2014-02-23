@@ -23,6 +23,7 @@ import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
+import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.fragment.RoboFragment;
@@ -100,7 +101,7 @@ public class EpisodeListFragment extends RoboFragment {
                     }
                 });
 
-        mEpisodeListView.addHeaderView(header, null, false);
+        ViewUtils.addHeaderView(mEpisodeListView, header);
     }
 
     private void setupListViewFooter() {
