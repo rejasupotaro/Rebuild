@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.activities.EpisodeDetailActivity;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
@@ -40,6 +41,9 @@ public class PodcastPlayerNotification {
         builder.setContentTitle(episode.getTitle());
         builder.setContentText(episode.getDescription());
         builder.addAction(android.R.drawable.ic_media_pause, context.getString(R.string.notification_pause), piPause);
+        PendingIntent launchDetail = PendingIntent.getActivity(context, 0,
+                EpisodeDetailActivity.createIntent(context, episode.getEpisodeId()), Intent.FLAG_ACTIVITY_NEW_TASK);
+        builder.setContentIntent(launchDetail);
 
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_NO_CLEAR;
