@@ -6,10 +6,12 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:0.7.+'
         classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
+        classpath 'org.notlocalhost.gradle:gradle-calabash-android-plugin:0.1.+'
     }
 }
 
 apply plugin: 'android'
+apply plugin: 'calabash-test'
 
 repositories {
     mavenCentral()
@@ -39,7 +41,7 @@ android {
         versionName "${versionMajor}.${versionMinor}.${versionPatch}-${gitSha()}"
     }
 
-    releasable = new File('../secret.gradle').exists()
+    def releasable = new File('../secret.gradle').exists()
     if (releasable) {
         apply from: '../secret.gradle'
         signingConfigs {
