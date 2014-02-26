@@ -18,3 +18,4 @@ secret.gradle
 rebuild.keystore
 
 test_servers
+screenshot_*
