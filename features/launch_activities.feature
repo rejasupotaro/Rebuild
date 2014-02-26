@@ -7,31 +7,26 @@ Feature: Launch Activities
     Then the "Main" activity should be open
 
   Scenario: Launch SettingsActivity
-    Then I press the menu key
-    Then I press the enter button
+    When I try to open SettingsActivity
     Then I wait
     Then the "Settings" activity should be open
 
   Scenario: Launch AboutActivity
-    Then I press the menu key
-    Then I press the enter button
-    Then I press "About"
+    When I try to open AboutActivity
     Then I wait
     Then the "About" activity should be open
 
   Scenario: Launch LicensesActivity
-    Then I press the menu key
-    Then I press the enter button
-    Then I press "OSS Licenses"
+    When I try to open LicensesActivity
     Then I wait
     Then the "Licenses" activity should be open
 
   Scenario: Launch TwitterWidgetActivity
-    Then I touch the "timeline" text
+    When I try to open TwitterWidgetActivity
     Then I wait
     Then the "TwitterWidget" activity should be open
 
   Scenario: Launch EpisodeDetailActivity
-    Then I press the enter button
+    When I try to open EpisodeDetailActivity
     Then I wait
     Then the "EpisodeDetail" activity should be open
