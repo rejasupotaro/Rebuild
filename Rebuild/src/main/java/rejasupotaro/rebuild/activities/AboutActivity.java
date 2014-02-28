@@ -3,31 +3,25 @@ package rejasupotaro.rebuild.activities;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.adapters.AboutItemListAdapter;
+import rejasupotaro.rebuild.models.AboutItem;
 import rejasupotaro.rebuild.tools.MenuDelegate;
-import rejasupotaro.rebuild.utils.IntentUtils;
+import rejasupotaro.rebuild.utils.ViewUtils;
+import rejasupotaro.rebuild.views.RecentChangesView;
 import roboguice.inject.InjectView;
 
 public class AboutActivity extends RoboActionBarActivity {
 
-    private static final String ABOUT_FILE_PATH = "file:///android_asset/about.html";
-
-    @InjectView(R.id.about_view)
-    private WebView aboutView;
-
-    @InjectView(R.id.rebuildfm)
-    private View listItemRebuild;
-
-    @InjectView(R.id.rejasupotaro)
-    private View listItemRejasupotaro;
-
-    @InjectView(R.id.hotchemi)
-    private View listItemHotchemi;
+    @InjectView(R.id.about_item_list)
+    private ListView aboutItemListView;
 
     @Inject
     private MenuDelegate menuDelegate;
@@ -37,8 +31,7 @@ public class AboutActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         setupActionBar();
-        setupProfileView();
-        setupLicensesView();
+        setupAboutListItemView();
     }
 
     private void setupActionBar() {
@@ -47,30 +40,29 @@ public class AboutActivity extends RoboActionBarActivity {
         actionBar.setHomeButtonEnabled(true);
     }
 
-    private void setupProfileView() {
-        listItemRebuild.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.openGitHubRepository(AboutActivity.this);
-            }
-        });
-        listItemRejasupotaro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.openMyTwitter(AboutActivity.this);
-            }
-        });
-        listItemHotchemi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.openTwitterProfile(AboutActivity.this, "hotchemi");
-            }
-        });
-    }
+    private void setupAboutListItemView() {
+        ViewUtils.addFooterView(aboutItemListView, new RecentChangesView(this));
 
-    private void setupLicensesView() {
-        aboutView.getSettings().setJavaScriptEnabled(false);
-        aboutView.loadUrl(ABOUT_FILE_PATH);
+        List<AboutItem> aboutItemList = new ArrayList<AboutItem>();
+        aboutItemList.add(new AboutItem.AboutItemHeader("About this app"));
+        aboutItemList.add(new AboutItem.AboutItemContent(
+                "",
+                "",
+                "https://github.com/rejasupotaro/Rebuild"));
+        aboutItemList.add(new AboutItem.AboutItemHeader("Developer"));
+        aboutItemList.add(new AboutItem.AboutItemContent(
+                "https://pbs.twimg.com/profile_images/424554842367852544/jRoDtV1R.jpeg",
+                "rejasupotaro",
+                "http://twitter.com/rejasupotaro"));
+        aboutItemList.add(new AboutItem.AboutItemHeader("Contributors"));
+        aboutItemList.add(new AboutItem.AboutItemContent(
+                "https://pbs.twimg.com/profile_images/424955294616023040/aco9m_GJ.png",
+                "hotchemi",
+                "http://twitter.com/hotchemi"));
+        aboutItemList.add(new AboutItem.AboutItemHeader("Recent Changes"));
+
+        AboutItemListAdapter adapter = new AboutItemListAdapter(this, aboutItemList);
+        aboutItemListView.setAdapter(adapter);
     }
 
     @Override

@@ -82,7 +82,7 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
                 return false;
             }
         });
-        PicassoHelper.load(getContext(), holder.siteThumbnail, item.getUrl());
+        PicassoHelper.loadThumbnail(getContext(), holder.siteThumbnail, item.getUrl());
         holder.showNoteTitleTextView.setText(item.getTitle());
     }
 

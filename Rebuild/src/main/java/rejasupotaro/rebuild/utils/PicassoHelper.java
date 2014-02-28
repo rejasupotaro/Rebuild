@@ -11,6 +11,13 @@ public class PicassoHelper {
 
     public static void load(Context context, ImageView target, String url) {
         Picasso.with(context)
+                .load(url)
+                .placeholder(R.drawable.loading)
+                .into(target);
+    }
+
+    public static void loadThumbnail(Context context, ImageView target, String url) {
+        Picasso.with(context)
                 .load(buildSiteThumbnailUrl(url))
                 .placeholder(R.drawable.loading)
                 .into(target);

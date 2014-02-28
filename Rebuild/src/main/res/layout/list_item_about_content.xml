@@ -1,0 +1,20 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:padding="@dimen/padding_contents"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+                android:id="@+id/content_image"
+                android:src="@drawable/ic_launcher"
+                style="@style/AboutListItemImage"
+                />
+        <TextView
+                android:id="@+id/content_text"
+                android:text="Rebuild for Android, Version 0.2.2\nCopyright © 2013 by rejasupotaro"
+                style="@style/AboutListItemText"
+                />
+</LinearLayout>
