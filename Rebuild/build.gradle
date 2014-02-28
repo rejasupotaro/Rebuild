@@ -32,8 +32,6 @@ android {
     compileSdkVersion 18
     buildToolsVersion "19.0.1"
 
-    installRequiredSdk(android)
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 18
