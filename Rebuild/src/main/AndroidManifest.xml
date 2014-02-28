@@ -42,6 +42,10 @@
             android:label="@string/label_timeline">
         </activity>
         <activity
+                android:name=".activities.TimelineActivity"
+                android:label="@string/label_timeline">
+        </activity>
+        <activity
                 android:name=".activities.SettingsActivity"
                 android:label="@string/activity_settings">
         </activity>
