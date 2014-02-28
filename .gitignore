@@ -19,3 +19,5 @@ rebuild.keystore
 
 test_servers
 screenshot_*
+
+Rebuild/src/product/java/rejasupotaro/rebuild/api/TwitterApiClient.java
