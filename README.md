@@ -25,7 +25,7 @@ Installation
 $ git clone https://github.com/rejasupotaro/Rebuild.git
 $ cd Rebuild
 $ git submodule update --init
-$ ./gradlew installDebug
+$ ./gradlew installStagingDebug
 ```
 
 Run Test
@@ -34,13 +34,13 @@ Run Test
 ### Run unit tests
 
 ```
-$ ./gradlew connectedInstrumentTest
+$ ./gradlew connectedInstrumentTestStagingDebug
 ```
 
 ### Run UI tests and take screenshots
 
 ```
-$ ./gradlew calabashDebug
+$ ./gradlew calabashStagingDebug
 ```
 
 Contributing
