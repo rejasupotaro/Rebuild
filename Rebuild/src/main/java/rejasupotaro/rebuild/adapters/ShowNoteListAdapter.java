@@ -11,7 +11,6 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Link;
-import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class ShowNoteListAdapter extends BindableAdapter<Link> {
@@ -38,12 +37,12 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
         }
     }
 
-    private ItemClickListener mItemClickListener;
+    private ItemClickListener itemClickListener;
 
     public ShowNoteListAdapter(Context context,
             List<Link> episodeList, ItemClickListener itemClickListener) {
         super(context, episodeList);
-        mItemClickListener = itemClickListener;
+        this.itemClickListener = itemClickListener;
     }
 
     @Override
@@ -73,13 +72,13 @@ public class ShowNoteListAdapter extends BindableAdapter<Link> {
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mItemClickListener.onClick(item);
+                itemClickListener.onClick(item);
             }
         });
         holder.root.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                mItemClickListener.onLongClick(item);
+                itemClickListener.onLongClick(item);
                 return false;
             }
         });

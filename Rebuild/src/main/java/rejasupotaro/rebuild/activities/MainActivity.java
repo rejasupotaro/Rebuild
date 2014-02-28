@@ -20,7 +20,7 @@ public class MainActivity extends RoboActionBarActivity
     private static final String EXTRA_EPISODE = "extra_episode";
 
     @Inject
-    private MenuDelegate mMenuDelegate;
+    private MenuDelegate menuDelegate;
 
     public static Intent createIntent(Context context, Episode episode) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -71,6 +71,6 @@ public class MainActivity extends RoboActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return mMenuDelegate.onItemSelect(item);
+        return menuDelegate.onItemSelect(item);
     }
 }

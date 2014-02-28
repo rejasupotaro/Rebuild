@@ -7,43 +7,43 @@ public class Timer extends Handler {
 
     private static final int DEFAULT_INTERVAL_MILLIS = 1000;
 
-    private boolean mIsUpdate;
+    private boolean isUpdate;
 
-    private int mInstervalMillis = DEFAULT_INTERVAL_MILLIS;
+    private int instervalMillis = DEFAULT_INTERVAL_MILLIS;
 
-    private Callback mCallback;
+    private Callback callback;
 
-    private long mStartTimeMillis;
+    private long startTimeMillis;
 
     public Timer(Callback callback) {
-        mCallback = callback;
+        this.callback = callback;
     }
 
     public Timer(Callback callback, int intervalMillis) {
-        mCallback = callback;
-        mInstervalMillis = intervalMillis;
+        this.callback = callback;
+        instervalMillis = intervalMillis;
     }
 
     private void init() {
-        mStartTimeMillis = System.currentTimeMillis();
+        startTimeMillis = System.currentTimeMillis();
     }
 
     public void start() {
         init();
-        mIsUpdate = true;
+        isUpdate = true;
         handleMessage(new Message());
     }
 
     public void stop() {
-        mIsUpdate = false;
+        isUpdate = false;
     }
 
     @Override
     public void handleMessage(Message msg) {
         this.removeMessages(0);
-        if (mIsUpdate) {
-            sendMessageDelayed(obtainMessage(0), mInstervalMillis);
-            mCallback.tick(System.currentTimeMillis() - mStartTimeMillis);
+        if (isUpdate) {
+            sendMessageDelayed(obtainMessage(0), instervalMillis);
+            callback.tick(System.currentTimeMillis() - startTimeMillis);
         }
     }
 

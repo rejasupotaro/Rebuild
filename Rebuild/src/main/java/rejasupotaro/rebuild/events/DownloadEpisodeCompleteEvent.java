@@ -4,14 +4,14 @@ import rejasupotaro.rebuild.models.Episode;
 
 public class DownloadEpisodeCompleteEvent {
 
-    private Episode mEpisode;
+    private Episode episode;
 
     public Episode getEpisode() {
-        return mEpisode;
+        return episode;
     }
 
     public DownloadEpisodeCompleteEvent(Episode episode) {
-        mEpisode = episode;
+        this.episode = episode;
     }
 
 }

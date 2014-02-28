@@ -20,7 +20,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
     @InjectExtra(value = EXTRA_EPISODE_ID)
-    private int mEpisodeId;
+    private int episodeId;
+
+    @Inject
+    private MenuDelegate menuDelegate;
 
     public static Intent createIntent(Context context, int episodeId) {
         Intent intent = new Intent(context, EpisodeDetailActivity.class);
@@ -37,7 +40,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
         EpisodeDetailFragment episodeDetailFragment =
                 (EpisodeDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_episode_detail);
-        episodeDetailFragment.setup(Episode.findById(mEpisodeId));
+        episodeDetailFragment.setup(Episode.findById(episodeId));
     }
 
     private void setupActionBar() {
@@ -45,9 +48,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
     }
-
-    @Inject
-    private MenuDelegate mMenuDelegate;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,6 +57,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return mMenuDelegate.onItemSelect(item);
+        return menuDelegate.onItemSelect(item);
     }
 }

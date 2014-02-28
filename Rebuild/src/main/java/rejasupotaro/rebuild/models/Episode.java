@@ -24,112 +24,112 @@ import rejasupotaro.rebuild.utils.StringUtils;
 public class Episode extends Model implements Parcelable {
 
     @Column(name = "episode_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    private int mEpisodeId;
+    private int episodeId;
 
     @Column(name = "title")
-    private String mTitle;
+    private String title;
 
     @Column(name = "description")
-    private String mDescription;
+    private String description;
 
     @Column(name = "link")
-    private Uri mLink;
+    private Uri link;
 
     @Column(name = "posted_at")
-    private String mPostedAt;
+    private String postedAt;
 
     @Column(name = "enclosure")
-    private Uri mEnclosure;
+    private Uri enclosure;
 
     @Column(name = "duration")
-    private String mDuration;
+    private String duration;
 
     @Column(name = "show_notes")
-    private String mShowNotes;
+    private String showNotes;
 
     @Column(name = "favorited")
-    private boolean mIsFavorited;
+    private boolean isFavorited;
 
     @Column(name = "played")
-    private boolean mHasPlayed;
+    private boolean hasPlayed;
 
     @Column(name = "media_local_path")
-    private String mMediaLocalPath;
+    private String mediaLocalPath;
 
     public int getEpisodeId() {
-        return mEpisodeId;
+        return episodeId;
     }
 
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
     public String getDescription() {
-        return mDescription;
+        return description;
     }
 
     public Uri getLink() {
-        return mLink;
+        return link;
     }
 
     public String getPostedAt() {
-        return mPostedAt;
+        return postedAt;
     }
 
     public Uri getEnclosure() {
-        return mEnclosure;
+        return enclosure;
     }
 
     public String getDuration() {
-        return mDuration;
+        return duration;
     }
 
     public String getShowNotes() {
-        return mShowNotes;
+        return showNotes;
     }
 
     public boolean isDownloaded() {
-        if (TextUtils.isEmpty(mMediaLocalPath)) {
+        if (TextUtils.isEmpty(mediaLocalPath)) {
             return false;
         }
 
-        boolean result = MediaFileManager.exists(mMediaLocalPath);
+        boolean result = MediaFileManager.exists(mediaLocalPath);
         if (!result) {
-            mMediaLocalPath = null;
+            mediaLocalPath = null;
         }
         return result;
     }
 
     public boolean isFavorited() {
-        return mIsFavorited;
+        return isFavorited;
     }
 
     public void favorite() {
-        mIsFavorited = true;
+        isFavorited = true;
     }
 
     public boolean hasPlayed() {
-        return mHasPlayed;
+        return hasPlayed;
     }
 
     public void play() {
-        mHasPlayed = true;
+        hasPlayed = true;
     }
 
     public String getMediaLocalPath() {
-        return mMediaLocalPath;
+        return mediaLocalPath;
     }
 
     public void setMediaLocalPath(String mediaLocalPath) {
-        mMediaLocalPath = mediaLocalPath;
+        this.mediaLocalPath = mediaLocalPath;
     }
 
     public void clearCache() {
-        if (TextUtils.isEmpty(mMediaLocalPath)) return;
+        if (TextUtils.isEmpty(mediaLocalPath)) return;
 
-        File file = new File(mMediaLocalPath);
+        File file = new File(mediaLocalPath);
         file.delete();
-        mMediaLocalPath = null;
+        mediaLocalPath = null;
         save();
     }
 
@@ -138,24 +138,24 @@ public class Episode extends Model implements Parcelable {
     }
 
     public boolean isSameEpisode(Episode episode) {
-        if (TextUtils.isEmpty(mTitle) || episode == null) {
+        if (TextUtils.isEmpty(title) || episode == null) {
             return false;
         }
 
-        return (mTitle.equals(episode.getTitle()));
+        return (title.equals(episode.getTitle()));
     }
 
     private Episode(int episodeId, String title, String description, Uri link, String postedAt,
                     Uri enclosure, String duration, String showNotes) {
         super();
-        mEpisodeId = episodeId;
-        mTitle = title;
-        mDescription = StringUtils.removeNewLines(description);
-        mLink = link;
-        mPostedAt = DateUtils.formatPubDate(postedAt);
-        mEnclosure = enclosure;
-        mDuration = duration;
-        mShowNotes = showNotes;
+        this.episodeId = episodeId;
+        this.title = title;
+        this.description = StringUtils.removeNewLines(description);
+        this.link = link;
+        this.postedAt = DateUtils.formatPubDate(postedAt);
+        this.enclosure = enclosure;
+        this.duration = duration;
+        this.showNotes = showNotes;
     }
 
     public static Episode newEpisodeFromEntity(RssItem rssItem) {
@@ -210,7 +210,7 @@ public class Episode extends Model implements Parcelable {
 
     private void upsert() {
         Episode episode =
-                new Select().from(Episode.class).where("episode_id=?", mEpisodeId).executeSingle();
+                new Select().from(Episode.class).where("episode_id=?", episodeId).executeSingle();
         if (episode == null) {
             save();
         } else {
@@ -221,22 +221,22 @@ public class Episode extends Model implements Parcelable {
     public void update() {
         new Update(Episode.class)
                 .set("title=?,description=?,link=?,posted_at=?,enclosure=?,duration=?,show_notes=?",
-                        mTitle,
-                        mDescription,
-                        mLink,
-                        mPostedAt,
-                        mEnclosure,
-                        mDuration,
-                        mShowNotes)
-                .where("episode_id=?", mEpisodeId)
+                        title,
+                        description,
+                        link,
+                        postedAt,
+                        enclosure,
+                        duration,
+                        showNotes)
+                .where("episode_id=?", episodeId)
                 .execute();
     }
 
     public void insertMediaLocalPath(String mediaLocalPath) {
-        mMediaLocalPath = mediaLocalPath;
+        this.mediaLocalPath = mediaLocalPath;
         new Update(Episode.class)
                 .set("media_local_path=?", mediaLocalPath)
-                .where("episode_id=?", mEpisodeId)
+                .where("episode_id=?", episodeId)
                 .execute();
     }
 
@@ -247,17 +247,17 @@ public class Episode extends Model implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mEpisodeId);
-        dest.writeString(mTitle);
-        dest.writeString(mDescription);
-        dest.writeString(mLink.toString());
-        dest.writeString(mPostedAt);
-        dest.writeString(mEnclosure.toString());
-        dest.writeString(mDuration);
-        dest.writeString(mShowNotes);
-        dest.writeInt(mIsFavorited ? 1 : 0);
-        dest.writeInt(mHasPlayed ? 1 : 0);
-        dest.writeString(mMediaLocalPath);
+        dest.writeInt(episodeId);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(link.toString());
+        dest.writeString(postedAt);
+        dest.writeString(enclosure.toString());
+        dest.writeString(duration);
+        dest.writeString(showNotes);
+        dest.writeInt(isFavorited ? 1 : 0);
+        dest.writeInt(hasPlayed ? 1 : 0);
+        dest.writeString(mediaLocalPath);
     }
 
     public static final Creator<Episode> CREATOR = new Creator<Episode>() {
@@ -271,16 +271,16 @@ public class Episode extends Model implements Parcelable {
     };
 
     private Episode(Parcel in) {
-        mEpisodeId = in.readInt();
-        mTitle = in.readString();
-        mDescription = in.readString();
-        mLink = Uri.parse(in.readString());
-        mPostedAt = in.readString();
-        mEnclosure = Uri.parse(in.readString());
-        mDuration = in.readString();
-        mShowNotes = in.readString();
-        mIsFavorited = (in.readInt() == 1);
-        mHasPlayed = (in.readInt() == 1);
-        mMediaLocalPath = in.readString();
+        episodeId = in.readInt();
+        title = in.readString();
+        description = in.readString();
+        link = Uri.parse(in.readString());
+        postedAt = in.readString();
+        enclosure = Uri.parse(in.readString());
+        duration = in.readString();
+        showNotes = in.readString();
+        isFavorited = (in.readInt() == 1);
+        hasPlayed = (in.readInt() == 1);
+        mediaLocalPath = in.readString();
     }
 }

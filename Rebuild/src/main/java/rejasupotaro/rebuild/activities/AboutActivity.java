@@ -18,19 +18,19 @@ public class AboutActivity extends RoboActionBarActivity {
     private static final String ABOUT_FILE_PATH = "file:///android_asset/about.html";
 
     @InjectView(R.id.about_view)
-    private WebView mAboutView;
+    private WebView aboutView;
 
     @InjectView(R.id.rebuildfm)
-    private View mListItemRebuild;
+    private View listItemRebuild;
 
     @InjectView(R.id.rejasupotaro)
-    private View mListItemRejasupotaro;
+    private View listItemRejasupotaro;
 
     @InjectView(R.id.hotchemi)
-    private View mListItemHotchemi;
+    private View listItemHotchemi;
 
     @Inject
-    private MenuDelegate mMenuDelegate;
+    private MenuDelegate menuDelegate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,19 +48,19 @@ public class AboutActivity extends RoboActionBarActivity {
     }
 
     private void setupProfileView() {
-        mListItemRebuild.setOnClickListener(new View.OnClickListener() {
+        listItemRebuild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentUtils.openGitHubRepository(AboutActivity.this);
             }
         });
-        mListItemRejasupotaro.setOnClickListener(new View.OnClickListener() {
+        listItemRejasupotaro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentUtils.openMyTwitter(AboutActivity.this);
             }
         });
-        mListItemHotchemi.setOnClickListener(new View.OnClickListener() {
+        listItemHotchemi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentUtils.openTwitterProfile(AboutActivity.this, "hotchemi");
@@ -69,12 +69,12 @@ public class AboutActivity extends RoboActionBarActivity {
     }
 
     private void setupLicensesView() {
-        mAboutView.getSettings().setJavaScriptEnabled(false);
-        mAboutView.loadUrl(ABOUT_FILE_PATH);
+        aboutView.getSettings().setJavaScriptEnabled(false);
+        aboutView.loadUrl(ABOUT_FILE_PATH);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return mMenuDelegate.onItemSelect(item);
+        return menuDelegate.onItemSelect(item);
     }
 }

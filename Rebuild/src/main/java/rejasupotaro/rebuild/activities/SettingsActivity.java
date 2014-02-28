@@ -15,7 +15,7 @@ import rejasupotaro.rebuild.utils.PreferenceUtils;
 
 public class SettingsActivity extends PreferenceActivity {
 
-    private MenuDelegate mMenuDelegate;
+    private MenuDelegate menuDelegate;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, SettingsActivity.class);
@@ -25,7 +25,7 @@ public class SettingsActivity extends PreferenceActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mMenuDelegate = new MenuDelegate(this);
+        menuDelegate = new MenuDelegate(this);
 
         addPreferencesFromResource(R.xml.preferences);
 
@@ -37,7 +37,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return mMenuDelegate.onItemSelect(item);
+        return menuDelegate.onItemSelect(item);
     }
 
     private void setUpNotificationEpisodesCheckBox() {

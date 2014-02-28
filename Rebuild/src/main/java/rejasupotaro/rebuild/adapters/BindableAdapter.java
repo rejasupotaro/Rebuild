@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class BindableAdapter<T> extends ArrayAdapter<T> {
 
-    private LayoutInflater mInflater;
+    private LayoutInflater inflater;
 
     public BindableAdapter(Context context, List<T> episodeList) {
         super(context, 0, episodeList);
@@ -18,13 +18,13 @@ public abstract class BindableAdapter<T> extends ArrayAdapter<T> {
     }
 
     private void setup(Context context) {
-        mInflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public final View getView(int position, View view, ViewGroup container) {
         if (view == null) {
-            view = newView(mInflater, position, container);
+            view = newView(inflater, position, container);
             if (view == null) {
                 throw new IllegalStateException("newView result must not be null.");
             }

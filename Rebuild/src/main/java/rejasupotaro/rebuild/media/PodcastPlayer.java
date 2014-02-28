@@ -13,47 +13,47 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     public static final String TAG = PodcastPlayer.class.getSimpleName();
 
-    private static PodcastPlayer sInstance;
+    private static PodcastPlayer instance;
 
-    private Timer mTimer;
+    private Timer timer;
 
-    private Episode mEpisode;
+    private Episode episode;
 
-    private StateChangedListener mStateChangedListener;
+    private StateChangedListener stateChangedListener;
 
     private PodcastPlayer() {
         super();
     }
 
     public static PodcastPlayer getInstance() {
-        if (sInstance == null) {
-            sInstance = new PodcastPlayer();
+        if (instance == null) {
+            instance = new PodcastPlayer();
         }
-        return sInstance;
+        return instance;
     }
 
     public Episode getEpisode() {
-        return mEpisode;
+        return episode;
     }
 
     public boolean isPlayingEpisode(Episode other) {
         if (other == null) return false;
-        return other.isSameEpisode(mEpisode);
+        return other.isSameEpisode(episode);
     }
 
     public void setCurrentTimeListener(final CurrentTimeListener currentTimeListener) {
-        mTimer = new Timer(new Timer.Callback() {
+        timer = new Timer(new Timer.Callback() {
             @Override
             public void tick(long timeMillis) {
                 currentTimeListener.onTick(getCurrentPosition());
             }
         });
-        mTimer.start();
+        timer.start();
     }
 
     public void start(Context context, Episode episode, StateChangedListener stateChangedListener) {
-        mEpisode = episode;
-        mStateChangedListener = stateChangedListener;
+        this.episode = episode;
+        this.stateChangedListener = stateChangedListener;
 
         reset();
         try {
@@ -72,7 +72,7 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-        mStateChangedListener.onStart();
+        stateChangedListener.onStart();
         start();
     }
 

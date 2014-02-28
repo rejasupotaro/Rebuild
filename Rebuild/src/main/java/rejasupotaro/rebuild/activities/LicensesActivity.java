@@ -16,10 +16,10 @@ public class LicensesActivity extends RoboActionBarActivity {
     private static final String LICENSES_FILE_PATH = "file:///android_asset/licenses.html";
 
     @InjectView(R.id.licenses_view)
-    private WebView mLicensesView;
+    private WebView licensesView;
 
     @Inject
-    private MenuDelegate mMenuDelegate;
+    private MenuDelegate menuDelegate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,12 +36,12 @@ public class LicensesActivity extends RoboActionBarActivity {
     }
 
     private void setupLicensesView() {
-        mLicensesView.getSettings().setJavaScriptEnabled(false);
-        mLicensesView.loadUrl(LICENSES_FILE_PATH);
+        licensesView.getSettings().setJavaScriptEnabled(false);
+        licensesView.loadUrl(LICENSES_FILE_PATH);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return mMenuDelegate.onItemSelect(item);
+        return menuDelegate.onItemSelect(item);
     }
 }

@@ -20,36 +20,36 @@ import static rejasupotaro.rebuild.views.TwitterWidgetWebView.*;
 public class TwitterWidgetActivity extends RoboActionBarActivity {
 
     @InjectView(R.id.state_frame_layout)
-    private StateFrameLayout mStateFrameLayout;
+    private StateFrameLayout stateFrameLayout;
 
     @InjectView(R.id.twitter_widget)
-    private TwitterWidgetWebView mTwitterWidgetWebView;
+    private TwitterWidgetWebView twitterWidgetWebView;
 
     @Inject
-    private MenuDelegate mMenuDelegate;
+    private MenuDelegate menuDelegate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_widget);
         setupActionBar();
-        mTwitterWidgetWebView.init(getApplicationContext(), mLoadListener);
+        twitterWidgetWebView.init(getApplicationContext(), mLoadListener);
     }
 
     private LoadListener mLoadListener = new LoadListener() {
         @Override
         public void onStart() {
-            mStateFrameLayout.showProgress();
+            stateFrameLayout.showProgress();
         }
 
         @Override
         public void onError(int errorCode) {
-            mStateFrameLayout.showError();
+            stateFrameLayout.showError();
         }
 
         @Override
         public void onFinish() {
-            mStateFrameLayout.showContent();
+            stateFrameLayout.showContent();
         }
 
         @Override
@@ -76,6 +76,6 @@ public class TwitterWidgetActivity extends RoboActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return mMenuDelegate.onItemSelect(item);
+        return menuDelegate.onItemSelect(item);
     }
 }

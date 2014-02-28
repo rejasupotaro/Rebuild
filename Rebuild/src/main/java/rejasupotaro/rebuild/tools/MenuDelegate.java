@@ -8,19 +8,16 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.activities.SettingsActivity;
-import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.rebuild.utils.DebugUtils;
-import rejasupotaro.rebuild.utils.IntentUtils;
 
 public class MenuDelegate {
 
     public static final String PARAM_EPISODE = "param_episode";
 
-    private Activity mActivity;
+    private Activity activity;
 
     @Inject
     public MenuDelegate(Activity activity) {
-        mActivity = activity;
+        this.activity = activity;
     }
 
     public boolean onItemSelect(MenuItem item) {
@@ -31,15 +28,15 @@ public class MenuDelegate {
         boolean result = true;
         switch (item.getItemId()) {
             case android.R.id.home: {
-                mActivity.finish();
+                activity.finish();
                 break;
             }
             case R.id.action_settings: {
-                mActivity.startActivity(SettingsActivity.createIntent(mActivity));
+                activity.startActivity(SettingsActivity.createIntent(activity));
                 break;
             }
             default: {
-                result = mActivity.onOptionsItemSelected(item);
+                result = activity.onOptionsItemSelected(item);
                 break;
             }
         }

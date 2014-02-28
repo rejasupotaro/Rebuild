@@ -21,7 +21,7 @@ public class RssFeedClient extends AbstractHttpClient {
 
     private static final String REBUILD_FEED_URL = "http://feeds.rebuild.fm/rebuildfm";
 
-    private static final AsyncRssClient sAsyncRssClient = new AsyncRssClient();
+    private static final AsyncRssClient CLIENT = new AsyncRssClient();
 
     public static interface EpisodeClientResponseHandler {
         public void onSuccess(List<Episode> episodeList);
@@ -41,7 +41,7 @@ public class RssFeedClient extends AbstractHttpClient {
 
     private void requestNetwork(final EpisodeClientResponseHandler handler,
                                 final boolean shouldUpdateListView) {
-        sAsyncRssClient.read(
+        CLIENT.read(
                 REBUILD_FEED_URL,
                 new AsyncRssResponseHandler() {
                     @Override
@@ -50,7 +50,8 @@ public class RssFeedClient extends AbstractHttpClient {
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] body, Throwable throwable) {
+                    public void onFailure(int statusCode, Header[] headers, byte[] body,
+                            Throwable throwable) {
                         handleErrorResponse(handler, headers, body, throwable);
                     }
                 }

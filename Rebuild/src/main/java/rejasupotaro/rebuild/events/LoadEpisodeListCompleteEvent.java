@@ -6,13 +6,13 @@ import rejasupotaro.rebuild.models.Episode;
 
 public class LoadEpisodeListCompleteEvent {
 
-    private List<Episode> mEpisodeList;
+    private List<Episode> episodeList;
 
     public List<Episode> getEpisodeList() {
-        return mEpisodeList;
+        return episodeList;
     }
 
     public LoadEpisodeListCompleteEvent(List<Episode> episodeList) {
-        mEpisodeList = episodeList;
+        this.episodeList = episodeList;
     }
 }

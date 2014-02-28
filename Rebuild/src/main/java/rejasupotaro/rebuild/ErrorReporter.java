@@ -12,19 +12,19 @@ public class ErrorReporter implements Thread.UncaughtExceptionHandler {
 
     private static final String TAG = ErrorReporter.class.getSimpleName();
 
-    private volatile boolean mCrashing = false;
+    private volatile boolean crashing = false;
 
-    private Activity mActivity;
+    private Activity activity;
 
     private Thread.UncaughtExceptionHandler mUncaughtExceptionHandler = null;
 
     public void registerActivity(Activity activity) {
         if (shouldInit()) init();
-        mActivity = activity;
+        this.activity = activity;
     }
 
     public void unregisterActivity() {
-        mActivity = null;
+        activity = null;
     }
 
     private boolean shouldInit() {
@@ -40,8 +40,8 @@ public class ErrorReporter implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         try {
-            if (!mCrashing) {
-                mCrashing = true;
+            if (!crashing) {
+                crashing = true;
                 handleExcetion();
             }
         } finally {
@@ -52,8 +52,8 @@ public class ErrorReporter implements Thread.UncaughtExceptionHandler {
     }
 
     private void handleExcetion() {
-        if (mActivity != null) {
-            mActivity.startActivity(new Intent(mActivity, ReportActivity.class));
+        if (activity != null) {
+            activity.startActivity(new Intent(activity, ReportActivity.class));
         } else {
 
         }

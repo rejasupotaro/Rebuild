@@ -10,11 +10,11 @@ import roboguice.inject.ContextSingleton;
 @ContextSingleton
 public class MainThreadExecutor implements Executor {
 
-    private static final Handler mHandler = new Handler(Looper.getMainLooper());
+    private static final Handler HANDLER = new Handler(Looper.getMainLooper());
 
     @Override
     public void execute(Runnable r) {
-        mHandler.post(r);
+        HANDLER.post(r);
     }
 }
 

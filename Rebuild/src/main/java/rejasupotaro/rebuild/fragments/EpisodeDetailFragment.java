@@ -32,39 +32,39 @@ import roboguice.inject.InjectView;
 public class EpisodeDetailFragment extends RoboFragment {
 
     @InjectView(R.id.state_frame_layout)
-    private StateFrameLayout mStateFrameLayout;
+    private StateFrameLayout stateFrameLayout;
 
     @Inject
-    private EpisodeDownloadClient mEpisodeDownloadClient;
+    private EpisodeDownloadClient episodeDownloadClient;
 
     @InjectView(R.id.show_note_list)
-    private ListView mShowNoteListView;
+    private ListView showNoteListView;
 
-    private Episode mEpisode;
+    private Episode episode;
 
-    private EpisodeDetailHeaderView mEpisodeDetailHeaderView;
+    private EpisodeDetailHeaderView episodeDetailHeaderView;
 
     @Inject
-    private OnContextExecutor mOnContextExecutor;
+    private OnContextExecutor onContextExecutor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mEpisodeDetailHeaderView = new EpisodeDetailHeaderView(getActivity(), new LoadListener() {
+        episodeDetailHeaderView = new EpisodeDetailHeaderView(getActivity(), new LoadListener() {
             @Override
             public void showProgress() {
-                mStateFrameLayout.showProgress();
+                stateFrameLayout.showProgress();
             }
 
             @Override
             public void showError() {
-                mStateFrameLayout.showError();
+                stateFrameLayout.showError();
 
             }
 
             @Override
             public void showContent() {
-                mStateFrameLayout.showContent();
+                stateFrameLayout.showContent();
             }
         });
         BusProvider.getInstance().register(this);
@@ -74,13 +74,13 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mEpisodeDetailHeaderView.onActivityCreated();
+        episodeDetailHeaderView.onActivityCreated();
     }
 
     @Override
     public void onDestroyView() {
         BusProvider.getInstance().unregister(this);
-        mEpisodeDetailHeaderView.onDestroy();
+        episodeDetailHeaderView.onDestroy();
         super.onDestroyView();
     }
 
@@ -89,8 +89,8 @@ public class EpisodeDetailFragment extends RoboFragment {
             getActivity().finish();
         }
 
-        mEpisode = episode;
-        mEpisodeDetailHeaderView.setEpisode(episode);
+        this.episode = episode;
+        episodeDetailHeaderView.setEpisode(episode);
         setupListView(episode);
         setTitle(episode);
     }
@@ -100,8 +100,8 @@ public class EpisodeDetailFragment extends RoboFragment {
         final ShowNoteListAdapter adapter = new ShowNoteListAdapter(
                 getActivity(), linkList, mItemClickListener);
 
-        ViewUtils.addHeaderView(mShowNoteListView, mEpisodeDetailHeaderView);
-        mShowNoteListView.setAdapter(adapter);
+        ViewUtils.addHeaderView(showNoteListView, episodeDetailHeaderView);
+        showNoteListView.setAdapter(adapter);
     }
 
     private ShowNoteListAdapter.ItemClickListener mItemClickListener
@@ -125,11 +125,11 @@ public class EpisodeDetailFragment extends RoboFragment {
 
     @Subscribe
     public void onLoadEpisodeListComplete(final LoadEpisodeListCompleteEvent event) {
-        if (mEpisode != null) {
+        if (episode != null) {
             return;
         }
 
-        mOnContextExecutor.execute(getActivity(), new Runnable() {
+        onContextExecutor.execute(getActivity(), new Runnable() {
             @Override
             public void run() {
                 List<Episode> episodeList = event.getEpisodeList();

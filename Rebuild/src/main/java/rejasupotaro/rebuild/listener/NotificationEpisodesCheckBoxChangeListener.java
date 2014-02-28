@@ -7,17 +7,17 @@ import rejasupotaro.rebuild.utils.DebugUtils;
 
 public class NotificationEpisodesCheckBoxChangeListener implements Preference.OnPreferenceChangeListener {
 
-    private Context mContext;
+    private Context context;
 
     public NotificationEpisodesCheckBoxChangeListener(final Context context) {
-        mContext = context;
+        this.context = context;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if ((Boolean) newValue) {
             // not implemented yet
-            DebugUtils.notImplementedYet(mContext);
+            DebugUtils.notImplementedYet(context);
         }
         return true;
     }

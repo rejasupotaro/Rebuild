@@ -11,26 +11,26 @@ import java.util.List;
 
 public class Link implements Parcelable {
 
-    private String mTitle;
+    private String title;
 
-    private String mUrl;
+    private String url;
 
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
     public String getUrl() {
-        return mUrl;
+        return url;
     }
 
     public Link(String title, String url) {
-        mTitle = title;
-        mUrl = url;
+        this.title = title;
+        this.url = url;
     }
 
     public Link(Parcel in) {
-        mTitle = in.readString();
-        mUrl = in.readString();
+        title = in.readString();
+        url = in.readString();
     }
 
     @Override
@@ -50,8 +50,8 @@ public class Link implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mTitle);
-        dest.writeString(mUrl);
+        dest.writeString(title);
+        dest.writeString(url);
     }
 
     public static class Parser {

@@ -18,9 +18,9 @@ public class EpisodeDownloadService extends IntentService {
 
     private static final String EXTRA_EPISODE = "extra_episode";
 
-    private static List<Episode> sDownloadingEpisodeList = new ArrayList<Episode>();
+    private static List<Episode> downloadingEpisodeList = new ArrayList<Episode>();
 
-    private static EpisodeDownloadClient sEpisodeDownloadClient = new EpisodeDownloadClient();
+    private static EpisodeDownloadClient episodeDownloadClient = new EpisodeDownloadClient();
 
     public static Intent createIntent(Context context, Episode episode) {
         Intent intent = new Intent(context, EpisodeDownloadService.class);
@@ -37,7 +37,7 @@ public class EpisodeDownloadService extends IntentService {
     }
 
     public static boolean isDownloading(Episode episode) {
-        for (Episode e : sDownloadingEpisodeList) {
+        for (Episode e : downloadingEpisodeList) {
             if (episode.isSameEpisode(e)) {
                 return true;
             }
@@ -51,12 +51,12 @@ public class EpisodeDownloadService extends IntentService {
         if (isDownloading(episode)) {
             return;
         }
-        sDownloadingEpisodeList.add(episode);
+        downloadingEpisodeList.add(episode);
 
-        sEpisodeDownloadClient.download(getApplicationContext(), episode);
+        episodeDownloadClient.download(getApplicationContext(), episode);
 
         episode.save();
-        sDownloadingEpisodeList.remove(episode);
+        downloadingEpisodeList.remove(episode);
         BusProvider.getInstance().post(new DownloadEpisodeCompleteEvent(episode));
     }
 }

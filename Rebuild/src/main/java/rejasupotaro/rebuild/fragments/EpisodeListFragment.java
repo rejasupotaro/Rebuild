@@ -2,7 +2,6 @@ package rejasupotaro.rebuild.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,12 +34,12 @@ public class EpisodeListFragment extends RoboFragment {
     private RssFeedClient mClient;
 
     @InjectView(R.id.state_frame_layout)
-    StateFrameLayout mStateFrameLayout;
+    StateFrameLayout stateFrameLayout;
 
     @InjectView(R.id.episode_list_view)
-    private ListView mEpisodeListView;
+    private ListView episodeListView;
 
-    private OnEpisodeSelectListener mListener;
+    private OnEpisodeSelectListener listener;
 
     public static interface OnEpisodeSelectListener {
         public void onSelect(Episode episode);
@@ -49,7 +48,7 @@ public class EpisodeListFragment extends RoboFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mListener = (OnEpisodeSelectListener) activity;
+        listener = (OnEpisodeSelectListener) activity;
     }
 
     @Override
@@ -70,11 +69,11 @@ public class EpisodeListFragment extends RoboFragment {
         setupListViewHeader();
         setupListViewFooter();
 
-        mEpisodeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        episodeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Episode episode = (Episode) mEpisodeListView.getItemAtPosition(position);
-                mListener.onSelect(episode);
+                Episode episode = (Episode) episodeListView.getItemAtPosition(position);
+                listener.onSelect(episode);
             }
         });
     }
@@ -101,7 +100,7 @@ public class EpisodeListFragment extends RoboFragment {
                     }
                 });
 
-        ViewUtils.addHeaderView(mEpisodeListView, header);
+        ViewUtils.addHeaderView(episodeListView, header);
     }
 
     private void setupListViewFooter() {
@@ -114,36 +113,36 @@ public class EpisodeListFragment extends RoboFragment {
             }
         });
 
-        mEpisodeListView.addFooterView(footer, null, false);
+        episodeListView.addFooterView(footer, null, false);
     }
 
     private void requestFeed() {
-        mStateFrameLayout.showProgress();
+        stateFrameLayout.showProgress();
         mClient.request(new RssFeedClient.EpisodeClientResponseHandler() {
             @Override
             public void onSuccess(List<Episode> episodeList) {
                 setupEpisodeListView(episodeList);
                 BusProvider.getInstance().post(new LoadEpisodeListCompleteEvent(episodeList));
-                mStateFrameLayout.showContent();
+                stateFrameLayout.showContent();
             }
 
             @Override
             public void onFailure() {
                 if (shouldShowError()) {
                     ToastUtils.showNetworkError(getActivity());
-                    mStateFrameLayout.showError();
+                    stateFrameLayout.showError();
                 }
             }
         });
     }
 
     private boolean shouldShowError() {
-        return (mEpisodeListView == null
-                && mEpisodeListView.getCount() == 0);
+        return (episodeListView == null
+                && episodeListView.getCount() == 0);
     }
 
     public void setupEpisodeListView(List<Episode> episodeList) {
         EpisodeListAdapter episodeListAdapter = new EpisodeListAdapter(getActivity(), episodeList);
-        mEpisodeListView.setAdapter(episodeListAdapter);
+        episodeListView.setAdapter(episodeListAdapter);
     }
 }
