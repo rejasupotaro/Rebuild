@@ -19,9 +19,9 @@ build:
         code: |
           gradle --project-cache-dir=$WERCKER_CACHE_DIR connectedCheck
     - script:
-        name: run gradle build
+        name: run gradle assemble
         code: |
-          gradle --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR build
+          gradle --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR assembleDebug
   after-steps:
     # Use the build results
     - script:
