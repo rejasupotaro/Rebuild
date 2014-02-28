@@ -72,6 +72,11 @@ android {
         }
     }
 
+    productFlavors {
+        staging {}
+        product {}
+    }
+
     dependencies {
         compile fileTree(dir: 'src/main/libs', include: '*.jar')
         compile 'com.android.support:appcompat-v7:18.0.0'
