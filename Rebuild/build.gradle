@@ -81,9 +81,14 @@ android {
         compile 'com.loopj.android:android-async-http:1.4.4'
         compile 'org.apache.commons:commons-lang3:3.1'
         compile 'com.squareup.picasso:picasso:2.0.0'
+        compile 'org.twitter4j:twitter4j-core:3.0.5'
 
         instrumentTestCompile fileTree(dir: 'src/instrumentTest/libs', include: '*.jar')
         instrumentTestCompile 'com.squareup:fest-android:1.0.7'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
     }
 }
 
