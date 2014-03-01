@@ -88,3 +88,12 @@
 -keep class * implements android.os.Parcelable {
     public static android.os.Parcelable$Creator *;
 }
+
+# twitter4j
+-keepclasseswithmembers  class twitter4j.** {
+    *;
+}
+-dontwarn twitter4j.management.**
+-dontwarn twitter4j.TwitterAPIMonitor
+-dontwarn twitter4j.internal.**
+-dontwarn twitter4j.Annotation
