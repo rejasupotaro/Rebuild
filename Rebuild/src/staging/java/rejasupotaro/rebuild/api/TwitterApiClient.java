@@ -26,6 +26,14 @@ public class TwitterApiClient {
     }
 
     public List<Tweet> search(String keyword) {
-        return new ArrayList<Tweet>();
+        List<Tweet> tweetList = new ArrayList<Tweet>();
+        for (int i = 0; i < 20; i++) {
+            tweetList.add(new Tweet(
+                    362409221523910657L,
+                    "https://pbs.twimg.com/profile_images/378800000217831113/d9a348d7ff1d6e089dfec2ead82a1bf4.png",
+                    "rebuildfm",
+                    "Announcing Rebuild, new Podcast by @miyagawa. http://rebuild.fm/"));
+        }
+        return tweetList;
     }
 }
