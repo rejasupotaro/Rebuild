@@ -57,16 +57,20 @@ public class EpisodeDetailHeaderView extends LinearLayout {
     public EpisodeDetailHeaderView(Context context, LoadListener loadListener) {
         super(context);
         this.loadListener = loadListener;
-        setupView(context);
+        setup(context);
     }
 
-    private void setupView(Context context) {
+    private void setup(Context context) {
         BusProvider.getInstance().register(this);
 
         LayoutParams params =
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         View view = inflate(context, R.layout.header_episode_detail, null);
+        findViews(view);
+        addView(view, params);
+    }
 
+    private void findViews(View view) {
         episodeTitleTextView = (TextView) view.findViewById(R.id.episode_title);
         mediaStartButtonOnImageCover = view.findViewById(R.id.episode_detail_header_cover);
         mediaCurrentTimeTextView = (TextView) view.findViewById(R.id.media_current_time);
@@ -77,8 +81,6 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         episodeShareButton = (FontAwesomeTextView) view.findViewById(R.id.episode_share_button);
         episodeDownloadButton = (FontAwesomeTextView) view.findViewById(R.id.episode_download_button);
         guestListView = (GuestListView) view.findViewById(R.id.guest_list);
-
-        addView(view, params);
     }
 
     public void onDestroy() {
