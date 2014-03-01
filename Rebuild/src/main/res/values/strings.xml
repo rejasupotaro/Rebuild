@@ -37,6 +37,11 @@
     <string name="pref_title_about">About</string>
     <string name="pref_title_licenses">OSS Licenses</string>
 
+    <string name="about_item_header_about">About This App</string>
+    <string name="about_item_header_developer">Developer</string>
+    <string name="about_item_header_contributors">Contributors</string>
+    <string name="about_item_header_recent_changes">Recent changes</string>
+
     <string name="report_dialog_title">Sorry...</string>
     <string name="report_dialog_body">"Unfortunately, This application has stopped"</string>
     <string name="report_dialog_positive_button">report</string>

@@ -44,22 +44,26 @@ public class AboutActivity extends RoboActionBarActivity {
         ViewUtils.addFooterView(aboutItemListView, new RecentChangesView(this));
 
         List<AboutItem> aboutItemList = new ArrayList<AboutItem>();
-        aboutItemList.add(new AboutItem.AboutItemHeader("About this app"));
+        aboutItemList.add(new AboutItem.AboutItemHeader(
+                getString(R.string.about_item_header_about)));
         aboutItemList.add(new AboutItem.AboutItemContent(
                 "",
                 "",
                 "https://github.com/rejasupotaro/Rebuild"));
-        aboutItemList.add(new AboutItem.AboutItemHeader("Developer"));
+        aboutItemList.add(new AboutItem.AboutItemHeader(
+                getString(R.string.about_item_header_developer)));
         aboutItemList.add(new AboutItem.AboutItemContent(
                 "https://pbs.twimg.com/profile_images/424554842367852544/jRoDtV1R.jpeg",
                 "rejasupotaro",
                 "http://twitter.com/rejasupotaro"));
-        aboutItemList.add(new AboutItem.AboutItemHeader("Contributors"));
+        aboutItemList.add(new AboutItem.AboutItemHeader(
+                getString(R.string.about_item_header_contributors)));
         aboutItemList.add(new AboutItem.AboutItemContent(
                 "https://pbs.twimg.com/profile_images/424955294616023040/aco9m_GJ.png",
                 "hotchemi",
                 "http://twitter.com/hotchemi"));
-        aboutItemList.add(new AboutItem.AboutItemHeader("Recent Changes"));
+        aboutItemList.add(new AboutItem.AboutItemHeader(
+                getString(R.string.about_item_header_recent_changes)));
 
         AboutItemListAdapter adapter = new AboutItemListAdapter(this, aboutItemList);
         aboutItemListView.setAdapter(adapter);
