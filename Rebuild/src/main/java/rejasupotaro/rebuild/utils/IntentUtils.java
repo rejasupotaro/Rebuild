@@ -22,10 +22,6 @@ public final class IntentUtils {
         openBrowser(context, URL_GITHUB_REPOSITORY);
     }
 
-    public static void openMyTwitter(Context context) {
-        openTwitterProfile(context, "rejasupotaro");
-    }
-
     public static void openTwitter(Context context, long tweetId, String userName) {
         openBrowser(context, "https://twitter.com/" + userName + "/status/" + tweetId);
     }
