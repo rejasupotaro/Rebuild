@@ -48,6 +48,10 @@ public class GuestListView extends LinearLayout {
         onContextExecutor.execute(getContext(), new Runnable() {
             @Override
             public void run() {
+                SectionHeaderView sectionHeaderView = new SectionHeaderView(getContext());
+                sectionHeaderView.setup("Guests");
+                addView(sectionHeaderView);
+
                 for (Guest guest : guestList) {
                     if (Guest.isEmpty(guest)) {
                         continue;

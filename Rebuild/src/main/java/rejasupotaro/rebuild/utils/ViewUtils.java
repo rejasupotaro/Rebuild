@@ -51,5 +51,6 @@ public final class ViewUtils {
         view.setClickable(false);
     }
 
-    private ViewUtils() {}
+    private ViewUtils() {
+    }
 }

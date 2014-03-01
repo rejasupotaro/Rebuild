@@ -67,6 +67,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         View view = inflate(context, R.layout.header_episode_detail, null);
         findViews(view);
+        setupSectionHeaders(view);
         addView(view, params);
     }
 
@@ -81,6 +82,13 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         episodeShareButton = (FontAwesomeTextView) view.findViewById(R.id.episode_share_button);
         episodeDownloadButton = (FontAwesomeTextView) view.findViewById(R.id.episode_download_button);
         guestListView = (GuestListView) view.findViewById(R.id.guest_list);
+    }
+
+    private void setupSectionHeaders(View view) {
+        SectionHeaderView sectionHeaderDescription = (SectionHeaderView) view.findViewById(R.id.section_header_description);
+        sectionHeaderDescription.setup("Description");
+        SectionHeaderView sectionHeaderShowNotes = (SectionHeaderView) view.findViewById(R.id.section_header_show_notes);
+        sectionHeaderShowNotes.setup("Show Notes");
     }
 
     public void onDestroy() {

@@ -74,13 +74,22 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-    <include layout="@layout/view_episode_description"/>
-    <rejasupotaro.rebuild.views.VerticalSeparator
+
+    <rejasupotaro.rebuild.views.SectionHeaderView
+            android:id="@+id/section_header_description"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="wrap_content"
             />
+    <include layout="@layout/view_episode_description"/>
+
     <rejasupotaro.rebuild.views.GuestListView
             android:id="@+id/guest_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+    <rejasupotaro.rebuild.views.SectionHeaderView
+            android:id="@+id/section_header_show_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 </LinearLayout>
