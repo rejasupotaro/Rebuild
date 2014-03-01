@@ -1,8 +1,7 @@
-Feature: Launch Activities
+Feature: Confirm Launch Activities
 
   Scenario: Launch MainActivity
-    Then I see "website"
-    Then I see "timeline"
+    Then I wait for 5 seconds
     Then I wait
     Then the "Main" activity should be open
     Then I take a picture
@@ -25,10 +24,10 @@ Feature: Launch Activities
     Then the "Licenses" activity should be open
     Then I take a picture
 
-  Scenario: Launch TwitterWidgetActivity
-    When I try to open TwitterWidgetActivity
+  Scenario: Launch TimelineActivity
+    When I try to open TimelineActivity
     Then I wait
-    Then the "TwitterWidget" activity should be open
+    Then the "TimelineActivity" activity should be open
     Then I take a picture
 
   Scenario: Launch EpisodeDetailActivity

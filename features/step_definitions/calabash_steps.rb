@@ -15,7 +15,7 @@ When /^I try to open LicensesActivity$/ do
   step %{I press "OSS Licenses"}
 end
 
-When /^I try to open TwitterWidgetActivity$/ do
+When /^I try to open TimelineActivity$/ do
   step %{I touch the "timeline" text}
 end
 
