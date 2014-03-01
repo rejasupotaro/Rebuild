@@ -4,8 +4,6 @@ import com.squareup.otto.Subscribe;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -25,9 +23,9 @@ import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.IntentUtils;
-import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
+import rejasupotaro.rebuild.utils.ViewUtils;
 
 public class EpisodeDetailHeaderView extends LinearLayout {
 
@@ -79,10 +77,6 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         addView(view, params);
     }
 
-    public void onActivityCreated() {
-        mEpisodeDescriptionTextView.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
     public void onDestroy() {
         BusProvider.getInstance().unregister(this);
     }
@@ -91,8 +85,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         String originalTitle = episode.getTitle();
         int startIndex = originalTitle.indexOf(':');
         mEpisodeTitleTextView.setText(originalTitle.substring(startIndex + 2));
-        mEpisodeDescriptionTextView.setText(
-                Html.fromHtml(StringUtils.buildTwitterLinkText(episode.getDescription())));
+        ViewUtils.setTweetText(mEpisodeDescriptionTextView, episode.getDescription());
 
         setupMediaPlayAndPauseButton(episode);
         setupShareButton(episode);
