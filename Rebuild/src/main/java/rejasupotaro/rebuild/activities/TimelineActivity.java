@@ -13,13 +13,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.api.TwitterApiClient;
+import rejasupotaro.rebuild.adapters.TweetListAdapter;
 import rejasupotaro.rebuild.loaders.TweetLoader;
+import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.inject.InjectView;
-import twitter4j.TweetEntity;
 
 public class TimelineActivity extends RoboActionBarActivity {
 
@@ -39,7 +39,7 @@ public class TimelineActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
         setupActionBar();
-        setupTweetListView();
+        requestTweetList();
     }
 
     private void setupActionBar() {
@@ -51,21 +51,26 @@ public class TimelineActivity extends RoboActionBarActivity {
         actionBar.setTitle(title);
     }
 
-    public void setupTweetListView() {
-        getLoaderManager().initLoader(REQUEST_TWEET_LIST, null, new LoaderManager.LoaderCallbacks<List<TweetEntity>>() {
+    public void setupTweetListView(List<Tweet> tweetList) {
+        TweetListAdapter adapter = new TweetListAdapter(this, tweetList);
+        tweetListView.setAdapter(adapter);
+    }
+
+    private void requestTweetList() {
+        getLoaderManager().initLoader(REQUEST_TWEET_LIST, null, new LoaderManager.LoaderCallbacks<List<Tweet>>() {
             @Override
-            public Loader<List<TweetEntity>> onCreateLoader(int i, Bundle bundle) {
+            public Loader<List<Tweet>> onCreateLoader(int i, Bundle bundle) {
                 return new TweetLoader(TimelineActivity.this);
             }
 
             @Override
-            public void onLoadFinished(Loader<List<TweetEntity>> listLoader,
-                    List<TweetEntity> tweetEntities) {
-                // TODO: impl me
+            public void onLoadFinished(Loader<List<Tweet>> listLoader,
+                    List<Tweet> tweetList) {
+                setupTweetListView(tweetList);
             }
 
             @Override
-            public void onLoaderReset(Loader<List<TweetEntity>> listLoader) {
+            public void onLoaderReset(Loader<List<Tweet>> listLoader) {
                 // nothing to do
             }
         });

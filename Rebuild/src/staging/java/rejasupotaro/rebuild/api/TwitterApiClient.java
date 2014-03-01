@@ -3,7 +3,7 @@ package rejasupotaro.rebuild.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import twitter4j.TweetEntity;
+import rejasupotaro.rebuild.models.Tweet;
 import twitter4j.Twitter;
 
 public class TwitterApiClient {
@@ -25,7 +25,7 @@ public class TwitterApiClient {
     public void getUser(int userId) {
     }
 
-    public List<TweetEntity> search(String keyword) {
-        return new ArrayList<TweetEntity>();
+    public List<Tweet> search(String keyword) {
+        return new ArrayList<Tweet>();
     }
 }

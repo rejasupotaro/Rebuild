@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.api.TwitterApiClient;
-import twitter4j.TweetEntity;
+import rejasupotaro.rebuild.models.Tweet;
 
-public class TweetLoader extends AsyncTaskLoader<List<TweetEntity>> {
+public class TweetLoader extends AsyncTaskLoader<List<Tweet>> {
 
-    private List<TweetEntity> tweetEntityList = new ArrayList<TweetEntity>();
+    private List<Tweet> tweetList = new ArrayList<Tweet>();
 
     public TweetLoader(Context context) {
         super(context);
@@ -19,28 +19,28 @@ public class TweetLoader extends AsyncTaskLoader<List<TweetEntity>> {
 
     @Override
     protected void onStartLoading() {
-        if (!tweetEntityList.isEmpty()) {
-            deliverResult(tweetEntityList);
-        } else if (takeContentChanged() || tweetEntityList.isEmpty()) {
+        if (!tweetList.isEmpty()) {
+            deliverResult(tweetList);
+        } else if (takeContentChanged() || tweetList.isEmpty()) {
             forceLoad();
         }
     }
 
     @Override
-    public List<TweetEntity> loadInBackground() {
+    public List<Tweet> loadInBackground() {
         return TwitterApiClient.getInstance().search("rebuildfm");
     }
 
     @Override
-    public void deliverResult(List<TweetEntity> data) {
+    public void deliverResult(List<Tweet> data) {
         if (isReset()) {
-            if (!tweetEntityList.isEmpty()) {
-                tweetEntityList.clear();
+            if (!tweetList.isEmpty()) {
+                tweetList.clear();
             }
             return;
         }
 
-        tweetEntityList = data;
+        tweetList = data;
 
         if (isStarted()) {
             super.deliverResult(data);
