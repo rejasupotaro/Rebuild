@@ -11,6 +11,7 @@ import java.net.URL;
 
 import rejasupotaro.rebuild.media.MediaFileManager;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.utils.NetworkUtils;
 
 public class EpisodeDownloadClient extends AbstractHttpClient {
 
@@ -25,6 +26,7 @@ public class EpisodeDownloadClient extends AbstractHttpClient {
         try {
             URL url = new URL(episode.getEnclosure().toString());
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            NetworkUtils.setUserAgent(context, urlConnection);
             String mediaLocalPath = MediaFileManager.saveMediaToFile(
                     applicationContext,
                     urlConnection.getInputStream(),

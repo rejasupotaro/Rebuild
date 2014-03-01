@@ -2,11 +2,15 @@ package rejasupotaro.rebuild.media;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.utils.NetworkUtils;
 import rejasupotaro.rebuild.utils.Timer;
 
 public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPreparedListener {
@@ -61,7 +65,10 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
                 setDataSource(episode.getMediaLocalPath());
             } else {
                 Context applicationContext = context.getApplicationContext();
-                setDataSource(applicationContext, episode.getEnclosure());
+                setDataSource(
+                        applicationContext,
+                        episode.getEnclosure(),
+                        NetworkUtils.createUserAgentHeader(applicationContext));
             }
             prepareAsync();
             setOnPreparedListener(this);

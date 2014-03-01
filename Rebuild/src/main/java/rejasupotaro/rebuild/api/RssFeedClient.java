@@ -2,6 +2,8 @@ package rejasupotaro.rebuild.api;
 
 import org.apache.http.Header;
 
+import android.content.Context;
+
 import java.util.List;
 
 import rejasupotaro.asyncrssclient.AsyncRssClient;
@@ -10,6 +12,7 @@ import rejasupotaro.asyncrssclient.RssFeed;
 import rejasupotaro.asyncrssclient.RssItem;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.ListUtils;
+import rejasupotaro.rebuild.utils.NetworkUtils;
 
 public class RssFeedClient extends AbstractHttpClient {
 
@@ -27,6 +30,14 @@ public class RssFeedClient extends AbstractHttpClient {
         public void onSuccess(List<Episode> episodeList);
 
         public void onFailure();
+    }
+
+    public static void init(Context context) {
+        setUserAgent(NetworkUtils.getUserAgent(context));
+    }
+
+    public static void setUserAgent(String userAgent) {
+        CLIENT.setUserAgent(userAgent);
     }
 
     public void request(final EpisodeClientResponseHandler handler) {
