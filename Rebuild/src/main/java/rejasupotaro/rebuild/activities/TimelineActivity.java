@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.TweetListAdapter;
+import rejasupotaro.rebuild.listener.EndlessScrollListener;
 import rejasupotaro.rebuild.loaders.TweetLoader;
 import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MenuDelegate;
@@ -34,6 +35,8 @@ public class TimelineActivity extends RoboActionBarActivity {
     @InjectView(R.id.tweet_list)
     private ListView tweetListView;
 
+    private TweetListAdapter tweetListAdapter;
+
     @Inject
     private MenuDelegate menuDelegate;
 
@@ -42,7 +45,7 @@ public class TimelineActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
         setupActionBar();
-        requestTweetList();
+        setupTweetListView();
     }
 
     private void setupActionBar() {
@@ -54,21 +57,30 @@ public class TimelineActivity extends RoboActionBarActivity {
         actionBar.setTitle(title);
     }
 
-    public void setupTweetListView(List<Tweet> tweetList) {
-        final TweetListAdapter adapter = new TweetListAdapter(this, tweetList);
-        tweetListView.setAdapter(adapter);
+    public void setupTweetListView() {
+        tweetListAdapter = new TweetListAdapter(this);
+        tweetListView.setAdapter(tweetListAdapter);
 
         tweetListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Tweet item = adapter.getItem(i);
+                Tweet item = tweetListAdapter.getItem(i);
                 IntentUtils.openTwitter(TimelineActivity.this, item.getId(), item.getUserName());
             }
         });
+
+        tweetListView.setOnScrollListener(new EndlessScrollListener(tweetListView) {
+            @Override
+            public void onLoadMore() {
+                requestTweetList();
+            }
+        });
+
+        requestTweetList();
     }
 
     private void requestTweetList() {
-        getLoaderManager().initLoader(REQUEST_TWEET_LIST, null, new LoaderManager.LoaderCallbacks<List<Tweet>>() {
+        getLoaderManager().restartLoader(REQUEST_TWEET_LIST, null, new LoaderManager.LoaderCallbacks<List<Tweet>>() {
             @Override
             public Loader<List<Tweet>> onCreateLoader(int i, Bundle bundle) {
                 return new TweetLoader(TimelineActivity.this);
@@ -77,7 +89,7 @@ public class TimelineActivity extends RoboActionBarActivity {
             @Override
             public void onLoadFinished(Loader<List<Tweet>> listLoader,
                     List<Tweet> tweetList) {
-                setupTweetListView(tweetList);
+                addTweetList(tweetList);
             }
 
             @Override
@@ -85,6 +97,13 @@ public class TimelineActivity extends RoboActionBarActivity {
                 // nothing to do
             }
         });
+    }
+
+    private void addTweetList(List<Tweet> tweetList) {
+        if (tweetList == null || tweetList.isEmpty()) {
+            return;
+        }
+        tweetListAdapter.addAll(tweetList);
     }
 
     @Override

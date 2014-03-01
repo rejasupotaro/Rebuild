@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
@@ -15,6 +16,10 @@ import rejasupotaro.rebuild.utils.PicassoHelper;
 import rejasupotaro.rebuild.utils.ViewUtils;
 
 public class TweetListAdapter extends BindableAdapter<Tweet> {
+
+    public TweetListAdapter(Context context) {
+        this(context, new ArrayList<Tweet>());
+    }
 
     public TweetListAdapter(Context context,
             List<Tweet> episodeList) {
