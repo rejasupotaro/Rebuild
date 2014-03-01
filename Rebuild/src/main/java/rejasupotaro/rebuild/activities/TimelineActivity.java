@@ -84,17 +84,20 @@ public class TimelineActivity extends RoboActionBarActivity {
         requestTweetList();
     }
 
+    private boolean isFirstRequest = true;
+
     private void requestTweetList() {
         getLoaderManager().restartLoader(REQUEST_TWEET_LIST, null,
                 new LoaderManager.LoaderCallbacks<List<Tweet>>() {
                     @Override
                     public Loader<List<Tweet>> onCreateLoader(int i, Bundle bundle) {
-                        return new TweetLoader(TimelineActivity.this);
+                        return new TweetLoader(TimelineActivity.this, isFirstRequest);
                     }
 
                     @Override
                     public void onLoadFinished(Loader<List<Tweet>> listLoader,
                             List<Tweet> tweetList) {
+                        isFirstRequest = false;
                         addTweetList(tweetList);
                     }
 

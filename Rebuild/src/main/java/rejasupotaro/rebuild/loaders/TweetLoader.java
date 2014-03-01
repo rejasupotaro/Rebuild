@@ -2,6 +2,7 @@ package rejasupotaro.rebuild.loaders;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,11 @@ public class TweetLoader extends AsyncTaskLoader<List<Tweet>> {
 
     private List<Tweet> tweetList = new ArrayList<Tweet>();
 
-    public TweetLoader(Context context) {
+    private boolean isFirstRequest = true;
+
+    public TweetLoader(Context context, boolean isFirstRequest) {
         super(context);
+        this.isFirstRequest = isFirstRequest;
     }
 
     @Override
@@ -28,7 +32,7 @@ public class TweetLoader extends AsyncTaskLoader<List<Tweet>> {
 
     @Override
     public List<Tweet> loadInBackground() {
-        return TwitterApiClient.getInstance().search("rebuildfm");
+        return TwitterApiClient.getInstance().search("rebuildfm", isFirstRequest);
     }
 
     @Override
