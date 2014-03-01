@@ -6,8 +6,8 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,10 +16,14 @@ import java.util.List;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.loaders.GuestLoader;
 import rejasupotaro.rebuild.models.Guest;
+import rejasupotaro.rebuild.tools.OnContextExecutor;
+import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class GuestListView extends LinearLayout {
 
     private static final int REQUEST_GUEST_LIST = 1;
+
+    private OnContextExecutor onContextExecutor = new OnContextExecutor();
 
     private TextView nameTextView;
 
@@ -32,20 +36,48 @@ public class GuestListView extends LinearLayout {
     }
 
     public void setup(List<String> guestNameList) {
-        View view = View.inflate(getContext(), R.layout.list_item_guest, null);
-        findViews(view);
-        addView(view);
+        setOrientation(VERTICAL);
         requestGuestList(guestNameList);
     }
 
-    public void findViews(View view) {
-        nameTextView = (TextView) view.findViewById(R.id.guest_name_text);
+    public void setupGuestList(final List<Guest> guestList) {
+        onContextExecutor.execute(getContext(), new Runnable() {
+            @Override
+            public void run() {
+                for (Guest guest : guestList) {
+                    LayoutParams params =
+                            new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                    addView(createGuestView(guest), params);
+                }
+            }
+        });
     }
 
-    public void setupGuestList(List<Guest> guestList) {
-        for (Guest guest : guestList) {
-            Log.e("debugging", guest.getName());
-        }
+    public View createGuestView(Guest guest) {
+        View view = View.inflate(getContext(), R.layout.list_item_guest, null);
+
+        TextView guestNameText = (TextView) view.findViewById(R.id.guest_name_text);
+        guestNameText.setText(guest.getName());
+
+        ImageView profileImageView = (ImageView) view.findViewById(R.id.profile_image);
+        PicassoHelper.load(getContext(), profileImageView, guest.getProfileImageUrl());
+
+        TextView tweetsCountText = (TextView) view.findViewById(R.id.tweets_count_text);
+        tweetsCountText.setText(guest.getTweetsCount() + " tweets");
+
+        TextView friendsCountText = (TextView) view.findViewById(R.id.friends_count_text);
+        friendsCountText.setText("following " + guest.getTweetsCount());
+
+        TextView followersCountText = (TextView) view.findViewById(R.id.followers_count_text);
+        followersCountText.setText(guest.getFollowersCount() + " followers");
+
+        TextView descriptionTextView = (TextView) view.findViewById(R.id.description_text);
+        descriptionTextView.setText(guest.getDescription());
+
+        TextView urlTextView = (TextView) view.findViewById(R.id.url_text);
+        urlTextView.setText(guest.getUrl());
+
+        return view;
     }
 
     public void requestGuestList(final List<String> guestNameList) {

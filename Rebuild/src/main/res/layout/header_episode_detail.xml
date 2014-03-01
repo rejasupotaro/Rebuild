@@ -75,6 +75,10 @@
         </LinearLayout>
     </RelativeLayout>
     <include layout="@layout/view_episode_description"/>
+    <rejasupotaro.rebuild.views.VerticalSeparator
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            />
     <rejasupotaro.rebuild.views.GuestListView
             android:id="@+id/guest_list"
             android:layout_width="match_parent"
