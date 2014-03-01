@@ -30,33 +30,33 @@ import rejasupotaro.rebuild.utils.ViewUtils;
 
 public class EpisodeDetailHeaderView extends LinearLayout {
 
-    private LoadListener mLoadListener;
+    private LoadListener loadListener;
 
-    private OnContextExecutor mOnContextExecutor = new OnContextExecutor();
+    private OnContextExecutor onContextExecutor = new OnContextExecutor();
 
-    private TextView mEpisodeTitleTextView;
+    private TextView episodeTitleTextView;
 
-    private View mMediaStartButtonOnImageCover;
+    private View mediaStartButtonOnImageCover;
 
-    private TextView mMediaCurrentTimeTextView;
+    private TextView mediaCurrentTimeTextView;
 
-    private TextView mMediaDurationTextView;
+    private TextView mediaDurationTextView;
 
-    private CheckBox mMediaStartAndPauseButton;
+    private CheckBox mediaStartAndPauseButton;
 
-    private SeekBar mSeekBar;
+    private SeekBar seekBar;
 
-    private TextView mEpisodeDescriptionTextView;
+    private TextView episodeDescriptionTextView;
 
-    private FontAwesomeTextView mEpisodeShareButton;
+    private FontAwesomeTextView episodeShareButton;
 
-    private FontAwesomeTextView mEpisodeDownloadButton;
+    private FontAwesomeTextView episodeDownloadButton;
 
-    private GuestListView mGuestListView;
+    private GuestListView guestListView;
 
     public EpisodeDetailHeaderView(Context context, LoadListener loadListener) {
         super(context);
-        mLoadListener = loadListener;
+        this.loadListener = loadListener;
         setupView(context);
     }
 
@@ -67,16 +67,16 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         View view = inflate(context, R.layout.header_episode_detail, null);
 
-        mEpisodeTitleTextView = (TextView) view.findViewById(R.id.episode_title);
-        mMediaStartButtonOnImageCover = view.findViewById(R.id.episode_detail_header_cover);
-        mMediaCurrentTimeTextView = (TextView) view.findViewById(R.id.media_current_time);
-        mMediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
-        mMediaStartAndPauseButton = (CheckBox) view.findViewById(R.id.media_start_and_pause_button);
-        mSeekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
-        mEpisodeDescriptionTextView = (TextView) view.findViewById(R.id.episode_description);
-        mEpisodeShareButton = (FontAwesomeTextView) view.findViewById(R.id.episode_share_button);
-        mEpisodeDownloadButton = (FontAwesomeTextView) view.findViewById(R.id.episode_download_button);
-        mGuestListView = (GuestListView) view.findViewById(R.id.guest_list);
+        episodeTitleTextView = (TextView) view.findViewById(R.id.episode_title);
+        mediaStartButtonOnImageCover = view.findViewById(R.id.episode_detail_header_cover);
+        mediaCurrentTimeTextView = (TextView) view.findViewById(R.id.media_current_time);
+        mediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
+        mediaStartAndPauseButton = (CheckBox) view.findViewById(R.id.media_start_and_pause_button);
+        seekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
+        episodeDescriptionTextView = (TextView) view.findViewById(R.id.episode_description);
+        episodeShareButton = (FontAwesomeTextView) view.findViewById(R.id.episode_share_button);
+        episodeDownloadButton = (FontAwesomeTextView) view.findViewById(R.id.episode_download_button);
+        guestListView = (GuestListView) view.findViewById(R.id.guest_list);
 
         addView(view, params);
     }
@@ -88,11 +88,11 @@ public class EpisodeDetailHeaderView extends LinearLayout {
     public void setEpisode(Episode episode) {
         String originalTitle = episode.getTitle();
         int startIndex = originalTitle.indexOf(':');
-        mEpisodeTitleTextView.setText(originalTitle.substring(startIndex + 2));
+        episodeTitleTextView.setText(originalTitle.substring(startIndex + 2));
 
-        ViewUtils.setTweetText(mEpisodeDescriptionTextView, episode.getDescription());
+        ViewUtils.setTweetText(episodeDescriptionTextView, episode.getDescription());
 
-        mGuestListView.setup(StringUtils.getGuestNames(episode.getDescription()));
+        guestListView.setup(StringUtils.getGuestNames(episode.getDescription()));
 
         setupMediaPlayAndPauseButton(episode);
         setupShareButton(episode);
@@ -102,15 +102,15 @@ public class EpisodeDetailHeaderView extends LinearLayout {
 
     private void setupMediaPlayAndPauseButton(final Episode episode) {
         if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
-            mMediaStartAndPauseButton.setChecked(true);
-            mMediaStartButtonOnImageCover.setVisibility(View.GONE);
+            mediaStartAndPauseButton.setChecked(true);
+            mediaStartButtonOnImageCover.setVisibility(View.GONE);
         } else {
-            mMediaStartAndPauseButton.setChecked(false);
-            mMediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
-            mMediaStartButtonOnImageCover.setAlpha(1);
+            mediaStartAndPauseButton.setChecked(false);
+            mediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
+            mediaStartButtonOnImageCover.setAlpha(1);
         }
 
-        mMediaStartAndPauseButton.setOnCheckedChangeListener(
+        mediaStartAndPauseButton.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -127,26 +127,26 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         if (shouldRestart(episode)) {
             podcastPlayer.start();
-            mSeekBar.setEnabled(true);
+            seekBar.setEnabled(true);
             PodcastPlayerNotification.notity(getContext(), episode);
         } else {
-            mLoadListener.showProgress();
-            mMediaStartAndPauseButton.setEnabled(false);
+            loadListener.showProgress();
+            mediaStartAndPauseButton.setEnabled(false);
             podcastPlayer.start(getContext(), episode, new PodcastPlayer.StateChangedListener() {
                 @Override
                 public void onStart() {
                     if (getContext() == null) {
                         pause();
                     } else {
-                        mLoadListener.showContent();
-                        mSeekBar.setEnabled(true);
-                        mMediaStartAndPauseButton.setEnabled(true);
+                        loadListener.showContent();
+                        seekBar.setEnabled(true);
+                        mediaStartAndPauseButton.setEnabled(true);
                         PodcastPlayerNotification.notity(getContext(), episode);
                     }
                 }
             });
 
-            UiAnimations.fadeOut(mMediaStartButtonOnImageCover, 300, 1000);
+            UiAnimations.fadeOut(mediaStartButtonOnImageCover, 300, 1000);
         }
     }
 
@@ -159,14 +159,14 @@ public class EpisodeDetailHeaderView extends LinearLayout {
     private void pause() {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         podcastPlayer.pause();
-        mSeekBar.setEnabled(false);
+        seekBar.setEnabled(false);
 
         PodcastPlayerNotification.cancel(getContext());
     }
 
     private void setupShareButton(final Episode episode) {
-        mEpisodeShareButton.prepend(FontAwesomeTextView.Icon.SHARE);
-        mEpisodeShareButton.setOnClickListener(new OnClickListener() {
+        episodeShareButton.prepend(FontAwesomeTextView.Icon.SHARE);
+        episodeShareButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentUtils.shareEpisode(getContext(), episode);
@@ -175,11 +175,11 @@ public class EpisodeDetailHeaderView extends LinearLayout {
     }
 
     private void setupDownloadButton(final Episode episode) {
-        mEpisodeDownloadButton.setEnabled(true);
+        episodeDownloadButton.setEnabled(true);
         if (episode.isDownloaded()) {
-            mEpisodeDownloadButton.setText(getContext().getString(R.string.clear_cache));
-            mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.MINUS);
-            mEpisodeDownloadButton.setOnClickListener(new View.OnClickListener() {
+            episodeDownloadButton.setText(getContext().getString(R.string.clear_cache));
+            episodeDownloadButton.prepend(FontAwesomeTextView.Icon.MINUS);
+            episodeDownloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     episode.clearCache();
@@ -187,27 +187,27 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 }
             });
         } else if (EpisodeDownloadService.isDownloading(episode)) {
-            mEpisodeDownloadButton.setEnabled(false);
-            mEpisodeDownloadButton.setText(getContext().getString(R.string.downloading));
-            mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
+            episodeDownloadButton.setEnabled(false);
+            episodeDownloadButton.setText(getContext().getString(R.string.downloading));
+            episodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
         } else {
-            mEpisodeDownloadButton.setText(getContext().getString(R.string.download));
-            mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.DOWNLOAD);
-            mEpisodeDownloadButton.setOnClickListener(new View.OnClickListener() {
+            episodeDownloadButton.setText(getContext().getString(R.string.download));
+            episodeDownloadButton.prepend(FontAwesomeTextView.Icon.DOWNLOAD);
+            episodeDownloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mEpisodeDownloadButton.setEnabled(false);
+                    episodeDownloadButton.setEnabled(false);
                     Intent intent = EpisodeDownloadService.createIntent(getContext(), episode);
                     getContext().startService(intent);
-                    mEpisodeDownloadButton.setText(getContext().getString(R.string.downloading));
-                    mEpisodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
+                    episodeDownloadButton.setText(getContext().getString(R.string.downloading));
+                    episodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
                 }
             });
         }
     }
 
     private void setupSeekBar(final Episode episode) {
-        mMediaDurationTextView.setText(episode.getDuration());
+        mediaDurationTextView.setText(episode.getDuration());
 
         PodcastPlayer.getInstance().setCurrentTimeListener(
                 new PodcastPlayer.CurrentTimeListener() {
@@ -221,7 +221,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                     }
                 });
 
-        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             }
@@ -238,23 +238,23 @@ public class EpisodeDetailHeaderView extends LinearLayout {
             }
         });
 
-        mSeekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
+        seekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
 
         if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
-            mSeekBar.setEnabled(true);
+            seekBar.setEnabled(true);
         } else {
-            mSeekBar.setEnabled(false);
+            seekBar.setEnabled(false);
         }
     }
 
     private void updateCurrentTime(int currentPosition) {
-        mMediaCurrentTimeTextView.setText(DateUtils.formatCurrentTime(currentPosition));
-        mSeekBar.setProgress(currentPosition);
+        mediaCurrentTimeTextView.setText(DateUtils.formatCurrentTime(currentPosition));
+        seekBar.setProgress(currentPosition);
     }
 
     @Subscribe
     public void onEpisodeDownloadComplete(final DownloadEpisodeCompleteEvent event) {
-        mOnContextExecutor.execute(getContext(), new Runnable() {
+        onContextExecutor.execute(getContext(), new Runnable() {
             @Override
             public void run() {
                 Episode episode = event.getEpisode();
@@ -269,10 +269,10 @@ public class EpisodeDetailHeaderView extends LinearLayout {
 
     @Subscribe
     public void onReceivePauseAction(ReceivePauseActionEvent event) {
-        mOnContextExecutor.execute(getContext(), new Runnable() {
+        onContextExecutor.execute(getContext(), new Runnable() {
             @Override
             public void run() {
-                mMediaStartAndPauseButton.setChecked(false);
+                mediaStartAndPauseButton.setChecked(false);
             }
         });
     }
