@@ -31,7 +31,7 @@ public class Tweet {
     public Tweet(long id, String userImageUrl, String userName, String text) {
         this.id = id;
         this.userImageUrl = userImageUrl;
-        this.userName = userName;
+        this.userName = "@" + userName;
         this.text = text;
     }
 
@@ -39,7 +39,7 @@ public class Tweet {
         return new Tweet(
                 status.getId(),
                 status.getUser().getProfileImageURL(),
-                status.getUser().getName(),
+                status.getUser().getScreenName(),
                 status.getText());
     }
 }
