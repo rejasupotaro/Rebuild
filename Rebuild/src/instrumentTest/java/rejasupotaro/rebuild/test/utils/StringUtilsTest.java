@@ -37,11 +37,11 @@ public class StringUtilsTest extends AndroidTestCase {
         }
         {
             String source = "Hello World";
-            assertEquals("Hello World", StringUtils.buildTwitterLinkText(source));
+            assertEquals("", StringUtils.buildTwitterLinkText(source));
         }
         {
             String source = "Hello (World)";
-            assertEquals("Hello (World)", StringUtils.buildTwitterLinkText(source));
+            assertEquals("", StringUtils.buildTwitterLinkText(source));
         }
         {
             String source = "rejasupotaro@gmail.com";

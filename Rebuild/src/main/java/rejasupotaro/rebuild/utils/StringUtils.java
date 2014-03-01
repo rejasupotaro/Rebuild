@@ -17,7 +17,7 @@ public final class StringUtils {
 
     public static String buildTwitterLinkText(String source) {
         if (TextUtils.isEmpty(source)) return "";
-        if (source.indexOf("@") < 0) return source;
+        if (source.indexOf("@") < 0) return "";
 
         String[] splitedSources = source.split("@");
 
