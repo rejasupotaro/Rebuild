@@ -2,6 +2,8 @@ package rejasupotaro.rebuild.test.utils;
 
 import android.test.AndroidTestCase;
 
+import java.util.List;
+
 import rejasupotaro.rebuild.utils.StringUtils;
 
 public class StringUtilsTest extends AndroidTestCase {
@@ -23,6 +25,29 @@ public class StringUtilsTest extends AndroidTestCase {
         {
             String source = "Hello\nWorld!\n";
             assertEquals("HelloWorld!", StringUtils.removeNewLines(source));
+        }
+    }
+
+    public void testGetGuestNames() {
+        {
+            List<String> guestNameList = StringUtils.getGuestNames("");
+            assertNotNull(guestNameList);
+            assertTrue(guestNameList.isEmpty());
+        }
+        {
+            List<String> guestNameList = StringUtils.getGuestNames("xxxxx");
+            assertNotNull(guestNameList);
+            assertTrue(guestNameList.isEmpty());
+        }
+        {
+            List<String> guestNameList = StringUtils.getGuestNames("舘野祐一さん (@hotchpotch) をゲストに迎えて、Podcast クライアント、モバイルアプリ開発、TestFlight, WhatsApp, iOS セキュリティなどについて話しました。");
+            assertNotNull(guestNameList);
+            assertEquals(1, guestNameList.size());
+        }
+        {
+            List<String> guestNameList = StringUtils.getGuestNames("adamrocker さん (@adamrocker)、 Motohiro Takayamaさん (@mootoh)をゲストに迎えて、Nexus 5, Android 4.4 などについて話しました。");
+            assertNotNull(guestNameList);
+            assertEquals(2, guestNameList.size());
         }
     }
 
