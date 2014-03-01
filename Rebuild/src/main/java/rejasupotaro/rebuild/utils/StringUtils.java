@@ -48,15 +48,6 @@ public final class StringUtils {
     }
 
     private static int findEndIndex(String source) {
-        int endIndex = source.indexOf(')');
-        if (endIndex >= 0) {
-            return endIndex;
-        }
-        endIndex = source.indexOf(':');
-        if (endIndex >= 0) {
-            return endIndex;
-        }
-        endIndex = source.indexOf(' ');
-        return endIndex;
+        return ListUtils.min(source.indexOf(')'), source.indexOf(':'), source.indexOf(' '));
     }
 }
