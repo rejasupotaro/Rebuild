@@ -6,6 +6,8 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import rejasupotaro.rebuild.adapters.TweetListAdapter;
 import rejasupotaro.rebuild.loaders.TweetLoader;
 import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MenuDelegate;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.inject.InjectView;
@@ -52,8 +55,16 @@ public class TimelineActivity extends RoboActionBarActivity {
     }
 
     public void setupTweetListView(List<Tweet> tweetList) {
-        TweetListAdapter adapter = new TweetListAdapter(this, tweetList);
+        final TweetListAdapter adapter = new TweetListAdapter(this, tweetList);
         tweetListView.setAdapter(adapter);
+
+        tweetListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Tweet item = adapter.getItem(i);
+                IntentUtils.openTwitter(TimelineActivity.this, item.getId(), item.getUserName());
+            }
+        });
     }
 
     private void requestTweetList() {
