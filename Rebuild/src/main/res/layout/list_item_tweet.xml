@@ -1,19 +1,35 @@
-<LinearLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
         android:padding="@dimen/padding_contents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <ImageView
-            android:id="@+id/user_profile_image"
-            android:layout_width="@dimen/user_profile_image_size"
-            android:layout_height="@dimen/user_profile_image_size"
-            />
-    <TextView
-            android:id="@+id/tweet_text"
-            android:layout_marginLeft="@dimen/padding_frame"
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-</LinearLayout>
+            android:layout_height="match_parent"
+            >
+        <ImageView
+                android:id="@+id/user_profile_image"
+                android:layout_width="@dimen/user_profile_image_size"
+                android:layout_height="@dimen/user_profile_image_size"
+                />
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/padding_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/user_name_text"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            <TextView
+                    android:id="@+id/tweet_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

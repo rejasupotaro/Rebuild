@@ -30,6 +30,9 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
         ImageView userProfileImageView = (ImageView) view.findViewById(R.id.user_profile_image);
         PicassoHelper.load(getContext(), userProfileImageView, item.getUserImageUrl());
 
+        TextView userNameTextView = (TextView) view.findViewById(R.id.user_name_text);
+        userNameTextView.setText(item.getUserName());
+
         TextView tweetTextView = (TextView) view.findViewById(R.id.tweet_text);
         tweetTextView.setText(item.getText());
     }
