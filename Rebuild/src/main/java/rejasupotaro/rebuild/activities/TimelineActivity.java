@@ -44,6 +44,8 @@ public class TimelineActivity extends RoboActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        stateFrameLayout.showProgress();
         setupActionBar();
         setupTweetListView();
     }
@@ -90,6 +92,7 @@ public class TimelineActivity extends RoboActionBarActivity {
             public void onLoadFinished(Loader<List<Tweet>> listLoader,
                     List<Tweet> tweetList) {
                 addTweetList(tweetList);
+                stateFrameLayout.showContent();
             }
 
             @Override
