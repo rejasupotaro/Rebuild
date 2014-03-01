@@ -39,10 +39,6 @@
             android:name=".activities.EpisodeDetailActivity">
         </activity>
         <activity
-            android:name=".activities.TwitterWidgetActivity"
-            android:label="@string/label_timeline">
-        </activity>
-        <activity
                 android:name=".activities.TimelineActivity"
                 android:label="@string/label_timeline">
         </activity>
