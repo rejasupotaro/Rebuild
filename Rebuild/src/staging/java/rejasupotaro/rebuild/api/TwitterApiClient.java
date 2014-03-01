@@ -3,6 +3,7 @@ package rejasupotaro.rebuild.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import rejasupotaro.rebuild.models.Guest;
 import rejasupotaro.rebuild.models.Tweet;
 import twitter4j.Twitter;
 
@@ -22,10 +23,18 @@ public class TwitterApiClient {
     private TwitterApiClient() {
     }
 
-    public void getUser(int userId) {
+    public Guest getUser(String userName) {
+        return new Guest(235544534,
+                "rejasupotaro",
+                "http://pbs.twimg.com/profile_images/424554842367852544/jRoDtV1R_normal.jpeg",
+                12897,
+                298,
+                999,
+                "顧客に価値を届け続けるオアダイ",
+                "http://t.co/IxfgYdk6nK");
     }
 
-    public List<Tweet> search(String keyword) {
+    public List<Tweet> search(String keyword, boolean shouldClearQuery) {
         List<Tweet> tweetList = new ArrayList<Tweet>();
         for (int i = 0; i < 20; i++) {
             tweetList.add(new Tweet(

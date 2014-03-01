@@ -41,10 +41,18 @@ public class GuestListView extends LinearLayout {
     }
 
     public void setupGuestList(final List<Guest> guestList) {
+        if (guestList == null || guestList.isEmpty()) {
+            return;
+        }
+
         onContextExecutor.execute(getContext(), new Runnable() {
             @Override
             public void run() {
                 for (Guest guest : guestList) {
+                    if (Guest.isEmpty(guest)) {
+                        continue;
+                    }
+
                     LayoutParams params =
                             new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
                     addView(createGuestView(guest), params);
@@ -54,6 +62,7 @@ public class GuestListView extends LinearLayout {
     }
 
     public View createGuestView(Guest guest) {
+
         View view = View.inflate(getContext(), R.layout.list_item_guest, null);
 
         TextView guestNameText = (TextView) view.findViewById(R.id.guest_name_text);

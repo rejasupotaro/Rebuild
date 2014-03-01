@@ -4,7 +4,7 @@ import twitter4j.User;
 
 public class Guest {
 
-    private long id;
+    private long id = -1;
 
     private String name;
 
@@ -50,6 +50,13 @@ public class Guest {
 
     public String getUrl() {
         return url;
+    }
+
+    public static boolean isEmpty(Guest guest) {
+        if (guest == null) {
+            return true;
+        }
+        return (guest.id == -1);
     }
 
     public Guest() {

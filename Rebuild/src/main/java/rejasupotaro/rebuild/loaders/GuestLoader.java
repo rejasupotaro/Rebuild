@@ -34,7 +34,9 @@ public class GuestLoader extends AsyncTaskLoader<List<Guest>> {
         List<Guest> guestList = new ArrayList<Guest>();
         for (String guestName : guestNameList) {
             Guest guest = TwitterApiClient.getInstance().getUser(guestName);
-            guestList.add(guest);
+            if (!Guest.isEmpty(guest)) {
+                guestList.add(guest);
+            }
         }
         return guestList;
     }
