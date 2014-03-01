@@ -79,7 +79,7 @@ public class GuestListView extends LinearLayout {
         tweetsCountText.setText(guest.getTweetsCount() + " tweets");
 
         TextView friendsCountText = (TextView) view.findViewById(R.id.friends_count_text);
-        friendsCountText.setText("following " + guest.getTweetsCount());
+        friendsCountText.setText("following " + guest.getFriendsCount());
 
         TextView followersCountText = (TextView) view.findViewById(R.id.followers_count_text);
         followersCountText.setText(guest.getFollowersCount() + " followers");
