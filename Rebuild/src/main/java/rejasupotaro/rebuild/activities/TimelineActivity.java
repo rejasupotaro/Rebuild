@@ -22,6 +22,7 @@ import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
+import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.inject.InjectView;
 
@@ -45,7 +46,6 @@ public class TimelineActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        stateFrameLayout.showProgress();
         setupActionBar();
         setupTweetListView();
     }
@@ -60,6 +60,9 @@ public class TimelineActivity extends RoboActionBarActivity {
     }
 
     public void setupTweetListView() {
+        View footer = View.inflate(this, R.layout.list_item_progress, null);
+        ViewUtils.addFooterView(tweetListView, footer);
+
         tweetListAdapter = new TweetListAdapter(this);
         tweetListView.setAdapter(tweetListAdapter);
 
@@ -82,24 +85,24 @@ public class TimelineActivity extends RoboActionBarActivity {
     }
 
     private void requestTweetList() {
-        getLoaderManager().restartLoader(REQUEST_TWEET_LIST, null, new LoaderManager.LoaderCallbacks<List<Tweet>>() {
-            @Override
-            public Loader<List<Tweet>> onCreateLoader(int i, Bundle bundle) {
-                return new TweetLoader(TimelineActivity.this);
-            }
+        getLoaderManager().restartLoader(REQUEST_TWEET_LIST, null,
+                new LoaderManager.LoaderCallbacks<List<Tweet>>() {
+                    @Override
+                    public Loader<List<Tweet>> onCreateLoader(int i, Bundle bundle) {
+                        return new TweetLoader(TimelineActivity.this);
+                    }
 
-            @Override
-            public void onLoadFinished(Loader<List<Tweet>> listLoader,
-                    List<Tweet> tweetList) {
-                addTweetList(tweetList);
-                stateFrameLayout.showContent();
-            }
+                    @Override
+                    public void onLoadFinished(Loader<List<Tweet>> listLoader,
+                            List<Tweet> tweetList) {
+                        addTweetList(tweetList);
+                    }
 
-            @Override
-            public void onLoaderReset(Loader<List<Tweet>> listLoader) {
-                // nothing to do
-            }
-        });
+                    @Override
+                    public void onLoaderReset(Loader<List<Tweet>> listLoader) {
+                        // nothing to do
+                    }
+                });
     }
 
     private void addTweetList(List<Tweet> tweetList) {
