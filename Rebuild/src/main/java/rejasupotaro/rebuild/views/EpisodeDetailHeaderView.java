@@ -23,6 +23,7 @@ import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.IntentUtils;
+import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.utils.ViewUtils;
@@ -51,6 +52,8 @@ public class EpisodeDetailHeaderView extends LinearLayout {
 
     private FontAwesomeTextView mEpisodeDownloadButton;
 
+    private GuestListView mGuestListView;
+
     public EpisodeDetailHeaderView(Context context, LoadListener loadListener) {
         super(context);
         mLoadListener = loadListener;
@@ -73,6 +76,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         mEpisodeDescriptionTextView = (TextView) view.findViewById(R.id.episode_description);
         mEpisodeShareButton = (FontAwesomeTextView) view.findViewById(R.id.episode_share_button);
         mEpisodeDownloadButton = (FontAwesomeTextView) view.findViewById(R.id.episode_download_button);
+        mGuestListView = (GuestListView) view.findViewById(R.id.guest_list);
 
         addView(view, params);
     }
@@ -85,7 +89,10 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         String originalTitle = episode.getTitle();
         int startIndex = originalTitle.indexOf(':');
         mEpisodeTitleTextView.setText(originalTitle.substring(startIndex + 2));
+
         ViewUtils.setTweetText(mEpisodeDescriptionTextView, episode.getDescription());
+
+        mGuestListView.setup(StringUtils.getGuestNames(episode.getDescription()));
 
         setupMediaPlayAndPauseButton(episode);
         setupShareButton(episode);
