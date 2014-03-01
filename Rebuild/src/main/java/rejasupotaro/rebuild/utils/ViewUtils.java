@@ -12,6 +12,7 @@ public final class ViewUtils {
         textView.setMovementMethod(LinkMovementMethod.getInstance());
         textView.setText(
                 Html.fromHtml(StringUtils.buildTwitterLinkText(text)));
+        textView.setFocusable(false);
     }
 
     public static void addHeaderView(ListView listView, View view) {

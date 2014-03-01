@@ -12,6 +12,7 @@ import java.util.List;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.utils.PicassoHelper;
+import rejasupotaro.rebuild.utils.ViewUtils;
 
 public class TweetListAdapter extends BindableAdapter<Tweet> {
 
@@ -34,6 +35,6 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
         userNameTextView.setText(item.getUserName());
 
         TextView tweetTextView = (TextView) view.findViewById(R.id.tweet_text);
-        tweetTextView.setText(item.getText());
+        ViewUtils.setTweetText(tweetTextView, item.getText());
     }
 }

@@ -40,8 +40,23 @@ public final class StringUtils {
     }
 
     private static String getTwitterName(String source) {
-        int endIndex = source.indexOf(")");
-        if (endIndex < 0) return "";
+        int endIndex = findEndIndex(source);
+        if (endIndex < 0) {
+            return "";
+        }
         return source.substring(0, endIndex);
+    }
+
+    private static int findEndIndex(String source) {
+        int endIndex = source.indexOf(')');
+        if (endIndex >= 0) {
+            return endIndex;
+        }
+        endIndex = source.indexOf(':');
+        if (endIndex >= 0) {
+            return endIndex;
+        }
+        endIndex = source.indexOf(' ');
+        return endIndex;
     }
 }
