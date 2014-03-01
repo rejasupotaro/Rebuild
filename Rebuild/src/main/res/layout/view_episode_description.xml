@@ -1,0 +1,15 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:padding="@dimen/padding_frame"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <TextView
+            android:id="@+id/episode_description"
+            android:textSize="@dimen/tertiary_text_size"
+            android:padding="@dimen/padding_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+</LinearLayout>

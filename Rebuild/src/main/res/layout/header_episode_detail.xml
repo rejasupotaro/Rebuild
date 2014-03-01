@@ -74,20 +74,22 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-    <LinearLayout
-            android:padding="@dimen/padding_frame"
-            android:orientation="vertical"
-            android:background="@color/base_color_light_gray"
+
+    <rejasupotaro.rebuild.views.SectionHeaderView
+            android:id="@+id/section_header_description"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-        <TextView
-                android:id="@+id/episode_description"
-                android:textSize="@dimen/tertiary_text_size"
-                android:padding="@dimen/padding_frame"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            />
+    <include layout="@layout/view_episode_description"/>
+
+    <rejasupotaro.rebuild.views.GuestListView
+            android:id="@+id/guest_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <rejasupotaro.rebuild.views.SectionHeaderView
+            android:id="@+id/section_header_show_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 </LinearLayout>

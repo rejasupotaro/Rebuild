@@ -2,7 +2,6 @@ package rejasupotaro.rebuild.loaders;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;

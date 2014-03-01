@@ -65,9 +65,9 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="AboutListItemImage">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
+    <style name="ProfileImage">
+        <item name="android:layout_width">@dimen/profile_image_size</item>
+        <item name="android:layout_height">@dimen/profile_image_size</item>
     </style>
 
     <style name="AboutListItemText">

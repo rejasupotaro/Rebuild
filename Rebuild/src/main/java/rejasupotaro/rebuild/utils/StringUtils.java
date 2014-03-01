@@ -2,6 +2,9 @@ package rejasupotaro.rebuild.utils;
 
 import android.text.TextUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class StringUtils {
 
     private StringUtils() {
@@ -13,6 +16,21 @@ public final class StringUtils {
 
     public static String removeNewLines(String source) {
         return source.replaceAll("\n", "");
+    }
+
+    public static List<String> getGuestNames(String source) {
+        List<String> guestNameList = new ArrayList<String>();
+        if (TextUtils.isEmpty(source)) return guestNameList;
+        if (source.indexOf("@") < 0) return guestNameList;
+
+        String[] splitedSources = source.split("@");
+        for (int i = 1; i < splitedSources.length; i++) {
+            String guestName = getTwitterName(splitedSources[i]);
+            if (!TextUtils.isEmpty(guestName)) {
+                guestNameList.add(guestName);
+            }
+        }
+        return guestNameList;
     }
 
     public static String buildTwitterLinkText(String source) {
