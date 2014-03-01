@@ -26,6 +26,10 @@ public final class IntentUtils {
         openTwitterProfile(context, "rejasupotaro");
     }
 
+    public static void openTwitter(Context context, long tweetId, String userName) {
+        openBrowser(context, "https://twitter.com/" + userName + "/status/" + tweetId);
+    }
+
     public static void openMiyagawaProfile(Context context) {
         openTwitterProfile(context, "miyagawa");
     }

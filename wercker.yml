@@ -15,13 +15,9 @@ build:
     - setup-android-emulator:
         target: android-18
     - script:
-        name: run gradle connectedCheck
+        name: run gradle assemble
         code: |
-          gradle --project-cache-dir=$WERCKER_CACHE_DIR connectedCheck
-    - script:
-        name: run gradle build
-        code: |
-          gradle --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR build
+          gradle --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR assembleStagingDebug
   after-steps:
     # Use the build results
     - script:

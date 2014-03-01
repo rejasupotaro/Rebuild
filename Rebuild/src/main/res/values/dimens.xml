@@ -21,4 +21,6 @@
     <dimen name="list_item_show_note_height">160dp</dimen>
 
     <dimen name="episode_posted_at_text_shape_size">60dp</dimen>
+
+    <dimen name="user_profile_image_size">48dp</dimen>
 </resources>
