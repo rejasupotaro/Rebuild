@@ -62,6 +62,10 @@ public class AboutActivity extends RoboActionBarActivity {
                 "https://pbs.twimg.com/profile_images/424955294616023040/aco9m_GJ.png",
                 "hotchemi",
                 "http://twitter.com/hotchemi"));
+        aboutItemList.add(new AboutItem.AboutItemContent(
+                "https://avatars.githubusercontent.com/u/2490",
+                "mootoh",
+                "https://github.com/mootoh"));
         aboutItemList.add(new AboutItem.AboutItemHeader(
                 getString(R.string.about_item_header_recent_changes)));
 
