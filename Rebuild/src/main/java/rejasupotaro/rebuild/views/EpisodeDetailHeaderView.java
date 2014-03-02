@@ -139,7 +139,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         if (shouldRestart(episode)) {
             podcastPlayer.start();
             seekBar.setEnabled(true);
-            PodcastPlayerNotification.notity(getContext(), episode);
+            PodcastPlayerNotification.notify(getContext(), episode);
         } else {
             loadListener.showProgress();
             mediaStartAndPauseButton.setEnabled(false);
@@ -152,7 +152,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                         loadListener.showContent();
                         seekBar.setEnabled(true);
                         mediaStartAndPauseButton.setEnabled(true);
-                        PodcastPlayerNotification.notity(getContext(), episode);
+                        PodcastPlayerNotification.notify(getContext(), episode);
                     }
                 }
             });
@@ -171,7 +171,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         podcastPlayer.pause();
         seekBar.setEnabled(false);
-        PodcastPlayerNotification.notity(getContext(), episode);
+        PodcastPlayerNotification.notify(getContext(), episode, PodcastPlayer.getInstance().getCurrentPosition());
     }
 
     private void setupShareButton(final Episode episode) {
@@ -225,6 +225,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                     public void onTick(int currentPosition) {
                         if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
                             updateCurrentTime(currentPosition);
+                            PodcastPlayerNotification.notify(getContext(), episode, currentPosition);
                         } else {
                             updateCurrentTime(0);
                         }

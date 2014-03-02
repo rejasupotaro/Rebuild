@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
-import android.widget.RemoteViews;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.activities.EpisodeDetailActivity;
@@ -17,6 +16,7 @@ import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
+import rejasupotaro.rebuild.utils.DateUtils;
 
 public class PodcastPlayerNotification {
 
@@ -24,15 +24,19 @@ public class PodcastPlayerNotification {
 
     private static final String ACTION_TOGGLE_PLAYBACK = "action_toggle_playback";
 
-    public static void notity(Context context, Episode episode) {
+    public static void notify(Context context, Episode episode) {
+        notify(context, episode, 0);
+    }
+
+    public static void notify(Context context, Episode episode, int currentPosition) {
         if (episode == null || context == null) return;
 
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, build(context, episode));
+        notificationManager.notify(NOTIFICATION_ID, build(context, episode, currentPosition));
     }
 
-    private static Notification build(Context context, Episode episode) {
+    private static Notification build(Context context, Episode episode, int currentPosition) {
         Intent pauseIntent = new Intent(context, PodcastPlayerService.class);
         pauseIntent.setAction(ACTION_TOGGLE_PLAYBACK);
         PendingIntent piToggle = PendingIntent.getService(
@@ -48,6 +52,8 @@ public class PodcastPlayerNotification {
         } else {
             builder.addAction(android.R.drawable.ic_media_play, context.getString(R.string.notification_resume), piToggle);
         }
+
+        builder.setProgress(DateUtils.durationToInt(episode.getDuration()), currentPosition, false);
 
         PendingIntent launchDetail = PendingIntent.getActivity(context, 0,
                 EpisodeDetailActivity.createIntent(context, episode.getEpisodeId()), Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -79,7 +85,7 @@ public class PodcastPlayerNotification {
                 BusProvider.getInstance().post(new ReceiveResumeActionEvent());
             }
             // Update the notification itself
-            PodcastPlayerNotification.notity(context, PodcastPlayer.getInstance().getEpisode());
+            PodcastPlayerNotification.notify(context, PodcastPlayer.getInstance().getEpisode(), PodcastPlayer.getInstance().getCurrentPosition());
         }
     }
 }
