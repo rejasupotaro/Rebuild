@@ -36,7 +36,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.EpisodeDetailActivity">
+                android:name=".activities.EpisodeDetailActivity"
+                android:launchMode="singleTask">
         </activity>
         <activity
                 android:name=".activities.TimelineActivity"
