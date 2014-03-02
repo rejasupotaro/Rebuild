@@ -5,7 +5,7 @@
         android:padding="@dimen/padding_contents"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
     <LinearLayout
             android:orientation="horizontal"
@@ -31,6 +31,7 @@
 
     </LinearLayout>
     <TextView
+            android:id="@+id/sf_text"
             android:text="in San Francisco, CA."
             android:textSize="@dimen/quaternary_text_size"
             android:textColor="@color/gray"

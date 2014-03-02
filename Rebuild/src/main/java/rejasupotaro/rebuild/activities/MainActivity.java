@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import javax.inject.Inject;
 
@@ -34,6 +35,10 @@ public class MainActivity extends RoboActionBarActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Hide actionbar
+        getActionBar().hide();
+
         startServices();
         parseIntent(getIntent());
     }

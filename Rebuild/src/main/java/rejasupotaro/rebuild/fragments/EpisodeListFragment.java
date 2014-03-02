@@ -2,6 +2,7 @@ package rejasupotaro.rebuild.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.google.inject.Inject;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.activities.SettingsActivity;
 import rejasupotaro.rebuild.activities.TimelineActivity;
 import rejasupotaro.rebuild.adapters.EpisodeListAdapter;
 import rejasupotaro.rebuild.api.RssFeedClient;
@@ -53,7 +55,7 @@ public class EpisodeListFragment extends RoboFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_episode_list, null);
         return view;
     }
@@ -100,6 +102,23 @@ public class EpisodeListFragment extends RoboFragment {
                     }
                 });
 
+        FontAwesomeTextView settingsText = (FontAwesomeTextView) header.findViewById(R.id.link_text_settings);
+        settingsText.prepend(FontAwesomeTextView.Icon.SETTINGS);
+        settingsText.findViewById(R.id.link_text_settings).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(getActivity(), SettingsActivity.class));
+                    }
+                });
+
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT >= 19) {
+            //In SDK4.4~, it has translucent navigation bar and status bar
+            View view = header.findViewById(R.id.episode_list_header);
+            view.getLayoutParams().height += getStatusbarHeight();
+        }
+
         ViewUtils.addHeaderView(episodeListView, header);
     }
 
@@ -112,6 +131,16 @@ public class EpisodeListFragment extends RoboFragment {
                 IntentUtils.openMiyagawaProfile(getActivity());
             }
         });
+
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT >= 19) {
+            //In SDK4.4~, it has translucent navigation bar and status bar
+            if (getResources().getBoolean(R.bool.translucentNavBar))
+            {
+                View view = footer.findViewById(R.id.sf_text);
+                view.setPadding(0, 0, 0, getNavigationbarHeight());
+            }
+        }
 
         episodeListView.addFooterView(footer, null, false);
     }
@@ -144,5 +173,23 @@ public class EpisodeListFragment extends RoboFragment {
     public void setupEpisodeListView(List<Episode> episodeList) {
         EpisodeListAdapter episodeListAdapter = new EpisodeListAdapter(getActivity(), episodeList);
         episodeListView.setAdapter(episodeListAdapter);
+    }
+
+    private int getStatusbarHeight() {
+        Resources resources = getActivity().getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
+    }
+
+    private int getNavigationbarHeight() {
+        Resources resources = getActivity().getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
     }
 }

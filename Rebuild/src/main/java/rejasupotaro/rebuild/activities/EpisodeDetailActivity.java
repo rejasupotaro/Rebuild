@@ -45,8 +45,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     private void setupActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
+        actionBar.hide();
     }
 
     @Override

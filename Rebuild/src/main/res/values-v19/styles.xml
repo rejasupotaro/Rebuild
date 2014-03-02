@@ -1,0 +1,96 @@
+<resources>
+
+    <style name="RebuildTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowAnimationStyle">@style/SlideWindowAnimationStyle</item>
+        <item name="android:windowTranslucentNavigation">@bool/translucentNavBar</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="SlideWindowAnimationStyle"
+           parent="android:Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_close_exit</item>
+    </style>
+
+    <style name="RebuildLogText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:shadowDx">8</item>
+        <item name="android:shadowDy">8</item>
+        <item name="android:shadowRadius">8</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="HeaderLinkText">
+        <item name="android:textSize">@dimen/quaternary_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/bg_header_link_text</item>
+        <item name="android:padding">@dimen/padding_contents</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ActionButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/base_color_gray</item>
+        <item name="android:background">@drawable/action_button_border</item>
+        <item name="android:layout_margin">@dimen/padding_frame</item>
+        <item name="android:padding">@dimen/padding_contents</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="DialogButtonText">
+        <item name="android:textSize">@dimen/primary_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/padding_contents</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_clickable</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AboutListItemHeader">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/tertiary_text_size</item>
+        <item name="android:padding">@dimen/padding_contents</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ProfileImage">
+        <item name="android:layout_width">@dimen/profile_image_size</item>
+        <item name="android:layout_height">@dimen/profile_image_size</item>
+    </style>
+
+    <style name="AboutListItemText">
+        <item name="android:layout_marginLeft">@dimen/padding_contents</item>
+        <item name="android:textSize">@dimen/tertiary_text_size</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="MediaStartAndPauseButton" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/media_start_and_pause_button</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>

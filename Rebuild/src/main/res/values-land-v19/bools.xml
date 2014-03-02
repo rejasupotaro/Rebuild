@@ -1,0 +1,3 @@
+<resources>
+    <bool name="translucentNavBar">false</bool>
+</resources>

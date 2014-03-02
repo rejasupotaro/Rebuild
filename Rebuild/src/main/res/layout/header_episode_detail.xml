@@ -6,13 +6,16 @@
         >
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="240dp"
             >
+
         <ImageView
-                android:background="@drawable/miyagawa_in_yapc"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/miyagawa_in_yapc"
+            android:scaleType="centerCrop" />
+
         <FrameLayout
                 android:id="@+id/episode_detail_header_cover"
                 android:background="@color/smoke_black"

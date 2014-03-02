@@ -44,6 +44,7 @@ public class FontAwesomeTextView extends TextView {
         TRASH(0xF014),
         MINUS(0xF146),
         SPINNER(0xF110),
+        SETTINGS(0xF013),
         SHARE(0xF045);
 
         private int unicode;

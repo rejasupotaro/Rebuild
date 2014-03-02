@@ -3,9 +3,15 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:background="@drawable/bg_rebuild"
+        android:id="@+id/episode_list_header"
         android:layout_width="match_parent"
         android:layout_height="160dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_rebuild"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -26,11 +32,19 @@
         </LinearLayout>
 
         <rejasupotaro.rebuild.views.FontAwesomeTextView
-            android:id="@+id/link_text_twitter"
-            android:text="@string/label_timeline"
+            android:id="@+id/link_text_settings"
+            android:text="@string/label_settings"
             android:layout_marginRight="@dimen/padding_contents"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            style="@style/HeaderLinkText" />
+
+        <rejasupotaro.rebuild.views.FontAwesomeTextView
+            android:id="@+id/link_text_twitter"
+            android:text="@string/label_timeline"
+            android:layout_toLeftOf="@+id/link_text_settings"
+            android:layout_marginRight="6dp"
+            android:layout_alignParentBottom="true"
             style="@style/HeaderLinkText" />
 
         <rejasupotaro.rebuild.views.FontAwesomeTextView

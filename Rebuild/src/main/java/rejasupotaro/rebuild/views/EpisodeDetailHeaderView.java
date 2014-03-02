@@ -4,6 +4,7 @@ import com.squareup.otto.Subscribe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -108,6 +109,12 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         setupShareButton(episode);
         setupDownloadButton(episode);
         setupSeekBar(episode);
+
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT >= 19) {
+            //In SDK4.4~, it has translucent navigation bar and status bar
+            episodeTitleTextView.setPadding(0, getStatusbarHeight(), 0, 0);
+        }
     }
 
     private void setupMediaPlayAndPauseButton(final Episode episode) {
@@ -285,6 +292,15 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 mediaStartAndPauseButton.setChecked(false);
             }
         });
+    }
+
+    private int getStatusbarHeight() {
+        Resources resources = getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
     }
 }
 
