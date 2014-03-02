@@ -1,7 +1,5 @@
-Rebuild.fm for Android
+Rebuild.fm for Android [![Build Status](https://travis-ci.org/rejasupotaro/Rebuild.png?branch=master)](https://travis-ci.org/rejasupotaro/Rebuild) [![wercker status](https://app.wercker.com/status/bac4cd5c8d65b004a6b81f8f01ef5524 "wercker status")](https://app.wercker.com/project/bykey/bac4cd5c8d65b004a6b81f8f01ef5524)
 ======
-
-[![Build Status](https://travis-ci.org/rejasupotaro/Rebuild.png?branch=master)](https://travis-ci.org/rejasupotaro/Rebuild) [![wercker status](https://app.wercker.com/status/bac4cd5c8d65b004a6b81f8f01ef5524 "wercker status")](https://app.wercker.com/project/bykey/bac4cd5c8d65b004a6b81f8f01ef5524) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rejasupotaro/rebuild/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Rebuild.fm for Android is the best podcast player to listen to Rebuild.fm. (Unofficial)
 
@@ -53,3 +51,8 @@ Contributing
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+Contributors
+------
+
+<img src="https://raw.github.com/rejasupotaro/Rebuild/master/contributors.png" width="360">
