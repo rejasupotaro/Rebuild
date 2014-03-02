@@ -40,6 +40,10 @@ public class AboutItem {
             this.imageUrl = imageUrl;
             this.link = link;
         }
+
+        public AboutItemContent(Developer developer) {
+            this(developer.getImageUrl(), developer.getName(), developer.getLink());
+        }
     }
 }
 
