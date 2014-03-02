@@ -47,4 +47,5 @@
     <string name="report_dialog_positive_button">report</string>
 
     <string name="notification_pause">Pause</string>
+    <string name="notification_resume">Resume</string>
 </resources>

@@ -15,6 +15,7 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
+import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
 import rejasupotaro.rebuild.listener.LoadListener;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
@@ -127,7 +128,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                         if (isChecked) {
                             start(episode);
                         } else {
-                            pause();
+                            pause(episode);
                         }
                     }
                 });
@@ -146,7 +147,7 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 @Override
                 public void onStart() {
                     if (getContext() == null) {
-                        pause();
+                        pause(episode);
                     } else {
                         loadListener.showContent();
                         seekBar.setEnabled(true);
@@ -166,12 +167,11 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                 && podcastPlayer.getCurrentPosition() > 0);
     }
 
-    private void pause() {
+    private void pause(final Episode episode) {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         podcastPlayer.pause();
         seekBar.setEnabled(false);
-
-        PodcastPlayerNotification.cancel(getContext());
+        PodcastPlayerNotification.notity(getContext(), episode);
     }
 
     private void setupShareButton(final Episode episode) {
@@ -283,6 +283,16 @@ public class EpisodeDetailHeaderView extends LinearLayout {
             @Override
             public void run() {
                 mediaStartAndPauseButton.setChecked(false);
+            }
+        });
+    }
+
+    @Subscribe
+    public void onReceivePauseAction(ReceiveResumeActionEvent event) {
+        onContextExecutor.execute(getContext(), new Runnable() {
+            @Override
+            public void run() {
+                mediaStartAndPauseButton.setChecked(true);
             }
         });
     }
