@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.AboutItemListAdapter;
 import rejasupotaro.rebuild.models.AboutItem;
+import rejasupotaro.rebuild.models.Developer;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.RecentChangesView;
@@ -50,22 +51,15 @@ public class AboutActivity extends RoboActionBarActivity {
                 "",
                 "",
                 "https://github.com/rejasupotaro/Rebuild"));
+
         aboutItemList.add(new AboutItem.AboutItemHeader(
                 getString(R.string.about_item_header_developer)));
-        aboutItemList.add(new AboutItem.AboutItemContent(
-                "https://pbs.twimg.com/profile_images/424554842367852544/jRoDtV1R.jpeg",
-                "rejasupotaro",
-                "http://twitter.com/rejasupotaro"));
+        aboutItemList.add(new AboutItem.AboutItemContent(Developer.REJASUPOTARO));
+
         aboutItemList.add(new AboutItem.AboutItemHeader(
                 getString(R.string.about_item_header_contributors)));
-        aboutItemList.add(new AboutItem.AboutItemContent(
-                "https://pbs.twimg.com/profile_images/424955294616023040/aco9m_GJ.png",
-                "hotchemi",
-                "http://twitter.com/hotchemi"));
-        aboutItemList.add(new AboutItem.AboutItemContent(
-                "https://avatars.githubusercontent.com/u/2490",
-                "mootoh",
-                "https://github.com/mootoh"));
+        aboutItemList.add(new AboutItem.AboutItemContent(Developer.HOTCHEMI));
+        aboutItemList.add(new AboutItem.AboutItemContent(Developer.MOOTOH));
         aboutItemList.add(new AboutItem.AboutItemHeader(
                 getString(R.string.about_item_header_recent_changes)));
 
