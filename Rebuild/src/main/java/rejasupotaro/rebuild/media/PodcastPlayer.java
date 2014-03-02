@@ -79,8 +79,8 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-        stateChangedListener.onStart();
         start();
+        stateChangedListener.onStart();
     }
 
     public static interface StateChangedListener {

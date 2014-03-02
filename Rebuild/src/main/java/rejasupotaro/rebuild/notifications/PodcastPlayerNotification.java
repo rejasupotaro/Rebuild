@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
+import android.widget.RemoteViews;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.activities.EpisodeDetailActivity;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
+import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
@@ -20,7 +22,7 @@ public class PodcastPlayerNotification {
 
     private static final int NOTIFICATION_ID = 1;
 
-    private static final String ACTION_PAUSE = "action_pause";
+    private static final String ACTION_TOGGLE_PLAYBACK = "action_toggle_playback";
 
     public static void notity(Context context, Episode episode) {
         if (episode == null || context == null) return;
@@ -32,15 +34,21 @@ public class PodcastPlayerNotification {
 
     private static Notification build(Context context, Episode episode) {
         Intent pauseIntent = new Intent(context, PodcastPlayerService.class);
-        pauseIntent.setAction(ACTION_PAUSE);
-        PendingIntent piPause = PendingIntent.getService(
+        pauseIntent.setAction(ACTION_TOGGLE_PLAYBACK);
+        PendingIntent piToggle = PendingIntent.getService(
                 context, 0, pauseIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentTitle(episode.getTitle());
         builder.setContentText(episode.getDescription());
-        builder.addAction(android.R.drawable.ic_media_pause, context.getString(R.string.notification_pause), piPause);
+
+        if (PodcastPlayer.getInstance().isPlaying()) {
+            builder.addAction(android.R.drawable.ic_media_pause, context.getString(R.string.notification_pause), piToggle);
+        } else {
+            builder.addAction(android.R.drawable.ic_media_play, context.getString(R.string.notification_resume), piToggle);
+        }
+
         PendingIntent launchDetail = PendingIntent.getActivity(context, 0,
                 EpisodeDetailActivity.createIntent(context, episode.getEpisodeId()), Intent.FLAG_ACTIVITY_NEW_TASK);
         builder.setContentIntent(launchDetail);
@@ -62,10 +70,16 @@ public class PodcastPlayerNotification {
     public static void handleAction(Context context, String action) {
         if (TextUtils.isEmpty(action)) return;
 
-        if (action.equals(ACTION_PAUSE)) {
-            PodcastPlayer.getInstance().pause();
-            cancel(context);
-            BusProvider.getInstance().post(new ReceivePauseActionEvent());
+        if (action.equals(ACTION_TOGGLE_PLAYBACK)) {
+            if (PodcastPlayer.getInstance().isPlaying()) {
+                PodcastPlayer.getInstance().pause();
+                BusProvider.getInstance().post(new ReceivePauseActionEvent());
+            } else {
+                PodcastPlayer.getInstance().start();
+                BusProvider.getInstance().post(new ReceiveResumeActionEvent());
+            }
+            // Update the notification itself
+            PodcastPlayerNotification.notity(context, PodcastPlayer.getInstance().getEpisode());
         }
     }
 }
