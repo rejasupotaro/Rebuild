@@ -3,7 +3,9 @@ package rejasupotaro.rebuild.activities;
 import android.app.ActionBar;
 import android.app.LoaderManager;
 import android.content.Loader;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,6 +84,12 @@ public class TimelineActivity extends RoboActionBarActivity {
         });
 
         requestTweetList();
+
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT >= 19) {
+            //In SDK4.4~, it has translucent navigation bar and status bar
+            tweetListView.setPadding(0, getStatusbarHeight() + getActionbarHeight(), 0, 0);
+        }
     }
 
     private boolean isFirstRequest = true;
@@ -115,14 +123,21 @@ public class TimelineActivity extends RoboActionBarActivity {
         tweetListAdapter.addAll(tweetList);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    private int getStatusbarHeight() {
+        Resources resources = getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return menuDelegate.onItemSelect(item);
+    private int getActionbarHeight() {
+        int actionBarHeight = 0;
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        return actionBarHeight;
     }
 }
