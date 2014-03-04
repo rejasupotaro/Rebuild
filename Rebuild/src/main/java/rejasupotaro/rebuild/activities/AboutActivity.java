@@ -60,6 +60,7 @@ public class AboutActivity extends RoboActionBarActivity {
                 getString(R.string.about_item_header_contributors)));
         aboutItemList.add(new AboutItem.AboutItemContent(Developer.HOTCHEMI));
         aboutItemList.add(new AboutItem.AboutItemContent(Developer.MOOTOH));
+        aboutItemList.add(new AboutItem.AboutItemContent(Developer.HAK));
         aboutItemList.add(new AboutItem.AboutItemHeader(
                 getString(R.string.about_item_header_recent_changes)));
 
