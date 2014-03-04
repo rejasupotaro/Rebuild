@@ -13,7 +13,11 @@ public enum Developer {
     MOOTOH(
             "https://avatars.githubusercontent.com/u/2490",
             "mootoh",
-            "https://github.com/mootoh");
+            "https://github.com/mootoh"),
+    HAK(
+            "https://avatars.githubusercontent.com/u/98031",
+            "hak",
+            "https://github.com/hak");
 
     private String imageUrl;
 
