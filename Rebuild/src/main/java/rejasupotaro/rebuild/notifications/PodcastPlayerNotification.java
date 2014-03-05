@@ -24,13 +24,17 @@ public class PodcastPlayerNotification {
 
     private static final String ACTION_TOGGLE_PLAYBACK = "action_toggle_playback";
 
+    private static boolean isInBackground = false;
+    public static void setIsInBackground(boolean isinb) {
+        isInBackground = isinb;
+    }
+
     public static void notify(Context context, Episode episode) {
         notify(context, episode, 0);
     }
 
     public static void notify(Context context, Episode episode, int currentPosition) {
-        if (episode == null || context == null) return;
-
+        if (!isInBackground || episode == null || context == null) return;
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, build(context, episode, currentPosition));
