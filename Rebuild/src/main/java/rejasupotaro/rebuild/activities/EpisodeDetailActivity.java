@@ -71,7 +71,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 episode));
 
         pagerTabStrip.setDrawFullUnderline(true);
-        pagerTabStrip.setTabIndicatorColor(Color.YELLOW);
+        pagerTabStrip.setTabIndicatorColor(Color.WHITE);
     }
 
     @Override
