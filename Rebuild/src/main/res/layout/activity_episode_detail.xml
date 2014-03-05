@@ -1,13 +1,29 @@
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
     <fragment
-        android:id="@+id/fragment_episode_detail"
-        class="rejasupotaro.rebuild.fragments.EpisodeDetailFragment"
-        android:background="@color/base_color_gray"
+        android:id="@+id/fragment_episode_media"
+        class="rejasupotaro.rebuild.fragments.EpisodeMediaFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_color_gray"
         />
-</FrameLayout>
+    <android.support.v4.view.ViewPager
+            android:id="@+id/episode_detail_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+        <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pager_tab_strip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_gray"
+                android:textColor="@android:color/white"
+                android:paddingTop="@dimen/padding_contents"
+                android:paddingBottom="@dimen/padding_contents" />
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

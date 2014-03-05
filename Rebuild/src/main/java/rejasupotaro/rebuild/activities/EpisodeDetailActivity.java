@@ -3,17 +3,22 @@ package rejasupotaro.rebuild.activities;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
+import rejasupotaro.rebuild.adapters.EpisodeDetailPagerAdapter;
+import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectView;
 
 public class EpisodeDetailActivity extends RoboActionBarActivity {
 
@@ -21,6 +26,12 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @InjectExtra(value = EXTRA_EPISODE_ID)
     private int episodeId;
+
+    @InjectView(R.id.episode_detail_view_pager)
+    private ViewPager viewPager;
+
+    @InjectView(R.id.pager_tab_strip)
+    private PagerTabStrip pagerTabStrip;
 
     @Inject
     private MenuDelegate menuDelegate;
@@ -36,17 +47,31 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
 
-        setupActionBar();
-
-        EpisodeDetailFragment episodeDetailFragment =
-                (EpisodeDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_episode_detail);
-        episodeDetailFragment.setup(Episode.findById(episodeId));
+        Episode episode = Episode.findById(episodeId);
+        setupActionBar(episode);
+        EpisodeMediaFragment episodeMediaFragment =
+                (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_episode_media);
+        episodeMediaFragment.setup(episode);
+        setupViewPager(episode);
     }
 
-    private void setupActionBar() {
+    private void setupActionBar(Episode episode) {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
+        String originalTitle = episode.getTitle();
+        int startIndex = originalTitle.indexOf(':');
+        actionBar.setTitle("Episode " + originalTitle.substring(0, startIndex));
+    }
+
+    private void setupViewPager(Episode episode) {
+        viewPager.setAdapter(new EpisodeDetailPagerAdapter(
+                getSupportFragmentManager(),
+                episode));
+
+        pagerTabStrip.setDrawFullUnderline(true);
+        pagerTabStrip.setTabIndicatorColor(Color.YELLOW);
     }
 
     @Override

@@ -25,12 +25,10 @@ import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.IntentUtils;
-import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
-import rejasupotaro.rebuild.utils.ViewUtils;
 
-public class EpisodeDetailHeaderView extends LinearLayout {
+public class EpisodeMediaView extends LinearLayout {
 
     private LoadListener loadListener;
 
@@ -48,19 +46,15 @@ public class EpisodeDetailHeaderView extends LinearLayout {
 
     private SeekBar seekBar;
 
-    private TextView episodeDescriptionTextView;
-
     private FontAwesomeTextView episodeShareButton;
 
     private FontAwesomeTextView episodeDownloadButton;
 
-    private GuestListView guestListView;
-
-    public EpisodeDetailHeaderView(Context context) {
+    public EpisodeMediaView(Context context) {
         super(context);
     }
 
-    public EpisodeDetailHeaderView(Context context, AttributeSet attrs) {
+    public EpisodeMediaView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -68,7 +62,6 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         BusProvider.getInstance().register(this);
         View view = inflate(getContext(), R.layout.header_episode_detail, null);
         findViews(view);
-        setupSectionHeaders(view);
         addView(view);
         setEpisode(episode);
         this.loadListener = loadListener;
@@ -81,27 +74,15 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         mediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
         mediaStartAndPauseButton = (CheckBox) view.findViewById(R.id.media_start_and_pause_button);
         seekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
-        episodeDescriptionTextView = (TextView) view.findViewById(R.id.episode_description);
         episodeShareButton = (FontAwesomeTextView) view.findViewById(R.id.episode_share_button);
-        episodeDownloadButton = (FontAwesomeTextView) view.findViewById(R.id.episode_download_button);
-        guestListView = (GuestListView) view.findViewById(R.id.guest_list);
-    }
-
-    private void setupSectionHeaders(View view) {
-        SectionHeaderView sectionHeaderDescription = (SectionHeaderView) view.findViewById(R.id.section_header_description);
-        sectionHeaderDescription.setup("Description");
-        SectionHeaderView sectionHeaderShowNotes = (SectionHeaderView) view.findViewById(R.id.section_header_show_notes);
-        sectionHeaderShowNotes.setup("Show Notes");
+        episodeDownloadButton = (FontAwesomeTextView) view
+                .findViewById(R.id.episode_download_button);
     }
 
     public void setEpisode(Episode episode) {
         String originalTitle = episode.getTitle();
         int startIndex = originalTitle.indexOf(':');
         episodeTitleTextView.setText(originalTitle.substring(startIndex + 2));
-
-        ViewUtils.setTweetText(episodeDescriptionTextView, episode.getDescription());
-
-        guestListView.setup(StringUtils.getGuestNames(episode.getDescription()));
 
         setupMediaPlayAndPauseButton(episode);
         setupShareButton(episode);
@@ -173,7 +154,8 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         podcastPlayer.pause();
         seekBar.setEnabled(false);
-        PodcastPlayerNotification.notify(getContext(), episode, PodcastPlayer.getInstance().getCurrentPosition());
+        PodcastPlayerNotification
+                .notify(getContext(), episode, PodcastPlayer.getInstance().getCurrentPosition());
     }
 
     private void setupShareButton(final Episode episode) {
@@ -227,7 +209,8 @@ public class EpisodeDetailHeaderView extends LinearLayout {
                     public void onTick(int currentPosition) {
                         if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
                             updateCurrentTime(currentPosition);
-                            PodcastPlayerNotification.notify(getContext(), episode, currentPosition);
+                            PodcastPlayerNotification
+                                    .notify(getContext(), episode, currentPosition);
                         } else {
                             updateCurrentTime(0);
                         }
@@ -245,8 +228,9 @@ public class EpisodeDetailHeaderView extends LinearLayout {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (!PodcastPlayer.getInstance().isPlaying())
+                if (!PodcastPlayer.getInstance().isPlaying()) {
                     return;
+                }
                 PodcastPlayer.getInstance().seekTo(seekBar.getProgress());
             }
         });

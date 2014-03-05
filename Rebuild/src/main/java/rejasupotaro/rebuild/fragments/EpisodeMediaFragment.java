@@ -1,46 +1,31 @@
 package rejasupotaro.rebuild.fragments;
 
-import com.google.inject.Inject;
-
 import com.squareup.otto.Subscribe;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.adapters.ShowNoteListAdapter;
-import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.listener.LoadListener;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
-import rejasupotaro.rebuild.utils.IntentUtils;
-import rejasupotaro.rebuild.views.EpisodeDetailHeaderView;
-import rejasupotaro.rebuild.views.StateFrameLayout;
+import rejasupotaro.rebuild.views.EpisodeMediaView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
-public class EpisodeDetailFragment extends RoboFragment {
+public class EpisodeMediaFragment extends RoboFragment {
 
-    @InjectView(R.id.state_frame_layout)
-    private StateFrameLayout stateFrameLayout;
-
-    @Inject
-    private EpisodeDownloadClient episodeDownloadClient;
-
-    @InjectView(R.id.episode_detail_header_view)
-    private EpisodeDetailHeaderView episodeDetailHeaderView;
-
-    @InjectView(R.id.show_note_list)
-    private ListView showNoteListView;
+    @InjectView(R.id.episode_media_view)
+    private EpisodeMediaView episodeMediaView;
 
     private Episode episode;
 
@@ -51,7 +36,7 @@ public class EpisodeDetailFragment extends RoboFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         BusProvider.getInstance().register(this);
-        return inflater.inflate(R.layout.fragment_episode_detail, container, false);
+        return inflater.inflate(R.layout.fragment_episode_media, container, false);
     }
 
     @Override
@@ -62,7 +47,7 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Override
     public void onDestroyView() {
         BusProvider.getInstance().unregister(this);
-        episodeDetailHeaderView.onDestroy();
+        episodeMediaView.onDestroy();
         super.onDestroyView();
     }
 
@@ -73,53 +58,19 @@ public class EpisodeDetailFragment extends RoboFragment {
 
         this.episode = episode;
 
-        episodeDetailHeaderView.setup(episode, new LoadListener() {
+        episodeMediaView.setup(episode, new LoadListener() {
             @Override
             public void showProgress() {
-                stateFrameLayout.showProgress();
             }
 
             @Override
             public void showError() {
-                stateFrameLayout.showError();
-
             }
 
             @Override
             public void showContent() {
-                stateFrameLayout.showContent();
             }
         });
-
-        setupListView(episode);
-        setTitle(episode);
-    }
-
-    private void setupListView(Episode episode) {
-        List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
-        final ShowNoteListAdapter adapter = new ShowNoteListAdapter(
-                getActivity(), linkList, mItemClickListener);
-
-        showNoteListView.setAdapter(adapter);
-    }
-
-    private ShowNoteListAdapter.ItemClickListener mItemClickListener
-            = new ShowNoteListAdapter.ItemClickListener() {
-        @Override
-        public void onClick(Link item) {
-            IntentUtils.openBrowser(getActivity(), item.getUrl());
-        }
-
-        @Override
-        public void onLongClick(Link item) {
-            IntentUtils.sendPostIntent(getActivity(), item.getUrl());
-        }
-    };
-
-    private void setTitle(Episode episode) {
-        String originalTitle = episode.getTitle();
-        int startIndex = originalTitle.indexOf(':');
-        getActivity().getActionBar().setTitle("Episode " + originalTitle.substring(0, startIndex));
     }
 
     @Subscribe
