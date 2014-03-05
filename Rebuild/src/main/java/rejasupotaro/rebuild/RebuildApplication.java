@@ -13,11 +13,13 @@ public class RebuildApplication extends Application {
         super.onCreate();
         ActiveAndroid.initialize(this);
         RssFeedClient.init(this);
+        ActivityLifecycleObserver.initialize(this);
     }
 
     @Override
     public void onTerminate() {
         ActiveAndroid.dispose();
+        ActivityLifecycleObserver.terminate(this);
         super.onTerminate();
     }
 }

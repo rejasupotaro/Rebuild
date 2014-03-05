@@ -15,49 +15,6 @@ public class PodcastPlayerService extends Service {
     @Override
     public void onCreate() {
         BusProvider.getInstance().register(this);
-
-        Application app = (Application)this.getApplicationContext();
-        if (app != null) {
-            app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-                int activities = 1;
-                boolean isInBackground = false;
-
-                @Override
-                public void onActivityPaused(Activity activity) {
-                    activities--;
-                }
-
-                @Override
-                public void onActivityResumed(Activity activity) {
-                    if (isInBackground) {
-                        isInBackground = false;
-                        PodcastPlayerNotification.setIsInBackground(false);
-                        PodcastPlayerNotification.cancel(activity);
-                     }
-                    activities++;
-                }
-
-                @Override
-                public void onActivityDestroyed(Activity activity) {}
-
-                @Override
-                public void onActivitySaveInstanceState(Activity activity, Bundle outState) {}
-
-                @Override
-                public void onActivityStarted(Activity activity) {}
-
-                @Override
-                public void onActivityCreated(Activity activity, Bundle savedInstanceState) {}
-
-                @Override
-                public void onActivityStopped(Activity activity) {
-                    if (activities == 0) {
-                        isInBackground = true;
-                        PodcastPlayerNotification.setIsInBackground(true);
-                    }
-                }
-            });
-        }
     }
 
     @Override
