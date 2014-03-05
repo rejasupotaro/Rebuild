@@ -1,10 +1,7 @@
 package rejasupotaro.rebuild.services;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.Service;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.IBinder;
 
 import rejasupotaro.rebuild.events.BusProvider;
