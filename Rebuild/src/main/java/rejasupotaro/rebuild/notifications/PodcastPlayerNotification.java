@@ -34,7 +34,7 @@ public class PodcastPlayerNotification {
     }
 
     public static void notify(Context context, Episode episode, int currentPosition) {
-        if (! isInBackground || episode == null || context == null) return;
+        if (!isInBackground || episode == null || context == null) return;
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, build(context, episode, currentPosition));
