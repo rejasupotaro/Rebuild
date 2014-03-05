@@ -4,6 +4,7 @@ import com.squareup.otto.Subscribe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -55,21 +56,22 @@ public class EpisodeDetailHeaderView extends LinearLayout {
 
     private GuestListView guestListView;
 
-    public EpisodeDetailHeaderView(Context context, LoadListener loadListener) {
+    public EpisodeDetailHeaderView(Context context) {
         super(context);
-        this.loadListener = loadListener;
-        setup(context);
     }
 
-    private void setup(Context context) {
-        BusProvider.getInstance().register(this);
+    public EpisodeDetailHeaderView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-        LayoutParams params =
-                new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        View view = inflate(context, R.layout.header_episode_detail, null);
+    public void setup(Episode episode, LoadListener loadListener) {
+        BusProvider.getInstance().register(this);
+        View view = inflate(getContext(), R.layout.header_episode_detail, null);
         findViews(view);
         setupSectionHeaders(view);
-        addView(view, params);
+        addView(view);
+        setEpisode(episode);
+        this.loadListener = loadListener;
     }
 
     private void findViews(View view) {
@@ -92,10 +94,6 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         sectionHeaderShowNotes.setup("Show Notes");
     }
 
-    public void onDestroy() {
-        BusProvider.getInstance().unregister(this);
-    }
-
     public void setEpisode(Episode episode) {
         String originalTitle = episode.getTitle();
         int startIndex = originalTitle.indexOf(':');
@@ -109,6 +107,10 @@ public class EpisodeDetailHeaderView extends LinearLayout {
         setupShareButton(episode);
         setupDownloadButton(episode);
         setupSeekBar(episode);
+    }
+
+    public void onDestroy() {
+        BusProvider.getInstance().unregister(this);
     }
 
     private void setupMediaPlayAndPauseButton(final Episode episode) {

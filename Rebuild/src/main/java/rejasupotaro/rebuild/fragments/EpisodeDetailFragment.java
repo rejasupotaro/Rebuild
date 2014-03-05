@@ -23,7 +23,6 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
-import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.EpisodeDetailHeaderView;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.fragment.RoboFragment;
@@ -37,12 +36,13 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Inject
     private EpisodeDownloadClient episodeDownloadClient;
 
+    @InjectView(R.id.episode_detail_header_view)
+    private EpisodeDetailHeaderView episodeDetailHeaderView;
+
     @InjectView(R.id.show_note_list)
     private ListView showNoteListView;
 
     private Episode episode;
-
-    private EpisodeDetailHeaderView episodeDetailHeaderView;
 
     @Inject
     private OnContextExecutor onContextExecutor;
@@ -50,23 +50,6 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        episodeDetailHeaderView = new EpisodeDetailHeaderView(getActivity(), new LoadListener() {
-            @Override
-            public void showProgress() {
-                stateFrameLayout.showProgress();
-            }
-
-            @Override
-            public void showError() {
-                stateFrameLayout.showError();
-
-            }
-
-            @Override
-            public void showContent() {
-                stateFrameLayout.showContent();
-            }
-        });
         BusProvider.getInstance().register(this);
         return inflater.inflate(R.layout.fragment_episode_detail, container, false);
     }
@@ -89,7 +72,25 @@ public class EpisodeDetailFragment extends RoboFragment {
         }
 
         this.episode = episode;
-        episodeDetailHeaderView.setEpisode(episode);
+
+        episodeDetailHeaderView.setup(episode, new LoadListener() {
+            @Override
+            public void showProgress() {
+                stateFrameLayout.showProgress();
+            }
+
+            @Override
+            public void showError() {
+                stateFrameLayout.showError();
+
+            }
+
+            @Override
+            public void showContent() {
+                stateFrameLayout.showContent();
+            }
+        });
+
         setupListView(episode);
         setTitle(episode);
     }
@@ -99,7 +100,6 @@ public class EpisodeDetailFragment extends RoboFragment {
         final ShowNoteListAdapter adapter = new ShowNoteListAdapter(
                 getActivity(), linkList, mItemClickListener);
 
-        ViewUtils.addHeaderView(showNoteListView, episodeDetailHeaderView);
         showNoteListView.setAdapter(adapter);
     }
 
