@@ -8,6 +8,7 @@
     <string name="rebuild_description">A Podcast by Tatsuhiko Miyagawa. Talking about Tech, Software Development and Gadgets.</string>
     <string name="share">share</string>
     <string name="cancel">cancel</string>
+    <string name="downloaded">downloaded</string>
     <string name="download">Download</string>
     <string name="downloading">Downloading...</string>
     <string name="clear_cache">Clear Cache</string>
