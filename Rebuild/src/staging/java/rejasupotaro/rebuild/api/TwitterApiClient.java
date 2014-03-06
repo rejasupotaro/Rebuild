@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.api;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import rejasupotaro.rebuild.models.Guest;
@@ -39,9 +40,12 @@ public class TwitterApiClient {
         for (int i = 0; i < 20; i++) {
             tweetList.add(new Tweet(
                     362409221523910657L,
+                    new Date(),
                     "https://pbs.twimg.com/profile_images/378800000217831113/d9a348d7ff1d6e089dfec2ead82a1bf4.png",
                     "rebuildfm",
-                    "Announcing Rebuild, new Podcast by @miyagawa. http://rebuild.fm/"));
+                    "Announcing Rebuild, new Podcast by @miyagawa. http://rebuild.fm/",
+                    10,
+                    10));
         }
         return tweetList;
     }
