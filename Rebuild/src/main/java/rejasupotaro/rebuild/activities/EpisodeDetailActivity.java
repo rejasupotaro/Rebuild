@@ -17,6 +17,7 @@ import rejasupotaro.rebuild.adapters.EpisodeDetailPagerAdapter;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MenuDelegate;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
@@ -26,6 +27,8 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @InjectExtra(value = EXTRA_EPISODE_ID)
     private int episodeId;
+
+    private Episode episode;
 
     @InjectView(R.id.episode_detail_view_pager)
     private ViewPager viewPager;
@@ -47,7 +50,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
 
-        Episode episode = Episode.findById(episodeId);
+        episode = Episode.findById(episodeId);
         setupActionBar(episode);
         EpisodeMediaFragment episodeMediaFragment =
                 (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_episode_media);
@@ -82,6 +85,25 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return menuDelegate.onItemSelect(item);
+        boolean result = true;
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                menuDelegate.pressHome();
+                break;
+            }
+            case R.id.action_settings: {
+                menuDelegate.pressSettings();
+                break;
+            }
+            case R.id.action_share: {
+                menuDelegate.pressShare(episode);
+                break;
+            }
+            default: {
+                result = super.onOptionsItemSelected(item);
+                break;
+            }
+        }
+        return result;
     }
 }

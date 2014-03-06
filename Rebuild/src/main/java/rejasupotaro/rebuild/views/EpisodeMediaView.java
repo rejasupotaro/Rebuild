@@ -46,8 +46,6 @@ public class EpisodeMediaView extends LinearLayout {
 
     private SeekBar seekBar;
 
-    private FontAwesomeTextView episodeShareButton;
-
     private FontAwesomeTextView episodeDownloadButton;
 
     public EpisodeMediaView(Context context) {
@@ -74,7 +72,6 @@ public class EpisodeMediaView extends LinearLayout {
         mediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
         mediaStartAndPauseButton = (CheckBox) view.findViewById(R.id.media_start_and_pause_button);
         seekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
-        episodeShareButton = (FontAwesomeTextView) view.findViewById(R.id.episode_share_button);
         episodeDownloadButton = (FontAwesomeTextView) view
                 .findViewById(R.id.episode_download_button);
     }
@@ -85,7 +82,6 @@ public class EpisodeMediaView extends LinearLayout {
         episodeTitleTextView.setText(originalTitle.substring(startIndex + 2));
 
         setupMediaPlayAndPauseButton(episode);
-        setupShareButton(episode);
         setupDownloadButton(episode);
         setupSeekBar(episode);
     }
@@ -156,16 +152,6 @@ public class EpisodeMediaView extends LinearLayout {
         seekBar.setEnabled(false);
         PodcastPlayerNotification
                 .notify(getContext(), episode, PodcastPlayer.getInstance().getCurrentPosition());
-    }
-
-    private void setupShareButton(final Episode episode) {
-        episodeShareButton.prepend(FontAwesomeTextView.Icon.SHARE);
-        episodeShareButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.shareEpisode(getContext(), episode);
-            }
-        });
     }
 
     private void setupDownloadButton(final Episode episode) {
