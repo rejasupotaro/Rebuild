@@ -17,6 +17,22 @@ import rejasupotaro.rebuild.utils.ViewUtils;
 
 public class TweetListAdapter extends BindableAdapter<Tweet> {
 
+    private static class ViewHolder {
+        ImageView userProfileImageView;
+        TextView userNameTextView;
+        TextView tweetTextView;
+        TextView favoriteCountTextView;
+        TextView retweetCountTextView;
+
+        public ViewHolder(View view) {
+            userProfileImageView = (ImageView) view.findViewById(R.id.user_profile_image);
+            userNameTextView = (TextView) view.findViewById(R.id.user_name_text);
+            tweetTextView = (TextView) view.findViewById(R.id.tweet_text);
+            favoriteCountTextView = (TextView) view.findViewById(R.id.favorite_count_text);
+            retweetCountTextView = (TextView) view.findViewById(R.id.retweet_count_text);
+        }
+    }
+
     public TweetListAdapter(Context context) {
         this(context, new ArrayList<Tweet>());
     }
@@ -28,18 +44,18 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
 
     @Override
     public View newView(LayoutInflater inflater, int position, ViewGroup container) {
-        return inflater.inflate(R.layout.list_item_tweet, null);
+        View view = inflater.inflate(R.layout.list_item_tweet, null);
+        ViewHolder holder = new ViewHolder(view);
+        view.setTag(holder);
+        return view;
     }
 
     @Override
     public void bindView(Tweet item, int position, View view) {
-        ImageView userProfileImageView = (ImageView) view.findViewById(R.id.user_profile_image);
-        PicassoHelper.load(getContext(), userProfileImageView, item.getUserImageUrl());
+        ViewHolder holder = (ViewHolder) view.getTag();
 
-        TextView userNameTextView = (TextView) view.findViewById(R.id.user_name_text);
-        userNameTextView.setText(item.getUserName());
-
-        TextView tweetTextView = (TextView) view.findViewById(R.id.tweet_text);
-        ViewUtils.setTweetText(tweetTextView, item.getText());
+        PicassoHelper.load(getContext(), holder.userProfileImageView, item.getUserImageUrl());
+        holder.userNameTextView.setText(item.getUserName());
+        ViewUtils.setTweetText(holder.tweetTextView, item.getText());
     }
 }
