@@ -8,36 +8,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.fragments.EpisodeDescriptionFragment;
+import rejasupotaro.rebuild.fragments.EpisodeTranscriptFragment;
 import rejasupotaro.rebuild.fragments.ShowNotesFragment;
 import rejasupotaro.rebuild.models.Episode;
 
 public class EpisodeDetailPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<String> titleList = new ArrayList<String>();
-
-    private List<Fragment> fragmentList = new ArrayList<Fragment>();
+    private PagerFragmentList pagerFragmentList = new PagerFragmentList();
 
     public EpisodeDetailPagerAdapter(FragmentManager fragmentManager, Episode episode) {
         super(fragmentManager);
-        titleList.add("DETAILS");
-        fragmentList.add(EpisodeDescriptionFragment.newInstance(episode));
-
-        titleList.add("SHOW NOTES");
-        fragmentList.add(ShowNotesFragment.newInstance(episode));
+        pagerFragmentList.add("DETAILS", EpisodeDescriptionFragment.newInstance(episode));
+        pagerFragmentList.add("SHOW NOTES", ShowNotesFragment.newInstance(episode));
+        pagerFragmentList.add("TRANSCRIPT", EpisodeTranscriptFragment.newInstance());
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fragmentList.get(position);
+        return pagerFragmentList.getFragment(position);
     }
 
     @Override
     public int getCount() {
-        return fragmentList.size();
+        return pagerFragmentList.getSize();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titleList.get(position);
+        return pagerFragmentList.getTitle(position);
+    }
+
+    private static class PagerFragmentList {
+
+        private List<String> titleList = new ArrayList<String>();
+
+        private List<Fragment> fragmentList = new ArrayList<Fragment>();
+
+        public void add(String title, Fragment fragment) {
+            titleList.add(title);
+            fragmentList.add(fragment);
+        }
+
+        public int getSize() {
+            return fragmentList.size();
+        }
+
+        public String getTitle(int position) {
+            return titleList.get(position);
+        }
+
+        public Fragment getFragment(int position) {
+            return fragmentList.get(position);
+        }
     }
 }
