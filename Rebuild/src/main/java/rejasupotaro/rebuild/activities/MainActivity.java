@@ -3,7 +3,6 @@ package rejasupotaro.rebuild.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,7 +13,6 @@ import rejasupotaro.rebuild.fragments.EpisodeListFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MenuDelegate;
-import rejasupotaro.rebuild.utils.NetworkUtils;
 
 public class MainActivity extends RoboActionBarActivity
         implements EpisodeListFragment.OnEpisodeSelectListener {
@@ -69,6 +67,7 @@ public class MainActivity extends RoboActionBarActivity
 
     private void openEpisodeDetailFragment(Episode episode) {
         startActivity(EpisodeDetailActivity.createIntent(this, episode.getEpisodeId()));
+        overridePendingTransition(R.anim.slide_up_enter, R.anim.zoom_out);
     }
 
     @Override

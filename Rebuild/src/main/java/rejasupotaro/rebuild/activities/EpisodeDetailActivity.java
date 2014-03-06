@@ -83,12 +83,23 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         return true;
     }
 
+    public void close() {
+        finish();
+        overridePendingTransition(R.anim.zoom_in, R.anim.slide_down_exit);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        close();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = true;
         switch (item.getItemId()) {
             case android.R.id.home: {
-                menuDelegate.pressHome();
+                close();
                 break;
             }
             case R.id.action_settings: {
