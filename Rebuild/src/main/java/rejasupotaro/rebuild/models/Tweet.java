@@ -28,6 +28,10 @@ public class Tweet {
         return createdAt;
     }
 
+    public String getCreatedAtText() {
+        return getCreatedAt().toString();
+    }
+
     public String getUserImageUrl() {
         return userImageUrl;
     }

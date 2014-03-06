@@ -19,6 +19,7 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
 
     private static class ViewHolder {
         ImageView userProfileImageView;
+        TextView createdAtTextView;
         TextView userNameTextView;
         TextView tweetTextView;
         TextView favoriteCountTextView;
@@ -26,6 +27,7 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
 
         public ViewHolder(View view) {
             userProfileImageView = (ImageView) view.findViewById(R.id.user_profile_image);
+            createdAtTextView = (TextView) view.findViewById(R.id.created_at_text);
             userNameTextView = (TextView) view.findViewById(R.id.user_name_text);
             tweetTextView = (TextView) view.findViewById(R.id.tweet_text);
             favoriteCountTextView = (TextView) view.findViewById(R.id.favorite_count_text);
@@ -55,7 +57,10 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
         ViewHolder holder = (ViewHolder) view.getTag();
 
         PicassoHelper.load(getContext(), holder.userProfileImageView, item.getUserImageUrl());
+        holder.createdAtTextView.setText(item.getCreatedAtText());
         holder.userNameTextView.setText(item.getUserName());
         ViewUtils.setTweetText(holder.tweetTextView, item.getText());
+        holder.favoriteCountTextView.setText(item.getFavoriteCount() + " favorites");
+        holder.retweetCountTextView.setText(item.getRetweetCount() + " retweets");
     }
 }
