@@ -22,16 +22,16 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
         TextView createdAtTextView;
         TextView userNameTextView;
         TextView tweetTextView;
-        TextView favoriteCountTextView;
         TextView retweetCountTextView;
+        TextView favoriteCountTextView;
 
         public ViewHolder(View view) {
             userProfileImageView = (ImageView) view.findViewById(R.id.user_profile_image);
             createdAtTextView = (TextView) view.findViewById(R.id.created_at_text);
             userNameTextView = (TextView) view.findViewById(R.id.user_name_text);
             tweetTextView = (TextView) view.findViewById(R.id.tweet_text);
-            favoriteCountTextView = (TextView) view.findViewById(R.id.favorite_count_text);
             retweetCountTextView = (TextView) view.findViewById(R.id.retweet_count_text);
+            favoriteCountTextView = (TextView) view.findViewById(R.id.favorite_count_text);
         }
     }
 
@@ -60,7 +60,7 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
         holder.createdAtTextView.setText(item.getCreatedAtText());
         holder.userNameTextView.setText(item.getUserName());
         ViewUtils.setTweetText(holder.tweetTextView, item.getText());
-        holder.favoriteCountTextView.setText(item.getFavoriteCount() + " favorites");
         holder.retweetCountTextView.setText(item.getRetweetCount() + " retweets");
+        holder.favoriteCountTextView.setText(item.getFavoriteCount() + " favorites");
     }
 }
