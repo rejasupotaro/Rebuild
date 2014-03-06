@@ -26,6 +26,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
                 >
             <TextView
                     android:id="@+id/episode_title"
@@ -33,12 +34,12 @@
                     android:textSize="@dimen/primary_text_size"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
             <View
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />
@@ -49,11 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-            <rejasupotaro.rebuild.views.FontAwesomeTextView
-                    android:id="@+id/episode_share_button"
-                    android:text="@string/share"
-                    style="@style/ActionButton"
-                    />
             <rejasupotaro.rebuild.views.FontAwesomeTextView
                     android:id="@+id/episode_download_button"
                     android:text="@string/download"
@@ -77,22 +73,4 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-
-    <rejasupotaro.rebuild.views.SectionHeaderView
-            android:id="@+id/section_header_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    <include layout="@layout/view_episode_description"/>
-
-    <rejasupotaro.rebuild.views.GuestListView
-            android:id="@+id/guest_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    <rejasupotaro.rebuild.views.SectionHeaderView
-            android:id="@+id/section_header_show_notes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
 </LinearLayout>

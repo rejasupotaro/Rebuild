@@ -4,10 +4,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <ListView
-            android:id="@+id/show_note_list"
-            android:layout_weight="1"
+    <rejasupotaro.rebuild.views.EpisodeMediaView
+            android:id="@+id/episode_media_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             />
 </rejasupotaro.rebuild.views.StateFrameLayout>

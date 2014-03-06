@@ -18,6 +18,7 @@
             android:padding="@dimen/padding_contents"
             android:layout_gravity="bottom"
             android:textSize="@dimen/quaternary_text_size"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />

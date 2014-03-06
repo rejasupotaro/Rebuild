@@ -37,6 +37,7 @@
         </activity>
         <activity
                 android:name=".activities.EpisodeDetailActivity"
+                android:theme="@style/TransparentRebuildTheme"
                 android:launchMode="singleTask">
         </activity>
         <activity

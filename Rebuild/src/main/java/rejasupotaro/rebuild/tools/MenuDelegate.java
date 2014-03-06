@@ -8,10 +8,10 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.activities.SettingsActivity;
+import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.utils.IntentUtils;
 
 public class MenuDelegate {
-
-    public static final String PARAM_EPISODE = "param_episode";
 
     private Activity activity;
 
@@ -20,26 +20,15 @@ public class MenuDelegate {
         this.activity = activity;
     }
 
-    public boolean onItemSelect(MenuItem item) {
-        return onItemSelect(item, new Bundle());
+    public void pressHome() {
+        activity.finish();
     }
 
-    public boolean onItemSelect(MenuItem item, Bundle params) {
-        boolean result = true;
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                activity.finish();
-                break;
-            }
-            case R.id.action_settings: {
-                activity.startActivity(SettingsActivity.createIntent(activity));
-                break;
-            }
-            default: {
-                result = activity.onOptionsItemSelected(item);
-                break;
-            }
-        }
-        return result;
+    public void pressSettings() {
+        activity.startActivity(SettingsActivity.createIntent(activity));
+    }
+
+    public void pressShare(Episode episode) {
+        IntentUtils.shareEpisode(activity, episode);
     }
 }

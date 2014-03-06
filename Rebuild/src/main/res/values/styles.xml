@@ -4,6 +4,19 @@
         <item name="android:windowAnimationStyle">@style/SlideWindowAnimationStyle</item>
     </style>
 
+    <style name="TransparentRebuildTheme" parent="RebuildTheme">
+        <item name="android:windowAnimationStyle">@style/SlideWindowAnimationStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/TransparentActionBar</item>
+        <item name="actionBarStyle">@style/TransparentActionBar</item>
+    </style>
+
+    <style name="TransparentActionBar"
+           parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
     <style name="SlideWindowAnimationStyle"
            parent="android:Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_open_enter</item>
