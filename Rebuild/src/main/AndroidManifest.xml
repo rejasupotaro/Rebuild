@@ -28,6 +28,7 @@
 
         <activity
             android:name="rejasupotaro.rebuild.activities.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,27 +38,33 @@
         </activity>
         <activity
                 android:name=".activities.EpisodeDetailActivity"
+                android:configChanges="orientation|screenSize"
                 android:theme="@style/TransparentRebuildTheme"
                 android:launchMode="singleTask">
         </activity>
         <activity
                 android:name=".activities.TimelineActivity"
+                android:configChanges="orientation|screenSize"
                 android:label="@string/label_timeline">
         </activity>
         <activity
                 android:name=".activities.SettingsActivity"
+                android:configChanges="orientation|screenSize"
                 android:label="@string/activity_settings">
         </activity>
         <activity
             android:name=".activities.ReportActivity"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.Transparent">
         </activity>
         <activity
                 android:name=".activities.AboutActivity"
+                android:configChanges="orientation|screenSize"
                 android:label="@string/activity_about">
         </activity>
         <activity
                 android:name=".activities.LicensesActivity"
+                android:configChanges="orientation|screenSize"
                 android:label="@string/activity_licenses">
         </activity>
 
