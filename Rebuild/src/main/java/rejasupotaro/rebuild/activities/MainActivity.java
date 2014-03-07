@@ -15,6 +15,7 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MenuDelegate;
+import rejasupotaro.rebuild.views.MediaBarView;
 import roboguice.inject.InjectView;
 
 public class MainActivity extends RoboActionBarActivity
@@ -26,7 +27,7 @@ public class MainActivity extends RoboActionBarActivity
     private MenuDelegate menuDelegate;
 
     @InjectView(R.id.media_bar)
-    private View mediaBar;
+    private MediaBarView mediaBar;
 
     public static Intent createIntent(Context context, Episode episode) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -69,7 +70,7 @@ public class MainActivity extends RoboActionBarActivity
     private void setupMediaBar() {
         final Episode currentListeningEpisode = PodcastPlayer.getInstance().getEpisode();
         if (currentListeningEpisode != null) {
-            mediaBar.setVisibility(View.VISIBLE);
+            mediaBar.show(currentListeningEpisode);
             mediaBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -77,7 +78,7 @@ public class MainActivity extends RoboActionBarActivity
                 }
             });
         } else {
-            mediaBar.setVisibility(View.GONE);
+            mediaBar.hide();
         }
     }
 
