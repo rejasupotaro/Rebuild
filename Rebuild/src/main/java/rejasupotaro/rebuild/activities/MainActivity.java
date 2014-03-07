@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.fragments.EpisodeListFragment;
+import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MenuDelegate;
@@ -39,14 +40,12 @@ public class MainActivity extends RoboActionBarActivity
         setContentView(R.layout.activity_main);
         startServices();
         parseIntent(getIntent());
+    }
 
-        mediaBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: implement later...
-                openEpisodeDetailFragment(34);
-            }
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupMediaBar();
     }
 
     private void parseIntent(Intent intent) {
@@ -65,6 +64,21 @@ public class MainActivity extends RoboActionBarActivity
 
     private void startServices() {
         startService(new Intent(this, PodcastPlayerService.class));
+    }
+
+    private void setupMediaBar() {
+        final Episode currentListeningEpisode = PodcastPlayer.getInstance().getEpisode();
+        if (currentListeningEpisode != null) {
+            mediaBar.setVisibility(View.VISIBLE);
+            mediaBar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openEpisodeDetailFragment(currentListeningEpisode.getEpisodeId());
+                }
+            });
+        } else {
+            mediaBar.setVisibility(View.GONE);
+        }
     }
 
     @Override
