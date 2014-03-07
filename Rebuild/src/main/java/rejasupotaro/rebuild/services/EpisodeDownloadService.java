@@ -28,6 +28,11 @@ public class EpisodeDownloadService extends IntentService {
         return intent;
     }
 
+    public static void startDownload(Context context, Episode episode) {
+        Intent intent = EpisodeDownloadService.createIntent(context, episode);
+        context.startService(intent);
+    }
+
     public EpisodeDownloadService() {
         super(TAG);
     }

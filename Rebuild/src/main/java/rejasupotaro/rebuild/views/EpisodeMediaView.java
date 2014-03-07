@@ -3,7 +3,6 @@ package rejasupotaro.rebuild.views;
 import com.squareup.otto.Subscribe;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
@@ -47,10 +46,6 @@ public class EpisodeMediaView extends LinearLayout {
     private SeekBar seekBar;
 
     private FontAwesomeTextView episodeDownloadButton;
-
-    public EpisodeMediaView(Context context) {
-        super(context);
-    }
 
     public EpisodeMediaView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -179,9 +174,8 @@ public class EpisodeMediaView extends LinearLayout {
             episodeDownloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    EpisodeDownloadService.startDownload(getContext(), episode);
                     episodeDownloadButton.setEnabled(false);
-                    Intent intent = EpisodeDownloadService.createIntent(getContext(), episode);
-                    getContext().startService(intent);
                     episodeDownloadButton.setText(getContext().getString(R.string.downloading));
                     episodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
                 }
@@ -198,6 +192,14 @@ public class EpisodeMediaView extends LinearLayout {
             updateCurrentTime(0);
         }
 
+        seekBar.setOnSeekBarChangeListener(new OnPlayerSeekListener());
+        seekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
+        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
+            seekBar.setEnabled(true);
+        } else {
+            seekBar.setEnabled(false);
+        }
+
         PodcastPlayer.getInstance().setCurrentTimeListener(
                 new PodcastPlayer.CurrentTimeListener() {
                     @Override
@@ -211,16 +213,6 @@ public class EpisodeMediaView extends LinearLayout {
                         }
                     }
                 });
-
-        seekBar.setOnSeekBarChangeListener(new OnPlayerSeekListener());
-
-        seekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
-
-        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
-            seekBar.setEnabled(true);
-        } else {
-            seekBar.setEnabled(false);
-        }
     }
 
     private void updateCurrentTime(int currentPosition) {
