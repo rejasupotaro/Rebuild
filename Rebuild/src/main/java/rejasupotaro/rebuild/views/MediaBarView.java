@@ -107,6 +107,8 @@ public class MediaBarView extends FrameLayout {
 
     public void show(Episode episode) {
         episodeTitleTextView.setText(episode.getTitle());
+        episodeTitleTextView.setSelected(true);
+        episodeTitleTextView.requestFocus();
         setupMediaPlayAndPauseButton(episode);
         rootView.setVisibility(VISIBLE);
     }

@@ -36,6 +36,10 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="@dimen/secondary_text_size"
                 android:textColor="@color/dark_gray"
+                android:textStyle="italic"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee"
+                android:singleLine="true"
                 />
         <FrameLayout
                 android:layout_width="@dimen/media_bar_height"
