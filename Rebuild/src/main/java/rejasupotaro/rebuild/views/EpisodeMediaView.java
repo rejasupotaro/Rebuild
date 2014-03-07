@@ -127,14 +127,14 @@ public class EpisodeMediaView extends LinearLayout {
                         pause(episode);
                     } else {
                         loadListener.showContent();
+                        UiAnimations.fadeOut(mediaStartButtonOnImageCover, 300, 1000);
+
                         seekBar.setEnabled(true);
                         mediaPlayAndPauseButton.setEnabled(true);
                         PodcastPlayerNotification.notify(getContext(), episode);
                     }
                 }
             });
-
-            UiAnimations.fadeOut(mediaStartButtonOnImageCover, 300, 1000);
         }
     }
 
