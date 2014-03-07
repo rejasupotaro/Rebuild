@@ -1,46 +1,68 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/media_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/media_bar_height"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding_contents"
-        android:background="@color/dark_gray"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_launcher"
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/above_shadow"
             />
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
+            android:layout_height="@dimen/media_bar_height"
+            android:orientation="horizontal"
+            android:background="@color/base_color_light_gray"
             >
+        <FrameLayout
+                android:layout_width="@dimen/media_bar_height"
+                android:layout_height="@dimen/media_bar_height"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/padding_frame"
+                >
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher"
+                    />
+        </FrameLayout>
         <TextView
+                android:id="@+id/episode_title_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/tertiary_text_size"
-                android:textColor="@android:color/white"
-                android:text="34: Snappy Links (naan)"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/secondary_text_size"
+                android:textColor="@color/dark_gray"
                 />
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/quaternary_text_size"
-                android:textColor="@android:color/white"
-                android:text="Kazuho Okuiさん (@naan) をゲストに迎えて、goto fail、Podcast トランスクリプト、Github Atom、レーティング、Flinto などについて話しました。"
-                android:singleLine="true"
-                android:ellipsize="end"
-                />
+        <FrameLayout
+                android:layout_width="@dimen/media_bar_height"
+                android:layout_height="@dimen/media_bar_height"
+                android:gravity="center"
+                android:paddingTop="@dimen/padding_frame"
+                android:paddingBottom="@dimen/padding_frame"
+                android:paddingLeft="@dimen/padding_frame"
+                >
+            <CheckBox
+                    android:id="@+id/media_play_and_pause_button"
+                    style="@style/MediaPlayAndPauseButton"
+                    android:layout_gravity="center"
+                    />
+        </FrameLayout>
+        <FrameLayout
+                android:id="@+id/media_stop_button"
+                android:layout_width="@dimen/media_bar_height"
+                android:layout_height="@dimen/media_bar_height"
+                android:layout_gravity="center"
+                android:padding="@dimen/padding_contents"
+                >
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel"
+                    />
+        </FrameLayout>
     </LinearLayout>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@android:drawable/ic_media_play"
-            />
 </LinearLayout>

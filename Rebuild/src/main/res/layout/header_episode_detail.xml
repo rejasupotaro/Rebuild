@@ -64,8 +64,8 @@
                     android:layout_height="wrap_content"
                     >
                 <CheckBox
-                        android:id="@+id/media_start_and_pause_button"
-                        style="@style/MediaStartAndPauseButton"
+                        android:id="@+id/media_play_and_pause_button"
+                        style="@style/MediaPlayAndPauseButton"
                         android:layout_marginLeft="@dimen/margin_icon_button"
                         android:layout_gravity="center"
                         />
