@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import javax.inject.Inject;
 
@@ -68,18 +67,14 @@ public class MainActivity extends RoboActionBarActivity
     }
 
     private void setupMediaBar() {
-        final Episode currentListeningEpisode = PodcastPlayer.getInstance().getEpisode();
-        if (currentListeningEpisode != null) {
-            mediaBar.show(currentListeningEpisode);
-            mediaBar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    openEpisodeDetailFragment(currentListeningEpisode.getEpisodeId());
-                }
-            });
-        } else {
-            mediaBar.hide();
-        }
+        mediaBar.setEpisode(
+                PodcastPlayer.getInstance().getEpisode(),
+                new MediaBarView.OnMediaBarClickListener() {
+                    @Override
+                    public void onClick(Episode episode) {
+                        openEpisodeDetailFragment(episode.getEpisodeId());
+                    }
+                });
     }
 
     @Override
