@@ -25,6 +25,17 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     private StateChangedListener stateChangedListener;
 
+    private PlayerStatus playerStatus = PlayerStatus.STOPPED;
+
+    @Override
+    public boolean isPlaying() {
+        return (playerStatus == PlayerStatus.PLAYING);
+    }
+
+    public boolean isStopped() {
+        return (playerStatus == PlayerStatus.STOPPED);
+    }
+
     private PodcastPlayer() {
         super();
     }
@@ -56,6 +67,8 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
     }
 
     public void start(Context context, Episode episode, StateChangedListener stateChangedListener) {
+        playerStatus = playerStatus.PREPARING;
+
         this.episode = episode;
         this.stateChangedListener = stateChangedListener;
 
@@ -78,17 +91,26 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
     }
 
     @Override
+    public void pause() {
+        super.pause();
+        playerStatus = PlayerStatus.PAUSED;
+    }
+
+    @Override
     public void stop() {
         if (isPlaying()) {
-            super.stop();
+            super.pause();
         }
         super.seekTo(0);
+        playerStatus = PlayerStatus.STOPPED;
     }
 
     @Override
     public void onPrepared(MediaPlayer mp) {
+        playerStatus = PlayerStatus.PREPARED;
         start();
         stateChangedListener.onStart();
+        playerStatus = PlayerStatus.PLAYING;
     }
 
     public static interface StateChangedListener {
@@ -97,5 +119,13 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     public static interface CurrentTimeListener {
         public void onTick(int currentPosition);
+    }
+
+    public enum PlayerStatus {
+        PREPARING,
+        PAUSED,
+        PLAYING,
+        STOPPED,
+        PREPARED,
     }
 }

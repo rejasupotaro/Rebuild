@@ -96,7 +96,7 @@ public class EpisodeMediaView extends LinearLayout {
             mediaStartButtonOnImageCover.setVisibility(View.GONE);
         } else {
             mediaPlayAndPauseButton.setChecked(false);
-            if (podcastPlayer.getCurrentPosition() == 0) {
+            if (podcastPlayer.isPlaying()) {
                 mediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
                 mediaStartButtonOnImageCover.setAlpha(1);
             }
