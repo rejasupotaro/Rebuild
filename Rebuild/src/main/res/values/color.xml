@@ -7,4 +7,5 @@
     <color name="smoke_black">#aa000000</color>
     <color name="smoke_white">#aaffffff</color>
     <color name="bg_pressed">#6633B5E5</color>
+    <color name="navy">#285179</color>
 </resources>

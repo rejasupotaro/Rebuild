@@ -10,6 +10,7 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.views.FontAwesomeTextView;
 
 public class EpisodeListAdapter extends BindableAdapter<Episode> {
 
@@ -17,11 +18,14 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
         TextView postedAtTextView;
         TextView titleTextView;
         TextView subtitleTextView;
+        FontAwesomeTextView downloadStateTextView;
 
         public ViewHolder(View view) {
             postedAtTextView = (TextView) view.findViewById(R.id.episode_posted_at);
             titleTextView = (TextView) view.findViewById(R.id.episode_title);
             subtitleTextView = (TextView) view.findViewById(R.id.episode_subtitle);
+            downloadStateTextView = (FontAwesomeTextView) view.findViewById(R.id.episode_download_state);
+            downloadStateTextView.prepend(FontAwesomeTextView.Icon.DOWNLOAD);
         }
     }
 
@@ -44,5 +48,11 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
         holder.postedAtTextView.setText(item.getPostedAt());
         holder.titleTextView.setText(item.getTitle());
         holder.subtitleTextView.setText(item.getDescription());
+
+        if (item.isDownloaded()) {
+            holder.downloadStateTextView.setVisibility(View.VISIBLE);
+        } else {
+            holder.downloadStateTextView.setVisibility(View.GONE);
+        }
     }
 }

@@ -10,17 +10,11 @@ import rejasupotaro.rebuild.models.Episode;
 
 public final class IntentUtils {
 
-    private static final String URL_GITHUB_REPOSITORY = "https://github.com/rejasupotaro/Rebuild";
-
     private static final String URL_TWITTER = "https://twitter.com/";
 
     private static final String URL_REBUILD = "http://rebuild.fm";
 
     private IntentUtils() {}
-
-    public static void openGitHubRepository(Context context) {
-        openBrowser(context, URL_GITHUB_REPOSITORY);
-    }
 
     public static void openTwitter(Context context, long tweetId, String userName) {
         openBrowser(context, "https://twitter.com/" + userName + "/status/" + tweetId);
