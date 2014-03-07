@@ -4,11 +4,34 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_frame"
         >
-    <ListView
-            android:id="@+id/tweet_list"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:orientation="vertical"
+            >
+        <ListView
+                android:id="@+id/tweet_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_frame"
+                android:layout_weight="1"
+                />
+        <FrameLayout
+                android:id="@+id/compose_tweet_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_frame"
+                android:background="@color/gray"
+                >
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_contents"
+                    android:background="@drawable/bg_compose_tweet_text"
+                    android:text="Compose new Tweet..."
+                    android:textColor="@color/gray"
+                    />
+        </FrameLayout>
+    </LinearLayout>
 </rejasupotaro.rebuild.views.StateFrameLayout>

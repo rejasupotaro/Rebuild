@@ -36,6 +36,9 @@ public class TimelineActivity extends RoboActionBarActivity {
     @InjectView(R.id.tweet_list)
     private ListView tweetListView;
 
+    @InjectView(R.id.compose_tweet_button)
+    private View composeTweetButton;
+
     private TweetListAdapter tweetListAdapter;
 
     @Inject
@@ -48,6 +51,7 @@ public class TimelineActivity extends RoboActionBarActivity {
 
         setupActionBar();
         setupTweetListView();
+        setupComposeTweetButton();
     }
 
     private void setupActionBar() {
@@ -82,6 +86,15 @@ public class TimelineActivity extends RoboActionBarActivity {
         });
 
         requestTweetList();
+    }
+
+    private void setupComposeTweetButton() {
+        composeTweetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentUtils.sendPostIntent(TimelineActivity.this, "#rebuildfm");
+            }
+        });
     }
 
     private boolean isFirstRequest = true;
