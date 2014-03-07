@@ -5,15 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.fragments.EpisodeListFragment;
+import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MenuDelegate;
+import rejasupotaro.rebuild.views.MediaBarView;
 import roboguice.inject.InjectView;
 
 public class MainActivity extends RoboActionBarActivity
@@ -25,7 +26,7 @@ public class MainActivity extends RoboActionBarActivity
     private MenuDelegate menuDelegate;
 
     @InjectView(R.id.media_bar)
-    private View mediaBar;
+    private MediaBarView mediaBar;
 
     public static Intent createIntent(Context context, Episode episode) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -39,14 +40,12 @@ public class MainActivity extends RoboActionBarActivity
         setContentView(R.layout.activity_main);
         startServices();
         parseIntent(getIntent());
+    }
 
-        mediaBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: implement later...
-                openEpisodeDetailFragment(34);
-            }
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupMediaBar();
     }
 
     private void parseIntent(Intent intent) {
@@ -65,6 +64,17 @@ public class MainActivity extends RoboActionBarActivity
 
     private void startServices() {
         startService(new Intent(this, PodcastPlayerService.class));
+    }
+
+    private void setupMediaBar() {
+        mediaBar.setEpisode(
+                PodcastPlayer.getInstance().getEpisode(),
+                new MediaBarView.OnMediaBarClickListener() {
+                    @Override
+                    public void onClick(Episode episode) {
+                        openEpisodeDetailFragment(episode.getEpisodeId());
+                    }
+                });
     }
 
     @Override

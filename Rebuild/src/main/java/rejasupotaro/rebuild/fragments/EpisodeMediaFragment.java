@@ -19,10 +19,14 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.views.EpisodeMediaView;
+import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 public class EpisodeMediaFragment extends RoboFragment {
+
+    @InjectView(R.id.state_frame_layout)
+    private StateFrameLayout stateFrameLayout;
 
     @InjectView(R.id.episode_media_view)
     private EpisodeMediaView episodeMediaView;
@@ -61,6 +65,7 @@ public class EpisodeMediaFragment extends RoboFragment {
         episodeMediaView.setup(episode, new LoadListener() {
             @Override
             public void showProgress() {
+                stateFrameLayout.showProgress();
             }
 
             @Override
@@ -69,6 +74,7 @@ public class EpisodeMediaFragment extends RoboFragment {
 
             @Override
             public void showContent() {
+                stateFrameLayout.showContent();
             }
         });
     }

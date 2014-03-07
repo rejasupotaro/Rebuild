@@ -3,7 +3,6 @@ package rejasupotaro.rebuild.views;
 import com.squareup.otto.Subscribe;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
@@ -18,13 +17,13 @@ import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
 import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
 import rejasupotaro.rebuild.listener.LoadListener;
+import rejasupotaro.rebuild.listener.OnPlayerSeekListener;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
-import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 
@@ -42,15 +41,11 @@ public class EpisodeMediaView extends LinearLayout {
 
     private TextView mediaDurationTextView;
 
-    private CheckBox mediaStartAndPauseButton;
+    private CheckBox mediaPlayAndPauseButton;
 
     private SeekBar seekBar;
 
     private FontAwesomeTextView episodeDownloadButton;
-
-    public EpisodeMediaView(Context context) {
-        super(context);
-    }
 
     public EpisodeMediaView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -70,7 +65,7 @@ public class EpisodeMediaView extends LinearLayout {
         mediaStartButtonOnImageCover = view.findViewById(R.id.episode_detail_header_cover);
         mediaCurrentTimeTextView = (TextView) view.findViewById(R.id.media_current_time);
         mediaDurationTextView = (TextView) view.findViewById(R.id.media_duration);
-        mediaStartAndPauseButton = (CheckBox) view.findViewById(R.id.media_start_and_pause_button);
+        mediaPlayAndPauseButton = (CheckBox) view.findViewById(R.id.media_play_and_pause_button);
         seekBar = (SeekBar) view.findViewById(R.id.media_seekbar);
         episodeDownloadButton = (FontAwesomeTextView) view
                 .findViewById(R.id.episode_download_button);
@@ -91,16 +86,19 @@ public class EpisodeMediaView extends LinearLayout {
     }
 
     private void setupMediaPlayAndPauseButton(final Episode episode) {
-        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
-            mediaStartAndPauseButton.setChecked(true);
+        PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        if (podcastPlayer.isPlayingEpisode(episode) && podcastPlayer.isPlaying()) {
+            mediaPlayAndPauseButton.setChecked(true);
             mediaStartButtonOnImageCover.setVisibility(View.GONE);
         } else {
-            mediaStartAndPauseButton.setChecked(false);
-            mediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
-            mediaStartButtonOnImageCover.setAlpha(1);
+            mediaPlayAndPauseButton.setChecked(false);
+            if (podcastPlayer.isPlaying()) {
+                mediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
+                mediaStartButtonOnImageCover.setAlpha(1);
+            }
         }
 
-        mediaStartAndPauseButton.setOnCheckedChangeListener(
+        mediaPlayAndPauseButton.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -121,7 +119,7 @@ public class EpisodeMediaView extends LinearLayout {
             PodcastPlayerNotification.notify(getContext(), episode);
         } else {
             loadListener.showProgress();
-            mediaStartAndPauseButton.setEnabled(false);
+            mediaPlayAndPauseButton.setEnabled(false);
             podcastPlayer.start(getContext(), episode, new PodcastPlayer.StateChangedListener() {
                 @Override
                 public void onStart() {
@@ -129,14 +127,14 @@ public class EpisodeMediaView extends LinearLayout {
                         pause(episode);
                     } else {
                         loadListener.showContent();
+                        UiAnimations.fadeOut(mediaStartButtonOnImageCover, 300, 1000);
+
                         seekBar.setEnabled(true);
-                        mediaStartAndPauseButton.setEnabled(true);
+                        mediaPlayAndPauseButton.setEnabled(true);
                         PodcastPlayerNotification.notify(getContext(), episode);
                     }
                 }
             });
-
-            UiAnimations.fadeOut(mediaStartButtonOnImageCover, 300, 1000);
         }
     }
 
@@ -176,9 +174,8 @@ public class EpisodeMediaView extends LinearLayout {
             episodeDownloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    EpisodeDownloadService.startDownload(getContext(), episode);
                     episodeDownloadButton.setEnabled(false);
-                    Intent intent = EpisodeDownloadService.createIntent(getContext(), episode);
-                    getContext().startService(intent);
                     episodeDownloadButton.setText(getContext().getString(R.string.downloading));
                     episodeDownloadButton.prepend(FontAwesomeTextView.Icon.SPINNER);
                 }
@@ -188,6 +185,20 @@ public class EpisodeMediaView extends LinearLayout {
 
     private void setupSeekBar(final Episode episode) {
         mediaDurationTextView.setText(episode.getDuration());
+
+        if (PodcastPlayer.getInstance().isPlaying()) {
+            updateCurrentTime(PodcastPlayer.getInstance().getCurrentPosition());
+        } else {
+            updateCurrentTime(0);
+        }
+
+        seekBar.setOnSeekBarChangeListener(new OnPlayerSeekListener());
+        seekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
+        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
+            seekBar.setEnabled(true);
+        } else {
+            seekBar.setEnabled(false);
+        }
 
         PodcastPlayer.getInstance().setCurrentTimeListener(
                 new PodcastPlayer.CurrentTimeListener() {
@@ -202,32 +213,6 @@ public class EpisodeMediaView extends LinearLayout {
                         }
                     }
                 });
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                if (!PodcastPlayer.getInstance().isPlaying()) {
-                    return;
-                }
-                PodcastPlayer.getInstance().seekTo(seekBar.getProgress());
-            }
-        });
-
-        seekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
-
-        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
-            seekBar.setEnabled(true);
-        } else {
-            seekBar.setEnabled(false);
-        }
     }
 
     private void updateCurrentTime(int currentPosition) {
@@ -255,7 +240,7 @@ public class EpisodeMediaView extends LinearLayout {
         onContextExecutor.execute(getContext(), new Runnable() {
             @Override
             public void run() {
-                mediaStartAndPauseButton.setChecked(false);
+                mediaPlayAndPauseButton.setChecked(false);
             }
         });
     }
@@ -265,7 +250,7 @@ public class EpisodeMediaView extends LinearLayout {
         onContextExecutor.execute(getContext(), new Runnable() {
             @Override
             public void run() {
-                mediaStartAndPauseButton.setChecked(true);
+                mediaPlayAndPauseButton.setChecked(true);
             }
         });
     }
