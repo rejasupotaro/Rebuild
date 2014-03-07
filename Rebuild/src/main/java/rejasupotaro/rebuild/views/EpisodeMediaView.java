@@ -90,13 +90,16 @@ public class EpisodeMediaView extends LinearLayout {
     }
 
     private void setupMediaPlayAndPauseButton(final Episode episode) {
-        if (PodcastPlayer.getInstance().isPlayingEpisode(episode)) {
+        PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        if (podcastPlayer.isPlayingEpisode(episode) && podcastPlayer.isPlaying()) {
             mediaPlayAndPauseButton.setChecked(true);
             mediaStartButtonOnImageCover.setVisibility(View.GONE);
         } else {
             mediaPlayAndPauseButton.setChecked(false);
-            mediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
-            mediaStartButtonOnImageCover.setAlpha(1);
+            if (podcastPlayer.getCurrentPosition() == 0) {
+                mediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
+                mediaStartButtonOnImageCover.setAlpha(1);
+            }
         }
 
         mediaPlayAndPauseButton.setOnCheckedChangeListener(
@@ -187,6 +190,12 @@ public class EpisodeMediaView extends LinearLayout {
 
     private void setupSeekBar(final Episode episode) {
         mediaDurationTextView.setText(episode.getDuration());
+
+        if (PodcastPlayer.getInstance().isPlaying()) {
+            updateCurrentTime(PodcastPlayer.getInstance().getCurrentPosition());
+        } else {
+            updateCurrentTime(0);
+        }
 
         PodcastPlayer.getInstance().setCurrentTimeListener(
                 new PodcastPlayer.CurrentTimeListener() {
