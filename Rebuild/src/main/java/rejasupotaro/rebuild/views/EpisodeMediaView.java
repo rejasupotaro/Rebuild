@@ -18,6 +18,7 @@ import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
 import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
 import rejasupotaro.rebuild.listener.LoadListener;
+import rejasupotaro.rebuild.listener.OnPlayerSeekListener;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
@@ -211,23 +212,7 @@ public class EpisodeMediaView extends LinearLayout {
                     }
                 });
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                if (!PodcastPlayer.getInstance().isPlaying()) {
-                    return;
-                }
-                PodcastPlayer.getInstance().seekTo(seekBar.getProgress());
-            }
-        });
+        seekBar.setOnSeekBarChangeListener(new OnPlayerSeekListener());
 
         seekBar.setMax(DateUtils.durationToInt(episode.getDuration()));
 
