@@ -33,6 +33,10 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         return (playerStatus == PlayerStatus.PLAYING);
     }
 
+    public boolean isPaused() {
+        return (playerStatus == PlayerStatus.PAUSED);
+    }
+
     public boolean isStopped() {
         return (playerStatus == PlayerStatus.STOPPED);
     }

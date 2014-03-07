@@ -34,10 +34,21 @@ public class PodcastPlayerNotification {
     }
 
     public static void notify(Context context, Episode episode, int currentPosition) {
-        if (!isInBackground || episode == null || context == null) return;
+        if (!shouldNotify(context, episode)) {
+            return;
+        }
+
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, build(context, episode, currentPosition));
+    }
+
+    private static boolean shouldNotify(Context context, Episode episode) {
+        PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        return (isInBackground
+                && episode != null
+                && context != null
+                && (podcastPlayer.isPlaying() || podcastPlayer.isPaused()));
     }
 
     private static Notification build(Context context, Episode episode, int currentPosition) {

@@ -107,7 +107,9 @@ public class MediaBarView extends FrameLayout {
     }
 
     public void setEpisode(final Episode episode, final OnMediaBarClickListener listener) {
-        if (episode != null) {
+        PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        if (episode != null
+                && (podcastPlayer.isPlaying() || podcastPlayer.isPaused())) {
             rootView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
