@@ -63,6 +63,11 @@
                 android:label="@string/activity_about">
         </activity>
         <activity
+                android:name=".activities.RecentChangesActivity"
+                android:configChanges="orientation|screenSize"
+                android:label="@string/activity_recent_changes">
+        </activity>
+        <activity
                 android:name=".activities.LicensesActivity"
                 android:configChanges="orientation|screenSize"
                 android:label="@string/activity_licenses">

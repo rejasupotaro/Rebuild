@@ -16,7 +16,7 @@ import rejasupotaro.rebuild.models.AboutItem;
 import rejasupotaro.rebuild.models.Developer;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.ViewUtils;
-import rejasupotaro.rebuild.views.RecentChangesView;
+import rejasupotaro.rebuild.views.AppDescriptionView;
 import roboguice.inject.InjectView;
 
 public class AboutActivity extends RoboActionBarActivity {
@@ -42,16 +42,9 @@ public class AboutActivity extends RoboActionBarActivity {
     }
 
     private void setupAboutListItemView() {
-        ViewUtils.addFooterView(aboutItemListView, new RecentChangesView(this));
+        ViewUtils.addHeaderView(aboutItemListView, new AppDescriptionView(this));
 
         List<AboutItem> aboutItemList = new ArrayList<AboutItem>();
-        aboutItemList.add(new AboutItem.AboutItemHeader(
-                getString(R.string.about_item_header_about)));
-        aboutItemList.add(new AboutItem.AboutItemContent(
-                "",
-                "",
-                "https://github.com/rejasupotaro/Rebuild"));
-
         aboutItemList.add(new AboutItem.AboutItemHeader(
                 getString(R.string.about_item_header_developer)));
         aboutItemList.add(new AboutItem.AboutItemContent(Developer.REJASUPOTARO));
@@ -61,8 +54,6 @@ public class AboutActivity extends RoboActionBarActivity {
         aboutItemList.add(new AboutItem.AboutItemContent(Developer.HOTCHEMI));
         aboutItemList.add(new AboutItem.AboutItemContent(Developer.MOOTOH));
         aboutItemList.add(new AboutItem.AboutItemContent(Developer.HAK));
-        aboutItemList.add(new AboutItem.AboutItemHeader(
-                getString(R.string.about_item_header_recent_changes)));
 
         AboutItemListAdapter adapter = new AboutItemListAdapter(this, aboutItemList);
         aboutItemListView.setAdapter(adapter);
@@ -72,18 +63,12 @@ public class AboutActivity extends RoboActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = true;
         switch (item.getItemId()) {
-            case android.R.id.home: {
+            case android.R.id.home:
                 menuDelegate.pressHome();
                 break;
-            }
-            case R.id.action_settings: {
-                menuDelegate.pressSettings();
-                break;
-            }
-            default: {
+            default:
                 result = super.onOptionsItemSelected(item);
                 break;
-            }
         }
         return result;
     }

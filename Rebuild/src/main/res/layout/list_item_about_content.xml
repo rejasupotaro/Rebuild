@@ -1,7 +1,7 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
-        android:background="@android:color/white"
+        android:background="@drawable/bg_white_and_clickable"
         android:padding="@dimen/padding_contents"
         android:gravity="center_vertical"
         android:layout_width="match_parent"
@@ -14,7 +14,6 @@
                 />
         <TextView
                 android:id="@+id/content_text"
-                android:text="Rebuild for Android, Version 0.2.2\nCopyright © 2013 by rejasupotaro"
                 style="@style/AboutListItemText"
                 />
 </LinearLayout>

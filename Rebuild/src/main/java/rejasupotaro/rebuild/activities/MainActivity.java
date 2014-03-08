@@ -3,7 +3,6 @@ package rejasupotaro.rebuild.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -55,7 +54,6 @@ public class MainActivity extends RoboActionBarActivity
         }
 
         int episodeId = intent.getIntExtra(EXTRA_EPISODE, 0);
-        Log.e("debugging", "episodeId: " + episodeId);
         if (episodeId == 0) {
             return;
         }

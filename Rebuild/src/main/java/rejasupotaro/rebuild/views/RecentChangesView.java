@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.views;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.webkit.WebView;
 
 public class RecentChangesView extends WebView {
@@ -9,6 +10,11 @@ public class RecentChangesView extends WebView {
 
     public RecentChangesView(Context context) {
         super(context);
+        setupView();
+    }
+
+    public RecentChangesView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         setupView();
     }
 

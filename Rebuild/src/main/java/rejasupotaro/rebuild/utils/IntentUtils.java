@@ -16,6 +16,10 @@ public final class IntentUtils {
 
     private IntentUtils() {}
 
+    public static void openGitHubRepository(Context context) {
+        openBrowser(context, "https://github.com/rejasupotaro/Rebuild");
+    }
+
     public static void openTwitter(Context context, long tweetId, String userName) {
         openBrowser(context, "https://twitter.com/" + userName + "/status/" + tweetId);
     }

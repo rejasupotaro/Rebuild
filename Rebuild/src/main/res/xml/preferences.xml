@@ -7,16 +7,17 @@
             android:summary="@string/pref_summary_notification_episodes" />
     </PreferenceCategory>
     <PreferenceCategory android:title="MORE">
-        <Preference android:title="@string/pref_title_website">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="http://rebuild.fm/" />
-        </Preference>
         <Preference android:title="@string/pref_title_about">
             <intent
                     android:action="android.intent.action.VIEW"
                     android:targetPackage="rejasupotaro.rebuild"
                     android:targetClass="rejasupotaro.rebuild.activities.AboutActivity"/>
+        </Preference>
+        <Preference android:title="@string/pref_title_recent_changes">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:targetPackage="rejasupotaro.rebuild"
+                    android:targetClass="rejasupotaro.rebuild.activities.RecentChangesActivity"/>
         </Preference>
         <Preference android:title="@string/pref_title_licenses">
             <intent

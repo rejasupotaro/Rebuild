@@ -67,7 +67,6 @@ public class GuestListView extends LinearLayout {
     }
 
     public View createGuestView(final Guest guest) {
-
         View view = View.inflate(getContext(), R.layout.list_item_guest, null);
 
         View twitterProfileButton = view.findViewById(R.id.twitter_profile_button);

@@ -85,7 +85,11 @@
 
     <style name="AboutListItemText">
         <item name="android:layout_marginLeft">@dimen/padding_contents</item>
-        <item name="android:textSize">@dimen/tertiary_text_size</item>
+        <item name="android:textSize">@dimen/primary_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowDx">8</item>
+        <item name="android:shadowDy">8</item>
+        <item name="android:shadowRadius">8</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
