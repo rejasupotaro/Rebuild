@@ -5,14 +5,17 @@
             android:id="@+id/action_share"
             android:icon="@android:drawable/ic_menu_share"
             android:title="@string/action_share"
-            rebuild:showAsAction="ifRoom"/>
-    <item
-            android:id="@+id/action_settings"
-            android:title="@string/action_settings"
-            rebuild:showAsAction="never"/>
+            rebuild:showAsAction="ifRoom"
+            />
     <item
             android:id="@+id/action_download_or_clear_cache"
             android:title="@string/download"
-            rebuild:showAsAction="never"/>
+            rebuild:showAsAction="never"
+            />
+    <item
+            android:id="@+id/action_settings"
+            android:title="@string/action_settings"
+            rebuild:showAsAction="never"
+            />
 </menu>
 
