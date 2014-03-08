@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import rejasupotaro.rebuild.BuildConfig;
 import rejasupotaro.rebuild.fragments.EpisodeDescriptionFragment;
 import rejasupotaro.rebuild.fragments.EpisodeTranscriptFragment;
 import rejasupotaro.rebuild.fragments.ShowNotesFragment;
@@ -20,7 +21,9 @@ public class EpisodeDetailPagerAdapter extends FragmentStatePagerAdapter {
         super(fragmentManager);
         pagerFragmentList.add("DETAILS", EpisodeDescriptionFragment.newInstance(episode));
         pagerFragmentList.add("SHOW NOTES", ShowNotesFragment.newInstance(episode));
-        pagerFragmentList.add("TRANSCRIPT", EpisodeTranscriptFragment.newInstance());
+        if (BuildConfig.DEBUG) {
+            pagerFragmentList.add("TRANSCRIPT", EpisodeTranscriptFragment.newInstance());
+        }
     }
 
     @Override
