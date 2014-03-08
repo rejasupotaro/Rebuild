@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.EpisodeDetailPagerAdapter;
+import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
@@ -58,12 +59,20 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
 
+        BusProvider.getInstance().register(this);
+
         currentEpisode = Episode.findById(episodeId);
         setupActionBar(currentEpisode);
         EpisodeMediaFragment episodeMediaFragment =
                 (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_episode_media);
         episodeMediaFragment.setup(currentEpisode);
         setupViewPager(currentEpisode);
+    }
+
+    @Override
+    public void onDestroy() {
+        BusProvider.getInstance().unregister(this);
+        super.onDestroy();
     }
 
     private void setupActionBar(Episode episode) {

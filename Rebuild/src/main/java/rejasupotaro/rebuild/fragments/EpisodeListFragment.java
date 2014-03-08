@@ -11,6 +11,8 @@ import android.widget.ListView;
 
 import com.google.inject.Inject;
 
+import com.squareup.otto.Subscribe;
+
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
@@ -18,8 +20,11 @@ import rejasupotaro.rebuild.activities.TimelineActivity;
 import rejasupotaro.rebuild.adapters.EpisodeListAdapter;
 import rejasupotaro.rebuild.api.RssFeedClient;
 import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
+import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.ViewUtils;
@@ -41,6 +46,9 @@ public class EpisodeListFragment extends RoboFragment {
 
     private OnEpisodeSelectListener listener;
 
+    @Inject
+    private MainThreadExecutor mainThreadExecutor;
+
     public static interface OnEpisodeSelectListener {
         public void onSelect(Episode episode);
     }
@@ -54,6 +62,7 @@ public class EpisodeListFragment extends RoboFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        BusProvider.getInstance().register(this);
         View view = inflater.inflate(R.layout.fragment_episode_list, null);
         return view;
     }
@@ -63,6 +72,12 @@ public class EpisodeListFragment extends RoboFragment {
         super.onActivityCreated(savedInstanceState);
         setupListView();
         requestFeed();
+    }
+
+    @Override
+    public void onDestroyView() {
+        BusProvider.getInstance().unregister(this);
+        super.onDestroyView();
     }
 
     private void setupListView() {
@@ -144,5 +159,25 @@ public class EpisodeListFragment extends RoboFragment {
     public void setupEpisodeListView(List<Episode> episodeList) {
         EpisodeListAdapter episodeListAdapter = new EpisodeListAdapter(getActivity(), episodeList);
         episodeListView.setAdapter(episodeListAdapter);
+    }
+
+    @Subscribe
+    public void onEpisodeDownloadComplete(final DownloadEpisodeCompleteEvent event) {
+        mainThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                requestFeed();
+            }
+        });
+    }
+
+    @Subscribe
+    public void onEpisodeCacheCleared(final ClearEpisodeCacheEvent event) {
+        mainThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                requestFeed();
+            }
+        });
     }
 }
