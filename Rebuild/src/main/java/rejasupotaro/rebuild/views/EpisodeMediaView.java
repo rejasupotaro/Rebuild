@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.EpisodePlayStartEvent;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
 import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
 import rejasupotaro.rebuild.listener.LoadListener;
@@ -125,6 +126,7 @@ public class EpisodeMediaView extends LinearLayout {
                         seekBar.setEnabled(true);
                         mediaPlayAndPauseButton.setEnabled(true);
                         PodcastPlayerNotification.notify(getContext(), episode);
+                        BusProvider.getInstance().post(new EpisodePlayStartEvent(episode.getEpisodeId()));
                     }
                 }
             });

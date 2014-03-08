@@ -1,5 +1,7 @@
 package rejasupotaro.rebuild.activities;
 
+import com.squareup.otto.Subscribe;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +11,13 @@ import android.view.MenuItem;
 import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.EpisodePlayStartEvent;
 import rejasupotaro.rebuild.fragments.EpisodeListFragment;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
+import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.views.MediaBarView;
 import roboguice.inject.InjectView;
@@ -28,6 +33,9 @@ public class MainActivity extends RoboActionBarActivity
     @InjectView(R.id.media_bar)
     private MediaBarView mediaBar;
 
+    @Inject
+    private MainThreadExecutor mainThreadExecutor;
+
     public static Intent createIntent(Context context, int episodeId) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(EXTRA_EPISODE, episodeId);
@@ -38,6 +46,7 @@ public class MainActivity extends RoboActionBarActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BusProvider.getInstance().register(this);
         startServices();
         parseIntent(getIntent());
     }
@@ -45,7 +54,13 @@ public class MainActivity extends RoboActionBarActivity
     @Override
     public void onResume() {
         super.onResume();
-        setupMediaBar();
+        setupMediaBar(PodcastPlayer.getInstance().getEpisode());
+    }
+
+    @Override
+    public void onDestroy() {
+        BusProvider.getInstance().unregister(this);
+        super.onDestroy();
     }
 
     private void parseIntent(Intent intent) {
@@ -65,9 +80,9 @@ public class MainActivity extends RoboActionBarActivity
         startService(new Intent(this, PodcastPlayerService.class));
     }
 
-    private void setupMediaBar() {
+    private void setupMediaBar(Episode episode) {
         mediaBar.setEpisode(
-                PodcastPlayer.getInstance().getEpisode(),
+                episode,
                 new MediaBarView.OnMediaBarClickListener() {
                     @Override
                     public void onClick(Episode episode) {
@@ -96,19 +111,27 @@ public class MainActivity extends RoboActionBarActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = true;
         switch (item.getItemId()) {
-            case android.R.id.home: {
+            case android.R.id.home:
                 menuDelegate.pressHome();
                 break;
-            }
-            case R.id.action_settings: {
+            case R.id.action_settings:
                 menuDelegate.pressSettings();
                 break;
-            }
-            default: {
+            default:
                 result = super.onOptionsItemSelected(item);
                 break;
-            }
         }
         return result;
+    }
+
+    @Subscribe
+    public void onEpisodePlayStart(final EpisodePlayStartEvent event) {
+        final Episode episode = Episode.findById(event.getEpisodeId());
+        mainThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                setupMediaBar(episode);
+            }
+        });
     }
 }
