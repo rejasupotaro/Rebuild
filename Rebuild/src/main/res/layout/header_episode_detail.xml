@@ -51,11 +51,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/pager_tab_strip_height"
                 >
-            <rejasupotaro.rebuild.views.FontAwesomeTextView
-                    android:id="@+id/episode_download_button"
-                    android:text="@string/download"
-                    style="@style/ActionButton"
-                    />
             <LinearLayout
                     android:id="@+id/media_control_view"
                     android:background="@drawable/above_shadow"

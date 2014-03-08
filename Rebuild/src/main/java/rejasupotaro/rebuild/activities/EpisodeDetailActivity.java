@@ -1,5 +1,7 @@
 package rejasupotaro.rebuild.activities;
 
+import com.squareup.otto.Subscribe;
+
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +16,12 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.EpisodeDetailPagerAdapter;
+import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.tools.MenuDelegate;
+import rejasupotaro.rebuild.utils.ToastUtils;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
@@ -39,6 +44,9 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @Inject
     private MenuDelegate menuDelegate;
+
+    @Inject
+    private MainThreadExecutor mainThreadExecutor;
 
     public static Intent createIntent(Context context, int episodeId) {
         Intent intent = new Intent(context, EpisodeDetailActivity.class);
@@ -127,5 +135,20 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 break;
         }
         return result;
+    }
+
+    @Subscribe
+    public void onEpisodeDownloadComplete(final DownloadEpisodeCompleteEvent event) {
+        mainThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                Episode episode = event.getEpisode();
+                String message = getString(
+                        R.string.episode_download_completed,
+                        episode.getTitle());
+                ToastUtils.show(EpisodeDetailActivity.this, message);
+                updateMenuTitles(episode);
+            }
+        });
     }
 }
