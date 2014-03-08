@@ -48,7 +48,7 @@ public class EpisodeMediaView extends LinearLayout {
 
     public void setup(Episode episode, LoadListener loadListener) {
         BusProvider.getInstance().register(this);
-        View view = inflate(getContext(), R.layout.header_episode_detail, null);
+        View view = inflate(getContext(), R.layout.episode_media_view, null);
         findViews(view);
         addView(view);
         setEpisode(episode);
