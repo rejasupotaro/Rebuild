@@ -17,7 +17,6 @@ import rejasupotaro.rebuild.adapters.EpisodeDetailPagerAdapter;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MenuDelegate;
-import rejasupotaro.rebuild.utils.IntentUtils;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 

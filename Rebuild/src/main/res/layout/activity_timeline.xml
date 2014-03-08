@@ -20,7 +20,7 @@
         <FrameLayout
                 android:id="@+id/compose_tweet_button"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/media_bar_height"
+                android:layout_height="@dimen/common_tool_bar_height"
                 android:padding="@dimen/padding_frame"
                 android:background="@color/gray"
                 >

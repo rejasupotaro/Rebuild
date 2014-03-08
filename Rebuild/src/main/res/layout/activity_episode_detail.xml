@@ -13,6 +13,7 @@
         />
     <android.support.v4.view.ViewPager
             android:id="@+id/episode_detail_view_pager"
+            android:layout_marginTop="-38dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -20,10 +21,9 @@
         <android.support.v4.view.PagerTabStrip
                 android:id="@+id/pager_tab_strip"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/dark_gray"
+                android:layout_height="@dimen/pager_tab_strip_height"
+                android:background="@color/smoke_black"
                 android:textColor="@android:color/white"
-                android:paddingTop="@dimen/padding_contents"
-                android:paddingBottom="@dimen/padding_contents" />
+                />
     </android.support.v4.view.ViewPager>
 </LinearLayout>

@@ -49,6 +49,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/pager_tab_strip_height"
                 >
             <rejasupotaro.rebuild.views.FontAwesomeTextView
                     android:id="@+id/episode_download_button"
@@ -57,7 +58,7 @@
                     />
             <LinearLayout
                     android:id="@+id/media_control_view"
-                    android:background="@color/smoke_black"
+                    android:background="@drawable/above_shadow"
                     android:orientation="horizontal"
                     android:gravity="center"
                     android:layout_width="match_parent"
