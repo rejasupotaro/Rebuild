@@ -34,12 +34,12 @@
                     android:textSize="@dimen/primary_text_size"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
             <View
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />
