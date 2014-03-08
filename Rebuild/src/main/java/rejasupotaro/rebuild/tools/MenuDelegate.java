@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.activities.SettingsActivity;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.IntentUtils;
 
 public class MenuDelegate {
@@ -30,5 +31,13 @@ public class MenuDelegate {
 
     public void pressShare(Episode episode) {
         IntentUtils.shareEpisode(activity, episode);
+    }
+
+    public void pressDownloadOrClearCache(Episode episode) {
+        if (episode.isDownloaded()) {
+            episode.clearCache();
+        } else {
+            EpisodeDownloadService.startDownload(activity, episode);
+        }
     }
 }

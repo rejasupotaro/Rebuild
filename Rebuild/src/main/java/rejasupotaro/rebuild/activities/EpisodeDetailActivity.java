@@ -24,6 +24,8 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
+    private Menu menu;
+
     @InjectExtra(value = EXTRA_EPISODE_ID)
     private int episodeId;
 
@@ -79,7 +81,18 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.episode_detail, menu);
+        this.menu = menu;
+        updateMenuTitles(episode);
         return true;
+    }
+
+    private void updateMenuTitles(Episode episode) {
+        MenuItem downloadOrClearCacheMenuItem = menu.findItem(R.id.action_download_or_clear_cache);
+        if (episode.isDownloaded()) {
+            downloadOrClearCacheMenuItem.setTitle(getString(R.string.clear_cache));
+        } else {
+            downloadOrClearCacheMenuItem.setTitle(getString(R.string.download));
+        }
     }
 
     public void close() {
@@ -97,22 +110,21 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = true;
         switch (item.getItemId()) {
-            case android.R.id.home: {
+            case android.R.id.home:
                 close();
                 break;
-            }
-            case R.id.action_settings: {
+            case R.id.action_settings:
                 menuDelegate.pressSettings();
                 break;
-            }
-            case R.id.action_share: {
+            case R.id.action_share:
                 menuDelegate.pressShare(episode);
                 break;
-            }
-            default: {
+            case R.id.action_download_or_clear_cache:
+                menuDelegate.pressDownloadOrClearCache(episode);
+                break;
+            default:
                 result = super.onOptionsItemSelected(item);
                 break;
-            }
         }
         return result;
     }

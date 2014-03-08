@@ -10,5 +10,9 @@
             android:id="@+id/action_settings"
             android:title="@string/action_settings"
             rebuild:showAsAction="never"/>
+    <item
+            android:id="@+id/action_download_or_clear_cache"
+            android:title="@string/download"
+            rebuild:showAsAction="never"/>
 </menu>
 
