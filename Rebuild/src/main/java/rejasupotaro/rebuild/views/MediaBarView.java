@@ -125,11 +125,13 @@ public class MediaBarView extends FrameLayout {
         setupMediaPlayAndPauseTextView(episode);
         setupMediaPlayAndPauseButton(episode);
 
-        rootView.setVisibility(View.VISIBLE);
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up_enter);
-        animation.setFillAfter(true);
-        animation.setFillEnabled(true);
-        rootView.startAnimation(animation);
+        if (rootView.getVisibility() == View.GONE) {
+            rootView.setVisibility(View.VISIBLE);
+            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up_enter);
+            animation.setFillAfter(true);
+            animation.setFillEnabled(true);
+            rootView.startAnimation(animation);
+        }
     }
 
     private void setupMediaPlayAndPauseTextView(Episode episode) {
