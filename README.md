@@ -10,7 +10,13 @@ A [Podcast](http://rebuild.fm/) by [Tatsuhiko Miyagawa](https://twitter.com/miya
 Screenshot
 ------
 
+### Current Version
+
 <img src="https://raw2.github.com/rejasupotaro/Rebuild/master/screenshot.png">
+
+### WIP
+
+<img src="https://raw2.github.com/rejasupotaro/Rebuild/master/wip_screenshot.png">
 
 Installation
 ------
