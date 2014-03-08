@@ -6,7 +6,7 @@ import android.webkit.WebView;
 
 public class RecentChangesView extends WebView {
 
-    private static final String ABOUT_FILE_PATH = "file:///android_asset/about.html";
+    private static final String ABOUT_FILE_PATH = "file:///android_asset/recent_changes.html";
 
     public RecentChangesView(Context context) {
         super(context);
