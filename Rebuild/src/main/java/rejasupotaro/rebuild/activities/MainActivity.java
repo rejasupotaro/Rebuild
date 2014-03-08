@@ -3,6 +3,7 @@ package rejasupotaro.rebuild.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,9 +29,9 @@ public class MainActivity extends RoboActionBarActivity
     @InjectView(R.id.media_bar)
     private MediaBarView mediaBar;
 
-    public static Intent createIntent(Context context, Episode episode) {
+    public static Intent createIntent(Context context, int episodeId) {
         Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(EXTRA_EPISODE, episode);
+        intent.putExtra(EXTRA_EPISODE, episodeId);
         return intent;
     }
 
@@ -53,13 +54,13 @@ public class MainActivity extends RoboActionBarActivity
             return;
         }
 
-        Episode episode = intent.getParcelableExtra(EXTRA_EPISODE);
-        if (episode == null) {
+        int episodeId = intent.getIntExtra(EXTRA_EPISODE, 0);
+        Log.e("debugging", "episodeId: " + episodeId);
+        if (episodeId == 0) {
             return;
         }
 
-        getActionBar().hide();
-        openEpisodeDetailFragment(episode.getEpisodeId());
+        openEpisodeDetailActivity(episodeId);
     }
 
     private void startServices() {
@@ -72,7 +73,7 @@ public class MainActivity extends RoboActionBarActivity
                 new MediaBarView.OnMediaBarClickListener() {
                     @Override
                     public void onClick(Episode episode) {
-                        openEpisodeDetailFragment(episode.getEpisodeId());
+                        openEpisodeDetailActivity(episode.getEpisodeId());
                     }
                 });
     }
@@ -85,10 +86,10 @@ public class MainActivity extends RoboActionBarActivity
 
     @Override
     public void onSelect(Episode episode) {
-        openEpisodeDetailFragment(episode.getEpisodeId());
+        openEpisodeDetailActivity(episode.getEpisodeId());
     }
 
-    private void openEpisodeDetailFragment(int episodeId) {
+    private void openEpisodeDetailActivity(int episodeId) {
         startActivity(EpisodeDetailActivity.createIntent(this, episodeId));
         overridePendingTransition(R.anim.slide_up_enter, R.anim.zoom_out);
     }
