@@ -17,6 +17,7 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.loaders.GuestLoader;
 import rejasupotaro.rebuild.models.Guest;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class GuestListView extends LinearLayout {
@@ -65,9 +66,17 @@ public class GuestListView extends LinearLayout {
         });
     }
 
-    public View createGuestView(Guest guest) {
+    public View createGuestView(final Guest guest) {
 
         View view = View.inflate(getContext(), R.layout.list_item_guest, null);
+
+        View twitterProfileButton = view.findViewById(R.id.twitter_profile_button);
+        twitterProfileButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtils.openTwitterProfile(getContext(), guest.getName());
+            }
+        });
 
         TextView guestNameText = (TextView) view.findViewById(R.id.guest_name_text);
         guestNameText.setText(guest.getName());

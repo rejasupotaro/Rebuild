@@ -49,4 +49,7 @@
 
     <string name="notification_pause">Pause</string>
     <string name="notification_resume">Resume</string>
+
+    <string name="guest_profile_text">profile</string>
+    <string name="guest_website_text">website</string>
 </resources>

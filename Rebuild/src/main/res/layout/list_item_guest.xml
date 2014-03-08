@@ -14,10 +14,10 @@
             >
         <TextView
                 android:id="@+id/guest_name_text"
-                android:textStyle="bold"
-                android:textSize="@dimen/secondary_text_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/primary_text_size"
                 />
         <rejasupotaro.rebuild.views.VerticalSeparator
                 android:layout_marginTop="@dimen/padding_frame"
@@ -31,11 +31,13 @@
             android:layout_height="wrap_content"
             >
         <LinearLayout
+                android:id="@+id/twitter_profile_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/padding_contents"
                 android:layout_weight="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:background="@drawable/bg_clickable"
                 >
             <ImageView
                     android:id="@+id/profile_image"
@@ -44,34 +46,39 @@
                     />
             <TextView
                     android:id="@+id/tweets_count_text"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/padding_frame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_frame"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/tertiary_text_size"
                     />
             <TextView
                     android:id="@+id/friends_count_text"
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/tertiary_text_size"
                     />
             <TextView
                     android:id="@+id/followers_count_text"
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/tertiary_text_size"
                     />
         </LinearLayout>
         <LinearLayout
-                android:orientation="vertical"
-                android:padding="@dimen/padding_contents"
-                android:layout_weight="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingTop="@dimen/padding_contents"
+                android:paddingBottom="@dimen/padding_contents"
+                android:paddingRight="@dimen/padding_contents"
+                android:orientation="vertical"
                 >
             <TextView
-                    android:text="profile"
-                    android:textSize="@dimen/quaternary_text_size"
+                    android:text="@string/guest_profile_text"
+                    android:textSize="@dimen/secondary_text_size"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,22 +86,24 @@
             <TextView
                     android:id="@+id/description_text"
                     android:layout_marginLeft="@dimen/padding_contents"
-                    android:textSize="@dimen/quaternary_text_size"
+                    android:textSize="@dimen/tertiary_text_size"
+                    android:autoLink="all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
             <TextView
-                    android:text="website"
+                    android:text="@string/guest_website_text"
                     android:layout_marginTop="@dimen/padding_contents"
                     android:textStyle="bold"
-                    android:textSize="@dimen/quaternary_text_size"
+                    android:textSize="@dimen/secondary_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
             <TextView
                     android:id="@+id/url_text"
                     android:layout_marginLeft="@dimen/padding_contents"
-                    android:textSize="@dimen/quaternary_text_size"
+                    android:textSize="@dimen/tertiary_text_size"
+                    android:autoLink="all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
