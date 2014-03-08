@@ -14,10 +14,6 @@ Screenshot
 
 <img src="https://raw.github.com/rejasupotaro/Rebuild/master/screenshot.png">
 
-### WIP
-
-<img src="https://raw.github.com/rejasupotaro/Rebuild/master/wip_screenshot.png">
-
 Installation
 ------
 
