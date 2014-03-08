@@ -22,6 +22,8 @@ public class PodcastPlayerNotification {
 
     private static final String ACTION_TOGGLE_PLAYBACK = "action_toggle_playback";
 
+    private static final String ACTION_STOP = "action_stop";
+
     private static boolean isInBackground = false;
 
     public static void setIsInBackground(boolean isinb) {
@@ -58,6 +60,7 @@ public class PodcastPlayerNotification {
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentTitle(episode.getTitle());
         builder.setContentText(episode.getDescription());
+        builder.setProgress(DateUtils.durationToInt(episode.getDuration()), currentPosition, false);
 
         if (PodcastPlayer.getInstance().isPlaying()) {
             builder.addAction(
@@ -71,7 +74,10 @@ public class PodcastPlayerNotification {
                     getToggleIntent(context));
         }
 
-        builder.setProgress(DateUtils.durationToInt(episode.getDuration()), currentPosition, false);
+        builder.addAction(
+                android.R.drawable.ic_menu_close_clear_cancel,
+                context.getString(R.string.notification_stop),
+                getStopIntent(context));
 
         builder.setContentIntent(getLaunchIntent(context, episode.getEpisodeId()));
 
@@ -82,10 +88,17 @@ public class PodcastPlayerNotification {
     }
 
     private static PendingIntent getToggleIntent(Context context) {
-        Intent toggleIntent = new Intent(context, PodcastPlayerService.class);
-        toggleIntent.setAction(ACTION_TOGGLE_PLAYBACK);
+        Intent intent = new Intent(context, PodcastPlayerService.class);
+        intent.setAction(ACTION_TOGGLE_PLAYBACK);
         return PendingIntent.getService(
-                context, 0, toggleIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
+    private static PendingIntent getStopIntent(Context context) {
+        Intent intent = new Intent(context, PodcastPlayerService.class);
+        intent.setAction(ACTION_STOP);
+        return PendingIntent.getService(
+                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
     private static PendingIntent getLaunchIntent(Context context, int episodeId) {
@@ -94,7 +107,9 @@ public class PodcastPlayerNotification {
     }
 
     public static void cancel(Context context) {
-        if (context == null) return;
+        if (context == null) {
+            return;
+        }
 
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -113,7 +128,13 @@ public class PodcastPlayerNotification {
                 BusProvider.getInstance().post(new ReceiveResumeActionEvent());
             }
             // Update the notification itself
-            PodcastPlayerNotification.notify(context, PodcastPlayer.getInstance().getEpisode(), PodcastPlayer.getInstance().getCurrentPosition());
+            PodcastPlayerNotification.notify(
+                    context,
+                    PodcastPlayer.getInstance().getEpisode(),
+                    PodcastPlayer.getInstance().getCurrentPosition());
+        } else if (action.equals(ACTION_STOP)) {
+            PodcastPlayer.getInstance().stop();
+            cancel(context);
         }
     }
 
