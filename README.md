@@ -12,11 +12,11 @@ Screenshot
 
 ### Current Version
 
-<img src="https://raw2.github.com/rejasupotaro/Rebuild/master/screenshot.png">
+<img src="https://raw.github.com/rejasupotaro/Rebuild/master/screenshot.png">
 
 ### WIP
 
-<img src="https://raw2.github.com/rejasupotaro/Rebuild/master/wip_screenshot.png">
+<img src="https://raw.github.com/rejasupotaro/Rebuild/master/wip_screenshot.png">
 
 Installation
 ------
