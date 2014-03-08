@@ -2,6 +2,7 @@ package rejasupotaro.rebuild.models;
 
 import java.util.Date;
 
+import rejasupotaro.rebuild.utils.DateUtils;
 import twitter4j.Status;
 
 public class Tweet {
@@ -29,7 +30,7 @@ public class Tweet {
     }
 
     public String getCreatedAtText() {
-        return getCreatedAt().toString();
+        return DateUtils.createdAtToString(createdAt);
     }
 
     public String getUserImageUrl() {

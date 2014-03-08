@@ -20,16 +20,16 @@
         <FrameLayout
                 android:id="@+id/compose_tweet_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/media_bar_height"
                 android:padding="@dimen/padding_frame"
                 android:background="@color/gray"
                 >
             <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:padding="@dimen/padding_contents"
                     android:background="@drawable/bg_compose_tweet_text"
-                    android:text="Compose new Tweet..."
+                    android:text="@string/compose_new_tweet"
                     android:textColor="@color/gray"
                     />
         </FrameLayout>
