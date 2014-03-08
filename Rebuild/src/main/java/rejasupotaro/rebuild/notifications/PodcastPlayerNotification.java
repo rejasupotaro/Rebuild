@@ -53,32 +53,44 @@ public class PodcastPlayerNotification {
     }
 
     private static Notification build(Context context, Episode episode, int currentPosition) {
-        Intent pauseIntent = new Intent(context, PodcastPlayerService.class);
-        pauseIntent.setAction(ACTION_TOGGLE_PLAYBACK);
-        PendingIntent piToggle = PendingIntent.getService(
-                context, 0, pauseIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentTitle(episode.getTitle());
         builder.setContentText(episode.getDescription());
 
         if (PodcastPlayer.getInstance().isPlaying()) {
-            builder.addAction(android.R.drawable.ic_media_pause, context.getString(R.string.notification_pause), piToggle);
+            builder.addAction(
+                    android.R.drawable.ic_media_pause,
+                    context.getString(R.string.notification_pause),
+                    getToggleIntent(context));
         } else {
-            builder.addAction(android.R.drawable.ic_media_play, context.getString(R.string.notification_resume), piToggle);
+            builder.addAction(
+                    android.R.drawable.ic_media_play,
+                    context.getString(R.string.notification_resume),
+                    getToggleIntent(context));
         }
 
         builder.setProgress(DateUtils.durationToInt(episode.getDuration()), currentPosition, false);
 
-        PendingIntent launchDetail = PendingIntent.getActivity(context, 0,
-                MainActivity.createIntent(context, episode.getEpisodeId()), Intent.FLAG_ACTIVITY_NEW_TASK);
-        builder.setContentIntent(launchDetail);
+        builder.setContentIntent(getLaunchIntent(context, episode.getEpisodeId()));
 
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_NO_CLEAR;
 
         return notification;
+    }
+
+    private static PendingIntent getToggleIntent(Context context) {
+        Intent toggleIntent = new Intent(context, PodcastPlayerService.class);
+        toggleIntent.setAction(ACTION_TOGGLE_PLAYBACK);
+        return PendingIntent.getService(
+                context, 0, toggleIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
+    private static PendingIntent getLaunchIntent(Context context, int episodeId) {
+        return PendingIntent.getActivity(context, 0,
+                MainActivity.createIntent(context, episodeId), Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     public static void cancel(Context context) {
