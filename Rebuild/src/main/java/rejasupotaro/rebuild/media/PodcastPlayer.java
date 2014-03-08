@@ -65,7 +65,11 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         timer = new Timer(new Timer.Callback() {
             @Override
             public void tick(long timeMillis) {
-                currentTimeListener.onTick(getCurrentPosition());
+                if (isPlaying() || isPaused()) {
+                    currentTimeListener.onTick(getCurrentPosition());
+                } else {
+                    currentTimeListener.onTick(0);
+                }
             }
         });
         timer.start();

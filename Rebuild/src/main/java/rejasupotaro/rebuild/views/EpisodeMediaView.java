@@ -140,7 +140,7 @@ public class EpisodeMediaView extends LinearLayout {
     private boolean shouldRestart(Episode episode) {
         PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         return (podcastPlayer.isPlayingEpisode(episode)
-                && podcastPlayer.getCurrentPosition() > 0);
+                && (podcastPlayer.isPlaying() || podcastPlayer.isPaused()));
     }
 
     private void pause(final Episode episode) {
