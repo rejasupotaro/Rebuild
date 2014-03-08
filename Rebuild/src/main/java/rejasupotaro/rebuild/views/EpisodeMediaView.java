@@ -79,7 +79,8 @@ public class EpisodeMediaView extends LinearLayout {
 
     private void setupMediaPlayAndPauseButton(final Episode episode) {
         PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        if (podcastPlayer.isPlayingEpisode(episode) && podcastPlayer.isPlaying()) {
+        if (podcastPlayer.isPlayingEpisode(episode)
+                && (podcastPlayer.isPlaying() || podcastPlayer.isPaused())) {
             mediaPlayAndPauseButton.setChecked(true);
             mediaStartButtonOnImageCover.setVisibility(View.GONE);
         } else {
