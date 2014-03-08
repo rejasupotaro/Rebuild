@@ -11,6 +11,7 @@ import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.notifications.EpisodeDownloadNotification;
 
 public class EpisodeDownloadService extends IntentService {
 
@@ -56,12 +57,17 @@ public class EpisodeDownloadService extends IntentService {
         if (isDownloading(episode)) {
             return;
         }
-        downloadingEpisodeList.add(episode);
 
-        episodeDownloadClient.download(getApplicationContext(), episode);
+        try {
+            EpisodeDownloadNotification.notify(this, episode);
 
-        episode.save();
-        downloadingEpisodeList.remove(episode);
-        BusProvider.getInstance().post(new DownloadEpisodeCompleteEvent(episode));
+            downloadingEpisodeList.add(episode);
+            episodeDownloadClient.download(getApplicationContext(), episode);
+            episode.save();
+            downloadingEpisodeList.remove(episode);
+            BusProvider.getInstance().post(new DownloadEpisodeCompleteEvent(episode.getEpisodeId()));
+        } finally {
+            EpisodeDownloadNotification.cancel(this, episode);
+        }
     }
 }

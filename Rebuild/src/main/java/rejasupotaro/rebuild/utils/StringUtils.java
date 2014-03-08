@@ -1,7 +1,6 @@
 package rejasupotaro.rebuild.utils;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,6 @@ public final class StringUtils {
                 guestNameList.add(guestName);
             }
         }
-        Log.e("debugging", "size: " + guestNameList.size());
         return guestNameList;
     }
 

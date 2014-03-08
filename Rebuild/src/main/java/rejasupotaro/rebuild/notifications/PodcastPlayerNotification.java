@@ -20,11 +20,10 @@ import rejasupotaro.rebuild.utils.DateUtils;
 
 public class PodcastPlayerNotification {
 
-    private static final int NOTIFICATION_ID = 1;
-
     private static final String ACTION_TOGGLE_PLAYBACK = "action_toggle_playback";
 
     private static boolean isInBackground = false;
+
     public static void setIsInBackground(boolean isinb) {
         isInBackground = isinb;
     }
@@ -40,7 +39,9 @@ public class PodcastPlayerNotification {
 
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, build(context, episode, currentPosition));
+        notificationManager.notify(
+                getNotificationId(),
+                build(context, episode, currentPosition));
     }
 
     private static boolean shouldNotify(Context context, Episode episode) {
@@ -85,7 +86,7 @@ public class PodcastPlayerNotification {
 
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(NOTIFICATION_ID);
+        notificationManager.cancel(getNotificationId());
     }
 
     public static void handleAction(Context context, String action) {
@@ -102,5 +103,9 @@ public class PodcastPlayerNotification {
             // Update the notification itself
             PodcastPlayerNotification.notify(context, PodcastPlayer.getInstance().getEpisode(), PodcastPlayer.getInstance().getCurrentPosition());
         }
+    }
+
+    public static int getNotificationId() {
+        return NotificationId.PodcastPlayer;
     }
 }

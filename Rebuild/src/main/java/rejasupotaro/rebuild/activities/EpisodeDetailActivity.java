@@ -21,7 +21,6 @@ import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.tools.MenuDelegate;
-import rejasupotaro.rebuild.utils.ToastUtils;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
@@ -34,7 +33,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @InjectExtra(value = EXTRA_EPISODE_ID)
     private int episodeId;
 
-    private Episode episode;
+    private Episode currentEpisode;
 
     @InjectView(R.id.episode_detail_view_pager)
     private ViewPager viewPager;
@@ -59,12 +58,12 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
 
-        episode = Episode.findById(episodeId);
-        setupActionBar(episode);
+        currentEpisode = Episode.findById(episodeId);
+        setupActionBar(currentEpisode);
         EpisodeMediaFragment episodeMediaFragment =
                 (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_episode_media);
-        episodeMediaFragment.setup(episode);
-        setupViewPager(episode);
+        episodeMediaFragment.setup(currentEpisode);
+        setupViewPager(currentEpisode);
     }
 
     private void setupActionBar(Episode episode) {
@@ -90,13 +89,17 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.episode_detail, menu);
         this.menu = menu;
-        updateMenuTitles(episode);
+        updateMenuTitles(currentEpisode);
         return true;
     }
 
     private void updateMenuTitles(Episode episode) {
+        if (!currentEpisode.isSameEpisode(episode)) {
+            return;
+        }
+
         MenuItem downloadOrClearCacheMenuItem = menu.findItem(R.id.action_download_or_clear_cache);
-        if (episode.isDownloaded()) {
+        if (currentEpisode.isDownloaded()) {
             downloadOrClearCacheMenuItem.setTitle(getString(R.string.clear_cache));
         } else {
             downloadOrClearCacheMenuItem.setTitle(getString(R.string.download));
@@ -125,10 +128,11 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 menuDelegate.pressSettings();
                 break;
             case R.id.action_share:
-                menuDelegate.pressShare(episode);
+                menuDelegate.pressShare(currentEpisode);
                 break;
             case R.id.action_download_or_clear_cache:
-                menuDelegate.pressDownloadOrClearCache(episode);
+                menuDelegate.pressDownloadOrClearCache(currentEpisode);
+                updateMenuTitles(currentEpisode);
                 break;
             default:
                 result = super.onOptionsItemSelected(item);
@@ -139,14 +143,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @Subscribe
     public void onEpisodeDownloadComplete(final DownloadEpisodeCompleteEvent event) {
+        final Episode episode = Episode.findById(event.getEpisodeId());
         mainThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                Episode episode = event.getEpisode();
-                String message = getString(
-                        R.string.episode_download_completed,
-                        episode.getTitle());
-                ToastUtils.show(EpisodeDetailActivity.this, message);
                 updateMenuTitles(episode);
             }
         });

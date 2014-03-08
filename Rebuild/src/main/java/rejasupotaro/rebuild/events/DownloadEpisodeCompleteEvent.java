@@ -1,17 +1,15 @@
 package rejasupotaro.rebuild.events;
 
-import rejasupotaro.rebuild.models.Episode;
-
 public class DownloadEpisodeCompleteEvent {
 
-    private Episode episode;
+    private int episodeId;
 
-    public Episode getEpisode() {
-        return episode;
+    public int getEpisodeId() {
+        return episodeId;
     }
 
-    public DownloadEpisodeCompleteEvent(Episode episode) {
-        this.episode = episode;
+    public DownloadEpisodeCompleteEvent(int episodeId) {
+        this.episodeId = episodeId;
     }
 
 }

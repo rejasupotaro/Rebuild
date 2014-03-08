@@ -7,6 +7,7 @@ import android.os.Bundle;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 
 public class ActivityLifecycleObserver implements Application.ActivityLifecycleCallbacks {
+
     private static Object LOCK = new Object();
 
     private static ActivityLifecycleObserver INSTANCE = null;

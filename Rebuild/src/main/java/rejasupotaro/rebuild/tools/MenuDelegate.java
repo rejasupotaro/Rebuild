@@ -36,6 +36,7 @@ public class MenuDelegate {
     public void pressDownloadOrClearCache(Episode episode) {
         if (episode.isDownloaded()) {
             episode.clearCache();
+            episode.save();
         } else {
             EpisodeDownloadService.startDownload(activity, episode);
         }
