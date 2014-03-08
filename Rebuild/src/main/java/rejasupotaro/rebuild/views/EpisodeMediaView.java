@@ -82,27 +82,31 @@ public class EpisodeMediaView extends LinearLayout {
         PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         if (podcastPlayer.isPlayingEpisode(episode)
                 && (podcastPlayer.isPlaying() || podcastPlayer.isPaused())) {
-            mediaPlayAndPauseButton.setChecked(true);
             mediaStartButtonOnImageCover.setVisibility(View.GONE);
+
+            if (podcastPlayer.isPlaying()) {
+                mediaPlayAndPauseButton.setChecked(true);
+            } else {
+                mediaPlayAndPauseButton.setChecked(false);
+            }
         } else {
-            mediaPlayAndPauseButton.setChecked(false);
             if (podcastPlayer.isPlaying()) {
                 mediaStartButtonOnImageCover.setVisibility(View.VISIBLE);
                 mediaStartButtonOnImageCover.setAlpha(1);
             }
         }
 
-        mediaPlayAndPauseButton.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            start(episode);
-                        } else {
-                            pause(episode);
-                        }
-                    }
-                });
+        mediaPlayAndPauseButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayAndPauseButton.isChecked()) {
+                    start(episode);
+                } else {
+                    pause(episode);
+                }
+
+            }
+        });
     }
 
     private void start(final Episode episode) {

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -60,17 +59,16 @@ public class MediaBarView extends FrameLayout {
             mediaPlayAndPauseButton.setChecked(false);
         }
 
-        mediaPlayAndPauseButton.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            start(episode);
-                        } else {
-                            pause(episode);
-                        }
-                    }
-                });
+        mediaPlayAndPauseButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayAndPauseButton.isChecked()) {
+                    start(episode);
+                } else {
+                    pause(episode);
+                }
+            }
+        });
     }
 
     private void start(final Episode episode) {
@@ -108,25 +106,23 @@ public class MediaBarView extends FrameLayout {
 
     public void setEpisode(final Episode episode, final OnMediaBarClickListener listener) {
         PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        if (episode != null
-                && (podcastPlayer.isPlaying() || podcastPlayer.isPaused())) {
-            rootView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClick(episode);
-                }
-            });
-
-            show(episode);
-        } else {
+        if (episode == null
+                || !((podcastPlayer.isPlaying() || podcastPlayer.isPaused()))) {
             gone();
+            return;
         }
+
+        rootView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(episode);
+            }
+        });
+        show(episode);
     }
 
     private void show(Episode episode) {
-        episodeTitleTextView.setText(episode.getTitle());
-        episodeTitleTextView.setSelected(true);
-        episodeTitleTextView.requestFocus();
+        setupMediaPlayAndPauseTextView(episode);
         setupMediaPlayAndPauseButton(episode);
 
         rootView.setVisibility(View.VISIBLE);
@@ -134,6 +130,12 @@ public class MediaBarView extends FrameLayout {
         animation.setFillAfter(true);
         animation.setFillEnabled(true);
         rootView.startAnimation(animation);
+    }
+
+    private void setupMediaPlayAndPauseTextView(Episode episode) {
+        episodeTitleTextView.setText(episode.getTitle());
+        episodeTitleTextView.setSelected(true);
+        episodeTitleTextView.requestFocus();
     }
 
     private void hide() {
