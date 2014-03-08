@@ -11,6 +11,7 @@ import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.notifications.EpisodeDownloadCompleteNotificaiton;
 import rejasupotaro.rebuild.notifications.EpisodeDownloadNotification;
 
 public class EpisodeDownloadService extends IntentService {
@@ -66,6 +67,7 @@ public class EpisodeDownloadService extends IntentService {
             episode.save();
             downloadingEpisodeList.remove(episode);
             BusProvider.getInstance().post(new DownloadEpisodeCompleteEvent(episode.getEpisodeId()));
+            EpisodeDownloadCompleteNotificaiton.notify(this, episode);
         } finally {
             EpisodeDownloadNotification.cancel(this, episode);
         }

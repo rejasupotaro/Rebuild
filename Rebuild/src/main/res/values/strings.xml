@@ -16,8 +16,7 @@
     <string name="network_error_message">An error occurred while requesting rss feed.</string>
     <string name="not_implemented_yet">Not implemented yet</string>
     <string name="compose_new_tweet">Compose new Tweet...</string>
-
-    <string name="episode_download_completed">\"%1$s\" donwload is completed</string>
+    <string name="episode_download_completed">Donwload Completed</string>
 
     <string name="label_timeline">timeline</string>
 
