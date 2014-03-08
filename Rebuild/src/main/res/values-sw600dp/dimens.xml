@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="profile_image_size">64dp</dimen>
+    <dimen name="episode_image_height">320dp</dimen>
+</resources>
+

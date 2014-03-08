@@ -6,7 +6,7 @@
         >
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="@dimen/episode_image_height"
             >
 
         <ImageView
@@ -21,7 +21,7 @@
                 android:id="@+id/episode_detail_header_cover"
                 android:background="@color/smoke_black"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="@dimen/episode_image_height"
                 />
         <LinearLayout
                 android:orientation="horizontal"

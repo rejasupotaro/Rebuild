@@ -1,14 +1,9 @@
 <resources>
-    <dimen name="sliding_up_panel_height">48dp</dimen>
-    <dimen name="media_controller_view_height">64dp</dimen>
-
     <dimen name="padding_frame">6dp</dimen>
     <dimen name="padding_seekbar">8dp</dimen>
     <dimen name="padding_contents">12dp</dimen>
 
     <dimen name="margin_icon_button">6dp</dimen>
-
-    <dimen name="action_button_border_width">2dp</dimen>
 
     <dimen name="ic_button_primary">56dp</dimen>
     <dimen name="ic_button_secondary">40dp</dimen>
@@ -18,11 +13,15 @@
     <dimen name="tertiary_text_size">14sp</dimen>
     <dimen name="quaternary_text_size">12sp</dimen>
 
+    <dimen name="episode_posted_at_text_shape_size">60dp</dimen>
+    <dimen name="profile_image_size">48dp</dimen>
+
+    <dimen name="action_button_border_width">2dp</dimen>
+
+    <dimen name="sliding_up_panel_height">48dp</dimen>
+    <dimen name="media_controller_view_height">64dp</dimen>
     <dimen name="list_item_show_note_height">120dp</dimen>
     <dimen name="common_tool_bar_height">56dp</dimen>
     <dimen name="pager_tab_strip_height">38dp</dimen>
-
-    <dimen name="episode_posted_at_text_shape_size">60dp</dimen>
-
-    <dimen name="profile_image_size">48dp</dimen>
+    <dimen name="episode_image_height">240dp</dimen>
 </resources>
