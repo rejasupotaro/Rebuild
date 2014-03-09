@@ -11,25 +11,34 @@ import java.util.regex.Pattern;
 
 public final class ViewUtils {
 
+    private static final Linkify.TransformFilter defaultFilter = new Linkify.TransformFilter() {
+        public final String transformUrl(final Matcher match, String url) {
+            return match.group();
+        }
+    };
+
     public static void setTweetText(TextView textView, String text) {
         textView.setText(text);
 
-        Linkify.TransformFilter filter = new Linkify.TransformFilter() {
-            public final String transformUrl(final Matcher match, String url) {
-                return match.group();
-            }
-        };
+        Pattern rebuildPattern = Pattern.compile("rebuild.fm([/A-Za-z0-9_-]*)");
+        String httpScheme = "http://";
+        Linkify.addLinks(textView, rebuildPattern, httpScheme, null, defaultFilter);
 
         Pattern mentionPattern = Pattern.compile("@([A-Za-z0-9_-]+)");
         String mentionScheme = "http://www.twitter.com/";
-        Linkify.addLinks(textView, mentionPattern, mentionScheme, null, filter);
+        Linkify.addLinks(textView, mentionPattern, mentionScheme, null, defaultFilter);
 
         Pattern hashtagPattern = Pattern.compile("#([A-Za-z0-9_-]+)");
         String hashtagScheme = "http://www.twitter.com/search/";
-        Linkify.addLinks(textView, hashtagPattern, hashtagScheme, null, filter);
+        Linkify.addLinks(textView, hashtagPattern, hashtagScheme, null, new Linkify.TransformFilter() {
+            @Override
+            public String transformUrl(Matcher match, String url) {
+                String hashtag = match.group();
+                return hashtag.substring(1, hashtag.length());
+            }
+        });
 
-        Pattern urlPattern = Patterns.WEB_URL;
-        Linkify.addLinks(textView, urlPattern, null, null, filter);
+        Linkify.addLinks(textView, Patterns.WEB_URL, null, null, defaultFilter);
     }
 
     public static void addHeaderView(ListView listView, View view) {
