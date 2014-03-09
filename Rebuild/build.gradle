@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
@@ -12,9 +11,9 @@ buildscript {
 
 apply plugin: 'android'
 apply plugin: 'calabash-test'
+apply from : "${rootDir}/gradle/gradle-findbugs/findbugs.gradle"
 
 repositories {
-    mavenCentral()
     maven { url 'https://raw.github.com/rejasupotaro/AsyncRssClient/master/AsyncRssClient/repository' }
     maven { url 'https://raw.github.com/rejasupotaro/RobotGirl/master/RobotGirl/repository' }
 }
