@@ -75,7 +75,7 @@ public class RssFeedClient extends AbstractHttpClient {
         List<Episode> episodeList = Episode.newEpisodeFromEntity(rssItemList);
 
         if (Episode.refreshTable(episodeList) || shouldUpdateListView) {
-            handler.onSuccess(episodeList);
+            handler.onSuccess(Episode.find());
         } else {
             // nothing to do
         }
