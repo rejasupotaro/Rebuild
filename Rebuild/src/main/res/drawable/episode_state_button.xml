@@ -6,7 +6,7 @@
             android:radius="12px"
             />
     <solid
-            android:color="@color/navy"
+            android:color="@color/indian_red"
             />
 </shape>
 
