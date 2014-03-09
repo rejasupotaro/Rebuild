@@ -42,6 +42,8 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @InjectView(R.id.pager_tab_strip)
     private PagerTabStrip pagerTabStrip;
 
+    private EpisodeMediaFragment episodeMediaFragment;
+
     @Inject
     private MenuDelegate menuDelegate;
 
@@ -63,8 +65,8 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
         currentEpisode = Episode.findById(episodeId);
         setupActionBar(currentEpisode);
-        EpisodeMediaFragment episodeMediaFragment =
-                (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_episode_media);
+        episodeMediaFragment = (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(
+                R.id.fragment_episode_media);
         episodeMediaFragment.setup(currentEpisode);
         setupViewPager(currentEpisode);
     }
@@ -103,10 +105,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     }
 
     private void updateMenuTitles(Episode episode) {
-        if (!currentEpisode.isSameEpisode(episode)) {
-            return;
-        }
-
         MenuItem downloadOrClearCacheMenuItem = menu.findItem(R.id.action_download_or_clear_cache);
         if (currentEpisode.isDownloaded()) {
             downloadOrClearCacheMenuItem.setTitle(getString(R.string.clear_cache));
@@ -153,10 +151,17 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @Subscribe
     public void onEpisodeDownloadComplete(final DownloadEpisodeCompleteEvent event) {
         final Episode episode = Episode.findById(event.getEpisodeId());
+        if (!currentEpisode.isSameEpisode(episode)) {
+            return;
+        }
+
+        currentEpisode = episode;
+
         mainThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                updateMenuTitles(episode);
+                updateMenuTitles(currentEpisode);
+                episodeMediaFragment.setup(currentEpisode);
             }
         });
     }

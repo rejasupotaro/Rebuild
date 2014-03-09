@@ -59,7 +59,6 @@ public class EpisodeMediaFragment extends RoboFragment {
         if (episode == null) {
             getActivity().finish();
         }
-
         this.episode = episode;
 
         episodeMediaView.setup(episode, new LoadListener() {
@@ -77,6 +76,10 @@ public class EpisodeMediaFragment extends RoboFragment {
                 stateFrameLayout.showContent();
             }
         });
+    }
+
+    public void updateEpisodeMediaView() {
+
     }
 
     @Subscribe

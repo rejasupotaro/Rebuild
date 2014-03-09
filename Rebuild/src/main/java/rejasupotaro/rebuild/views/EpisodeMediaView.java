@@ -6,7 +6,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -26,6 +25,8 @@ import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 
 public class EpisodeMediaView extends LinearLayout {
+
+    private View rootView;
 
     private LoadListener loadListener;
 
@@ -47,11 +48,15 @@ public class EpisodeMediaView extends LinearLayout {
         super(context, attrs);
     }
 
-    public void setup(Episode episode, LoadListener loadListener) {
+    public synchronized void setup(Episode episode, LoadListener loadListener) {
         BusProvider.getInstance().register(this);
-        View view = inflate(getContext(), R.layout.episode_media_view, null);
-        findViews(view);
-        addView(view);
+
+        if (rootView == null) {
+            rootView = inflate(getContext(), R.layout.episode_media_view, null);
+            findViews(rootView);
+            addView(rootView);
+        }
+
         setEpisode(episode);
         this.loadListener = loadListener;
     }
