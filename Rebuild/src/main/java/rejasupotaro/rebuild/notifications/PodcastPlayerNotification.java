@@ -9,7 +9,6 @@ import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.activities.MainActivity;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
 import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
@@ -79,7 +78,9 @@ public class PodcastPlayerNotification {
                 context.getString(R.string.notification_stop),
                 getStopIntent(context));
 
-        builder.setContentIntent(getLaunchIntent(context, episode.getEpisodeId()));
+        PendingIntent launchIntent = NotificationDelegate.getLauchEpisodeDetailIntent(context,
+                episode.getEpisodeId());
+        builder.setContentIntent(launchIntent);
 
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_NO_CLEAR;
@@ -101,11 +102,6 @@ public class PodcastPlayerNotification {
                 context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
-    private static PendingIntent getLaunchIntent(Context context, int episodeId) {
-        return PendingIntent.getActivity(context, 0,
-                MainActivity.createIntent(context, episodeId), Intent.FLAG_ACTIVITY_NEW_TASK);
-    }
-
     public static void cancel(Context context) {
         if (context == null) {
             return;
@@ -117,7 +113,9 @@ public class PodcastPlayerNotification {
     }
 
     public static void handleAction(Context context, String action) {
-        if (TextUtils.isEmpty(action)) return;
+        if (TextUtils.isEmpty(action)) {
+            return;
+        }
 
         if (action.equals(ACTION_TOGGLE_PLAYBACK)) {
             if (PodcastPlayer.getInstance().isPlaying()) {

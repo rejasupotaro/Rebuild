@@ -4,11 +4,9 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.activities.MainActivity;
 import rejasupotaro.rebuild.models.Episode;
 
 public class EpisodeDownloadNotification {
@@ -29,9 +27,9 @@ public class EpisodeDownloadNotification {
         builder.setContentTitle(context.getString(R.string.downloading));
         builder.setContentText(episode.getTitle());
 
-        PendingIntent launchDetail = PendingIntent.getActivity(context, 0,
-                MainActivity.createIntent(context, episode.getEpisodeId()), Intent.FLAG_ACTIVITY_NEW_TASK);
-        builder.setContentIntent(launchDetail);
+        PendingIntent launchIntent = NotificationDelegate.getLauchEpisodeDetailIntent(context,
+                episode.getEpisodeId());
+        builder.setContentIntent(launchIntent);
 
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_NO_CLEAR;
