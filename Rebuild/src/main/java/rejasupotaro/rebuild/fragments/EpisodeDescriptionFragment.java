@@ -65,9 +65,10 @@ public class EpisodeDescriptionFragment extends RoboFragment {
     }
 
     private void setupSponsorTextView(Episode episode) {
-        final Sponsor sponsor = Sponsor.Parser.toSponsor(episode.getShowNotes());
+        final Sponsor sponsor = Sponsor.fromSource(episode.getShowNotes());
         if (!sponsor.isNull()) {
-            episodeSponsorTextView.setText("スポンサー: " + sponsor.getText());
+            String text = getString(R.string.episode_sponsor_text, sponsor.getText());
+            episodeSponsorTextView.setText(text);
             episodeSponsorTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

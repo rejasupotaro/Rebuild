@@ -1,4 +1,5 @@
 <p>伊藤直也さん (<a href="https://twitter.com/naoya_ito">@naoya_ito</a>) をゲストに迎えて、Flappy Bird、iOSゲーム、リモートワークなどについて話しました。</p>
+<p>スポンサー: <a href="http://railstutorial.jp/">Ruby on Rails チュートリアル</a></p>
 <h3>Show Notes</h3>
 <ul>
     <li><a href="http://d.hatena.ne.jp/naoya/20140212/1392203174">Rebuild #29 でアプリのレビューをして欲しいと話したらたくさんレビューが来た</a></li>

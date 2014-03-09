@@ -21,6 +21,7 @@
     <string name="not_implemented_yet">Not implemented yet</string>
     <string name="compose_new_tweet">Compose new Tweet...</string>
     <string name="episode_download_completed">Donwload Completed</string>
+    <string name="episode_sponsor_text">Sponsor: %1$s</string>
 
     <string name="label_timeline">timeline</string>
 

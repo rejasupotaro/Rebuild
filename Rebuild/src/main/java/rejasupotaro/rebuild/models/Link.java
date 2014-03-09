@@ -63,13 +63,18 @@ public class Link implements Parcelable {
                 return linkList;
             }
 
-            String[] lines = substringDescription(source).split("<li>");
-            for (String line : lines) {
-                if (!line.startsWith("<a href=")) continue;
-                Link link = new Link(getText(line), getHref(line));
-                linkList.add(link);
+            try {
+                String[] lines = substringDescription(source).split("<li>");
+                for (String line : lines) {
+                    if (!line.startsWith("<a href=")) continue;
+                    Link link = new Link(getText(line), getHref(line));
+                    linkList.add(link);
+                }
+                return linkList;
+            } catch (Exception e) {
+                // considering case that description format is modified
+                return linkList;
             }
-            return linkList;
         }
 
         public static String substringDescription(String source) {

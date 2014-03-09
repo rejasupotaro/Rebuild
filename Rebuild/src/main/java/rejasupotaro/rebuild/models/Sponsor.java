@@ -29,6 +29,11 @@ public class Sponsor {
         return (TextUtils.isEmpty(text) && TextUtils.isEmpty(url));
     }
 
+    public static Sponsor fromSource(String source) {
+        return Parser.toSponsor(source);
+
+    }
+
     public static class Parser {
 
         public static Sponsor toSponsor(String source) {
@@ -36,10 +41,15 @@ public class Sponsor {
                 return NULL_SPONSOR;
             }
 
-            String sponsorText = substringSponsor(source);
-            String text = getText(sponsorText);
-            String url = getUrl(sponsorText);
-            return new Sponsor(text, url);
+            try {
+                String sponsorText = substringSponsor(source);
+                String text = getText(sponsorText);
+                String url = getUrl(sponsorText);
+                return new Sponsor(text, url);
+            } catch (Exception e) {
+                // considering case that description format is modified
+                return NULL_SPONSOR;
+            }
         }
 
         public static String substringSponsor(String source) {
