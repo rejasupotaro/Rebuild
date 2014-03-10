@@ -10,7 +10,7 @@ A [Podcast](http://rebuild.fm/) by [Tatsuhiko Miyagawa](https://twitter.com/miya
 Screenshot
 ------
 
-### Current Version (0.4.1)
+### Current Version (0.4.2)
 
 <img src="https://raw.github.com/rejasupotaro/Rebuild/master/screenshot.png">
 
@@ -30,7 +30,7 @@ $ git submodule update --init
 $ ./gradlew installStagingDebug
 ```
 
-Run Test
+QA
 ------
 
 ### Run unit tests
@@ -43,6 +43,20 @@ $ ./gradlew connectedInstrumentTestStagingDebug
 
 ```
 $ ./gradlew calabashStagingDebug
+```
+
+### Run lint
+
+```
+$ ./gradlew lint
+$ open Rebuild/build/lint-results.html
+```
+
+### Run FindBugs
+
+```
+$ ./gradlew findbugs
+$ open Rebuild/build/reports/findbugs/findbugs-Rebuild.html
 ```
 
 Contributing
