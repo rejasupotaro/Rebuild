@@ -1,11 +1,9 @@
 package rejasupotaro.rebuild.utils;
 
-import android.util.Log;
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.Locale;
 
 public final class DateUtils {
@@ -27,8 +25,7 @@ public final class DateUtils {
     }
 
     public static String formatCurrentTime(int currentTime) {
-        DateFormat formatter = new SimpleDateFormat("mm:ss");
-        return formatter.format(new Date(currentTime));
+        return DurationFormatter.format(currentTime);
     }
 
     /**
@@ -37,20 +34,15 @@ public final class DateUtils {
      * @return output instance of String
      */
     public static String formatPubDate(String source) {
-        String output = "";
-
-        try {
-            DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss zzz", Locale.US);
-            Date date = formatter.parse(source);
-            int month = date.getMonth() + 1;
-            int day = date.getDate();
-            int year = 1900 + date.getYear();
-            output = monthToName(month) + " " + (day < 10 ? "0" + day : day) + " " + year;
-        } catch (ParseException e) {
-            Log.e(TAG, e.toString(), e);
+        Date date = PubDateParser.parse(source);
+        if (date == null) {
+            return "";
         }
 
-        return output;
+        int month = date.getMonth() + 1;
+        int day = date.getDate();
+        int year = 1900 + date.getYear();
+        return monthToName(month) + " " + (day < 10 ? "0" + day : day) + " " + year;
     }
 
     public static String monthToName(int month) {
@@ -96,5 +88,43 @@ public final class DateUtils {
         }
         int d = h / 24;
         return String.valueOf(d) + "d";
+    }
+
+    private static final class DurationFormatter {
+
+        public static String format(int source) {
+            StringBuilder stringBuilder = new StringBuilder();
+            Formatter formatter = new Formatter(stringBuilder, Locale.getDefault());
+
+            int totalSeconds = source / 1000;
+
+            int seconds = totalSeconds % 60;
+            int minutes = (totalSeconds / 60) % 60;
+            int hours   = totalSeconds / 3600;
+
+            stringBuilder.setLength(0);
+            if (hours > 0) {
+                return formatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
+            } else {
+                return formatter.format("%02d:%02d", minutes, seconds).toString();
+            }
+        }
+
+        private DurationFormatter() {}
+    }
+
+    private static final class PubDateParser {
+
+        private static final SimpleDateFormat FORMAT = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss zzz", Locale.US);
+
+        public static synchronized Date parse(String source) {
+            try {
+                return FORMAT.parse(source);
+            } catch (ParseException e) {
+                return null;
+            }
+        }
+
+        private PubDateParser() {}
     }
 }
