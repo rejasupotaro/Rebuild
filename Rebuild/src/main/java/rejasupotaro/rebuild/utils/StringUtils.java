@@ -1,5 +1,7 @@
 package rejasupotaro.rebuild.utils;
 
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -67,5 +69,10 @@ public final class StringUtils {
 
     private static int findEndIndex(String source) {
         return ListUtils.min(source.indexOf(')'), source.indexOf(':'), source.indexOf(' '));
+    }
+
+    public static Spanned fromHtml(String source) {
+        String replacedText = source.replaceAll("<(p|\n)*?>", "");
+        return Html.fromHtml(replacedText);
     }
 }

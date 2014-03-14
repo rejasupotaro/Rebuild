@@ -10,6 +10,7 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
 
 public class EpisodeListAdapter extends BindableAdapter<Episode> {
@@ -47,7 +48,7 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
 
         holder.postedAtTextView.setText(item.getPostedAt());
         holder.titleTextView.setText(item.getTitle());
-        holder.subtitleTextView.setText(item.getDescription());
+        holder.subtitleTextView.setText(StringUtils.fromHtml(item.getDescription()).toString());
 
         if (item.isDownloaded()) {
             holder.downloadStateTextView.setVisibility(View.VISIBLE);

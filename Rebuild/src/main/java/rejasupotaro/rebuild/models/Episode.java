@@ -162,12 +162,18 @@ public class Episode extends Model implements Parcelable {
         return new Episode(
                 buildIdFromLink(rssItem.getLink()),
                 rssItem.getTitle(),
-                rssItem.getSubtitle(),
+                getDescription(rssItem),
                 rssItem.getLink(),
                 rssItem.getPubDate(),
                 rssItem.getMediaEnclosure().getUrl(),
                 rssItem.getDuration(),
                 rssItem.getDescription());
+    }
+
+    private static String getDescription(RssItem rssItem) {
+        String text = rssItem.getDescription();
+        int startIndex = text.indexOf("<h3>Show Notes</h3>");
+        return StringUtils.removeNewLines(text.substring(0, startIndex));
     }
 
     public static List<Episode> newEpisodeFromEntity(List<RssItem> rssItemList) {

@@ -18,7 +18,7 @@ public final class ViewUtils {
     };
 
     public static void setTweetText(TextView textView, String text) {
-        textView.setText(text);
+        textView.setText(StringUtils.fromHtml(text));
 
         Pattern rebuildPattern = Pattern.compile("rebuild.fm([/A-Za-z0-9_-]*)");
         String httpScheme = "http://";
