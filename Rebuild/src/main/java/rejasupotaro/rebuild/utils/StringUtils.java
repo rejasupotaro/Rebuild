@@ -22,12 +22,17 @@ public final class StringUtils {
 
     public static List<String> getGuestNames(String source) {
         List<String> guestNameList = new ArrayList<String>();
-        if (TextUtils.isEmpty(source)) return guestNameList;
-        if (source.indexOf("@") < 0) return guestNameList;
+        if (TextUtils.isEmpty(source)) {
+            return guestNameList;
+        }
+        if (source.indexOf("@") < 0) {
+            return guestNameList;
+        }
 
-        String[] splitedSources = source.split("@");
-        for (int i = 1; i < splitedSources.length; i++) {
-            String guestName = getTwitterName(splitedSources[i]);
+        String normarizedText = StringUtils.removeHtmlTags(source);
+        String[] splitedText = normarizedText.split("@");
+        for (int i = 1; i < splitedText.length; i++) {
+            String guestName = getTwitterName(splitedText[i]);
             if (!TextUtils.isEmpty(guestName)) {
                 guestNameList.add(guestName);
             }
@@ -36,8 +41,12 @@ public final class StringUtils {
     }
 
     public static String buildTwitterLinkText(String source) {
-        if (TextUtils.isEmpty(source)) return "";
-        if (source.indexOf("@") < 0) return "";
+        if (TextUtils.isEmpty(source)) {
+            return "";
+        }
+        if (source.indexOf("@") < 0) {
+            return "";
+        }
 
         String[] splitedSources = source.split("@");
 
@@ -74,5 +83,9 @@ public final class StringUtils {
     public static Spanned fromHtml(String source) {
         String replacedText = source.replaceAll("<(p|\n)*?>", "");
         return Html.fromHtml(replacedText);
+    }
+
+    public static String removeHtmlTags(String source) {
+        return Html.fromHtml(source).toString();
     }
 }
