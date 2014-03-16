@@ -22,10 +22,7 @@ def versionMajor = 0
 def versionMinor = 4
 def versionPatch = 3
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
-
-def gitSha() {
-    return 'git rev-parse --short HEAD'.execute().text.trim()
-}
+def revisionHash = ["sh",  "-c",  "cd ${project.rootDir} ; git rev-parse --short HEAD"].execute().in.text.trim()
 
 android {
     compileSdkVersion 18
@@ -35,7 +32,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 18
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}-${gitSha()}"
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}-${revisionHash}"
     }
 
     def releasable = new File('../secret.gradle').exists()
