@@ -11,6 +11,7 @@ import rejasupotaro.rebuild.BuildConfig;
 import rejasupotaro.rebuild.fragments.EpisodeDescriptionFragment;
 import rejasupotaro.rebuild.fragments.EpisodeTranscriptFragment;
 import rejasupotaro.rebuild.fragments.ShowNotesFragment;
+import rejasupotaro.rebuild.fragments.TimelineFragment;
 import rejasupotaro.rebuild.models.Episode;
 
 public class EpisodeDetailPagerAdapter extends FragmentStatePagerAdapter {
@@ -21,6 +22,7 @@ public class EpisodeDetailPagerAdapter extends FragmentStatePagerAdapter {
         super(fragmentManager);
         pagerFragmentList.add("DETAILS", EpisodeDescriptionFragment.newInstance(episode));
         pagerFragmentList.add("SHOW NOTES", ShowNotesFragment.newInstance(episode));
+        pagerFragmentList.add("TIME LINE", TimelineFragment.newInstance(episode));
         if (BuildConfig.DEBUG) {
             pagerFragmentList.add("TRANSCRIPT", EpisodeTranscriptFragment.newInstance());
         }
