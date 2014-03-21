@@ -3,6 +3,7 @@ package rejasupotaro.rebuild.api;
 import org.apache.http.Header;
 
 import android.content.Context;
+import android.os.Looper;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class RssFeedClient extends AbstractHttpClient {
 
     private static final String REBUILD_FEED_URL = "http://feeds.rebuild.fm/rebuildfm";
 
-    private static final AsyncRssClient CLIENT = new AsyncRssClient();
+    private static AsyncRssClient client;
 
     public static interface EpisodeClientResponseHandler {
         public void onSuccess(List<Episode> episodeList);
@@ -32,12 +33,19 @@ public class RssFeedClient extends AbstractHttpClient {
         public void onFailure();
     }
 
-    public static void init(Context context) {
-        setUserAgent(NetworkUtils.getUserAgent(context));
+    public static void init(final Context context) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                client = new AsyncRssClient();
+                setUserAgent(NetworkUtils.getUserAgent(context));
+            }
+        }).start();
     }
 
     public static void setUserAgent(String userAgent) {
-        CLIENT.setUserAgent(userAgent);
+        client.setUserAgent(userAgent);
     }
 
     public void request(final EpisodeClientResponseHandler handler) {
@@ -52,7 +60,7 @@ public class RssFeedClient extends AbstractHttpClient {
 
     private void requestNetwork(final EpisodeClientResponseHandler handler,
                                 final boolean shouldUpdateListView) {
-        CLIENT.read(
+        client.read(
                 REBUILD_FEED_URL,
                 new AsyncRssResponseHandler() {
                     @Override
