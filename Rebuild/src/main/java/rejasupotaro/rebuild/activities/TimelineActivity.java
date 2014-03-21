@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.TweetListAdapter;
-import rejasupotaro.rebuild.listener.EndlessScrollListener;
+import rejasupotaro.rebuild.listener.MoreLoadListener;
 import rejasupotaro.rebuild.loaders.TweetLoader;
 import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MenuDelegate;
@@ -78,7 +78,7 @@ public class TimelineActivity extends RoboActionBarActivity {
             }
         });
 
-        tweetListView.setOnScrollListener(new EndlessScrollListener(tweetListView) {
+        tweetListView.setOnScrollListener(new MoreLoadListener(tweetListView) {
             @Override
             public void onLoadMore() {
                 requestTweetList();

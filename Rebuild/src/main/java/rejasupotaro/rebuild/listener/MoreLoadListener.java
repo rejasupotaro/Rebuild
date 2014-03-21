@@ -3,11 +3,11 @@ package rejasupotaro.rebuild.listener;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-public abstract class EndlessScrollListener implements AbsListView.OnScrollListener {
+public abstract class MoreLoadListener implements AbsListView.OnScrollListener {
 
     private ListView listView;
 
-    public EndlessScrollListener(ListView listView) {
+    public MoreLoadListener(ListView listView) {
         this.listView = listView;
     }
 

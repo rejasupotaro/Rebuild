@@ -35,7 +35,7 @@ public class EpisodeTweetClient extends AbstractHttpClient {
 
     public void fetch(final EpisodeTweetResponseHandler responseHandler) {
         ASYNC_HTTP_CLIENT.get(
-                "https://gist.githubusercontent.com/rejasupotaro/9683475/raw/f0ce55ee888e5859f7e79760836038528887a5dc/timeline.json",
+                "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/36",
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers,
