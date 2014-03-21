@@ -4,18 +4,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.adapters.EpisodeTweetListAdapter;
 import rejasupotaro.rebuild.api.EpisodeTweetClient;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.models.Tweet;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 
 public class TimelineFragment extends RoboFragment {
 
     private Episode episode;
+
+    @InjectView(R.id.episode_tweet_list)
+    private ListView episodeTweetListView;
+
+    private EpisodeTweetListAdapter episodeTweetListAdapter;
 
     private static final EpisodeTweetClient episodeTweetClient = new EpisodeTweetClient();
 
@@ -44,12 +54,29 @@ public class TimelineFragment extends RoboFragment {
         episodeTweetClient.fetch(new EpisodeTweetClient.EpisodeTweetResponseHandler() {
             @Override
             public void onSuccess(List<Tweet> tweetList) {
-                // TODO: show tweet list
+                if (getActivity() == null) {
+                    return;
+                }
+
+                setupEpisodeTweetList(tweetList);
             }
 
             @Override
             public void onError() {
                 // TODO: show error view
+            }
+        });
+    }
+
+    private void setupEpisodeTweetList(List<Tweet> tweetList) {
+        episodeTweetListAdapter = new EpisodeTweetListAdapter(getActivity(), tweetList);
+        episodeTweetListView.setAdapter(episodeTweetListAdapter);
+
+        episodeTweetListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Tweet item = episodeTweetListAdapter.getItem(i);
+                IntentUtils.openTwitter(getActivity(), item.getId(), item.getUserName());
             }
         });
     }

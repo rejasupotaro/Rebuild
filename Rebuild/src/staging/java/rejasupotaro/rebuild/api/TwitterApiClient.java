@@ -35,6 +35,22 @@ public class TwitterApiClient {
                 "http://t.co/IxfgYdk6nK");
     }
 
+    public List<Tweet> findTweetById(JSONArray jsonArray) throws JSONException {
+        List<Tweet> tweetList = new ArrayList<Tweet>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            long tweetId = jsonArray.getLong(i);
+            Tweet tweet = findTweetById(tweetId);
+            if (tweet != null) {
+                tweetList.add(tweet);
+            }
+        }
+        return tweetList;
+    }
+
+    public Tweet findTweetById(long id) {
+        return null;
+    }
+
     public List<Tweet> search(String keyword, boolean shouldClearQuery) {
         List<Tweet> tweetList = new ArrayList<Tweet>();
         for (int i = 0; i < 20; i++) {
