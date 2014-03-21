@@ -35,9 +35,9 @@ android {
         versionName "${versionMajor}.${versionMinor}.${versionPatch}-${revisionHash}"
     }
 
-    def releasable = new File('../secret.gradle').exists()
-    if (releasable) {
-        apply from: '../secret.gradle'
+    def hasReleaseAuthority = new File("${rootDir}/secret.gradle").exists()
+    if (hasReleaseAuthority) {
+        apply from: "${rootDir}/secret.gradle"
         signingConfigs {
             release {
                 storeFile file('rebuild.keystore')
@@ -55,13 +55,13 @@ android {
             versionNameSuffix '.debug'
         }
 
-        if (releasable) {
+        if (hasReleaseAuthority) {
             release {
                 signingConfig signingConfigs.release
                 debuggable false
                 runProguard true
                 proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
-                proguardFile file('./proguard-release.txt')
+                proguardFile file('proguard-release.txt')
             }
         }
     }
