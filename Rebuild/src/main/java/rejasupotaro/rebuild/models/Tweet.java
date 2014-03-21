@@ -29,8 +29,12 @@ public class Tweet {
         return createdAt;
     }
 
-    public String getCreatedAtText() {
-        return DateUtils.createdAtToString(createdAt);
+    public String getElapsedTimeText() {
+        return DateUtils.createdAtToElapsedTimeText(createdAt);
+    }
+
+    public String getTweetTimeText() {
+        return DateUtils.formatTweetTime(createdAt);
     }
 
     public String getUserImageUrl() {

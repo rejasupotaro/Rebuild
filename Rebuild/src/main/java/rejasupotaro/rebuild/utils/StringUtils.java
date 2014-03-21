@@ -88,4 +88,13 @@ public final class StringUtils {
     public static String removeHtmlTags(String source) {
         return Html.fromHtml(source).toString();
     }
+
+    public static String removeRebuildHashTag(String source) {
+        if (!source.endsWith(" #rebuildfm")) {
+            return source;
+        }
+
+        int index = source.indexOf(" #rebuildfm");
+        return source.substring(0, index);
+    }
 }
