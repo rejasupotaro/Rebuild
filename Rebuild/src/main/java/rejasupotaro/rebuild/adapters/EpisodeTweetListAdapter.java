@@ -1,7 +1,6 @@
 package rejasupotaro.rebuild.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +19,11 @@ public class EpisodeTweetListAdapter extends BindableAdapter<Tweet> {
 
     private static class ViewHolder {
         ImageView userProfileImageView;
-        TextView createdAtTextView;
         TextView userNameTextView;
         TextView tweetTextView;
 
         public ViewHolder(View view) {
             userProfileImageView = (ImageView) view.findViewById(R.id.user_profile_image);
-            createdAtTextView = (TextView) view.findViewById(R.id.created_at_text);
             userNameTextView = (TextView) view.findViewById(R.id.user_name_text);
             tweetTextView = (TextView) view.findViewById(R.id.tweet_text);
         }
@@ -54,7 +51,6 @@ public class EpisodeTweetListAdapter extends BindableAdapter<Tweet> {
         ViewHolder holder = (ViewHolder) view.getTag();
 
         PicassoHelper.load(getContext(), holder.userProfileImageView, item.getUserImageUrl());
-        holder.createdAtTextView.setText(item.getTweetTimeText());
         holder.tweetTextView.setText(StringUtils.removeRebuildHashTag(item.getText()));
     }
 }

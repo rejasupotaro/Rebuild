@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ import rejasupotaro.rebuild.api.EpisodeTweetClient;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.utils.IntentUtils;
+import rejasupotaro.rebuild.views.ExtendedListView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -23,7 +24,7 @@ public class TimelineFragment extends RoboFragment {
     private Episode episode;
 
     @InjectView(R.id.episode_tweet_list)
-    private ListView episodeTweetListView;
+    private ExtendedListView episodeTweetListView;
 
     private EpisodeTweetListAdapter episodeTweetListAdapter;
 
@@ -77,6 +78,14 @@ public class TimelineFragment extends RoboFragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Tweet item = episodeTweetListAdapter.getItem(i);
                 IntentUtils.openTwitter(getActivity(), item.getId(), item.getUserName());
+            }
+        });
+
+        episodeTweetListView.setOnPositionChangedListener(new ExtendedListView.OnPositionChangedListener() {
+            @Override
+            public void onPositionChanged(ExtendedListView listView, int firstVisiblePosition, View scrollBarPanel) {
+                Tweet tweet = episodeTweetListAdapter.getItem(firstVisiblePosition);
+                ((TextView) scrollBarPanel).setText(tweet.getTweetTimeText());
             }
         });
     }
