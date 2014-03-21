@@ -41,6 +41,5 @@ public class EpisodeDownloadClient extends AbstractHttpClient {
         } catch (IOException e) {
             Log.e(TAG, "Download failed: " + episode.getEnclosure(), e);
         }
-
     }
 }
