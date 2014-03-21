@@ -1,28 +1,41 @@
 package rejasupotaro.rebuild.models;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+
 import java.util.Date;
 
 import rejasupotaro.rebuild.utils.DateUtils;
 import twitter4j.Status;
 
-public class Tweet {
+@Table(name = "tweets")
+public class Tweet extends Model {
 
-    private long id;
+    @Column(name = "tweet_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private long tweetId;
 
+    @Column(name = "craeted_at")
     private Date createdAt;
 
+    @Column(name = "user_image_url")
     private String userImageUrl;
 
+    @Column(name = "user_name")
     private String userName;
 
+    @Column(name = "text")
     private String text;
 
+    @Column(name = "favorite_count")
     private int favoriteCount;
 
+    @Column(name = "retweet_count")
     private int retweetCount;
 
-    public long getId() {
-        return id;
+    public long getEpisodeId() {
+        return tweetId;
     }
 
     public Date getCreatedAt() {
@@ -57,9 +70,13 @@ public class Tweet {
         return retweetCount;
     }
 
-    public Tweet(long id, Date createdAt, String userImageUrl, String userName, String text,
+    public Tweet() {
+        super();
+    }
+
+    public Tweet(long tweetId, Date createdAt, String userImageUrl, String userName, String text,
             int favoriteCount, int retweetCount) {
-        this.id = id;
+        this.tweetId = tweetId;
         this.createdAt = createdAt;
         this.userImageUrl = userImageUrl;
         this.userName = "@" + userName;
@@ -77,5 +94,9 @@ public class Tweet {
                 status.getText(),
                 status.getFavoriteCount(),
                 status.getRetweetCount());
+    }
+
+    public static Tweet findById(long tweetId) {
+        return new Select().from(Tweet.class).where("tweet_id=?", tweetId).executeSingle();
     }
 }

@@ -1,0 +1,1 @@
+CREATE TABLE tweets (Id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, favorite_count INTEGER, user_image_url TEXT, craeted_at INTEGER, tweet_id INTEGER UNIQUE ON CONFLICT REPLACE, retweet_count INTEGER, user_name TEXT);
