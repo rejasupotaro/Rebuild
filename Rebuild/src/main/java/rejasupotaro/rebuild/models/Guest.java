@@ -1,27 +1,41 @@
 package rejasupotaro.rebuild.models;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+
 import twitter4j.User;
 
-public class Guest {
+@Table(name = "guests")
+public class Guest extends Model {
 
-    private long id = -1;
+    @Column(name = "guest_id")
+    private long guestId = -1;
 
+    @Column(name = "name", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private String name;
 
+    @Column(name = "profile_image_url")
     private String profileImageUrl;
 
+    @Column(name = "tweets_count")
     private int tweetsCount;
 
+    @Column(name = "friends_count")
     private int friendsCount;
 
+    @Column(name = "followers_count")
     private int followersCount;
 
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "url")
     private String url;
 
-    public long getId() {
-        return id;
+    public long getGuestId() {
+        return guestId;
     }
 
     public String getName() {
@@ -56,15 +70,15 @@ public class Guest {
         if (guest == null) {
             return true;
         }
-        return (guest.id == -1);
+        return (guest.guestId == -1);
     }
 
     public Guest() {
     }
 
-    public Guest(long id, String name, String profileImageUrl, int tweetsCount, int friendsCount,
+    public Guest(long guestId, String name, String profileImageUrl, int tweetsCount, int friendsCount,
             int followersCount, String description, String url) {
-        this.id = id;
+        this.guestId = guestId;
         this.name = "@" + name;
         this.profileImageUrl = profileImageUrl;
         this.tweetsCount = tweetsCount;
@@ -84,5 +98,12 @@ public class Guest {
                 user.getFollowersCount(),
                 user.getDescription(),
                 user.getURL());
+    }
+
+    public static Guest findByName(String name) {
+        if (!name.startsWith("@")) {
+            name = "@" + name;
+        }
+        return new Select().from(Guest.class).where("name=?", name).executeSingle();
     }
 }
