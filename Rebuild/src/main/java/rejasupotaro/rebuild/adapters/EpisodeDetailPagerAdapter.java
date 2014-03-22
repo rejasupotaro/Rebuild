@@ -9,7 +9,7 @@ import java.util.List;
 
 import rejasupotaro.rebuild.fragments.EpisodeDescriptionFragment;
 import rejasupotaro.rebuild.fragments.ShowNotesFragment;
-import rejasupotaro.rebuild.fragments.TimelineFragment;
+import rejasupotaro.rebuild.fragments.TimeLineFragment;
 import rejasupotaro.rebuild.models.Episode;
 
 public class EpisodeDetailPagerAdapter extends FragmentPagerAdapter {
@@ -30,7 +30,7 @@ public class EpisodeDetailPagerAdapter extends FragmentPagerAdapter {
         pagerFragmentList.add(FRAGMENT_TITLE_SHOW_NOTES,
                 ShowNotesFragment.newInstance(episode));
         pagerFragmentList.add(FRAGMENT_TITLE_COMMENTS,
-                TimelineFragment.newInstance(episode));
+                TimeLineFragment.newInstance(episode));
     }
 
     public void removeByTitle(String title) {

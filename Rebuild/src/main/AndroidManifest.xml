@@ -43,7 +43,7 @@
                 android:launchMode="singleTask">
         </activity>
         <activity
-                android:name=".activities.TimelineActivity"
+                android:name=".activities.TimeLineActivity"
                 android:configChanges="orientation|screenSize"
                 android:label="@string/label_timeline">
         </activity>

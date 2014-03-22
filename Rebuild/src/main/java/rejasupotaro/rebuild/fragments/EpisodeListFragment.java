@@ -16,7 +16,7 @@ import com.squareup.otto.Subscribe;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.activities.TimelineActivity;
+import rejasupotaro.rebuild.activities.TimeLineActivity;
 import rejasupotaro.rebuild.adapters.EpisodeListAdapter;
 import rejasupotaro.rebuild.api.RssFeedClient;
 import rejasupotaro.rebuild.events.BusProvider;
@@ -111,7 +111,7 @@ public class EpisodeListFragment extends RoboFragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(getActivity(), TimelineActivity.class));
+                        startActivity(new Intent(getActivity(), TimeLineActivity.class));
                     }
                 });
 
