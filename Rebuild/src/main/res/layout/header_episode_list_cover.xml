@@ -8,6 +8,7 @@
             android:layout_height="@dimen/episode_list_header_height"
             >
         <LinearLayout
+                android:id="@+id/app_title_text"
                 android:orientation="vertical"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
@@ -25,6 +26,7 @@
                     />
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/header_link_text"
                 android:orientation="horizontal"
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"

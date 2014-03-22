@@ -28,6 +28,7 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
+import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
 import rejasupotaro.rebuild.views.StateFrameLayout;
@@ -95,9 +96,9 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void setupListViewHeader() {
-        View header = View.inflate(getActivity(), R.layout.header_episode_list_cover, null);
+        View headerView = View.inflate(getActivity(), R.layout.header_episode_list_cover, null);
 
-        FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_website);
+        FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) headerView.findViewById(R.id.link_text_website);
         websiteLinkText.prepend(FontAwesomeTextView.Icon.HOME);
         websiteLinkText.findViewById(R.id.link_text_website).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +107,7 @@ public class EpisodeListFragment extends RoboFragment {
             }
         });
 
-        FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_twitter);
+        FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) headerView.findViewById(R.id.link_text_twitter);
         twitterLinkText.prepend(FontAwesomeTextView.Icon.TWITTER);
         twitterLinkText.findViewById(R.id.link_text_twitter).setOnClickListener(
                 new View.OnClickListener() {
@@ -116,7 +117,12 @@ public class EpisodeListFragment extends RoboFragment {
                     }
                 });
 
-        ViewUtils.addHeaderView(episodeListView, header);
+        ViewUtils.addHeaderView(episodeListView, headerView);
+
+        View appTitleTextView = headerView.findViewById(R.id.app_title_text);
+        UiAnimations.fadeIn(appTitleTextView, 300, 1000);
+        View headerLinkTextView = headerView.findViewById(R.id.header_link_text);
+        UiAnimations.fadeIn(headerLinkTextView, 1300, 1000);
     }
 
     private void setupListViewFooter() {

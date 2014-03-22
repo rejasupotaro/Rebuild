@@ -7,7 +7,30 @@ import android.view.animation.Animation;
 
 public final class UiAnimations {
 
-    private UiAnimations() {
+    public static void fadeIn(final View view, long delay, long duration) {
+        view.setAlpha(0);
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "alpha", 1);
+        animation.setStartDelay(delay);
+        animation.setDuration(duration);
+        animation.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
+        animation.start();
     }
 
     public static void fadeOut(final View view, long delay, long duration) {
@@ -34,5 +57,8 @@ public final class UiAnimations {
             }
         });
         animation.start();
+    }
+
+    private UiAnimations() {
     }
 }
