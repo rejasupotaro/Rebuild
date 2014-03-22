@@ -76,7 +76,7 @@ public final class DateUtils {
         }
     }
 
-    public static String createdAtToString(Date createdAt) {
+    public static String createdAtToElapsedTimeText(Date createdAt) {
         long diff = new Date().getTime() - createdAt.getTime();
         int m = (int) (diff / 1000 / 60);
         if (m < 60) {
@@ -126,5 +126,20 @@ public final class DateUtils {
         }
 
         private PubDateParser() {}
+    }
+
+    public static String formatTweetTime(Date source) {
+        return TweetTimeFormatter.format(source);
+    }
+
+    private static final class TweetTimeFormatter {
+
+        private static final SimpleDateFormat FORMAT = new SimpleDateFormat("hh:mm:ss a", Locale.US);
+
+        public static synchronized String format(Date source) {
+            return FORMAT.format(source);
+        }
+
+        private TweetTimeFormatter() {}
     }
 }

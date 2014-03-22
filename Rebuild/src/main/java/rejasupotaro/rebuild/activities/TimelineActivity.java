@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.TweetListAdapter;
-import rejasupotaro.rebuild.listener.EndlessScrollListener;
+import rejasupotaro.rebuild.listener.MoreLoadListener;
 import rejasupotaro.rebuild.loaders.TweetLoader;
 import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MenuDelegate;
@@ -64,8 +64,12 @@ public class TimelineActivity extends RoboActionBarActivity {
     }
 
     public void setupTweetListView() {
-        View footer = View.inflate(this, R.layout.list_item_progress, null);
-        ViewUtils.addFooterView(tweetListView, footer);
+        tweetListView.setOnScrollListener(new MoreLoadListener(this, tweetListView) {
+            @Override
+            public void onLoadMore() {
+                requestTweetList();
+            }
+        });
 
         tweetListAdapter = new TweetListAdapter(this);
         tweetListView.setAdapter(tweetListAdapter);
@@ -74,14 +78,7 @@ public class TimelineActivity extends RoboActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Tweet item = tweetListAdapter.getItem(i);
-                IntentUtils.openTwitter(TimelineActivity.this, item.getId(), item.getUserName());
-            }
-        });
-
-        tweetListView.setOnScrollListener(new EndlessScrollListener(tweetListView) {
-            @Override
-            public void onLoadMore() {
-                requestTweetList();
+                IntentUtils.openTwitter(TimelineActivity.this, item.getEpisodeId(), item.getUserName());
             }
         });
 

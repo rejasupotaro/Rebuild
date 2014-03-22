@@ -1,20 +1,35 @@
 package rejasupotaro.rebuild.listener;
 
+import android.content.Context;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-public abstract class EndlessScrollListener implements AbsListView.OnScrollListener {
+import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.utils.ViewUtils;
+
+public abstract class MoreLoadListener implements AbsListView.OnScrollListener {
 
     private ListView listView;
 
-    public EndlessScrollListener(ListView listView) {
+    private View footerView;
+
+    private boolean isFinish = false;
+
+    public MoreLoadListener(Context context, ListView listView) {
+        this(context, listView, View.inflate(context, R.layout.list_item_progress, null));
+    }
+
+    public MoreLoadListener(Context context, ListView listView, View footerView) {
         this.listView = listView;
+        this.footerView = footerView;
+        ViewUtils.addFooterView(listView, footerView);
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem,
             int visibleItemCount, int totalItemCount) {
-        if (isEndOfList()) {
+        if (isEndOfList() && !isFinish) {
             onLoadMore();
         }
     }
@@ -34,6 +49,14 @@ public abstract class EndlessScrollListener implements AbsListView.OnScrollListe
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
+    }
+
+    public void finish() {
+        isFinish = true;
+
+        if (listView.getFooterViewsCount() > 0 || footerView != null) {
+            listView.removeFooterView(footerView);
+        }
     }
 }
 

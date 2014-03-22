@@ -1,0 +1,27 @@
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_list_item_tweet"
+        >
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_contents"
+            >
+        <ImageView
+                android:id="@+id/user_profile_image"
+                android:layout_width="@dimen/profile_image_size"
+                android:layout_height="@dimen/profile_image_size"
+                />
+        <TextView
+                android:id="@+id/tweet_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_frame"
+                />
+    </LinearLayout>
+</FrameLayout>
+

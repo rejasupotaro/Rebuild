@@ -1,0 +1,15 @@
+<TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/padding_contents"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tertiary_text_size"
+        android:textStyle="bold"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="0"
+        android:shadowDy="-1"
+        android:shadowRadius="0.1"
+        android:background="@drawable/bg_scroll_bar_panel"
+        />

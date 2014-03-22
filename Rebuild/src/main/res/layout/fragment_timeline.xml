@@ -1,0 +1,14 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <rejasupotaro.rebuild.views.ExtendedListView
+            xmlns:rebuild="http://schemas.android.com/apk/res/rejasupotaro.rebuild"
+            android:id="@+id/episode_tweet_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            rebuild:scrollBarPanel="@layout/scroll_bar_panel"
+            />
+</LinearLayout>

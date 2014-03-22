@@ -23,7 +23,7 @@
     <string name="episode_download_completed">Donwload Completed</string>
     <string name="episode_sponsor_text">Sponsor: %1$s</string>
 
-    <string name="label_timeline">timeline</string>
+    <string name="label_timeline">#rebuildfm</string>
 
     <string name="default_duration">00:00</string>
     <string name="share_episode">Share Episode</string>

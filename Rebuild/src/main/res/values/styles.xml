@@ -42,7 +42,7 @@
         <item name="android:background">@drawable/bg_header_link_text</item>
         <item name="android:padding">@dimen/padding_contents</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_width">102dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 

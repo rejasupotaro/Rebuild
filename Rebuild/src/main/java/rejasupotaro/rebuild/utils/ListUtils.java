@@ -1,5 +1,6 @@
 package rejasupotaro.rebuild.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ListUtils {
@@ -26,6 +27,26 @@ public final class ListUtils {
             }
         }
         return min;
+    }
+
+    public static <T> List<T> filterByPage(int page, int perPage, List<T> list) {
+        List<T> filteredList = new ArrayList<T>();
+        if (page <= 0 || perPage <= 0 || list == null || list.size() == 0) {
+            return filteredList;
+        }
+
+        int fromIndex = (page - 1) * perPage;
+        int toIndex = ((page * perPage)  < list.size() ? (page * perPage) : list.size());
+
+        if (fromIndex > list.size()) {
+            return filteredList;
+        }
+
+        for (int i = fromIndex; i < toIndex; i++) {
+            filteredList.add(list.get(i));
+        }
+
+        return filteredList;
     }
 
     private ListUtils() {}
