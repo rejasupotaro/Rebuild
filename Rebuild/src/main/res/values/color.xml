@@ -6,6 +6,7 @@
     <color name="gray">#bebebe</color>
     <color name="smoke_black">#aa000000</color>
     <color name="smoke_white">#aaffffff</color>
+    <color name="smoke_brown">#66663300</color>
     <color name="bg_pressed">#6633B5E5</color>
     <color name="navy">#285179</color>
     <color name="indian_red">#cd5c5c</color>

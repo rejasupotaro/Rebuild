@@ -24,22 +24,27 @@
                     style="@style/RebuildLogText"
                     />
         </LinearLayout>
-        <rejasupotaro.rebuild.views.FontAwesomeTextView
-                android:id="@+id/link_text_twitter"
-                android:text="@string/label_timeline"
-                android:layout_marginRight="@dimen/padding_contents"
+        <LinearLayout
+                android:orientation="horizontal"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                style="@style/HeaderLinkText"
-                />
-        <rejasupotaro.rebuild.views.FontAwesomeTextView
-                android:id="@+id/link_text_website"
-                android:text="website"
-                android:layout_toLeftOf="@+id/link_text_twitter"
-                android:layout_marginRight="6dp"
-                android:layout_alignParentBottom="true"
-                style="@style/HeaderLinkText"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_header_link_text"
+                android:padding="@dimen/padding_frame"
+                >
+            <rejasupotaro.rebuild.views.FontAwesomeTextView
+                    android:id="@+id/link_text_website"
+                    android:text="@string/label_website"
+                    android:layout_marginRight="3dp"
+                    style="@style/HeaderLinkText"
+                    />
+            <rejasupotaro.rebuild.views.FontAwesomeTextView
+                    android:id="@+id/link_text_twitter"
+                    android:text="@string/label_timeline"
+                    android:layout_marginLeft="3dp"
+                    style="@style/HeaderLinkText"
+                    />
+        </LinearLayout>
     </RelativeLayout>
 </FrameLayout>
 

@@ -39,11 +39,12 @@
         <item name="android:textSize">@dimen/quaternary_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/bg_header_link_text</item>
+        <item name="android:background">@drawable/action_button_border</item>
         <item name="android:padding">@dimen/padding_contents</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_width">102dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
     <style name="ActionButton">

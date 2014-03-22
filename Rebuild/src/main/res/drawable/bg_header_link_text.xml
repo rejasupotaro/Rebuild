@@ -4,5 +4,5 @@
         android:drawable="@color/bg_pressed"
         android:state_pressed="true"/>
     <item
-        android:drawable="@color/smoke_black"/>
+        android:drawable="@color/smoke_brown"/>
 </selector>

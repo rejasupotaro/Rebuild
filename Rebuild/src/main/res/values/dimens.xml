@@ -16,7 +16,7 @@
     <dimen name="episode_posted_at_text_shape_size">60dp</dimen>
     <dimen name="profile_image_size">48dp</dimen>
 
-    <dimen name="action_button_border_width">2dp</dimen>
+    <dimen name="action_button_border_width">1dp</dimen>
 
     <dimen name="sliding_up_panel_height">48dp</dimen>
     <dimen name="media_controller_view_height">64dp</dimen>
@@ -25,4 +25,6 @@
     <dimen name="pager_tab_strip_height">38dp</dimen>
     <dimen name="episode_image_height">240dp</dimen>
     <dimen name="episode_list_header_height">180dp</dimen>
+
+    <dimen name="action_button_border_radius">24px</dimen>
 </resources>

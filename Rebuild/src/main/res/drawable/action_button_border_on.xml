@@ -7,7 +7,7 @@
             android:color="@color/base_color_gray"
             />
     <corners
-            android:radius="8px"
+            android:radius="@dimen/action_button_border_radius"
             />
     <solid
             android:color="@color/smoke_white"
