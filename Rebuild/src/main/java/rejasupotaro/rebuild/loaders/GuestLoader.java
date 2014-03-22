@@ -1,15 +1,21 @@
 package rejasupotaro.rebuild.loaders;
 
+import com.path.android.jobqueue.JobManager;
+
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rejasupotaro.rebuild.RebuildApplication;
 import rejasupotaro.rebuild.api.TwitterApiClient;
+import rejasupotaro.rebuild.jobs.UpdateGuestJob;
 import rejasupotaro.rebuild.models.Guest;
 
 public class GuestLoader extends AsyncTaskLoader<List<Guest>> {
+
+    private JobManager jobManager;
 
     private List<String> guestNameList = new ArrayList<String>();
 
@@ -18,6 +24,7 @@ public class GuestLoader extends AsyncTaskLoader<List<Guest>> {
     public GuestLoader(Context context, List<String> guestNameList) {
         super(context);
         this.guestNameList = guestNameList;
+        jobManager = RebuildApplication.getInstance().getJobManager();
     }
 
     @Override
@@ -34,8 +41,9 @@ public class GuestLoader extends AsyncTaskLoader<List<Guest>> {
         List<Guest> guestList = new ArrayList<Guest>();
         for (String guestName : guestNameList) {
             Guest guest = Guest.findByName(guestName);
-            if (guest != null || !Guest.isEmpty(guest)) {
+            if (!Guest.isEmpty(guest)) {
                 guestList.add(guest);
+                jobManager.addJobInBackground(new UpdateGuestJob(guestName));
                 continue;
             }
 
