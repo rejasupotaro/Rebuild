@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="rejasupotaro.rebuild">
+          package="rejasupotaro.rebuild">
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
+            android:minSdkVersion="14"
+            android:targetSdkVersion="18"/>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-        android:name="rejasupotaro.rebuild.RebuildApplication"
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/RebuildTheme">
+            android:name="rejasupotaro.rebuild.RebuildApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/RebuildTheme">
 
         <meta-data
-            android:name="AA_DB_NAME"
-            android:value="rebuild.db" />
+                android:name="AA_DB_NAME"
+                android:value="rebuild.db"/>
         <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="2" />
+                android:name="AA_DB_VERSION"
+                android:value="2"/>
         <meta-data
-            android:name="AA_SERIALIZERS"
-            android:value="rejasupotaro.rebuild.serializers.UriTypeSerializer" />
+                android:name="AA_SERIALIZERS"
+                android:value="rejasupotaro.rebuild.serializers.UriTypeSerializer"/>
 
         <activity
-            android:name="rejasupotaro.rebuild.activities.MainActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/TransparentRebuildTheme">
+                android:name="rejasupotaro.rebuild.activities.MainActivity"
+                android:configChanges="orientation|screenSize"
+                android:theme="@style/TransparentRebuildTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -46,36 +46,41 @@
         <activity
                 android:name=".activities.TimelineActivity"
                 android:configChanges="orientation|screenSize"
-                android:label="@string/label_timeline">
+                android:label="@string/label_timeline"
+                android:theme="@style/RebuildTheme">
         </activity>
         <activity
                 android:name=".activities.SettingsActivity"
                 android:configChanges="orientation|screenSize"
-                android:label="@string/activity_settings">
+                android:label="@string/activity_settings"
+                android:theme="@style/RebuildTheme">
         </activity>
         <activity
-            android:name=".activities.ReportActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/Theme.Transparent">
+                android:name=".activities.ReportActivity"
+                android:configChanges="orientation|screenSize"
+                android:theme="@style/Theme.Transparent">
         </activity>
         <activity
                 android:name=".activities.AboutActivity"
                 android:configChanges="orientation|screenSize"
-                android:label="@string/activity_about">
+                android:label="@string/activity_about"
+                android:theme="@style/RebuildTheme">
         </activity>
         <activity
                 android:name=".activities.RecentChangesActivity"
                 android:configChanges="orientation|screenSize"
-                android:label="@string/activity_recent_changes">
+                android:label="@string/activity_recent_changes"
+                android:theme="@style/RebuildTheme">
         </activity>
         <activity
                 android:name=".activities.LicensesActivity"
                 android:configChanges="orientation|screenSize"
-                android:label="@string/activity_licenses">
+                android:label="@string/activity_licenses"
+                android:theme="@style/RebuildTheme">
         </activity>
 
-        <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService" />
-        <service android:name=".services.EpisodeDownloadService" />
+        <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService"/>
+        <service android:name=".services.EpisodeDownloadService"/>
     </application>
 
 </manifest>
