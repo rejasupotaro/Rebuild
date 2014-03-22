@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,8 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.utils.UiAnimations;
 
 public class StateFrameLayout extends FrameLayout {
+
+    private AttributeSet attrs;
 
     private View mContentView;
 
@@ -44,6 +48,7 @@ public class StateFrameLayout extends FrameLayout {
 
     public StateFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.attrs = attrs;
     }
 
     @Override
@@ -52,11 +57,17 @@ public class StateFrameLayout extends FrameLayout {
     }
 
     private void setupView() {
+        final TypedArray typedArray = getContext()
+                .obtainStyledAttributes(attrs, R.styleable.StateFrameLayout);
+        final int progressViewLayoutId = typedArray
+                .getResourceId(R.styleable.StateFrameLayout_progressView, R.layout.progress_view);
+        typedArray.recycle();
+
         List<View> children = getAllChildren();
         removeAllViews();
 
         mContentView = inflateContentView(children);
-        mProgressView = View.inflate(getContext(), R.layout.progress_view, null);
+        mProgressView = View.inflate(getContext(), progressViewLayoutId, null);
         mErrorView = View.inflate(getContext(), R.layout.error_view, null);
 
         addView(mContentView);

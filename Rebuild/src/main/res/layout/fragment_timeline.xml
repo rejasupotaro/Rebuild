@@ -5,7 +5,7 @@
         android:layout_height="match_parent"
         >
     <rejasupotaro.rebuild.views.ExtendedListView
-            xmlns:rebuild="http://schemas.android.com/apk/res/rejasupotaro.rebuild"
+            xmlns:rebuild="http://schemas.android.com/apk/res-auto"
             android:id="@+id/episode_tweet_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
