@@ -20,7 +20,7 @@ import rejasupotaro.rebuild.views.ExtendedListView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
-public class TimeLineFragment extends RoboFragment {
+public class CommentsFragment extends RoboFragment {
 
     private static final String ARGS_KEY_EPISODE_ID = "episode_id";
 
@@ -39,15 +39,15 @@ public class TimeLineFragment extends RoboFragment {
 
     private MoreLoadListener moreLoadListener;
 
-    public static TimeLineFragment newInstance(Episode episode) {
-        TimeLineFragment fragment = new TimeLineFragment();
+    public static CommentsFragment newInstance(Episode episode) {
+        CommentsFragment fragment = new CommentsFragment();
         Bundle args = new Bundle();
         args.putInt(ARGS_KEY_EPISODE_ID, episode.getEpisodeId());
         fragment.setArguments(args);
         return fragment;
     }
 
-    private TimeLineFragment() {
+    private CommentsFragment() {
     }
 
     @Override
@@ -110,7 +110,7 @@ public class TimeLineFragment extends RoboFragment {
                         }
 
                         page++;
-                        TimeLineFragment.this.page = page;
+                        CommentsFragment.this.page = page;
 
                         episodeTweetListAdapter.addAll(tweetList);
                     }
@@ -121,5 +121,5 @@ public class TimeLineFragment extends RoboFragment {
                     }
                 });
     }
-}
 
+}

@@ -105,7 +105,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
             @Override
             public void onNotFound() {
-                removeTimelineFragment();
+                removeCommentFragment();
             }
         });
     }
@@ -180,7 +180,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         });
     }
 
-    public void removeTimelineFragment() {
+    public void removeCommentFragment() {
         pagerAdapter.removeByTitle(EpisodeDetailPagerAdapter.FRAGMENT_TITLE_COMMENTS);
     }
 }
