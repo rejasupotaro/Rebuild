@@ -95,7 +95,7 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void setupListViewHeader() {
-        View header = View.inflate(getActivity(), R.layout.header_episode_list, null);
+        View header = View.inflate(getActivity(), R.layout.header_episode_list_cover, null);
 
         FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_website);
         websiteLinkText.prepend(FontAwesomeTextView.Icon.HOME);

@@ -24,4 +24,5 @@
     <dimen name="common_tool_bar_height">56dp</dimen>
     <dimen name="pager_tab_strip_height">38dp</dimen>
     <dimen name="episode_image_height">240dp</dimen>
+    <dimen name="episode_list_header_height">180dp</dimen>
 </resources>
