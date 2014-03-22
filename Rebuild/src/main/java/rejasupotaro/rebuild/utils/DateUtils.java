@@ -134,7 +134,7 @@ public final class DateUtils {
 
     private static final class TweetTimeFormatter {
 
-        private static final SimpleDateFormat FORMAT = new SimpleDateFormat("hh:mm:ss", Locale.US);
+        private static final SimpleDateFormat FORMAT = new SimpleDateFormat("hh:mm:ss a", Locale.US);
 
         public static synchronized String format(Date source) {
             return FORMAT.format(source);
