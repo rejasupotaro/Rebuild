@@ -1,2 +1,2 @@
-CREATE TABLE tweets (Id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, favorite_count INTEGER, user_image_url TEXT, craeted_at INTEGER, tweet_id INTEGER UNIQUE ON CONFLICT REPLACE, retweet_count INTEGER, user_name TEXT);
-CREATE TABLE guests (profile_image_url TEXT, Id INTEGER PRIMARY KEY AUTOINCREMENT, followers_count INTEGER, guest_id INTEGER, url TEXT, tweets_count INTEGER, friends_count INTEGER, description TEXT, name TEXT UNIQUE ON CONFLICT REPLACE);
+CREATE TABLE IF NOT EXISTS tweets (Id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, favorite_count INTEGER, user_image_url TEXT, craeted_at INTEGER, tweet_id INTEGER UNIQUE ON CONFLICT REPLACE, retweet_count INTEGER, user_name TEXT);
+CREATE TABLE IF NOT EXISTS guests (profile_image_url TEXT, Id INTEGER PRIMARY KEY AUTOINCREMENT, followers_count INTEGER, guest_id INTEGER, url TEXT, tweets_count INTEGER, friends_count INTEGER, description TEXT, name TEXT UNIQUE ON CONFLICT REPLACE);
