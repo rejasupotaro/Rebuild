@@ -36,7 +36,7 @@ import roboguice.inject.InjectView;
 public class EpisodeListFragment extends RoboFragment {
 
     @Inject
-    private RssFeedClient mClient;
+    private RssFeedClient rssFeedClient;
 
     @InjectView(R.id.state_frame_layout)
     StateFrameLayout stateFrameLayout;
@@ -133,7 +133,7 @@ public class EpisodeListFragment extends RoboFragment {
 
     private void requestFeed() {
         stateFrameLayout.showProgress();
-        mClient.request(new RssFeedClient.EpisodeClientResponseHandler() {
+        rssFeedClient.request(new RssFeedClient.EpisodeClientResponseHandler() {
             @Override
             public void onSuccess(List<Episode> episodeList) {
                 setupEpisodeListView(episodeList);
