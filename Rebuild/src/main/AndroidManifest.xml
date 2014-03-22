@@ -30,7 +30,7 @@
         <activity
                 android:name="rejasupotaro.rebuild.activities.MainActivity"
                 android:configChanges="orientation|screenSize"
-                android:theme="@style/TransparentRebuildTheme">
+                android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -40,7 +40,7 @@
         <activity
                 android:name=".activities.EpisodeDetailActivity"
                 android:configChanges="orientation|screenSize"
-                android:theme="@style/TransparentRebuildTheme"
+                android:theme="@style/TransparentActionBarTheme"
                 android:launchMode="singleTask">
         </activity>
         <activity

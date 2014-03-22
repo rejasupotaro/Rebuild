@@ -2,7 +2,6 @@ package rejasupotaro.rebuild.activities;
 
 import com.squareup.otto.Subscribe;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,7 +47,6 @@ public class MainActivity extends RoboActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BusProvider.getInstance().register(this);
-        setupActionBar();
         startServices();
         parseIntent(getIntent());
     }
@@ -76,12 +74,6 @@ public class MainActivity extends RoboActionBarActivity
         }
 
         openEpisodeDetailActivity(episodeId);
-    }
-
-    private void setupActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
     }
 
     private void startServices() {
