@@ -20,7 +20,7 @@
                 android:id="@+id/tweet_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding_contents"
+                android:paddingLeft="@dimen/padding_frame"
                 />
     </LinearLayout>
 </FrameLayout>
