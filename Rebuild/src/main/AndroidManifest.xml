@@ -30,7 +30,7 @@
         <activity
             android:name="rejasupotaro.rebuild.activities.MainActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/app_name">
+            android:theme="@style/TransparentRebuildTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
