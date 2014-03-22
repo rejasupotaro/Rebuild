@@ -37,7 +37,7 @@ public class EpisodeTweetClient extends AbstractHttpClient {
         return TAG;
     }
 
-    public void fetch(final int page, final int perPage, final EpisodeTweetResponseHandler responseHandler) {
+    public void fetch(int episodeId, final int page, final int perPage, final EpisodeTweetResponseHandler responseHandler) {
         if (tweetIds.size() > 0) {
             findTweetById(page, perPage, tweetIds, responseHandler);
             return;
@@ -45,7 +45,7 @@ public class EpisodeTweetClient extends AbstractHttpClient {
         tweetIds.clear();
 
         ASYNC_HTTP_CLIENT.get(
-                "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/36",
+                "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/" + episodeId,
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers,

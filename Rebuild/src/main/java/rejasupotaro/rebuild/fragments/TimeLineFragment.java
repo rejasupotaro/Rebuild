@@ -96,7 +96,7 @@ public class TimelineFragment extends RoboFragment {
     }
 
     private void requestEpisodeTweetList(int page, int perPage) {
-        episodeTweetClient.fetch(page, perPage,
+        episodeTweetClient.fetch(episode.getEpisodeId(), page, perPage,
                 new EpisodeTweetClient.EpisodeTweetResponseHandler() {
                     @Override
                     public void onSuccess(List<Tweet> tweetList) {
