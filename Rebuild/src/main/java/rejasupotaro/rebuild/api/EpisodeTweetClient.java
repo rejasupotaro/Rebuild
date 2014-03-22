@@ -19,13 +19,23 @@ public class EpisodeTweetClient extends AbstractHttpClient {
 
     private static final String TAG = EpisodeTweetClient.class.getSimpleName();
 
-    private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    private static final String DATA_URL_BASE
+            = "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/";
 
-    private final TwitterApiClient twitterApiClient = TwitterApiClient.getInstance();
+    private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+
+    private static final TwitterApiClient twitterApiClient = TwitterApiClient.getInstance();
 
     private List<Long> tweetIds = new ArrayList<Long>();
 
     private boolean isRequesting = false;
+
+    public static interface ExistsDataResponseHandler {
+
+        public void onFound();
+
+        public void onNotFound();
+    }
 
     public static interface EpisodeTweetResponseHandler {
 
@@ -39,7 +49,28 @@ public class EpisodeTweetClient extends AbstractHttpClient {
         return TAG;
     }
 
-    public void fetch(int episodeId, final int page, final int perPage, final EpisodeTweetResponseHandler responseHandler) {
+    public static void isExistsData(int episodeId,
+            final ExistsDataResponseHandler responseHandler) {
+        asyncHttpClient.get(
+                DATA_URL_BASE + episodeId,
+                new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers,
+                            final byte[] responseBody) {
+                        responseHandler.onFound();
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody,
+                            Throwable error) {
+                        responseHandler.onNotFound();
+                    }
+                });
+
+    }
+
+    public void fetch(int episodeId, final int page, final int perPage,
+            final EpisodeTweetResponseHandler responseHandler) {
         if (isRequesting) {
             return;
         }
@@ -51,10 +82,8 @@ public class EpisodeTweetClient extends AbstractHttpClient {
         }
         tweetIds.clear();
 
-
         asyncHttpClient.get(
-                "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/"
-                        + episodeId,
+                DATA_URL_BASE + episodeId,
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers,

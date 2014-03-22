@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.EpisodeDetailPagerAdapter;
+import rejasupotaro.rebuild.api.EpisodeTweetClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
@@ -49,6 +50,8 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @Inject
     private MainThreadExecutor mainThreadExecutor;
+
+    private EpisodeDetailPagerAdapter pagerAdapter;
 
     public static Intent createIntent(Context context, int episodeId) {
         Intent intent = new Intent(context, EpisodeDetailActivity.class);
@@ -88,12 +91,23 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     }
 
     private void setupViewPager(Episode episode) {
-        viewPager.setAdapter(new EpisodeDetailPagerAdapter(
-                getSupportFragmentManager(),
-                episode));
+        pagerAdapter = new EpisodeDetailPagerAdapter(getSupportFragmentManager(), episode);
+        viewPager.setAdapter(pagerAdapter);
 
         pagerTabStrip.setDrawFullUnderline(true);
         pagerTabStrip.setTabIndicatorColor(Color.WHITE);
+
+        EpisodeTweetClient.isExistsData(episode.getEpisodeId(), new EpisodeTweetClient.ExistsDataResponseHandler() {
+            @Override
+            public void onFound() {
+                // nothing to do
+            }
+
+            @Override
+            public void onNotFound() {
+                removeTimelineFragment();
+            }
+        });
     }
 
     @Override
@@ -164,5 +178,9 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 episodeMediaFragment.setup(currentEpisode);
             }
         });
+    }
+
+    public void removeTimelineFragment() {
+        pagerAdapter.removeByTitle(EpisodeDetailPagerAdapter.FRAGMENT_TITLE_COMMENTS);
     }
 }
