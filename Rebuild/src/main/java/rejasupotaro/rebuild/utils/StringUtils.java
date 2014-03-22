@@ -90,6 +90,10 @@ public final class StringUtils {
     }
 
     public static String removeRebuildHashTag(String source) {
+        if (source == null) {
+            return "";
+        }
+
         if (!source.endsWith(" #rebuildfm")) {
             return source;
         }
