@@ -14,6 +14,8 @@ public abstract class MoreLoadListener implements AbsListView.OnScrollListener {
 
     private View footerView;
 
+    private boolean isFinish = false;
+
     public MoreLoadListener(Context context, ListView listView) {
         this(context, listView, View.inflate(context, R.layout.list_item_progress, null));
     }
@@ -27,7 +29,7 @@ public abstract class MoreLoadListener implements AbsListView.OnScrollListener {
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem,
             int visibleItemCount, int totalItemCount) {
-        if (isEndOfList()) {
+        if (isEndOfList() && !isFinish) {
             onLoadMore();
         }
     }
@@ -50,6 +52,8 @@ public abstract class MoreLoadListener implements AbsListView.OnScrollListener {
     }
 
     public void finish() {
+        isFinish = true;
+
         if (listView.getFooterViewsCount() > 0 || footerView != null) {
             listView.removeFooterView(footerView);
         }

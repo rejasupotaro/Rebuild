@@ -74,7 +74,6 @@ public class TimelineFragment extends RoboFragment {
             @Override
             public void onLoadMore() {
                 requestEpisodeTweetList(page, PER_PAGE);
-                page++;
             }
         };
         episodeTweetListView.setOnScrollListener(moreLoadListener);
@@ -105,10 +104,13 @@ public class TimelineFragment extends RoboFragment {
         episodeTweetClient.fetch(episodeId, page, perPage,
                 new EpisodeTweetClient.EpisodeTweetResponseHandler() {
                     @Override
-                    public void onSuccess(List<Tweet> tweetList) {
+                    public void onSuccess(int page, List<Tweet> tweetList) {
                         if (getActivity() == null) {
                             return;
                         }
+
+                        page++;
+                        TimelineFragment.this.page = page;
 
                         episodeTweetListAdapter.addAll(tweetList);
                     }

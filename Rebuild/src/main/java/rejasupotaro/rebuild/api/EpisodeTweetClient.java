@@ -25,9 +25,11 @@ public class EpisodeTweetClient extends AbstractHttpClient {
 
     private List<Long> tweetIds = new ArrayList<Long>();
 
+    private boolean isRequesting = false;
+
     public static interface EpisodeTweetResponseHandler {
 
-        public void onSuccess(List<Tweet> tweetList);
+        public void onSuccess(int page, List<Tweet> tweetList);
 
         public void onError();
     }
@@ -38,11 +40,17 @@ public class EpisodeTweetClient extends AbstractHttpClient {
     }
 
     public void fetch(int episodeId, final int page, final int perPage, final EpisodeTweetResponseHandler responseHandler) {
+        if (isRequesting) {
+            return;
+        }
+        isRequesting = true;
+
         if (tweetIds.size() > 0) {
             findTweetById(page, perPage, tweetIds, responseHandler);
             return;
         }
         tweetIds.clear();
+
 
         asyncHttpClient.get(
                 "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/"
@@ -53,6 +61,8 @@ public class EpisodeTweetClient extends AbstractHttpClient {
                             final byte[] responseBody) {
                         if (responseBody == null || responseBody.length <= 0) {
                             responseHandler.onError();
+                            isRequesting = false;
+                            return;
                         }
 
                         try {
@@ -63,6 +73,7 @@ public class EpisodeTweetClient extends AbstractHttpClient {
                             findTweetById(page, perPage, tweetIds, responseHandler);
                         } catch (JSONException e) {
                             responseHandler.onError();
+                            isRequesting = false;
                         }
                     }
 
@@ -70,6 +81,7 @@ public class EpisodeTweetClient extends AbstractHttpClient {
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody,
                             Throwable error) {
                         responseHandler.onError();
+                        isRequesting = false;
                     }
                 });
     }
@@ -92,8 +104,9 @@ public class EpisodeTweetClient extends AbstractHttpClient {
                 if (tweetList == null || tweetList.size() == 0) {
                     responseHandler.onError();
                 } else {
-                    responseHandler.onSuccess(tweetList);
+                    responseHandler.onSuccess(page, tweetList);
                 }
+                isRequesting = false;
             }
         }.execute();
     }
