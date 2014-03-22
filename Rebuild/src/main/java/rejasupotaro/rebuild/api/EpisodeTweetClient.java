@@ -19,9 +19,9 @@ public class EpisodeTweetClient extends AbstractHttpClient {
 
     private static final String TAG = EpisodeTweetClient.class.getSimpleName();
 
-    private static final AsyncHttpClient ASYNC_HTTP_CLIENT = new AsyncHttpClient();
+    private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
-    private static final TwitterApiClient TWITTER_API_CLIENT = TwitterApiClient.getInstance();
+    private final TwitterApiClient twitterApiClient = TwitterApiClient.getInstance();
 
     private List<Long> tweetIds = new ArrayList<Long>();
 
@@ -44,8 +44,9 @@ public class EpisodeTweetClient extends AbstractHttpClient {
         }
         tweetIds.clear();
 
-        ASYNC_HTTP_CLIENT.get(
-                "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/" + episodeId,
+        asyncHttpClient.get(
+                "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/"
+                        + episodeId,
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers,
@@ -83,7 +84,7 @@ public class EpisodeTweetClient extends AbstractHttpClient {
                     return null;
                 }
 
-                return TWITTER_API_CLIENT.findTweetById(filteredIds);
+                return twitterApiClient.findTweetById(filteredIds);
             }
 
             @Override

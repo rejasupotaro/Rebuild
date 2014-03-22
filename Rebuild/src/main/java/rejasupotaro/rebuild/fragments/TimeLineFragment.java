@@ -22,14 +22,16 @@ import roboguice.inject.InjectView;
 
 public class TimelineFragment extends RoboFragment {
 
-    private Episode episode;
+    private static final String ARGS_KEY_EPISODE_ID = "episode_id";
+
+    private int episodeId;
 
     @InjectView(R.id.episode_tweet_list)
     private ExtendedListView episodeTweetListView;
 
     private EpisodeTweetListAdapter episodeTweetListAdapter;
 
-    private static final EpisodeTweetClient episodeTweetClient = new EpisodeTweetClient();
+    private EpisodeTweetClient episodeTweetClient = new EpisodeTweetClient();
 
     private int page = 1;
 
@@ -39,12 +41,10 @@ public class TimelineFragment extends RoboFragment {
 
     public static TimelineFragment newInstance(Episode episode) {
         TimelineFragment fragment = new TimelineFragment();
-        fragment.setEpisode(episode);
+        Bundle args = new Bundle();
+        args.putInt(ARGS_KEY_EPISODE_ID, episode.getEpisodeId());
+        fragment.setArguments(args);
         return fragment;
-    }
-
-    public void setEpisode(final Episode episode) {
-        this.episode = episode;
     }
 
     private TimelineFragment() {
@@ -59,8 +59,14 @@ public class TimelineFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        episodeId = getEpisodeId();
         page = 1;
         setupEpisodeTweetList();
+    }
+
+    private int getEpisodeId() {
+        Bundle args = getArguments();
+        return args.getInt(ARGS_KEY_EPISODE_ID);
     }
 
     private void setupEpisodeTweetList() {
@@ -96,7 +102,7 @@ public class TimelineFragment extends RoboFragment {
     }
 
     private void requestEpisodeTweetList(int page, int perPage) {
-        episodeTweetClient.fetch(episode.getEpisodeId(), page, perPage,
+        episodeTweetClient.fetch(episodeId, page, perPage,
                 new EpisodeTweetClient.EpisodeTweetResponseHandler() {
                     @Override
                     public void onSuccess(List<Tweet> tweetList) {

@@ -22,10 +22,7 @@ public class EpisodeDetailPagerAdapter extends FragmentStatePagerAdapter {
         super(fragmentManager);
         pagerFragmentList.add("DETAILS", EpisodeDescriptionFragment.newInstance(episode));
         pagerFragmentList.add("SHOW NOTES", ShowNotesFragment.newInstance(episode));
-        pagerFragmentList.add("TIME LINE", TimelineFragment.newInstance(episode));
-        if (BuildConfig.DEBUG) {
-            pagerFragmentList.add("TRANSCRIPT", EpisodeTranscriptFragment.newInstance());
-        }
+        pagerFragmentList.add("COMMENTS", TimelineFragment.newInstance(episode));
     }
 
     @Override
