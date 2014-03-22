@@ -148,7 +148,7 @@ public class ExtendedListView extends ListView implements OnScrollListener {
                 /*
                  * find out which itemviews the center of thumb is on
                  */
-                final int count = getChildCount();
+                final int count = getChildCount() - getFooterViewsCount();
                 for (int i = 0; i < count; ++i) {
                     final View childView = getChildAt(i);
                     if (childView != null) {

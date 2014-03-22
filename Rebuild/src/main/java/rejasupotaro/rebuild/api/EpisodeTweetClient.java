@@ -9,9 +9,11 @@ import org.json.JSONException;
 
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.models.Tweet;
+import rejasupotaro.rebuild.utils.ListUtils;
 
 public class EpisodeTweetClient extends AbstractHttpClient {
 
@@ -20,6 +22,8 @@ public class EpisodeTweetClient extends AbstractHttpClient {
     private static final AsyncHttpClient ASYNC_HTTP_CLIENT = new AsyncHttpClient();
 
     private static final TwitterApiClient TWITTER_API_CLIENT = TwitterApiClient.getInstance();
+
+    private List<Long> tweetIds = new ArrayList<Long>();
 
     public static interface EpisodeTweetResponseHandler {
 
@@ -33,7 +37,13 @@ public class EpisodeTweetClient extends AbstractHttpClient {
         return TAG;
     }
 
-    public void fetch(final EpisodeTweetResponseHandler responseHandler) {
+    public void fetch(final int page, final int perPage, final EpisodeTweetResponseHandler responseHandler) {
+        if (tweetIds.size() > 0) {
+            findTweetById(page, perPage, tweetIds, responseHandler);
+            return;
+        }
+        tweetIds.clear();
+
         ASYNC_HTTP_CLIENT.get(
                 "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/36",
                 new AsyncHttpResponseHandler() {
@@ -44,28 +54,15 @@ public class EpisodeTweetClient extends AbstractHttpClient {
                             responseHandler.onError();
                         }
 
-                        new AsyncTask<Void, Void, List<Tweet>>() {
-
-                            @Override
-                            protected List<Tweet> doInBackground(Void... params) {
-                                try {
-                                    JSONArray jsonArray = new JSONArray(new String(responseBody));
-                                    return TWITTER_API_CLIENT.findTweetById(jsonArray);
-                                } catch (JSONException e) {
-                                    responseHandler.onError();
-                                    return null;
-                                }
+                        try {
+                            JSONArray jsonArray = new JSONArray(new String(responseBody));
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                tweetIds.add(jsonArray.getLong(i));
                             }
-
-                            @Override
-                            protected void onPostExecute(List<Tweet> tweetList) {
-                                if (tweetList == null || tweetList.size() == 0) {
-                                    responseHandler.onError();
-                                } else {
-                                    responseHandler.onSuccess(tweetList);
-                                }
-                            }
-                        }.execute();
+                            findTweetById(page, perPage, tweetIds, responseHandler);
+                        } catch (JSONException e) {
+                            responseHandler.onError();
+                        }
                     }
 
                     @Override
@@ -75,4 +72,29 @@ public class EpisodeTweetClient extends AbstractHttpClient {
                     }
                 });
     }
+
+    private void findTweetById(final int page, final int perPage, final List<Long> tweetIds,
+            final EpisodeTweetResponseHandler responseHandler) {
+        new AsyncTask<Void, Void, List<Tweet>>() {
+            @Override
+            protected List<Tweet> doInBackground(Void... params) {
+                List<Long> filteredIds = ListUtils.filterByPage(page, perPage, tweetIds);
+                if (filteredIds == null || filteredIds.size() <= 0) {
+                    return null;
+                }
+
+                return TWITTER_API_CLIENT.findTweetById(filteredIds);
+            }
+
+            @Override
+            protected void onPostExecute(List<Tweet> tweetList) {
+                if (tweetList == null || tweetList.size() == 0) {
+                    responseHandler.onError();
+                } else {
+                    responseHandler.onSuccess(tweetList);
+                }
+            }
+        }.execute();
+    }
+
 }

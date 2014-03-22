@@ -12,6 +12,7 @@ import java.util.List;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.EpisodeTweetListAdapter;
 import rejasupotaro.rebuild.api.EpisodeTweetClient;
+import rejasupotaro.rebuild.listener.MoreLoadListener;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.utils.IntentUtils;
@@ -30,10 +31,20 @@ public class TimelineFragment extends RoboFragment {
 
     private static final EpisodeTweetClient episodeTweetClient = new EpisodeTweetClient();
 
+    private int page = 1;
+
+    private static final int PER_PAGE = 10;
+
+    private MoreLoadListener moreLoadListener;
+
     public static TimelineFragment newInstance(Episode episode) {
         TimelineFragment fragment = new TimelineFragment();
         fragment.setEpisode(episode);
         return fragment;
+    }
+
+    public void setEpisode(final Episode episode) {
+        this.episode = episode;
     }
 
     private TimelineFragment() {
@@ -48,29 +59,21 @@ public class TimelineFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        requestEpisodeTweetList();
+        page = 1;
+        setupEpisodeTweetList();
     }
 
-    private void requestEpisodeTweetList() {
-        episodeTweetClient.fetch(new EpisodeTweetClient.EpisodeTweetResponseHandler() {
+    private void setupEpisodeTweetList() {
+        moreLoadListener = new MoreLoadListener(getActivity(), episodeTweetListView) {
             @Override
-            public void onSuccess(List<Tweet> tweetList) {
-                if (getActivity() == null) {
-                    return;
-                }
-
-                setupEpisodeTweetList(tweetList);
+            public void onLoadMore() {
+                requestEpisodeTweetList(page, PER_PAGE);
+                page++;
             }
+        };
+        episodeTweetListView.setOnScrollListener(moreLoadListener);
 
-            @Override
-            public void onError() {
-                // TODO: show error view
-            }
-        });
-    }
-
-    private void setupEpisodeTweetList(List<Tweet> tweetList) {
-        episodeTweetListAdapter = new EpisodeTweetListAdapter(getActivity(), tweetList);
+        episodeTweetListAdapter = new EpisodeTweetListAdapter(getActivity());
         episodeTweetListView.setAdapter(episodeTweetListAdapter);
 
         episodeTweetListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,17 +84,34 @@ public class TimelineFragment extends RoboFragment {
             }
         });
 
-        episodeTweetListView.setOnPositionChangedListener(new ExtendedListView.OnPositionChangedListener() {
-            @Override
-            public void onPositionChanged(ExtendedListView listView, int firstVisiblePosition, View scrollBarPanel) {
-                Tweet tweet = episodeTweetListAdapter.getItem(firstVisiblePosition);
-                ((TextView) scrollBarPanel).setText(tweet.getTweetTimeText());
-            }
-        });
+        episodeTweetListView.setOnPositionChangedListener(
+                new ExtendedListView.OnPositionChangedListener() {
+                    @Override
+                    public void onPositionChanged(ExtendedListView listView,
+                            int firstVisiblePosition, View scrollBarPanel) {
+                        Tweet tweet = episodeTweetListAdapter.getItem(firstVisiblePosition);
+                        ((TextView) scrollBarPanel).setText(tweet.getTweetTimeText());
+                    }
+                });
     }
 
-    public void setEpisode(final Episode episode) {
-        this.episode = episode;
+    private void requestEpisodeTweetList(int page, int perPage) {
+        episodeTweetClient.fetch(page, perPage,
+                new EpisodeTweetClient.EpisodeTweetResponseHandler() {
+                    @Override
+                    public void onSuccess(List<Tweet> tweetList) {
+                        if (getActivity() == null) {
+                            return;
+                        }
+
+                        episodeTweetListAdapter.addAll(tweetList);
+                    }
+
+                    @Override
+                    public void onError() {
+                        moreLoadListener.finish();
+                    }
+                });
     }
 }
 
