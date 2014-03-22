@@ -25,7 +25,7 @@ import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.inject.InjectView;
 
-public class TimeLineActivity extends RoboActionBarActivity {
+public class TimelineActivity extends RoboActionBarActivity {
 
     private static final int REQUEST_TWEET_LIST = 1;
 
@@ -77,7 +77,7 @@ public class TimeLineActivity extends RoboActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Tweet item = tweetListAdapter.getItem(i);
-                IntentUtils.openTwitter(TimeLineActivity.this, item.getEpisodeId(),
+                IntentUtils.openTwitter(TimelineActivity.this, item.getEpisodeId(),
                         item.getUserName());
             }
         });
@@ -89,7 +89,7 @@ public class TimeLineActivity extends RoboActionBarActivity {
         composeTweetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IntentUtils.sendPostIntent(TimeLineActivity.this, "#rebuildfm");
+                IntentUtils.sendPostIntent(TimelineActivity.this, "#rebuildfm");
             }
         });
     }
@@ -101,7 +101,7 @@ public class TimeLineActivity extends RoboActionBarActivity {
                 new LoaderManager.LoaderCallbacks<List<Tweet>>() {
                     @Override
                     public Loader<List<Tweet>> onCreateLoader(int i, Bundle bundle) {
-                        return new TweetLoader(TimeLineActivity.this, isFirstRequest);
+                        return new TweetLoader(TimelineActivity.this, isFirstRequest);
                     }
 
                     @Override
