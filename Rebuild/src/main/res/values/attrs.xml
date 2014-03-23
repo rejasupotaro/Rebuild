@@ -4,4 +4,7 @@
         <attr name="scrollBarPanelInAnimation" format="reference" />
         <attr name="scrollBarPanelOutAnimation" format="reference" />
     </declare-styleable>
+    <declare-styleable name="StateFrameLayout">
+        <attr name="progressView" format="reference" />
+    </declare-styleable>
 </resources>

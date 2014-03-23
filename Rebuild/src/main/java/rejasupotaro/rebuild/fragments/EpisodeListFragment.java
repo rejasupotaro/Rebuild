@@ -1,5 +1,9 @@
 package rejasupotaro.rebuild.fragments;
 
+import com.google.inject.Inject;
+
+import com.squareup.otto.Subscribe;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,16 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
-
-import com.google.inject.Inject;
-
-import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.activities.TimelineActivity;
 import rejasupotaro.rebuild.activities.TimelineActivity;
 import rejasupotaro.rebuild.adapters.EpisodeListAdapter;
 import rejasupotaro.rebuild.api.RssFeedClient;
@@ -28,9 +28,9 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
+import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
-import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -39,8 +39,11 @@ public class EpisodeListFragment extends RoboFragment {
     @Inject
     private RssFeedClient rssFeedClient;
 
-    @InjectView(R.id.state_frame_layout)
-    StateFrameLayout stateFrameLayout;
+    @InjectView(R.id.rebuild_image)
+    private ImageView rebuildImageView;
+
+    @InjectView(R.id.splash_view)
+    private View splashView;
 
     @InjectView(R.id.episode_list_view)
     private ListView episodeListView;
@@ -51,6 +54,7 @@ public class EpisodeListFragment extends RoboFragment {
     private MainThreadExecutor mainThreadExecutor;
 
     public static interface OnEpisodeSelectListener {
+
         public void onSelect(Episode episode);
     }
 
@@ -71,6 +75,7 @@ public class EpisodeListFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        UiAnimations.slideLeft(rebuildImageView, 1000, 5000);
         setupListView();
         requestFeed();
     }
@@ -95,18 +100,21 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void setupListViewHeader() {
-        View header = View.inflate(getActivity(), R.layout.header_episode_list, null);
+        View headerView = View.inflate(getActivity(), R.layout.header_episode_list_cover, null);
 
-        FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_website);
+        FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) headerView
+                .findViewById(R.id.link_text_website);
         websiteLinkText.prepend(FontAwesomeTextView.Icon.HOME);
-        websiteLinkText.findViewById(R.id.link_text_website).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IntentUtils.openRebuildWeb(getActivity());
-            }
-        });
+        websiteLinkText.findViewById(R.id.link_text_website)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        IntentUtils.openRebuildWeb(getActivity());
+                    }
+                });
 
-        FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) header.findViewById(R.id.link_text_twitter);
+        FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) headerView
+                .findViewById(R.id.link_text_twitter);
         twitterLinkText.prepend(FontAwesomeTextView.Icon.TWITTER);
         twitterLinkText.findViewById(R.id.link_text_twitter).setOnClickListener(
                 new View.OnClickListener() {
@@ -116,7 +124,12 @@ public class EpisodeListFragment extends RoboFragment {
                     }
                 });
 
-        ViewUtils.addHeaderView(episodeListView, header);
+        ViewUtils.addHeaderView(episodeListView, headerView);
+
+        View appTitleTextView = headerView.findViewById(R.id.app_title_text);
+        UiAnimations.fadeIn(appTitleTextView, 1500, 1000);
+        View headerLinkTextView = headerView.findViewById(R.id.header_link_text);
+        UiAnimations.fadeIn(headerLinkTextView, 2500, 1000);
     }
 
     private void setupListViewFooter() {
@@ -133,20 +146,19 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void requestFeed() {
-        stateFrameLayout.showProgress();
         rssFeedClient.request(new RssFeedClient.EpisodeClientResponseHandler() {
             @Override
             public void onSuccess(List<Episode> episodeList) {
                 setupEpisodeListView(episodeList);
                 BusProvider.getInstance().post(new LoadEpisodeListCompleteEvent(episodeList));
-                stateFrameLayout.showContent();
+                UiAnimations.fadeOut(splashView, 1000, 500);
             }
 
             @Override
             public void onFailure() {
                 if (shouldShowError()) {
                     ToastUtils.showNetworkError(getActivity());
-                    stateFrameLayout.showError();
+                    UiAnimations.fadeOut(splashView, 1000, 500);
                 }
             }
         });

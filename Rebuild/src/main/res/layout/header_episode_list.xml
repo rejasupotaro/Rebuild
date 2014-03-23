@@ -1,50 +1,18 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/episode_list_header_width"
+        android:layout_height="wrap_content"
+        >
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="160dp">
-
-        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/bg_rebuild"
-            android:scaleType="centerCrop"
-            />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="@string/app_name"
-                android:textSize="28sp"
-                style="@style/RebuildLogText" />
-
-            <TextView
-                android:text="@string/rebuild_description"
-                android:textSize="8sp"
-                style="@style/RebuildLogText" />
-
-        </LinearLayout>
-
-        <rejasupotaro.rebuild.views.FontAwesomeTextView
-            android:id="@+id/link_text_twitter"
-            android:text="@string/label_timeline"
-            android:layout_marginRight="@dimen/padding_contents"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            style="@style/HeaderLinkText" />
-
-        <rejasupotaro.rebuild.views.FontAwesomeTextView
-            android:id="@+id/link_text_website"
-            android:text="website"
-            android:layout_toLeftOf="@+id/link_text_twitter"
-            android:layout_marginRight="6dp"
-            android:layout_alignParentBottom="true"
-            style="@style/HeaderLinkText"/>
+            android:layout_height="@dimen/episode_list_header_height"
+            >
+        <ImageView
+                android:id="@+id/rebuild_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/bg_rebuild"
+                android:scaleType="centerCrop"
+                />
     </RelativeLayout>
 </FrameLayout>

@@ -1,0 +1,41 @@
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        >
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/padding_contents"
+            >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rebuild.fm for Android"
+                android:textSize="@dimen/primary_text_size"
+                android:textColor="@color/dark_gray"
+                android:textStyle="bold"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="The best podcast player to listen to Rebuild.fm"
+                android:textSize="@dimen/tertiary_text_size"
+                android:textColor="@color/gray"
+                />
+    </LinearLayout>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/padding_contents"
+            android:text="\@rejasupotaro"
+            android:textSize="@dimen/tertiary_text_size"
+            android:textColor="@color/gray"
+            />
+</RelativeLayout>

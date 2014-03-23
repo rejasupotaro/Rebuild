@@ -58,4 +58,5 @@
 
     <string name="guest_profile_text">profile</string>
     <string name="guest_website_text">website</string>
+    <string name="label_website">website</string>
 </resources>
