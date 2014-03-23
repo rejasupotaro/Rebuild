@@ -75,7 +75,7 @@ public class EpisodeListFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        UiAnimations.slideLeft(rebuildImageView, 1000, 5000);
+        UiAnimations.slideLeft(rebuildImageView, 1000, 3000);
         setupListView();
         requestFeed();
     }
@@ -129,7 +129,7 @@ public class EpisodeListFragment extends RoboFragment {
         View appTitleTextView = headerView.findViewById(R.id.app_title_text);
         UiAnimations.fadeIn(appTitleTextView, 1500, 1000);
         View headerLinkTextView = headerView.findViewById(R.id.header_link_text);
-        UiAnimations.fadeIn(headerLinkTextView, 2500, 1000);
+        UiAnimations.slideUp(getActivity(), headerLinkTextView, 1000, 500);
     }
 
     private void setupListViewFooter() {

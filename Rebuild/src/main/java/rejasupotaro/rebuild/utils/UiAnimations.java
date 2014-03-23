@@ -12,23 +12,35 @@ import rejasupotaro.rebuild.R;
 public final class UiAnimations {
 
     public static void slideUp(Context context, View view) {
+        slideUp(context, view, 0, 0);
+    }
+
+    public static void slideUp(Context context, View view, long delay, long duration) {
         view.setVisibility(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_up_enter);
         animation.setFillAfter(true);
         animation.setFillEnabled(true);
+        animation.setStartOffset(delay);
+        animation.setDuration(duration);
         view.startAnimation(animation);
     }
 
     public static void slideDown(Context context, View view) {
+        slideDown(context, view, 0, 0);
+    }
+
+    public static void slideDown(Context context, View view, int delay, int duration) {
         view.setVisibility(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_down_exit);
         animation.setFillAfter(true);
         animation.setFillEnabled(true);
+        animation.setStartOffset(delay);
+        animation.setDuration(duration);
         view.startAnimation(animation);
     }
 
     public static void slideLeft(final View view, long delay, long duration) {
-        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "x", -10);
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "x", -20);
         animation.setStartDelay(delay);
         animation.setDuration(duration);
         animation.start();
