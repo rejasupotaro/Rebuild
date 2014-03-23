@@ -1,6 +1,6 @@
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/episode_list_header_width"
         android:layout_height="wrap_content"
         >
     <RelativeLayout
@@ -8,6 +8,7 @@
             android:layout_height="@dimen/episode_list_header_height"
             >
         <ImageView
+                android:id="@+id/rebuild_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/bg_rebuild"

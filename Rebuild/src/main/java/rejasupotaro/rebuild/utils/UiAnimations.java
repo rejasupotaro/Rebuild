@@ -3,9 +3,15 @@ package rejasupotaro.rebuild.utils;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.view.View;
-import android.view.animation.Animation;
 
 public final class UiAnimations {
+
+    public static void slideLeft(final View view, long delay, long duration) {
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "x", -10);
+        animation.setStartDelay(delay);
+        animation.setDuration(duration);
+        animation.start();
+    }
 
     public static void fadeIn(final View view, long delay, long duration) {
         view.setAlpha(0);

@@ -29,7 +29,6 @@
 
         <activity
                 android:name="rejasupotaro.rebuild.activities.MainActivity"
-                android:configChanges="orientation|screenSize"
                 android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
