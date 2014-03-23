@@ -13,6 +13,7 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
+import rejasupotaro.rebuild.utils.UiAnimations;
 
 public class MediaBarView extends FrameLayout {
 
@@ -126,11 +127,7 @@ public class MediaBarView extends FrameLayout {
         setupMediaPlayAndPauseButton(episode);
 
         if (rootView.getVisibility() == View.GONE) {
-            rootView.setVisibility(View.VISIBLE);
-            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up_enter);
-            animation.setFillAfter(true);
-            animation.setFillEnabled(true);
-            rootView.startAnimation(animation);
+            UiAnimations.slideUp(getContext(), rootView);
         }
     }
 
@@ -141,11 +138,7 @@ public class MediaBarView extends FrameLayout {
     }
 
     private void hide() {
-        rootView.setVisibility(View.VISIBLE);
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_down_exit);
-        animation.setFillAfter(true);
-        animation.setFillEnabled(true);
-        rootView.startAnimation(animation);
+        UiAnimations.slideDown(getContext(), rootView);
     }
 
     private void gone() {

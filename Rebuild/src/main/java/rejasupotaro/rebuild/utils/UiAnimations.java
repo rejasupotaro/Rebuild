@@ -2,9 +2,30 @@ package rejasupotaro.rebuild.utils;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+import rejasupotaro.rebuild.R;
 
 public final class UiAnimations {
+
+    public static void slideUp(Context context, View view) {
+        view.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_up_enter);
+        animation.setFillAfter(true);
+        animation.setFillEnabled(true);
+        view.startAnimation(animation);
+    }
+
+    public static void slideDown(Context context, View view) {
+        view.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_down_exit);
+        animation.setFillAfter(true);
+        animation.setFillEnabled(true);
+        view.startAnimation(animation);
+    }
 
     public static void slideLeft(final View view, long delay, long duration) {
         ObjectAnimator animation = ObjectAnimator.ofFloat(view, "x", -10);
