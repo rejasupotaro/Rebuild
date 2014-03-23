@@ -10,7 +10,7 @@ A [Podcast](http://rebuild.fm/) by [Tatsuhiko Miyagawa](https://twitter.com/miya
 Screenshot
 ------
 
-### Current Version (0.4.3)
+### Current Version (0.5.0)
 
 <img src="https://raw.github.com/rejasupotaro/Rebuild/master/screenshot.png">
 
@@ -30,13 +30,19 @@ $ git submodule update --init
 $ ./gradlew installStagingDebug
 ```
 
-QA
+Run tests
 ------
 
-### Run unit tests
+### Run unit tests on Dalvik VM
 
 ```
 $ ./gradlew connectedInstrumentTestStagingDebug
+```
+
+### Run unit tests on JVM
+
+```
+$ ./gradlew test
 ```
 
 ### Run UI tests and take screenshots
