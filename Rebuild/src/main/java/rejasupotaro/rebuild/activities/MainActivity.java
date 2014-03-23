@@ -20,9 +20,10 @@ import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.views.MediaBarView;
+import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
 
-public class MainActivity extends RoboActionBarActivity
+public class MainActivity extends RoboFragmentActivity
         implements EpisodeListFragment.OnEpisodeSelectListener {
 
     private static final String EXTRA_EPISODE = "extra_episode";
