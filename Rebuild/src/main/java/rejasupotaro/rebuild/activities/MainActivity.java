@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -18,7 +17,6 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
-import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.views.MediaBarView;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
@@ -27,9 +25,6 @@ public class MainActivity extends RoboFragmentActivity
         implements EpisodeListFragment.OnEpisodeSelectListener {
 
     private static final String EXTRA_EPISODE = "extra_episode";
-
-    @Inject
-    private MenuDelegate menuDelegate;
 
     @InjectView(R.id.media_bar)
     private MediaBarView mediaBar;
@@ -106,23 +101,6 @@ public class MainActivity extends RoboFragmentActivity
     private void openEpisodeDetailActivity(int episodeId) {
         startActivity(EpisodeDetailActivity.createIntent(this, episodeId));
         overridePendingTransition(R.anim.slide_up_enter, R.anim.zoom_out);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        boolean result = true;
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                menuDelegate.pressHome();
-                break;
-            case R.id.action_settings:
-                menuDelegate.pressSettings();
-                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
     }
 
     @Subscribe
