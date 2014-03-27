@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 
 public class ActivityLifecycleObserver implements Application.ActivityLifecycleCallbacks {
@@ -69,7 +70,11 @@ public class ActivityLifecycleObserver implements Application.ActivityLifecycleC
     public void onActivityStopped(Activity activity) {
         if (activities == 0) {
             isInBackground = true;
-            PodcastPlayerNotification.setIsInBackground(true);
+            if (PodcastPlayer.getInstance().isPlaying()) {
+                PodcastPlayerNotification.setIsInBackground(true);
+            } else {
+                PodcastPlayer.getInstance().stop();
+            }
         }
     }
 }

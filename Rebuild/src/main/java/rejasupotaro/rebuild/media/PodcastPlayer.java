@@ -28,6 +28,8 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
 
     private PlayerStatus playerStatus = PlayerStatus.STOPPED;
 
+    private CurrentTimeListener currentTimeListener;
+
     @Override
     public boolean isPlaying() {
         return (playerStatus == PlayerStatus.PLAYING);
@@ -61,7 +63,17 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         return other.isSameEpisode(episode);
     }
 
+    private void setCurrentTimeListener() {
+        if (currentTimeListener == null) {
+            return;
+        }
+
+        setCurrentTimeListener(currentTimeListener);
+    }
+
     public void setCurrentTimeListener(final CurrentTimeListener currentTimeListener) {
+        this.currentTimeListener = currentTimeListener;
+
         timer = new Timer(new Timer.Callback() {
             @Override
             public void tick(long timeMillis) {
@@ -110,6 +122,7 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         super.pause();
         super.seekTo(0);
         playerStatus = PlayerStatus.STOPPED;
+        timer.stop();
     }
 
     @Override
