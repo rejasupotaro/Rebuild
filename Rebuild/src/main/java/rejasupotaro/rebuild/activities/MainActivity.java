@@ -17,6 +17,7 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
+import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.MediaBarView;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
@@ -44,6 +45,7 @@ public class MainActivity extends RoboFragmentActivity
         setContentView(R.layout.activity_main);
         BusProvider.getInstance().register(this);
         startServices();
+        UiAnimations.initialize(this);
         parseIntent(getIntent());
     }
 
