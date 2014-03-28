@@ -122,7 +122,10 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
         super.pause();
         super.seekTo(0);
         playerStatus = PlayerStatus.STOPPED;
-        timer.stop();
+        if (timer != null) {
+            timer.stop();
+            timer = null;
+        }
     }
 
     @Override
