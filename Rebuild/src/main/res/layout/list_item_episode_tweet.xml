@@ -13,8 +13,8 @@
             >
         <ImageView
                 android:id="@+id/user_profile_image"
-                android:layout_width="@dimen/profile_image_size"
-                android:layout_height="@dimen/profile_image_size"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 />
         <TextView
                 android:id="@+id/tweet_text"

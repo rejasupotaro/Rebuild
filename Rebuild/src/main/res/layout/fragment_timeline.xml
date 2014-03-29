@@ -3,6 +3,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/padding_frame"
         >
     <rejasupotaro.rebuild.views.ExtendedListView
             xmlns:rebuild="http://schemas.android.com/apk/res-auto"
