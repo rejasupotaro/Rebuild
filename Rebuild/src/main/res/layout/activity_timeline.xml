@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <LinearLayout
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -24,20 +24,19 @@
                     />
         </android.support.v4.widget.SwipeRefreshLayout>
         <FrameLayout
-                android:id="@+id/compose_tweet_button"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_tool_bar_height"
-                android:padding="@dimen/padding_frame"
-                android:background="@color/gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:padding="@dimen/padding_contents"
+                android:clickable="false"
+                android:focusable="false"
                 >
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/padding_contents"
-                    android:background="@drawable/bg_compose_tweet_text"
-                    android:text="@string/compose_new_tweet"
-                    android:textColor="@color/gray"
+            <ImageView
+                    android:id="@+id/compose_tweet_button"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_compose_tweet"
                     />
         </FrameLayout>
-    </LinearLayout>
+    </FrameLayout>
 </rejasupotaro.rebuild.views.StateFrameLayout>

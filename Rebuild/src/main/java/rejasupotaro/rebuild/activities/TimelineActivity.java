@@ -23,6 +23,7 @@ import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
+import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.StateFrameLayout;
 import roboguice.inject.InjectView;
 
@@ -105,9 +106,12 @@ public class TimelineActivity extends RoboActionBarActivity {
     }
 
     private void setupComposeTweetButton() {
+        UiAnimations.fadeIn(composeTweetButton, 1500, 500);
+
         composeTweetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UiAnimations.bounceUp(TimelineActivity.this, composeTweetButton);
                 IntentUtils.sendPostIntent(TimelineActivity.this, "#rebuildfm");
             }
         });
@@ -145,6 +149,7 @@ public class TimelineActivity extends RoboActionBarActivity {
 
     private void addTweetList(List<Tweet> tweetList, boolean isFirstRequest) {
         if (tweetList == null || tweetList.isEmpty()) {
+            stateFrameLayout.showError();
             return;
         }
 

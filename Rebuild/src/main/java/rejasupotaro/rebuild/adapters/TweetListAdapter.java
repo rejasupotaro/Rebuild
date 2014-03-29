@@ -13,7 +13,6 @@ import java.util.List;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.utils.PicassoHelper;
-import rejasupotaro.rebuild.utils.ViewUtils;
 
 public class TweetListAdapter extends BindableAdapter<Tweet> {
 
@@ -59,7 +58,7 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
         PicassoHelper.load(getContext(), holder.userProfileImageView, item.getUserImageUrl());
         holder.createdAtTextView.setText(item.getElapsedTimeText());
         holder.userNameTextView.setText(item.getUserName());
-        ViewUtils.setTweetText(holder.tweetTextView, item.getText());
+        holder.tweetTextView.setText(item.getText());
         holder.retweetCountTextView.setText(item.getRetweetCount() + " retweets");
         holder.favoriteCountTextView.setText(item.getFavoriteCount() + " favorites");
     }

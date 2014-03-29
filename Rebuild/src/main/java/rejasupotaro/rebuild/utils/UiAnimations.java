@@ -14,6 +14,16 @@ public final class UiAnimations {
     private UiAnimations() {
     }
 
+    public static void bounceUp(Context context, View view) {
+        Animation bounceUpAnimation = AnimationUtils.loadAnimation(context, R.anim.bounce_touch_up);
+        view.startAnimation(bounceUpAnimation);
+    }
+
+    public static void bounceDown(Context context, View view) {
+        Animation bounceDownAnimation = AnimationUtils.loadAnimation(context, R.anim.bounce_touch_down);
+        view.startAnimation(bounceDownAnimation);
+    }
+
     public static void slideUp(Context context, View view) {
         slideUp(context, view, 0, 0);
     }
