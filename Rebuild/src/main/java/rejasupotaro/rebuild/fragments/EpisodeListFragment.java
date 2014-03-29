@@ -76,7 +76,8 @@ public class EpisodeListFragment extends RoboFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        UiAnimations.slideLeft(getActivity(), rebuildImageView, 0, 3000);
+        // Pending...
+        // UiAnimations.slideLeft(getActivity(), rebuildImageView, 0, 3000);
 
         setupListView();
         requestFeed();
