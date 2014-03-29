@@ -122,7 +122,7 @@ public class PodcastPlayerNotification {
                 PodcastPlayer.getInstance().pause();
                 BusProvider.getInstance().post(new ReceivePauseActionEvent());
             } else {
-                PodcastPlayer.getInstance().start();
+                PodcastPlayer.getInstance().restart();
                 BusProvider.getInstance().post(new ReceiveResumeActionEvent());
             }
             // Update the notification itself

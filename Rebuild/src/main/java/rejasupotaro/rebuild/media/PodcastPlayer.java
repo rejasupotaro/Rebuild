@@ -112,6 +112,16 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
     }
 
     @Override
+    public void start() {
+        restart();
+    }
+
+    public void restart() {
+        super.start();
+        playerStatus = PlayerStatus.PLAYING;
+    }
+
+    @Override
     public void pause() {
         super.pause();
         playerStatus = PlayerStatus.PAUSED;

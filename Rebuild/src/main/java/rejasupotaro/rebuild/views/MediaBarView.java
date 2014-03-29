@@ -75,7 +75,7 @@ public class MediaBarView extends FrameLayout {
     private void start(final Episode episode) {
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         if (shouldRestart(episode)) {
-            podcastPlayer.start();
+            podcastPlayer.restart();
             PodcastPlayerNotification.notify(getContext(), episode);
         } else {
             mediaPlayAndPauseButton.setEnabled(false);
