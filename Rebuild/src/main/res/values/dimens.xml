@@ -5,7 +5,7 @@
 
     <dimen name="margin_icon_button">6dp</dimen>
 
-    <dimen name="ic_button_primary">56dp</dimen>
+    <dimen name="ic_button_primary">60dp</dimen>
     <dimen name="ic_button_secondary">40dp</dimen>
 
     <dimen name="primary_text_size">18sp</dimen>
@@ -14,7 +14,7 @@
     <dimen name="quaternary_text_size">12sp</dimen>
 
     <dimen name="episode_posted_at_text_shape_size">60dp</dimen>
-    <dimen name="profile_image_size">48dp</dimen>
+    <dimen name="profile_image_size">56dp</dimen>
 
     <dimen name="action_button_border_width">1dp</dimen>
     <dimen name="episode_list_header_width">380dp</dimen>

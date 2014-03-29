@@ -46,6 +46,10 @@ public class Guest extends Model {
         return profileImageUrl;
     }
 
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
     public int getTweetsCount() {
         return tweetsCount;
     }
