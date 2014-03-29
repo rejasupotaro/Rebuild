@@ -127,7 +127,7 @@ public class MediaBarView extends FrameLayout {
         setupMediaPlayAndPauseButton(episode);
 
         if (rootView.getVisibility() == View.GONE) {
-            UiAnimations.slideUp(rootView);
+            UiAnimations.slideUp(getContext(), rootView);
         }
     }
 
@@ -138,7 +138,7 @@ public class MediaBarView extends FrameLayout {
     }
 
     private void hide() {
-        UiAnimations.slideDown(rootView);
+        UiAnimations.slideDown(getContext(), rootView);
     }
 
     private void gone() {

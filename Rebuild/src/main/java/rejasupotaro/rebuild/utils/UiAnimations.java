@@ -11,52 +11,38 @@ import rejasupotaro.rebuild.R;
 
 public final class UiAnimations {
 
-    private static UiAnimations instance;
-
-    private Animation slideUpAnimation;
-
-    private Animation slideDownAnimation;
-
-    private Animation slideLeftAnimation;
-
-    public static synchronized void initialize(Context context) {
-        if (instance == null) {
-            instance = new UiAnimations(context);
-        }
+    private UiAnimations() {
     }
 
-    private UiAnimations(Context context) {
-        slideUpAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_up_enter);
-        slideDownAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_down_exit);
-        slideLeftAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
+    public static void slideUp(Context context, View view) {
+        slideUp(context, view, 0, 0);
     }
 
-    public static void slideUp(View view) {
-        slideUp(view, 0, 0);
-    }
-
-    public static void slideUp(View view, long delay, long duration) {
+    public static void slideUp(Context context, View view, long delay, long duration) {
         view.setVisibility(View.VISIBLE);
-        instance.slideUpAnimation.setStartOffset(delay);
-        instance.slideUpAnimation.setDuration(duration);
-        view.startAnimation(instance.slideUpAnimation);
+        Animation slideUpAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_up_enter);
+        slideUpAnimation.setStartOffset(delay);
+        slideUpAnimation.setDuration(duration);
+        view.startAnimation(slideUpAnimation);
     }
 
-    public static void slideDown(View view) {
-        slideDown(view, 0, 0);
+    public static void slideDown(Context context, View view) {
+        slideDown(context, view, 0, 0);
     }
 
-    public static void slideDown(View view, int delay, int duration) {
+    public static void slideDown(Context context, View view, int delay, int duration) {
         view.setVisibility(View.VISIBLE);
-        instance.slideDownAnimation.setStartOffset(delay);
-        instance.slideDownAnimation.setDuration(duration);
-        view.startAnimation(instance.slideDownAnimation);
+        Animation slideDownAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_down_exit);
+        slideDownAnimation.setStartOffset(delay);
+        slideDownAnimation.setDuration(duration);
+        view.startAnimation(slideDownAnimation);
     }
 
-    public static void slideLeft(final View view, long delay, long duration) {
-        instance.slideLeftAnimation.setStartOffset(delay);
-        instance.slideLeftAnimation.setDuration(duration);
-        view.startAnimation(instance.slideLeftAnimation);
+    public static void slideLeft(Context context, final View view, long delay, long duration) {
+        Animation slideLeftAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
+        slideLeftAnimation.setStartOffset(delay);
+        slideLeftAnimation.setDuration(duration);
+        view.startAnimation(slideLeftAnimation);
     }
 
     public static void fadeIn(final View view, long delay, long duration) {
