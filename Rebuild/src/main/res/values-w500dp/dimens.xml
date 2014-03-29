@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="profile_image_size">64dp</dimen>
+
+    <dimen name="episode_list_header_width">680dp</dimen>
+</resources>
+

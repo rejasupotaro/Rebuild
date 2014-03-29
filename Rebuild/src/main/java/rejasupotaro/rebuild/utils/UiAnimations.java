@@ -25,7 +25,7 @@ public final class UiAnimations {
     }
 
     public static void slideUp(Context context, View view) {
-        slideUp(context, view, 0, 0);
+        slideUp(context, view, 0, 500);
     }
 
     public static void slideUp(Context context, View view, long delay, long duration) {
@@ -37,14 +37,30 @@ public final class UiAnimations {
     }
 
     public static void slideDown(Context context, View view) {
-        slideDown(context, view, 0, 0);
+        slideDown(context, view, 0, 500);
     }
 
-    public static void slideDown(Context context, View view, int delay, int duration) {
+    public static void slideDown(Context context, final View view, int delay, int duration) {
         view.setVisibility(View.VISIBLE);
         Animation slideDownAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_down_exit);
         slideDownAnimation.setStartOffset(delay);
         slideDownAnimation.setDuration(duration);
+        slideDownAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                view.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         view.startAnimation(slideDownAnimation);
     }
 

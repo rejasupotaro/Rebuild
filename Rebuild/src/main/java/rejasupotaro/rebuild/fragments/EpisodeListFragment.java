@@ -75,7 +75,9 @@ public class EpisodeListFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        UiAnimations.slideLeft(getActivity(), rebuildImageView, 1000, 5000);
+
+        UiAnimations.slideLeft(getActivity(), rebuildImageView, 0, 3000);
+
         setupListView();
         requestFeed();
     }

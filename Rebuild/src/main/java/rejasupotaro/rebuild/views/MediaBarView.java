@@ -3,8 +3,6 @@ package rejasupotaro.rebuild.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -127,7 +125,7 @@ public class MediaBarView extends FrameLayout {
         setupMediaPlayAndPauseButton(episode);
 
         if (rootView.getVisibility() == View.GONE) {
-            UiAnimations.slideUp(getContext(), rootView);
+            UiAnimations.slideUp(getContext(), rootView, 0, 500);
         }
     }
 
@@ -138,7 +136,7 @@ public class MediaBarView extends FrameLayout {
     }
 
     private void hide() {
-        UiAnimations.slideDown(getContext(), rootView);
+        UiAnimations.slideDown(getContext(), rootView, 0, 500);
     }
 
     private void gone() {
