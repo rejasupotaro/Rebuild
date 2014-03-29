@@ -17,10 +17,16 @@ public class ActivityLifecycleObserver implements Application.ActivityLifecycleC
 
     private boolean isInBackground = false;
 
-    public static void initialize(Application application) {
+    private OnActivityStoppedListener onActivityStoppedListener;
+
+    public static interface OnActivityStoppedListener {
+        public void onAllStop();
+    }
+
+    public static void initialize(Application application, OnActivityStoppedListener onActivityStoppedListener) {
         synchronized (LOCK) {
             if (INSTANCE == null) {
-                INSTANCE = new ActivityLifecycleObserver();
+                INSTANCE = new ActivityLifecycleObserver(onActivityStoppedListener);
                 application.registerActivityLifecycleCallbacks(INSTANCE);
             }
         }
@@ -33,6 +39,10 @@ public class ActivityLifecycleObserver implements Application.ActivityLifecycleC
                 INSTANCE = null;
             }
         }
+    }
+
+    private ActivityLifecycleObserver(OnActivityStoppedListener onActivityStoppedListener) {
+        this.onActivityStoppedListener = onActivityStoppedListener;
     }
 
     @Override
@@ -70,11 +80,7 @@ public class ActivityLifecycleObserver implements Application.ActivityLifecycleC
     public void onActivityStopped(Activity activity) {
         if (activities == 0) {
             isInBackground = true;
-            if (PodcastPlayer.getInstance().isPlaying()) {
-                PodcastPlayerNotification.setIsInBackground(true);
-            } else {
-                PodcastPlayer.getInstance().stop();
-            }
+            onActivityStoppedListener.onAllStop();
         }
     }
 }

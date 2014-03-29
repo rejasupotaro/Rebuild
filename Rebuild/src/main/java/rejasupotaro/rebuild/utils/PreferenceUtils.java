@@ -17,7 +17,7 @@ public final class PreferenceUtils {
     }
 
     public static int loadInt(Context context, String key) {
-        return getDefaultSharedPreferences(context).getInt(key, 0);
+        return getDefaultSharedPreferences(context).getInt(key, -1);
     }
 
     public static void remove(Context context, String key) {
