@@ -136,11 +136,6 @@ public class RoboActionBarActivity extends ActionBarActivity implements RoboCont
     }
 
     @Override
-    public void onContentChanged() {
-        super.onContentChanged();
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         eventManager.fire(new OnActivityResultEvent(requestCode, resultCode, data));

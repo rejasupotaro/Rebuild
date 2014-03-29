@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.LoaderManager;
 import android.content.Loader;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,9 @@ public class TimelineActivity extends RoboActionBarActivity {
     @InjectView(R.id.state_frame_layout)
     private StateFrameLayout stateFrameLayout;
 
+    @InjectView(R.id.swipe_refresh_layout)
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @InjectView(R.id.tweet_list)
     private ListView tweetListView;
 
@@ -50,6 +54,7 @@ public class TimelineActivity extends RoboActionBarActivity {
 
         setupActionBar();
         setupTweetListView();
+        setupSwipeRefreshLayout();
         setupComposeTweetButton();
     }
 
@@ -85,6 +90,20 @@ public class TimelineActivity extends RoboActionBarActivity {
         requestTweetList();
     }
 
+    private void setupSwipeRefreshLayout() {
+        swipeRefreshLayout.setColorScheme(
+                android.R.color.holo_blue_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
+    }
+
     private void setupComposeTweetButton() {
         composeTweetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +111,11 @@ public class TimelineActivity extends RoboActionBarActivity {
                 IntentUtils.sendPostIntent(TimelineActivity.this, "#rebuildfm");
             }
         });
+    }
+
+    private void refresh() {
+        isFirstRequest = true;
+        requestTweetList();
     }
 
     private boolean isFirstRequest = true;
@@ -107,8 +131,9 @@ public class TimelineActivity extends RoboActionBarActivity {
                     @Override
                     public void onLoadFinished(Loader<List<Tweet>> listLoader,
                             List<Tweet> tweetList) {
+                        addTweetList(tweetList, isFirstRequest);
+                        swipeRefreshLayout.setRefreshing(false);
                         isFirstRequest = false;
-                        addTweetList(tweetList);
                     }
 
                     @Override
@@ -118,10 +143,15 @@ public class TimelineActivity extends RoboActionBarActivity {
                 });
     }
 
-    private void addTweetList(List<Tweet> tweetList) {
+    private void addTweetList(List<Tweet> tweetList, boolean isFirstRequest) {
         if (tweetList == null || tweetList.isEmpty()) {
             return;
         }
+
+        if (isFirstRequest) {
+            tweetListAdapter.clear();
+        }
+
         tweetListAdapter.addAll(tweetList);
     }
 
