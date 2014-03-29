@@ -9,8 +9,6 @@ import android.app.Application;
 import android.util.Log;
 
 import rejasupotaro.rebuild.api.RssFeedClient;
-import rejasupotaro.rebuild.media.PlayingEpisodeStore;
-import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 
 import static rejasupotaro.rebuild.ActivityLifecycleObserver.OnActivityStoppedListener;
@@ -45,13 +43,7 @@ public class RebuildApplication extends Application {
         ActivityLifecycleObserver.initialize(this, new OnActivityStoppedListener() {
             @Override
             public void onAllStop() {
-                PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-                if (podcastPlayer.isPlaying()) {
-                    PodcastPlayerNotification.setIsInBackground(true);
-                } else {
-                    podcastPlayer.getInstance().stop();
-                    PlayingEpisodeStore.save(RebuildApplication.this);
-                }
+                PodcastPlayerNotification.setIsInBackground(true);
             }
         });
     }
