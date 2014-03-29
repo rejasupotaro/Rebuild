@@ -6,8 +6,24 @@ import android.preference.PreferenceManager;
 
 public final class PreferenceUtils {
 
-    public static SharedPreferences getDefaultSharedPreferences(final Context context) {
+    private static SharedPreferences getDefaultSharedPreferences(final Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public static void saveInt(Context context, String key, int value) {
+        SharedPreferences.Editor editor = getDefaultSharedPreferences(context).edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
+
+    public static int loadInt(Context context, String key) {
+        return getDefaultSharedPreferences(context).getInt(key, 0);
+    }
+
+    public static void remove(Context context, String key) {
+        SharedPreferences.Editor editor = getDefaultSharedPreferences(context).edit();
+        editor.remove(key);
+        editor.apply();
     }
 
     public static boolean getBoolean(final Context context, final String key) {

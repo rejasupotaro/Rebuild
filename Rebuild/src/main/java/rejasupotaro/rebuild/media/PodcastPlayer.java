@@ -2,13 +2,9 @@ package rejasupotaro.rebuild.media;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.util.Log;
-import android.widget.SeekBar;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.NetworkUtils;
