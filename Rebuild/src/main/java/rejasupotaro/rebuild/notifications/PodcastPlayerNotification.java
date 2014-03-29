@@ -16,6 +16,7 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.utils.DateUtils;
+import rejasupotaro.rebuild.utils.StringUtils;
 
 public class PodcastPlayerNotification {
 
@@ -58,7 +59,7 @@ public class PodcastPlayerNotification {
 
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentTitle(episode.getTitle());
-        builder.setContentText(episode.getDescription());
+        builder.setContentText(StringUtils.removeHtmlTags(episode.getDescription()));
         builder.setProgress(DateUtils.durationToInt(episode.getDuration()), currentPosition, false);
 
         if (PodcastPlayer.getInstance().isPlaying()) {
