@@ -140,26 +140,22 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        boolean result = true;
         switch (item.getItemId()) {
             case android.R.id.home:
                 close();
-                break;
+                return true;
             case R.id.action_settings:
                 menuDelegate.pressSettings();
-                break;
+                return true;
             case R.id.action_share:
                 menuDelegate.pressShare(currentEpisode);
-                break;
+                return true;
             case R.id.action_download_or_clear_cache:
                 menuDelegate.pressDownloadOrClearCache(currentEpisode);
                 updateMenuTitles(currentEpisode);
-                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
+                return true;
         }
-        return result;
+        return super.onOptionsItemSelected(item);
     }
 
     @Subscribe

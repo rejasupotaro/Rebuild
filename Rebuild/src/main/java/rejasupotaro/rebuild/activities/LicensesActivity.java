@@ -42,21 +42,14 @@ public class LicensesActivity extends RoboActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        boolean result = true;
         switch (item.getItemId()) {
-            case android.R.id.home: {
+            case android.R.id.home:
                 menuDelegate.pressHome();
-                break;
-            }
-            case R.id.action_settings: {
+                return true;
+            case R.id.action_settings:
                 menuDelegate.pressSettings();
-                break;
-            }
-            default: {
-                result = super.onOptionsItemSelected(item);
-                break;
-            }
+                return true;
         }
-        return result;
+        return super.onOptionsItemSelected(item);
     }
 }

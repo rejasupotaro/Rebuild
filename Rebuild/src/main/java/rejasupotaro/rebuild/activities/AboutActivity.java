@@ -61,15 +61,11 @@ public class AboutActivity extends RoboActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        boolean result = true;
         switch (item.getItemId()) {
             case android.R.id.home:
                 menuDelegate.pressHome();
-                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
+                return true;
         }
-        return result;
+        return super.onOptionsItemSelected(item);
     }
 }
