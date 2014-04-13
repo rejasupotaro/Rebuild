@@ -30,13 +30,6 @@ public class EpisodeTweetClient extends AbstractHttpClient {
 
     private boolean isRequesting = false;
 
-    public static interface ExistsDataResponseHandler {
-
-        public void onFound();
-
-        public void onNotFound();
-    }
-
     public static interface EpisodeTweetResponseHandler {
 
         public void onSuccess(int page, List<Tweet> tweetList);
@@ -47,26 +40,6 @@ public class EpisodeTweetClient extends AbstractHttpClient {
     @Override
     protected String getTag() {
         return TAG;
-    }
-
-    public static void isExistsData(int episodeId,
-            final ExistsDataResponseHandler responseHandler) {
-        asyncHttpClient.get(
-                DATA_URL_BASE + episodeId,
-                new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers,
-                            final byte[] responseBody) {
-                        responseHandler.onFound();
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody,
-                            Throwable error) {
-                        responseHandler.onNotFound();
-                    }
-                });
-
     }
 
     public void fetch(int episodeId, final int page, final int perPage,

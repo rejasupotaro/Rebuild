@@ -16,7 +16,6 @@ import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.EpisodeDetailPagerAdapter;
-import rejasupotaro.rebuild.api.EpisodeTweetClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
@@ -96,18 +95,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
         pagerTabStrip.setDrawFullUnderline(true);
         pagerTabStrip.setTabIndicatorColor(Color.WHITE);
-
-        EpisodeTweetClient.isExistsData(episode.getEpisodeId(), new EpisodeTweetClient.ExistsDataResponseHandler() {
-            @Override
-            public void onFound() {
-                // nothing to do
-            }
-
-            @Override
-            public void onNotFound() {
-                removeCommentFragment();
-            }
-        });
     }
 
     @Override
@@ -174,9 +161,5 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 episodeMediaFragment.setup(currentEpisode);
             }
         });
-    }
-
-    public void removeCommentFragment() {
-        pagerAdapter.removeByTitle(EpisodeDetailPagerAdapter.FRAGMENT_TITLE_COMMENTS);
     }
 }

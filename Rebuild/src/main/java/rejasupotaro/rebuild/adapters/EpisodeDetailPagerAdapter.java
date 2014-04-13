@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import rejasupotaro.rebuild.fragments.CommentsFragment;
 import rejasupotaro.rebuild.fragments.EpisodeDescriptionFragment;
 import rejasupotaro.rebuild.fragments.ShowNotesFragment;
 import rejasupotaro.rebuild.models.Episode;
@@ -18,8 +17,6 @@ public class EpisodeDetailPagerAdapter extends FragmentPagerAdapter {
 
     public static final String FRAGMENT_TITLE_SHOW_NOTES = "SHOW NOTES";
 
-    public static final String FRAGMENT_TITLE_COMMENTS = "COMMENTS";
-
     private PagerFragmentList pagerFragmentList = new PagerFragmentList();
 
     public EpisodeDetailPagerAdapter(FragmentManager fragmentManager, Episode episode) {
@@ -29,13 +26,6 @@ public class EpisodeDetailPagerAdapter extends FragmentPagerAdapter {
                 EpisodeDescriptionFragment.newInstance(episode));
         pagerFragmentList.add(FRAGMENT_TITLE_SHOW_NOTES,
                 ShowNotesFragment.newInstance(episode));
-        pagerFragmentList.add(FRAGMENT_TITLE_COMMENTS,
-                CommentsFragment.newInstance(episode));
-    }
-
-    public void removeByTitle(String title) {
-        pagerFragmentList.removeByTitle(title);
-        notifyDataSetChanged();
     }
 
     @Override
