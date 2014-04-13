@@ -3,7 +3,7 @@ buildscript {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:0.9.+'
         classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
         classpath 'org.notlocalhost.gradle:gradle-calabash-android-plugin:0.1.+'
     }
@@ -83,8 +83,8 @@ android {
         compile 'org.twitter4j:twitter4j-core:3.0.5'
         compile 'com.path:android-priority-jobqueue:1.1.2'
 
-        instrumentTestCompile fileTree(dir: 'src/instrumentTest/libs', include: '*.jar')
-        instrumentTestCompile 'com.squareup:fest-android:1.0.7'
+        androidTestCompile fileTree(dir: 'src/androidTest/libs', include: '*.jar')
+        androidTestCompile 'com.squareup:fest-android:1.0.7'
     }
 
     packagingOptions {
