@@ -2,6 +2,7 @@ package rejasupotaro.rebuild.media;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.IOException;
@@ -84,6 +85,11 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
     }
 
     public void start(Context context, Episode episode, StateChangedListener stateChangedListener) {
+        Uri enclosure = episode.getEnclosure();
+        if (enclosure == null) {
+            return;
+        }
+
         playerStatus = playerStatus.PREPARING;
 
         this.episode = episode;
@@ -103,7 +109,8 @@ public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPrepared
             prepareAsync();
             setOnPreparedListener(this);
         } catch (IOException e) {
-            Log.e(TAG, "An error occurred while preparing data source: " + episode.getEnclosure().toString());
+            Log.e(TAG, "An error occurred while preparing data source: "
+                    + (enclosure == null ? "null" : enclosure.toString()));
         }
     }
 

@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import rejasupotaro.asyncrssclient.MediaEnclosure;
 import rejasupotaro.asyncrssclient.RssItem;
 import rejasupotaro.rebuild.media.MediaFileManager;
 import rejasupotaro.rebuild.utils.DateUtils;
@@ -159,13 +160,14 @@ public class Episode extends Model implements Parcelable {
     }
 
     public static Episode newEpisodeFromEntity(RssItem rssItem) {
+        MediaEnclosure mediaEnclosure = rssItem.getMediaEnclosure();
         return new Episode(
                 buildIdFromLink(rssItem.getLink()),
                 rssItem.getTitle(),
                 getDescription(rssItem),
                 rssItem.getLink(),
                 rssItem.getPubDate(),
-                rssItem.getMediaEnclosure().getUrl(),
+                (mediaEnclosure == null ? null : mediaEnclosure.getUrl()),
                 rssItem.getDuration(),
                 rssItem.getDescription());
     }
@@ -258,7 +260,7 @@ public class Episode extends Model implements Parcelable {
         dest.writeString(description);
         dest.writeString(link.toString());
         dest.writeString(postedAt);
-        dest.writeString(enclosure.toString());
+        dest.writeString(enclosure == null ? "" : enclosure.toString());
         dest.writeString(duration);
         dest.writeString(showNotes);
         dest.writeInt(isFavorited ? 1 : 0);
@@ -282,7 +284,8 @@ public class Episode extends Model implements Parcelable {
         description = in.readString();
         link = Uri.parse(in.readString());
         postedAt = in.readString();
-        enclosure = Uri.parse(in.readString());
+        String uriString = in.readString();
+        enclosure = (TextUtils.isEmpty(uriString) ? null : Uri.parse(uriString));
         duration = in.readString();
         showNotes = in.readString();
         isFavorited = (in.readInt() == 1);
