@@ -20,4 +20,4 @@ before_script:
     - wait_for_emulator
 
 script:
-    - TERM=dumb ./gradlew connectedInstrumentTestStagingDebug
+    - TERM=dumb ./gradlew connectedAndroidTestStagingDebug

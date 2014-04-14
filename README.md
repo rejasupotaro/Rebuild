@@ -1,4 +1,4 @@
-Rebuild.fm for Android [![Build Status](https://travis-ci.org/rejasupotaro/Rebuild.png?branch=master)](https://travis-ci.org/rejasupotaro/Rebuild) [![wercker status](https://app.wercker.com/status/bac4cd5c8d65b004a6b81f8f01ef5524 "wercker status")](https://app.wercker.com/project/bykey/bac4cd5c8d65b004a6b81f8f01ef5524)
+Rebuild.fm for Android [![Build Status](https://travis-ci.org/rejasupotaro/Rebuild.png?branch=master)](https://travis-ci.org/rejasupotaro/Rebuild)
 ======
 
 Rebuild.fm for Android is the best podcast player to listen to Rebuild.fm. (Unofficial)
