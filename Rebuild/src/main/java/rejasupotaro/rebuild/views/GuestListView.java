@@ -38,6 +38,7 @@ public class GuestListView extends LinearLayout {
 
     public void setup(List<String> guestNameList) {
         setOrientation(VERTICAL);
+        guestNameList.add(0, "miyagawa");
         requestGuestList(guestNameList);
     }
 
@@ -50,7 +51,7 @@ public class GuestListView extends LinearLayout {
             @Override
             public void run() {
                 SectionHeaderView sectionHeaderView = new SectionHeaderView(getContext());
-                sectionHeaderView.setup("Guests");
+                sectionHeaderView.setup("Featuring");
                 addView(sectionHeaderView);
 
                 for (Guest guest : guestList) {
