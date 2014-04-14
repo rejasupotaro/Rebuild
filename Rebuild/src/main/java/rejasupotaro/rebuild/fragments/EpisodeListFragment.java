@@ -77,7 +77,7 @@ public class EpisodeListFragment extends RoboFragment {
         super.onActivityCreated(savedInstanceState);
 
         // Pending...
-        // UiAnimations.slideLeft(getActivity(), rebuildImageView, 0, 3000);
+        UiAnimations.slideLeft(getActivity(), rebuildImageView, 0, 5000);
 
         setupListView();
         requestFeed();
@@ -130,7 +130,7 @@ public class EpisodeListFragment extends RoboFragment {
         ViewUtils.addHeaderView(episodeListView, headerView);
 
         View appTitleTextView = headerView.findViewById(R.id.app_title_text);
-        UiAnimations.fadeIn(appTitleTextView, 1000, 1000);
+        UiAnimations.fadeIn(appTitleTextView, 1500, 500);
         View headerLinkTextView = headerView.findViewById(R.id.header_link_text);
         UiAnimations.slideUp(getActivity(), headerLinkTextView, 1000, 500);
     }
@@ -152,16 +152,16 @@ public class EpisodeListFragment extends RoboFragment {
         rssFeedClient.request(new RssFeedClient.EpisodeClientResponseHandler() {
             @Override
             public void onSuccess(List<Episode> episodeList) {
-                setupEpisodeListView(episodeList);
                 BusProvider.getInstance().post(new LoadEpisodeListCompleteEvent(episodeList));
-                UiAnimations.fadeOut(splashView, 1000, 500);
+                UiAnimations.fadeOut(splashView, 1000, 1);
+                setupEpisodeListView(episodeList);
             }
 
             @Override
             public void onFailure() {
                 if (shouldShowError()) {
                     ToastUtils.showNetworkError(getActivity());
-                    UiAnimations.fadeOut(splashView, 1000, 500);
+                    UiAnimations.fadeOut(splashView, 1000, 1);
                 }
             }
         });
