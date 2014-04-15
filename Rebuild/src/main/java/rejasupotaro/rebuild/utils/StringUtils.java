@@ -86,7 +86,7 @@ public final class StringUtils {
     }
 
     public static String removeHtmlTags(String source) {
-        return Html.fromHtml(source).toString();
+        return Html.fromHtml(source).toString().trim();
     }
 
     public static String removeRebuildHashTag(String source) {

@@ -2,7 +2,9 @@ package rejasupotaro.rebuild.views;
 
 import com.squareup.otto.Subscribe;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
@@ -11,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.dialogs.ChooseEpisodePlayFormatDialog;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.EpisodePlayStartEvent;
 import rejasupotaro.rebuild.events.ReceivePauseActionEvent;
@@ -108,12 +111,19 @@ public class EpisodeMediaView extends LinearLayout {
         mediaPlayAndPauseButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
+
+                ChooseEpisodePlayFormatDialog dialog
+                        = ChooseEpisodePlayFormatDialog.newInstance(episode, false);
+                dialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), "");
+
+                /* TODO: impl me
                 if (mediaPlayAndPauseButton.isChecked()) {
                     start(episode);
                 } else {
                     pause(episode);
                 }
-
+                */
             }
         });
     }
