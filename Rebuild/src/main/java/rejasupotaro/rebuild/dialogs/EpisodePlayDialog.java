@@ -12,15 +12,15 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.StringUtils;
 import roboguice.fragment.RoboDialogFragment;
 
-public class ChooseEpisodePlayFormatDialog extends RoboDialogFragment {
+public class EpisodePlayDialog extends RoboDialogFragment {
 
     @Inject
     private EpisodePlayDialogHelper episodePlayDialogHelper;
 
     private static final String ARGS_EPISODE = "args_episode";
 
-    public static ChooseEpisodePlayFormatDialog newInstance(Episode episode) {
-        ChooseEpisodePlayFormatDialog dialog = new ChooseEpisodePlayFormatDialog();
+    public static EpisodePlayDialog newInstance(Episode episode) {
+        EpisodePlayDialog dialog = new EpisodePlayDialog();
         Bundle args = new Bundle();
         args.putParcelable(ARGS_EPISODE, episode);
         dialog.setArguments(args);

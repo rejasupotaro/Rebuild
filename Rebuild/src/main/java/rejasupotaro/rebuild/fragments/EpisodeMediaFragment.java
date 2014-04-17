@@ -15,7 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.dialogs.ChooseEpisodePlayFormatDialog;
+import rejasupotaro.rebuild.dialogs.EpisodePlayDialog;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.EpisodePlayStartEvent;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
@@ -169,8 +169,8 @@ public class EpisodeMediaFragment extends RoboFragment {
     }
 
     private void showEpisodePlayDialog(Episode episode) {
-        ChooseEpisodePlayFormatDialog dialog
-                = ChooseEpisodePlayFormatDialog.newInstance(episode);
+        EpisodePlayDialog dialog
+                = EpisodePlayDialog.newInstance(episode);
         dialog.show(getActivity().getSupportFragmentManager(), "");
     }
 
