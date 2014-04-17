@@ -4,9 +4,76 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <rejasupotaro.rebuild.views.EpisodeMediaView
-            android:id="@+id/episode_media_view"
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            >
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/episode_image_height"
+                >
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/miyagawa_in_yapc"
+                    android:background="@android:color/black"
+                    android:scaleType="fitCenter"
+                    />
+
+            <FrameLayout
+                    android:id="@+id/episode_detail_header_cover"
+                    android:background="@color/smoke_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/episode_image_height"
+                    />
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    >
+                <TextView
+                        android:id="@+id/episode_title"
+                        android:layout_margin="@dimen/padding_contents"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                <View
+                        android:layout_weight="3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/pager_tab_strip_height"
+                    >
+                <LinearLayout
+                        android:id="@+id/media_control_view"
+                        android:background="@drawable/above_shadow"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                    <CheckBox
+                            android:id="@+id/media_play_and_pause_button"
+                            style="@style/MediaPlayAndPauseButton"
+                            android:layout_marginLeft="@dimen/margin_icon_button"
+                            android:layout_gravity="center"
+                            />
+                    <include layout="@layout/view_media_seekbar"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
 </rejasupotaro.rebuild.views.StateFrameLayout>
