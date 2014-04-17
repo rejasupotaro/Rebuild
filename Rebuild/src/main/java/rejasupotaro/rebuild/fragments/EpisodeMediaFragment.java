@@ -39,6 +39,12 @@ public class EpisodeMediaFragment extends RoboFragment {
 
     private LoadListener loadListener;
 
+    @Inject
+    private OnContextExecutor onContextExecutor;
+
+    @Inject
+    private EpisodePlayDialogHelper episodePlayDialogHelper;
+
     @InjectView(R.id.episode_title)
     private TextView episodeTitleTextView;
 
@@ -59,9 +65,6 @@ public class EpisodeMediaFragment extends RoboFragment {
 
     @InjectView(R.id.state_frame_layout)
     private StateFrameLayout stateFrameLayout;
-
-    @Inject
-    private OnContextExecutor onContextExecutor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
