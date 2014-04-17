@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 
+import rejasupotaro.rebuild.events.BusProvider;
+import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.StringUtils;
 import roboguice.fragment.RoboDialogFragment;
 
@@ -25,22 +27,39 @@ public class ChooseEpisodePlayFormatDialog extends RoboDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle args = getArguments();
-        Episode episode = args.getParcelable(ARGS_EPISODE);
+        final Episode episode = args.getParcelable(ARGS_EPISODE);
         String title = episode.getTitle();
         String description = StringUtils.removeHtmlTags(episode.getDescription());
         boolean isDownloaded = episode.isDownloaded();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(title)
-                .setMessage(description)
-                .setPositiveButton("STREAM", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                })
-                .setNegativeButton("DOWNLOAD", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
+        builder.setTitle(title);
+        builder.setMessage(description);
+        if (isDownloaded) {
+            builder.setPositiveButton("PLAY NOW", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // TODO: impl me
+                }
+            });
+            builder.setNegativeButton("CLEAR CACHE", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    episode.clearCache();
+                    episode.save();
+                    BusProvider.getInstance().post(new ClearEpisodeCacheEvent());
+                }
+            });
+        } else {
+            builder.setPositiveButton("STREAM", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // TODO: impl me
+                }
+            });
+            builder.setNegativeButton("DOWNLOAD", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    EpisodeDownloadService.startDownload(getActivity(), episode);
+                }
+            });
+        }
 
         Dialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
