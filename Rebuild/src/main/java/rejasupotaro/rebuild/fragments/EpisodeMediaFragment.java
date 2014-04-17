@@ -76,6 +76,19 @@ public class EpisodeMediaFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        episodePlayDialogHelper.setSelectListener(new EpisodePlayDialogHelper.OnSelectListener() {
+            @Override
+            public void playNow(Episode episode) {
+                start(episode);
+                mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
+            }
+
+            @Override
+            public void startStreaming(Episode episode) {
+                start(episode);
+                mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
+            }
+        });
     }
 
     @Override
@@ -141,47 +154,53 @@ public class EpisodeMediaFragment extends RoboFragment {
             public void onClick(View v) {
                 mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
 
-                ChooseEpisodePlayFormatDialog dialog
-                        = ChooseEpisodePlayFormatDialog.newInstance(episode);
-                dialog.show(getActivity().getSupportFragmentManager(), "");
-
-                /* TODO: impl me
-                if (mediaPlayAndPauseButton.isChecked()) {
-                    start(episode);
+                if (!mediaPlayAndPauseButton.isChecked()) {
+                    if (shouldRestart(episode)) {
+                        restart(episode);
+                        mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
+                    } else {
+                        showEpisodePlayDialog(episode);
+                    }
                 } else {
                     pause(episode);
                 }
-                */
             }
         });
     }
 
-    private void start(final Episode episode) {
-        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
-        if (shouldRestart(episode)) {
-            podcastPlayer.restart();
-            seekBar.setEnabled(true);
-            PodcastPlayerNotification.notify(getActivity(), episode);
-        } else {
-            loadListener.showProgress();
-            mediaPlayAndPauseButton.setEnabled(false);
-            podcastPlayer.start(getActivity(), episode, new PodcastPlayer.StateChangedListener() {
-                @Override
-                public void onStart() {
-                    if (getActivity() == null) {
-                        pause(episode);
-                    } else {
-                        loadListener.showContent();
-                        UiAnimations.fadeOut(mediaStartButtonOnImageCover, 300, 1000);
+    private void showEpisodePlayDialog(Episode episode) {
+        ChooseEpisodePlayFormatDialog dialog
+                = ChooseEpisodePlayFormatDialog.newInstance(episode);
+        dialog.show(getActivity().getSupportFragmentManager(), "");
+    }
 
-                        seekBar.setEnabled(true);
-                        mediaPlayAndPauseButton.setEnabled(true);
-                        PodcastPlayerNotification.notify(getActivity(), episode);
-                        BusProvider.getInstance().post(new EpisodePlayStartEvent(episode.getEpisodeId()));
-                    }
-                }
-            });
+    private void start(final Episode episode) {
+        if (shouldRestart(episode)) {
+            restart(episode);
+            return;
         }
+
+        loadListener.showProgress();
+        mediaPlayAndPauseButton.setEnabled(false);
+
+        final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        podcastPlayer.start(getActivity(), episode, new PodcastPlayer.StateChangedListener() {
+            @Override
+            public void onStart() {
+                if (getActivity() == null) {
+                    pause(episode);
+                } else {
+                    loadListener.showContent();
+                    UiAnimations.fadeOut(mediaStartButtonOnImageCover, 300, 1000);
+
+                    seekBar.setEnabled(true);
+                    mediaPlayAndPauseButton.setEnabled(true);
+                    PodcastPlayerNotification.notify(getActivity(), episode);
+                    BusProvider.getInstance()
+                            .post(new EpisodePlayStartEvent(episode.getEpisodeId()));
+                }
+            }
+        });
     }
 
     private boolean shouldRestart(Episode episode) {
@@ -190,7 +209,16 @@ public class EpisodeMediaFragment extends RoboFragment {
                 && (podcastPlayer.isPlaying() || podcastPlayer.isPaused()));
     }
 
+    private void restart(Episode episode) {
+        PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
+        podcastPlayer.restart();
+        seekBar.setEnabled(true);
+        PodcastPlayerNotification.notify(getActivity(), episode);
+    }
+
     private void pause(final Episode episode) {
+        mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
+
         final PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         podcastPlayer.pause();
         seekBar.setEnabled(false);
@@ -227,7 +255,8 @@ public class EpisodeMediaFragment extends RoboFragment {
                             updateCurrentTime(0);
                         }
                     }
-                });
+                }
+        );
     }
 
     private void updateCurrentTime(int currentPosition) {
