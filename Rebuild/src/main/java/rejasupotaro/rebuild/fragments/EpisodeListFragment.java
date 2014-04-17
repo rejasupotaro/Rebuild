@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -38,9 +37,6 @@ public class EpisodeListFragment extends RoboFragment {
 
     @Inject
     private RssFeedClient rssFeedClient;
-
-    @InjectView(R.id.rebuild_image)
-    private ImageView rebuildImageView;
 
     @InjectView(R.id.splash_view)
     private View splashView;
@@ -75,9 +71,6 @@ public class EpisodeListFragment extends RoboFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        // Pending...
-        UiAnimations.slideLeft(getActivity(), rebuildImageView, 0, 5000);
 
         setupListView();
         requestFeed();
