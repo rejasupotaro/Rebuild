@@ -29,8 +29,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
-    private Menu menu;
-
     @InjectExtra(value = EXTRA_EPISODE_ID)
     private int episodeId;
 
@@ -100,18 +98,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.episode_detail, menu);
-        this.menu = menu;
-        updateMenuTitles(currentEpisode);
         return true;
-    }
-
-    private void updateMenuTitles(Episode episode) {
-        MenuItem downloadOrClearCacheMenuItem = menu.findItem(R.id.action_download_or_clear_cache);
-        if (currentEpisode.isDownloaded()) {
-            downloadOrClearCacheMenuItem.setTitle(getString(R.string.clear_cache));
-        } else {
-            downloadOrClearCacheMenuItem.setTitle(getString(R.string.download));
-        }
     }
 
     public void close() {
@@ -137,10 +124,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
             case R.id.action_share:
                 menuDelegate.pressShare(currentEpisode);
                 return true;
-            case R.id.action_download_or_clear_cache:
-                menuDelegate.pressDownloadOrClearCache(currentEpisode);
-                updateMenuTitles(currentEpisode);
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -157,7 +140,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         mainThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                updateMenuTitles(currentEpisode);
                 episodeMediaFragment.setup(currentEpisode);
             }
         });
