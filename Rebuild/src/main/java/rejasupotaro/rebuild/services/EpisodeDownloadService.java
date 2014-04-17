@@ -44,12 +44,48 @@ public class EpisodeDownloadService extends IntentService {
     }
 
     public static boolean isDownloading(Episode episode) {
-        for (Episode e : downloadingEpisodeList) {
-            if (episode.isSameEpisode(e)) {
-                return true;
-            }
+        int index = getEpisodeIndexFromDownloadingList(episode);
+        return (index != -1);
+    }
+
+    public static void cancel(Context context, Episode episode) {
+        int index = getEpisodeIndexFromDownloadingList(episode);
+        if (index == -1) {
+            return;
         }
-        return false;
+
+        removeEpisodeFromDownloadingList(episode);
+        EpisodeDownloadNotification.cancel(context, episode);
+    }
+
+    public static int getEpisodeIndexFromDownloadingList(Episode episode) {
+        if (episode == null) {
+            return -1;
+        }
+
+        int index = 0;
+        while (index < downloadingEpisodeList.size()) {
+            Episode downloadingEpisode = downloadingEpisodeList.get(index);
+            if (downloadingEpisode.isSameEpisode(episode)) {
+                return index;
+            }
+            index++;
+        };
+
+        return -1;
+    }
+
+    public static void removeEpisodeFromDownloadingList(Episode episode) {
+        if (episode == null) {
+            return;
+        }
+
+        int index = getEpisodeIndexFromDownloadingList(episode);
+        if (index == -1) {
+            return;
+        }
+
+        downloadingEpisodeList.remove(index);
     }
 
     @Override
@@ -64,10 +100,13 @@ public class EpisodeDownloadService extends IntentService {
 
             downloadingEpisodeList.add(episode);
             episodeDownloadClient.download(getApplicationContext(), episode);
-            episode.save();
-            downloadingEpisodeList.remove(episode);
-            BusProvider.getInstance().post(new DownloadEpisodeCompleteEvent(episode.getEpisodeId()));
-            EpisodeDownloadCompleteNotificaiton.notify(this, episode);
+
+            if (isDownloading(episode)) {
+                downloadingEpisodeList.remove(episode);
+                episode.save();
+                BusProvider.getInstance().post(new DownloadEpisodeCompleteEvent(episode.getEpisodeId()));
+                EpisodeDownloadCompleteNotificaiton.notify(this, episode);
+            }
         } finally {
             EpisodeDownloadNotification.cancel(this, episode);
         }

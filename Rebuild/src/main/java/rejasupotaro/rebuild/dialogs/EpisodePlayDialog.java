@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import rejasupotaro.rebuild.fragments.EpisodePlayDialogHelper;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.StringUtils;
 import roboguice.fragment.RoboDialogFragment;
 
@@ -55,11 +56,19 @@ public class EpisodePlayDialog extends RoboDialogFragment {
                     episodePlayDialogHelper.startStreaming(episode);
                 }
             });
-            builder.setNegativeButton("DOWNLOAD", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    episodePlayDialogHelper.startDownload(episode);
-                }
-            });
+            if (EpisodeDownloadService.isDownloading(episode)) {
+                builder.setNegativeButton("CANCEL DOWNLOAD", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        EpisodeDownloadService.cancel(getActivity(), episode);
+                    }
+                });
+            } else {
+                builder.setNegativeButton("DOWNLOAD", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        episodePlayDialogHelper.startDownload(episode);
+                    }
+                });
+            }
         }
 
         Dialog dialog = builder.create();
