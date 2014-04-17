@@ -12,18 +12,12 @@ import roboguice.fragment.RoboDialogFragment;
 
 public class ChooseEpisodePlayFormatDialog extends RoboDialogFragment {
 
-    private static final String ARGS_TITLE = "args_title";
+    private static final String ARGS_EPISODE = "args_episode";
 
-    private static final String ARGS_DESCRIPTION = "args_description";
-
-    private static final String ARGS_IS_DONWLOADED = "args_is_downloaded";
-
-    public static ChooseEpisodePlayFormatDialog newInstance(Episode episode, boolean isDownloaded) {
+    public static ChooseEpisodePlayFormatDialog newInstance(Episode episode) {
         ChooseEpisodePlayFormatDialog dialog = new ChooseEpisodePlayFormatDialog();
         Bundle args = new Bundle();
-        args.putString(ARGS_TITLE, episode.getTitle());
-        args.putString(ARGS_DESCRIPTION, StringUtils.removeHtmlTags(episode.getDescription()));
-        args.putBoolean(ARGS_IS_DONWLOADED, isDownloaded);
+        args.putParcelable(ARGS_EPISODE, episode);
         dialog.setArguments(args);
         return dialog;
     }
@@ -31,10 +25,10 @@ public class ChooseEpisodePlayFormatDialog extends RoboDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle args = getArguments();
-        String title = args.getString(ARGS_TITLE);
-        String description = args.getString(ARGS_DESCRIPTION);
-        Log.e("debugging", description);
-        boolean isDownloaded = args.getBoolean(ARGS_IS_DONWLOADED);
+        Episode episode = args.getParcelable(ARGS_EPISODE);
+        String title = episode.getTitle();
+        String description = StringUtils.removeHtmlTags(episode.getDescription());
+        boolean isDownloaded = episode.isDownloaded();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title)

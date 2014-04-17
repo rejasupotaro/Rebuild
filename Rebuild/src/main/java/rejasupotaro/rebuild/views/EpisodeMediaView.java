@@ -114,7 +114,7 @@ public class EpisodeMediaView extends LinearLayout {
                 mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
 
                 ChooseEpisodePlayFormatDialog dialog
-                        = ChooseEpisodePlayFormatDialog.newInstance(episode, false);
+                        = ChooseEpisodePlayFormatDialog.newInstance(episode);
                 dialog.show(((FragmentActivity) getContext()).getSupportFragmentManager(), "");
 
                 /* TODO: impl me

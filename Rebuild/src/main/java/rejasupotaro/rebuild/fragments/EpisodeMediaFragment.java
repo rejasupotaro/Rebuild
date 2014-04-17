@@ -78,10 +78,6 @@ public class EpisodeMediaFragment extends RoboFragment {
         });
     }
 
-    public void updateEpisodeMediaView() {
-
-    }
-
     @Subscribe
     public void onLoadEpisodeListComplete(final LoadEpisodeListCompleteEvent event) {
         if (episode != null) {
