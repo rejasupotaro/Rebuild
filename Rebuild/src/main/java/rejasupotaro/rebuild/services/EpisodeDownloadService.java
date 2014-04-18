@@ -91,7 +91,7 @@ public class EpisodeDownloadService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Episode episode = intent.getParcelableExtra(EXTRA_EPISODE);
-        if (isDownloading(episode)) {
+        if (episode == null || isDownloading(episode)) {
             return;
         }
 
@@ -106,6 +106,8 @@ public class EpisodeDownloadService extends IntentService {
                 episode.save();
                 BusProvider.getInstance().post(new DownloadEpisodeCompleteEvent(episode.getEpisodeId()));
                 EpisodeDownloadCompleteNotificaiton.notify(this, episode);
+            } else {
+                episode.clearCache();
             }
         } finally {
             EpisodeDownloadNotification.cancel(this, episode);
