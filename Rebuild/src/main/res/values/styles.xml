@@ -63,10 +63,11 @@
     </style>
 
     <style name="DialogButtonText">
-        <item name="android:textSize">@dimen/primary_text_size</item>
+        <item name="android:textSize">@dimen/secondary_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:padding">@dimen/padding_contents</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:background">@drawable/bg_clickable</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
