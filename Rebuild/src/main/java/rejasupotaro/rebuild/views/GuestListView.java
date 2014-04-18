@@ -51,7 +51,7 @@ public class GuestListView extends LinearLayout {
             @Override
             public void run() {
                 SectionHeaderView sectionHeaderView = new SectionHeaderView(getContext());
-                sectionHeaderView.setup("Featuring");
+                sectionHeaderView.setup("Casts");
                 addView(sectionHeaderView);
 
                 for (Guest guest : guestList) {
