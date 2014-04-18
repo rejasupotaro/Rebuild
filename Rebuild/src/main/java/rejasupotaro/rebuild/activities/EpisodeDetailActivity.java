@@ -91,7 +91,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         pagerAdapter = new EpisodeDetailPagerAdapter(getSupportFragmentManager(), episode);
         viewPager.setAdapter(pagerAdapter);
 
-        pagerTabStrip.setDrawFullUnderline(true);
         pagerTabStrip.setTabIndicatorColor(Color.WHITE);
     }
 
