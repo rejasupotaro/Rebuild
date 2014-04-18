@@ -6,13 +6,10 @@ import java.util.List;
 
 import rejasupotaro.rebuild.models.Guest;
 import rejasupotaro.rebuild.models.Tweet;
-import twitter4j.Twitter;
 
 public class TwitterApiClient {
 
     private static TwitterApiClient INSTANCE;
-
-    private Twitter twitter;
 
     public static synchronized TwitterApiClient getInstance() {
         if (INSTANCE == null) {
@@ -26,13 +23,13 @@ public class TwitterApiClient {
 
     public Guest getUser(String userName) {
         return new Guest(235544534,
-                "rejasupotaro",
-                "http://pbs.twimg.com/profile_images/424554842367852544/jRoDtV1R_normal.jpeg",
-                12897,
-                298,
-                999,
-                "顧客に価値を届け続けるオアダイ",
-                "http://t.co/IxfgYdk6nK");
+                "miyagawa",
+                "https://pbs.twimg.com/profile_images/1107507727/userpic-square.jpg",
+                50500,
+                1896,
+                12700,
+                "#sanfrancisco #cookpad @rebuildfm #sixapart #docker #tokyo #japan #perl #ruby #hacker #geek #blogger #podcaster #tech #web #electronica",
+                "http://weblog.bulknews.net/");
     }
 
     public List<Tweet> findTweetById(List<Long> ids) {
