@@ -60,49 +60,14 @@ public class EpisodePlayDialog extends RoboDialogFragment {
         titleTextView.setText(title);
         messageTextView.setText(description);
         if (isDownloaded) {
-            positiveButton.setText("PLAY NOW");
-            positiveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    episodePlayDialogHelper.playNow(episode);
-                    dismiss();
-                }
-            });
-            negativeButton.setText("CLEAR CACHE");
-            negativeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    episodePlayDialogHelper.clearCache(episode);
-                    dismiss();
-                }
-            });
+            setPlayNowEvent(positiveButton, episode);
+            setClearCacheEvent(negativeButton, episode);
         } else {
-            positiveButton.setText("STREAM");
-            positiveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    episodePlayDialogHelper.startStreaming(episode);
-                    dismiss();
-                }
-            });
+            setStreamEvent(positiveButton, episode);
             if (EpisodeDownloadService.isDownloading(episode)) {
-                negativeButton.setText("CANCEL DOWNLOAD");
-                negativeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        EpisodeDownloadService.cancel(getActivity(), episode);
-                        dismiss();
-                    }
-                });
+                setCancelDownloadEvent(negativeButton, episode);
             } else {
-                negativeButton.setText("DOWNLOAD");
-                negativeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        episodePlayDialogHelper.startDownload(episode);
-                        dismiss();
-                    }
-                });
+                setDownloadEvent(negativeButton, episode);
             }
         }
 
@@ -113,5 +78,60 @@ public class EpisodePlayDialog extends RoboDialogFragment {
         dialog.setCanceledOnTouchOutside(true);
 
         return dialog;
+    }
+
+    private void setPlayNowEvent(TextView view, final Episode episode) {
+        view.setText("PLAY NOW");
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                episodePlayDialogHelper.playNow(episode);
+                dismiss();
+            }
+        });
+    }
+
+    private void setClearCacheEvent(TextView view, final Episode episode) {
+        view.setText("CLEAR CACHE");
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                episodePlayDialogHelper.clearCache(episode);
+                dismiss();
+            }
+        });
+    }
+
+    private void setStreamEvent(TextView view, final Episode episode) {
+        view.setText("STREAM");
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                episodePlayDialogHelper.startStreaming(episode);
+                dismiss();
+            }
+        });
+    }
+
+    private void setCancelDownloadEvent(TextView view, final Episode episode) {
+        view.setText("CANCEL DOWNLOAD");
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EpisodeDownloadService.cancel(getActivity(), episode);
+                dismiss();
+            }
+        });
+    }
+
+    private void setDownloadEvent(TextView view, final Episode episode) {
+        view.setText("DOWNLOAD");
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                episodePlayDialogHelper.startDownload(episode);
+                dismiss();
+            }
+        });
     }
 }
