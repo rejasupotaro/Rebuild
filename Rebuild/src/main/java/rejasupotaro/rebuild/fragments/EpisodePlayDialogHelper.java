@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 
 import android.content.Context;
 
+import rejasupotaro.rebuild.Injectable;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
 import rejasupotaro.rebuild.models.Episode;
@@ -11,7 +12,7 @@ import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import roboguice.inject.ContextSingleton;
 
 @ContextSingleton
-public class EpisodePlayDialogHelper {
+public class EpisodePlayDialogHelper implements Injectable {
 
     @Inject
     private Context context;

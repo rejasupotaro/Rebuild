@@ -20,6 +20,8 @@
 -keep class javax.annotation.** { *; }
 -keep class roboguice.** { *; }
 
+-keep class * implements rejasupotaro.rebuild.Injectable
+
 -dontoptimize
 
 -keepclasseswithmembers class * { native <methods>; }
