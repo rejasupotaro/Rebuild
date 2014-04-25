@@ -6,9 +6,11 @@ buildscript {
         classpath 'com.android.tools.build:gradle:0.9.+'
         classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
         classpath 'org.notlocalhost.gradle:gradle-calabash-android-plugin:0.1.+'
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.9.+'
     }
 }
 
+apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
 apply plugin: 'calabash-test'
 apply from : "${rootDir}/gradle/gradle-findbugs/findbugs.gradle"

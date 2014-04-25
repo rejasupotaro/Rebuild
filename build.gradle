@@ -1,5 +1,4 @@
 apply from: 'gradle/gradle-android-utils/build.gradle'
-apply from: 'https://raw2.github.com/cookpad/gradle-android-sdk-manager/master/sdk_manager.gradle'
 
 ext {
     githubProjectName = 'Rebuild'
