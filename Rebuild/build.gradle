@@ -84,6 +84,7 @@ android {
         compile 'com.squareup.picasso:picasso:2.0.0'
         compile 'org.twitter4j:twitter4j-core:3.0.5'
         compile 'com.path:android-priority-jobqueue:1.1.2'
+        provided 'org.projectlombok:lombok:1.12.2'
 
         androidTestCompile fileTree(dir: 'src/androidTest/libs', include: '*.jar')
         androidTestCompile 'com.squareup:fest-android:1.0.7'
