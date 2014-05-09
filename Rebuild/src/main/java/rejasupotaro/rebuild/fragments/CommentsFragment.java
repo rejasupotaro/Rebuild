@@ -85,7 +85,7 @@ public class CommentsFragment extends RoboFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Tweet item = episodeTweetListAdapter.getItem(i);
-                IntentUtils.openTwitter(getActivity(), item.getEpisodeId(), item.getUserName());
+                IntentUtils.openTwitter(getActivity(), item.getTweetId(), item.getUserName());
             }
         });
 

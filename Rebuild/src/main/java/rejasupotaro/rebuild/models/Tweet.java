@@ -34,7 +34,7 @@ public class Tweet extends Model {
     @Column(name = "retweet_count")
     private int retweetCount;
 
-    public long getEpisodeId() {
+    public long getTweetId() {
         return tweetId;
     }
 

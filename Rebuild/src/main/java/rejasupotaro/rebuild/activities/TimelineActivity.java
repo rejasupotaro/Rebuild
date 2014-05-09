@@ -83,7 +83,7 @@ public class TimelineActivity extends RoboActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Tweet item = tweetListAdapter.getItem(i);
-                IntentUtils.openTwitter(TimelineActivity.this, item.getEpisodeId(),
+                IntentUtils.openTwitter(TimelineActivity.this, item.getTweetId(),
                         item.getUserName());
             }
         });
