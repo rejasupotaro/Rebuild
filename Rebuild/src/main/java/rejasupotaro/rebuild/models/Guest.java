@@ -5,8 +5,10 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import lombok.Data;
 import twitter4j.User;
 
+@Data
 @Table(name = "guests")
 public class Guest extends Model {
 
@@ -34,42 +36,6 @@ public class Guest extends Model {
     @Column(name = "url")
     private String url;
 
-    public long getGuestId() {
-        return guestId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
-
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
-
-    public int getTweetsCount() {
-        return tweetsCount;
-    }
-
-    public int getFriendsCount() {
-        return friendsCount;
-    }
-
-    public int getFollowersCount() {
-        return followersCount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
     public static boolean isEmpty(Guest guest) {
         if (guest == null) {
             return true;
@@ -78,6 +44,7 @@ public class Guest extends Model {
     }
 
     public Guest() {
+        super();
     }
 
     public Guest(long guestId, String name, String profileImageUrl, int tweetsCount, int friendsCount,
