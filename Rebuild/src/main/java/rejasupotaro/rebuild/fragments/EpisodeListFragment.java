@@ -98,17 +98,6 @@ public class EpisodeListFragment extends RoboFragment {
     private void setupListViewHeader() {
         View headerView = View.inflate(getActivity(), R.layout.header_episode_list_cover, null);
 
-        FontAwesomeTextView websiteLinkText = (FontAwesomeTextView) headerView
-                .findViewById(R.id.link_text_website);
-        websiteLinkText.prepend(FontAwesomeTextView.Icon.HOME);
-        websiteLinkText.findViewById(R.id.link_text_website)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        IntentUtils.openRebuildWeb(getActivity());
-                    }
-                });
-
         FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) headerView
                 .findViewById(R.id.link_text_twitter);
         twitterLinkText.prepend(FontAwesomeTextView.Icon.TWITTER);
