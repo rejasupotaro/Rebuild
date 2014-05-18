@@ -2,10 +2,12 @@ package rejasupotaro.rebuild.activities;
 
 import com.squareup.otto.Subscribe;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -17,17 +19,20 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
+import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.views.MediaBarView;
-import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
 
-public class MainActivity extends RoboFragmentActivity
+public class MainActivity extends RoboActionBarActivity
         implements EpisodeListFragment.OnEpisodeSelectListener {
 
     private static final String EXTRA_EPISODE = "extra_episode";
 
     @InjectView(R.id.media_bar)
     private MediaBarView mediaBar;
+
+    @Inject
+    private MenuDelegate menuDelegate;
 
     @Inject
     private MainThreadExecutor mainThreadExecutor;
@@ -43,8 +48,14 @@ public class MainActivity extends RoboFragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BusProvider.getInstance().register(this);
+        setupActionBar();
         startServices();
         parseIntent(getIntent());
+    }
+
+    private void setupActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(getString(R.string.app_name));
     }
 
     @Override
@@ -112,5 +123,15 @@ public class MainActivity extends RoboFragmentActivity
                 setupMediaBar(episode);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                menuDelegate.pressSettings();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

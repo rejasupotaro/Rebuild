@@ -27,7 +27,7 @@
 
         <activity
                 android:name="rejasupotaro.rebuild.activities.MainActivity"
-                android:theme="@style/NoActionBarTheme">
+                android:theme="@style/TransparentActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
