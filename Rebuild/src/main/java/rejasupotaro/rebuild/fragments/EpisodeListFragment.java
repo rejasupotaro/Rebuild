@@ -37,9 +37,6 @@ public class EpisodeListFragment extends RoboFragment {
     @Inject
     private RssFeedClient rssFeedClient;
 
-    @InjectView(R.id.splash_view)
-    private View splashView;
-
     @InjectView(R.id.link_text_twitter)
     private FontAwesomeTextView twitterLinkText;
 
@@ -112,8 +109,8 @@ public class EpisodeListFragment extends RoboFragment {
                         startActivity(new Intent(getActivity(), TimelineActivity.class));
                     }
                 });
-        UiAnimations.fadeIn(appTitleTextView, 1500, 500);
-        UiAnimations.slideUp(getActivity(), headerLinkTextView, 1000, 500);
+        UiAnimations.fadeIn(appTitleTextView, 500, 500);
+        UiAnimations.slideUp(getActivity(), headerLinkTextView, 0, 500);
     }
 
     private void setupListViewFooter() {
@@ -132,7 +129,6 @@ public class EpisodeListFragment extends RoboFragment {
             @Override
             public void onSuccess(List<Episode> episodeList) {
                 BusProvider.getInstance().post(new LoadEpisodeListCompleteEvent(episodeList));
-                UiAnimations.fadeOut(splashView, 1000, 1);
                 setupEpisodeListView(episodeList);
             }
 
@@ -140,7 +136,6 @@ public class EpisodeListFragment extends RoboFragment {
             public void onFailure() {
                 if (shouldShowError()) {
                     ToastUtils.showNetworkError(getActivity());
-                    UiAnimations.fadeOut(splashView, 1000, 1);
                 }
             }
         });
