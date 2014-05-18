@@ -28,7 +28,6 @@ import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
-import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.FontAwesomeTextView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
@@ -41,8 +40,17 @@ public class EpisodeListFragment extends RoboFragment {
     @InjectView(R.id.splash_view)
     private View splashView;
 
+    @InjectView(R.id.link_text_twitter)
+    private FontAwesomeTextView twitterLinkText;
+
+    @InjectView(R.id.app_title_text)
+    private View appTitleTextView;
+
     @InjectView(R.id.episode_list_view)
     private ListView episodeListView;
+
+    @InjectView(R.id.header_link_text)
+    private View headerLinkTextView;
 
     private OnEpisodeSelectListener listener;
 
@@ -96,10 +104,6 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void setupListViewHeader() {
-        View headerView = View.inflate(getActivity(), R.layout.header_episode_list_cover, null);
-
-        FontAwesomeTextView twitterLinkText = (FontAwesomeTextView) headerView
-                .findViewById(R.id.link_text_twitter);
         twitterLinkText.prepend(FontAwesomeTextView.Icon.TWITTER);
         twitterLinkText.findViewById(R.id.link_text_twitter).setOnClickListener(
                 new View.OnClickListener() {
@@ -108,25 +112,18 @@ public class EpisodeListFragment extends RoboFragment {
                         startActivity(new Intent(getActivity(), TimelineActivity.class));
                     }
                 });
-
-        ViewUtils.addHeaderView(episodeListView, headerView);
-
-        View appTitleTextView = headerView.findViewById(R.id.app_title_text);
         UiAnimations.fadeIn(appTitleTextView, 1500, 500);
-        View headerLinkTextView = headerView.findViewById(R.id.header_link_text);
         UiAnimations.slideUp(getActivity(), headerLinkTextView, 1000, 500);
     }
 
     private void setupListViewFooter() {
         View footer = View.inflate(getActivity(), R.layout.footer_episode_list, null);
-
         footer.findViewById(R.id.miyagawa_text).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentUtils.openMiyagawaProfile(getActivity());
             }
         });
-
         episodeListView.addFooterView(footer, null, false);
     }
 
