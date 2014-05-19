@@ -1,7 +1,8 @@
 <translate
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:fromXDelta="0%"
-        android:toXDelta="-2%"
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:fromXDelta="10%"
+        android:toXDelta="0%"
         android:fromYDelta="0%"
         android:toYDelta="0%"
         android:fillAfter="true"

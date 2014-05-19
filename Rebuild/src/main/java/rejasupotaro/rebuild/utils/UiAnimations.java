@@ -65,6 +65,7 @@ public final class UiAnimations {
     }
 
     public static void slideLeft(Context context, final View view, long delay, long duration) {
+        view.setVisibility(View.VISIBLE);
         Animation slideLeftAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
         slideLeftAnimation.setStartOffset(delay);
         slideLeftAnimation.setDuration(duration);

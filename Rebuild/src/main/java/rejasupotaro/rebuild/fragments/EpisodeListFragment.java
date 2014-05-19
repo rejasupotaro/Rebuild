@@ -5,8 +5,11 @@ import com.google.inject.Inject;
 import com.squareup.otto.Subscribe;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,22 +26,23 @@ import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
+import rejasupotaro.rebuild.loaders.TweetLoader;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
-import rejasupotaro.rebuild.views.FontAwesomeTextView;
+import rejasupotaro.rebuild.views.RecentlyTweetView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 public class EpisodeListFragment extends RoboFragment {
 
+    private static final int REQUEST_TWEET_LIST = 1;
+
     @Inject
     private RssFeedClient rssFeedClient;
-
-    @InjectView(R.id.link_text_twitter)
-    private FontAwesomeTextView twitterLinkText;
 
     @InjectView(R.id.app_title_text)
     private View appTitleTextView;
@@ -46,8 +50,8 @@ public class EpisodeListFragment extends RoboFragment {
     @InjectView(R.id.episode_list_view)
     private ListView episodeListView;
 
-    @InjectView(R.id.header_link_text)
-    private View headerLinkTextView;
+    @InjectView(R.id.recently_tweet_view)
+    private RecentlyTweetView recentlyTweetView;
 
     private OnEpisodeSelectListener listener;
 
@@ -69,8 +73,7 @@ public class EpisodeListFragment extends RoboFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         BusProvider.getInstance().register(this);
-        View view = inflater.inflate(R.layout.fragment_episode_list, null);
-        return view;
+        return inflater.inflate(R.layout.fragment_episode_list, null);
     }
 
     @Override
@@ -79,6 +82,7 @@ public class EpisodeListFragment extends RoboFragment {
 
         setupListView();
         requestFeed();
+        requestTweetList();
     }
 
     @Override
@@ -101,16 +105,14 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void setupListViewHeader() {
-        twitterLinkText.prepend(FontAwesomeTextView.Icon.TWITTER);
-        twitterLinkText.findViewById(R.id.link_text_twitter).setOnClickListener(
+        recentlyTweetView.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         startActivity(new Intent(getActivity(), TimelineActivity.class));
                     }
-                });
-        UiAnimations.fadeIn(appTitleTextView, 500, 500);
-        UiAnimations.slideUp(getActivity(), headerLinkTextView, 0, 500);
+                }
+        );
     }
 
     private void setupListViewFooter() {
@@ -139,6 +141,34 @@ public class EpisodeListFragment extends RoboFragment {
                 }
             }
         });
+    }
+
+    private void requestTweetList() {
+        getLoaderManager().restartLoader(REQUEST_TWEET_LIST, null,
+                new LoaderManager.LoaderCallbacks<List<Tweet>>() {
+                    @Override
+                    public Loader<List<Tweet>> onCreateLoader(int i, Bundle bundle) {
+                        Context context = getActivity();
+                        if (context == null) {
+                            return null;
+                        }
+
+                        UiAnimations.slideUp(context, recentlyTweetView, 0, 500);
+                        return new TweetLoader(context, true);
+                    }
+
+                    @Override
+                    public void onLoadFinished(Loader<List<Tweet>> listLoader,
+                            List<Tweet> tweetList) {
+                        recentlyTweetView.setTweetList(tweetList);
+                    }
+
+                    @Override
+                    public void onLoaderReset(Loader<List<Tweet>> listLoader) {
+                        // nothing to do
+                    }
+                }
+        );
     }
 
     private boolean shouldShowError() {
