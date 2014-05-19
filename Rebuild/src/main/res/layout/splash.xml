@@ -26,7 +26,7 @@
                 android:layout_centerVertical="true"
                 android:text="The best podcast player to listen to Rebuild.fm"
                 android:textSize="@dimen/tertiary_text_size"
-                android:textColor="@color/gray"
+                android:textColor="@color/light_gray"
                 />
     </LinearLayout>
     <TextView
@@ -36,6 +36,6 @@
             android:layout_margin="@dimen/padding_contents"
             android:text="\@rejasupotaro"
             android:textSize="@dimen/tertiary_text_size"
-            android:textColor="@color/gray"
+            android:textColor="@color/light_gray"
             />
 </RelativeLayout>
