@@ -22,21 +22,6 @@
                     android:scaleType="fitCenter"
                     />
 
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_centerInParent="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_header_link_text"
-                    android:padding="@dimen/padding_frame"
-                    >
-                <rejasupotaro.rebuild.views.FontAwesomeTextView
-                        android:text="@string/label_timeline"
-                        android:layout_marginLeft="3dp"
-                        style="@style/HeaderLinkText"
-                        />
-            </LinearLayout>
-
             <FrameLayout
                     android:id="@+id/episode_detail_header_cover"
                     android:background="@color/smoke_black"
