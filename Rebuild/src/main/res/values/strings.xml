@@ -12,7 +12,7 @@
     <string name="copyright">Rebuild.fm for Android, Version %1$s. Copyright © 2013 by rejasupotaro</string>
     <string name="share">share</string>
     <string name="cancel">cancel</string>
-    <string name="downloaded">downloaded</string>
+    <string name="downloaded">{fa-download} downloaded</string>
     <string name="download">Download</string>
     <string name="downloading">Downloading...</string>
     <string name="clear_cache">Clear Cache</string>

@@ -43,7 +43,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/padding_contents"
                 >
-            <rejasupotaro.rebuild.views.FontAwesomeTextView
+            <IconTextView
                     android:id="@+id/episode_download_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
