@@ -5,38 +5,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_weight="1"
             >
-        <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh_layout"
+        <ListView
+                android:id="@+id/tweet_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                >
-            <ListView
-                    android:id="@+id/tweet_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/padding_frame"
-                    />
-        </android.support.v4.widget.SwipeRefreshLayout>
-        <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:padding="@dimen/padding_contents"
-                android:clickable="false"
-                android:focusable="false"
-                >
-            <ImageView
-                    android:id="@+id/compose_tweet_button"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/ic_compose_tweet"
-                    />
-        </FrameLayout>
-    </FrameLayout>
+                android:padding="@dimen/padding_frame"
+                />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </rejasupotaro.rebuild.views.StateFrameLayout>
