@@ -12,6 +12,7 @@ import java.util.List;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.StringUtils;
+import rejasupotaro.rebuild.utils.UiAnimations;
 
 public class EpisodeListAdapter extends BindableAdapter<Episode> {
 
@@ -25,12 +26,6 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
             titleTextView = (TextView) view.findViewById(R.id.episode_title);
             subtitleTextView = (TextView) view.findViewById(R.id.episode_subtitle);
             downloadStateTextView = (IconTextView) view.findViewById(R.id.episode_download_state);
-            downloadStateTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // do something
-                }
-            });
             postedAtTextView = (IconTextView) view.findViewById(R.id.episode_posted_at);
         }
     }
@@ -43,6 +38,12 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
     public View newView(LayoutInflater inflater, int position, ViewGroup container) {
         View view = inflater.inflate(R.layout.list_item_episode, container, false);
         ViewHolder holder = new ViewHolder(view, position);
+        holder.downloadStateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UiAnimations.bounceUp(getContext(), v);
+            }
+        });
         view.setTag(holder);
         return view;
     }
