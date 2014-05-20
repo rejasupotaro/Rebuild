@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission  android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
             android:name="rejasupotaro.rebuild.RebuildApplication"
@@ -27,7 +26,7 @@
 
         <activity
                 android:name="rejasupotaro.rebuild.activities.MainActivity"
-                android:theme="@style/NoActionBarTheme">
+                android:theme="@style/TransparentActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

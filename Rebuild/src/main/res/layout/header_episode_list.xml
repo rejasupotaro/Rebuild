@@ -8,11 +8,33 @@
             android:layout_height="@dimen/episode_list_header_height"
             >
         <ImageView
-                android:id="@+id/rebuild_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/bg_rebuild"
                 android:scaleType="centerCrop"
+                />
+        <LinearLayout
+                android:id="@+id/app_title_text"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_contents"
+                android:layout_marginRight="@dimen/padding_contents"
+                >
+            <TextView
+                    android:text="@string/rebuild_description"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    style="@style/RebuildLogText"
+                    />
+        </LinearLayout>
+        <rejasupotaro.rebuild.views.RecentlyTweetView
+                android:id="@+id/recently_tweet_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_header_link_text"
                 />
     </RelativeLayout>
 </FrameLayout>

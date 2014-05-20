@@ -1,79 +1,80 @@
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:paddingLeft="@dimen/padding_frame"
-        android:paddingTop="@dimen/padding_frame"
-        android:paddingRight="@dimen/padding_contents"
-        android:paddingBottom="@dimen/padding_contents"
+        android:padding="@dimen/padding_contents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_gray_and_clickable"
         >
     <LinearLayout
-            android:orientation="vertical"
-            android:background="@android:color/white"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_contents"
+            android:background="@android:color/white"
             >
-        <RelativeLayout
-                android:padding="@dimen/padding_frame"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:minHeight="@dimen/episode_posted_at_text_shape_size"
-                android:layout_height="wrap_content"
-                >
-            <TextView
-                    android:id="@+id/episode_title"
-                    android:maxLines="2"
-                    android:ellipsize="end"
-                    android:textSize="@dimen/primary_text_size"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="56dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-        </RelativeLayout>
-
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_contents"
-                android:background="@color/base_color_light_gray"
+                android:orientation="horizontal"
+                android:descendantFocusability="blocksDescendants"
                 >
-            <TextView
-                    android:id="@+id/episode_subtitle"
-                    android:textSize="@dimen/quaternary_text_size"
-                    android:layout_width="match_parent"
+            <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    />
-            <rejasupotaro.rebuild.views.FontAwesomeTextView
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/padding_frame"
+                    android:orientation="vertical"
+                    >
+                <RelativeLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                    <TextView
+                            android:id="@+id/episode_title"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:textSize="@dimen/primary_text_size"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                </RelativeLayout>
+                <TextView
+                        android:id="@+id/episode_subtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding_contents"
+                        android:textSize="@dimen/quaternary_text_size"
+                        android:textColor="@color/gray"
+                        />
+            </LinearLayout>
+
+            <IconTextView
                     android:id="@+id/episode_download_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:paddingTop="@dimen/padding_frame"
-                    android:paddingBottom="@dimen/padding_frame"
-                    android:paddingLeft="@dimen/padding_contents"
-                    android:paddingRight="@dimen/padding_contents"
-                    android:layout_marginTop="@dimen/padding_frame"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="{fa-download}"
+                    android:textSize="28dp"
                     android:background="@drawable/episode_state_button"
-                    android:textSize="@dimen/quaternary_text_size"
-                    android:textColor="@android:color/white"
-                    android:text="@string/downloaded"
-                    android:visibility="gone"
+                    android:textColor="@color/gray"
                     />
         </LinearLayout>
-    </LinearLayout>
 
-    <TextView
-            android:id="@+id/episode_posted_at"
-            android:textSize="@dimen/quaternary_text_size"
-            android:textColor="@android:color/white"
-            android:background="@drawable/posted_at_circle"
-            android:gravity="center"
-            android:layout_width="@dimen/episode_posted_at_text_shape_size"
-            android:layout_height="@dimen/episode_posted_at_text_shape_size"
-            />
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+            <IconTextView
+                    android:id="@+id/episode_posted_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:textSize="@dimen/quaternary_text_size"
+                    />
+        </FrameLayout>
+    </LinearLayout>
 </FrameLayout>
