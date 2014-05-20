@@ -16,16 +16,22 @@ import rejasupotaro.rebuild.utils.StringUtils;
 public class EpisodeListAdapter extends BindableAdapter<Episode> {
 
     private static class ViewHolder {
-        TextView postedAtTextView;
         TextView titleTextView;
         TextView subtitleTextView;
         IconTextView downloadStateTextView;
+        IconTextView postedAtTextView;
 
-        public ViewHolder(View view) {
-            postedAtTextView = (TextView) view.findViewById(R.id.episode_posted_at);
+        public ViewHolder(View view, int position) {
             titleTextView = (TextView) view.findViewById(R.id.episode_title);
             subtitleTextView = (TextView) view.findViewById(R.id.episode_subtitle);
             downloadStateTextView = (IconTextView) view.findViewById(R.id.episode_download_state);
+            downloadStateTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // do something
+                }
+            });
+            postedAtTextView = (IconTextView) view.findViewById(R.id.episode_posted_at);
         }
     }
 
@@ -36,7 +42,7 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
     @Override
     public View newView(LayoutInflater inflater, int position, ViewGroup container) {
         View view = inflater.inflate(R.layout.list_item_episode, container, false);
-        ViewHolder holder = new ViewHolder(view);
+        ViewHolder holder = new ViewHolder(view, position);
         view.setTag(holder);
         return view;
     }
@@ -45,14 +51,13 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
     public void bindView(Episode item, int position, View view) {
         ViewHolder holder = (ViewHolder) view.getTag();
 
-        holder.postedAtTextView.setText(item.getPostedAt());
         holder.titleTextView.setText(item.getTitle());
         holder.subtitleTextView.setText(StringUtils.fromHtml(item.getDescription()).toString());
-
         if (item.isDownloaded()) {
-            holder.downloadStateTextView.setVisibility(View.VISIBLE);
+            holder.downloadStateTextView.setText("{fa-minus}");
         } else {
-            holder.downloadStateTextView.setVisibility(View.GONE);
+            holder.downloadStateTextView.setText("{fa-download}");
         }
+        holder.postedAtTextView.setText(String.format("{fa-calendar}  %s", item.getPostedAt()));
     }
 }
