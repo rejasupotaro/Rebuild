@@ -18,7 +18,6 @@ public class UpdateGuestJobRunner implements JobRunner {
 
     public static Job createJob(String guestName) {
         return new Job(UpdateGuestJobRunner.class, createArgs(guestName));
-
     }
 
     private static Map<String, Object> createArgs(String guestName) {

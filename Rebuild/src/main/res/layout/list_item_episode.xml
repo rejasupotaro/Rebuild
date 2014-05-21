@@ -51,7 +51,7 @@
             </LinearLayout>
 
             <IconTextView
-                    android:id="@+id/episode_download_state"
+                    android:id="@+id/episode_download_button"
                     android:layout_width="46dp"
                     android:layout_height="46dp"
                     android:layout_gravity="center"
@@ -66,8 +66,18 @@
         <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/padding_frame"
                 >
+            <TextView
+                    android:id="@+id/download_state_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:textSize="@dimen/quaternary_text_size"
+                    android:text="@string/downloading"
+                    android:visibility="gone"
+                    />
+
             <IconTextView
                     android:id="@+id/episode_posted_at"
                     android:layout_width="wrap_content"

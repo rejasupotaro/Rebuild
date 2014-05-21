@@ -47,6 +47,8 @@ public class EpisodeListFragment extends RoboFragment {
     @InjectView(R.id.app_title_text)
     private View appTitleTextView;
 
+    private EpisodeListAdapter episodeListAdapter;
+
     @InjectView(R.id.episode_list_view)
     private ListView episodeListView;
 
@@ -177,7 +179,7 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     public void setupEpisodeListView(List<Episode> episodeList) {
-        EpisodeListAdapter episodeListAdapter = new EpisodeListAdapter(getActivity(), episodeList);
+        episodeListAdapter = new EpisodeListAdapter(getActivity(), episodeList);
         episodeListView.setAdapter(episodeListAdapter);
     }
 
@@ -186,7 +188,11 @@ public class EpisodeListFragment extends RoboFragment {
         mainThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                requestFeed();
+                if (episodeListAdapter.includeEpisode(event.getEpisodeId())) {
+                    episodeListAdapter.notifyDataSetChanged();
+                } else {
+                    requestFeed();
+                }
             }
         });
     }
@@ -196,7 +202,7 @@ public class EpisodeListFragment extends RoboFragment {
         mainThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                requestFeed();
+                episodeListAdapter.notifyDataSetChanged();
             }
         });
     }
