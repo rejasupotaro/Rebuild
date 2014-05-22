@@ -32,7 +32,6 @@ import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
-import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.RecentlyTweetView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
@@ -155,7 +154,6 @@ public class EpisodeListFragment extends RoboFragment {
                             return null;
                         }
 
-                        UiAnimations.slideUp(context, recentlyTweetView, 0, 500);
                         return new TweetLoader(context, true);
                     }
 

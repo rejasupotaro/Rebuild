@@ -3,28 +3,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-    <RelativeLayout
+    <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/episode_list_header_height"
+            android:src="@drawable/bg_rebuild"
+            android:scaleType="centerCrop"
+            />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             >
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/bg_rebuild"
-                android:scaleType="centerCrop"
-                />
         <LinearLayout
                 android:id="@+id/app_title_text"
                 android:orientation="vertical"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginLeft="@dimen/padding_contents"
                 android:layout_marginRight="@dimen/padding_contents"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
                 >
             <TextView
+                    android:text="@string/app_name"
+                    android:textSize="28sp"
+                    style="@style/RebuildLogText"
+                    />
+            <TextView
                     android:text="@string/rebuild_description"
-                    android:textSize="12sp"
+                    android:textSize="8sp"
                     android:textStyle="normal"
                     style="@style/RebuildLogText"
                     />
@@ -33,8 +41,7 @@
                 android:id="@+id/recently_tweet_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:background="@drawable/bg_header_link_text"
                 />
-    </RelativeLayout>
+    </LinearLayout>
 </FrameLayout>
