@@ -5,6 +5,7 @@ import com.squareup.otto.Subscribe;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,7 +56,9 @@ public class MainActivity extends RoboActionBarActivity
 
     private void setupActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setTitle(getString(R.string.app_name));
+        actionBar.setTitle("");
+        int transparent = getResources().getColor(android.R.color.transparent);
+        actionBar.setIcon(new ColorDrawable(transparent));
     }
 
     @Override
