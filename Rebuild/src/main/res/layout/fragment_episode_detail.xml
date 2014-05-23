@@ -1,39 +1,34 @@
-<ScrollView
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-    <LinearLayout
-            android:orientation="vertical"
+    <rejasupotaro.rebuild.views.SectionHeaderView
+            android:id="@+id/section_header_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-        <rejasupotaro.rebuild.views.SectionHeaderView
-                android:id="@+id/section_header_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-        <TextView
-                android:id="@+id/episode_description_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_contents"
-                android:textSize="@dimen/tertiary_text_size"
-                />
-        <rejasupotaro.rebuild.views.GuestListView
-                android:id="@+id/guest_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-        <rejasupotaro.rebuild.views.SectionHeaderView
-                android:id="@+id/section_header_show_notes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-        <rejasupotaro.rebuild.views.ShowNotesView
-                android:id="@+id/show_notes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-    </LinearLayout>
-</ScrollView>
+            />
+    <TextView
+            android:id="@+id/episode_description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_contents"
+            android:textSize="@dimen/tertiary_text_size"
+            />
+    <rejasupotaro.rebuild.views.GuestListView
+            android:id="@+id/guest_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    <rejasupotaro.rebuild.views.SectionHeaderView
+            android:id="@+id/section_header_show_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    <rejasupotaro.rebuild.views.ShowNotesView
+            android:id="@+id/show_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+</LinearLayout>
