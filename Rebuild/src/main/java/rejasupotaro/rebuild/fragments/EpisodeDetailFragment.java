@@ -16,7 +16,7 @@ import rejasupotaro.rebuild.views.ShowNotesView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
-public class EpisodeDescriptionFragment extends RoboFragment {
+public class EpisodeDetailFragment extends RoboFragment {
 
     private Episode episode;
 
@@ -35,23 +35,15 @@ public class EpisodeDescriptionFragment extends RoboFragment {
     @InjectView(R.id.show_notes)
     private ShowNotesView showNotesView;
 
-    public static EpisodeDescriptionFragment newInstance(Episode episode) {
-        EpisodeDescriptionFragment fragment = new EpisodeDescriptionFragment();
-        fragment.setEpisode(episode);
-        return fragment;
-    }
-
-    public void setEpisode(final Episode episode) {
+    public void setup(final Episode episode) {
         this.episode = episode;
-    }
-
-    private EpisodeDescriptionFragment() {
+        showNotesView.setEpisode(episode);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_episode_description, container, false);
+        return inflater.inflate(R.layout.fragment_episode_detail, container, false);
     }
 
     @Override
@@ -60,7 +52,6 @@ public class EpisodeDescriptionFragment extends RoboFragment {
         setupSectionHeaders();
         ViewUtils.setTweetText(episodeDescriptionTextView, episode.getDescription());
         guestListView.setup(StringUtils.getGuestNames(episode.getDescription()));
-        showNotesView.setEpisode(episode);
     }
 
     private void setupSectionHeaders() {

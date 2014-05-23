@@ -55,7 +55,6 @@
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/pager_tab_strip_height"
                     >
                 <LinearLayout
                         android:id="@+id/media_control_view"

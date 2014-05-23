@@ -5,25 +5,21 @@ import com.squareup.otto.Subscribe;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.adapters.EpisodeDetailPagerAdapter;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
+import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
 
 public class EpisodeDetailActivity extends RoboActionBarActivity {
 
@@ -32,23 +28,17 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @InjectExtra(value = EXTRA_EPISODE_ID)
     private int episodeId;
 
-    private Episode currentEpisode;
-
-    @InjectView(R.id.episode_detail_view_pager)
-    private ViewPager viewPager;
-
-    @InjectView(R.id.pager_tab_strip)
-    private PagerTabStrip pagerTabStrip;
+    private Episode episode;
 
     private EpisodeMediaFragment episodeMediaFragment;
+
+    private EpisodeDetailFragment episodeDetailFragment;
 
     @Inject
     private MenuDelegate menuDelegate;
 
     @Inject
     private MainThreadExecutor mainThreadExecutor;
-
-    private EpisodeDetailPagerAdapter pagerAdapter;
 
     public static Intent createIntent(Context context, int episodeId) {
         Intent intent = new Intent(context, EpisodeDetailActivity.class);
@@ -63,12 +53,17 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
         BusProvider.getInstance().register(this);
 
-        currentEpisode = Episode.findById(episodeId);
-        setupActionBar(currentEpisode);
+        episode = Episode.findById(episodeId);
+        setupActionBar(episode);
+
         episodeMediaFragment = (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(
                 R.id.fragment_episode_media);
-        episodeMediaFragment.setup(currentEpisode);
-        setupViewPager(currentEpisode);
+        episodeMediaFragment.setup(episode);
+
+        episodeDetailFragment = (EpisodeDetailFragment) getSupportFragmentManager()
+                .findFragmentById(
+                        R.id.fragment_episode_detail);
+        episodeDetailFragment.setup(episode);
     }
 
     @Override
@@ -85,13 +80,6 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         String originalTitle = episode.getTitle();
         int startIndex = originalTitle.indexOf(':');
         actionBar.setTitle("Episode " + originalTitle.substring(0, startIndex));
-    }
-
-    private void setupViewPager(Episode episode) {
-        pagerAdapter = new EpisodeDetailPagerAdapter(getSupportFragmentManager(), episode);
-        viewPager.setAdapter(pagerAdapter);
-
-        pagerTabStrip.setTabIndicatorColor(Color.WHITE);
     }
 
     @Override
@@ -121,7 +109,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 menuDelegate.pressSettings();
                 return true;
             case R.id.action_share:
-                menuDelegate.pressShare(currentEpisode);
+                menuDelegate.pressShare(episode);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -130,16 +118,16 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @Subscribe
     public void onEpisodeDownloadComplete(final DownloadEpisodeCompleteEvent event) {
         final Episode episode = Episode.findById(event.getEpisodeId());
-        if (!currentEpisode.isSameEpisode(episode)) {
+        if (!this.episode.isSameEpisode(episode)) {
             return;
         }
 
-        currentEpisode = episode;
+        this.episode = episode;
 
         mainThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                episodeMediaFragment.setup(currentEpisode);
+                episodeMediaFragment.setup(EpisodeDetailActivity.this.episode);
             }
         });
     }
