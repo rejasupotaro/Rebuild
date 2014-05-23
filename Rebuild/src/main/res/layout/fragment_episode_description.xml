@@ -19,5 +19,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
+        <rejasupotaro.rebuild.views.SectionHeaderView
+                android:id="@+id/section_header_show_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        <rejasupotaro.rebuild.views.ShowNotesView
+                android:id="@+id/show_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
     </LinearLayout>
 </ScrollView>

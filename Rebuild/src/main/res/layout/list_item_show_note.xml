@@ -7,7 +7,6 @@
         >
     <ImageView
             android:id="@+id/site_thumbnail"
-            android:src="@drawable/ic_launcher"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="@dimen/list_item_show_note_height"

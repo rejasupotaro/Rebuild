@@ -6,13 +6,15 @@
         >
     <include
             android:id="@+id/left_item"
-            layout="@layout/list_item_show_note"/>
+            layout="@layout/list_item_show_note"
+            />
     <rejasupotaro.rebuild.views.VerticalSeparator
             android:layout_width="1dp"
             android:layout_height="match_parent"
             />
     <include
             android:id="@+id/right_item"
-            layout="@layout/list_item_show_note"/>
+            layout="@layout/list_item_show_note"
+            />
 </LinearLayout>
 

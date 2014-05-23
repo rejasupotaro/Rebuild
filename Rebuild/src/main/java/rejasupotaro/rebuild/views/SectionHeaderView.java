@@ -21,7 +21,7 @@ public class SectionHeaderView extends FrameLayout {
         super(context, attrs);
     }
 
-    public void setup(String text) {
+    public void setText(String text) {
         View view = View.inflate(getContext(), R.layout.view_section_header, null);
         findViews(view);
         textView.setText(text);
