@@ -67,6 +67,7 @@ public class ShowNotesView extends LinearLayout {
 
             if (i % 2 == 1 || i == linkList.size() - 1) {
                 addView(row);
+                addView(new HorizontalSeparator(getContext()));
             }
         }
     }

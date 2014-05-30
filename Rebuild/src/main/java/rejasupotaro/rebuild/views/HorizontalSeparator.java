@@ -7,20 +7,21 @@ import android.view.ViewGroup;
 
 import rejasupotaro.rebuild.R;
 
-public class VerticalSeparator extends View {
+public class HorizontalSeparator extends View {
 
-    public VerticalSeparator(Context context) {
+    public HorizontalSeparator(Context context) {
         super(context);
         setup();
     }
 
-    public VerticalSeparator(Context context, AttributeSet attrs) {
+    public HorizontalSeparator(Context context, AttributeSet attrs) {
         super(context, attrs);
         setup();
     }
 
     private void setup() {
         setBackgroundResource(R.color.light_gray);
-        setLayoutParams(new ViewGroup.LayoutParams(2, ViewGroup.LayoutParams.MATCH_PARENT));
+        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2));
     }
 }
+
