@@ -5,6 +5,8 @@ import com.squareup.otto.Subscribe;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +21,10 @@ import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.tools.MenuDelegate;
+import rejasupotaro.rebuild.views.ObservableScrollView;
 import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectView;
+import rx.functions.Action1;
 
 public class EpisodeDetailActivity extends RoboActionBarActivity {
 
@@ -27,6 +32,9 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     @InjectExtra(value = EXTRA_EPISODE_ID)
     private int episodeId;
+
+    @InjectView(R.id.scroll_view)
+    private ObservableScrollView scrollView;
 
     private Episode episode;
 
@@ -73,13 +81,35 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     }
 
     private void setupActionBar(Episode episode) {
-        ActionBar actionBar = getActionBar();
+        final ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
         String originalTitle = episode.getTitle();
         int startIndex = originalTitle.indexOf(':');
         actionBar.setTitle("Episode " + originalTitle.substring(0, startIndex));
+
+        final ColorDrawable colorDrawable = new ColorDrawable(
+                getResources().getColor(R.color.dark_gray));
+        colorDrawable.setAlpha(0);
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+        scrollView.getScrollSubject().subscribe(new Action1<ObservableScrollView.ScrollPosition>() {
+            @Override
+            public void call(ObservableScrollView.ScrollPosition scrollPosition) {
+                int alpha;
+                int y = scrollPosition.current.y;
+                if (y < 0) {
+                    alpha = 0;
+                } else if (y > 500) {
+                    alpha = 255;
+                } else {
+                    alpha = (int) ((y / 500.0) * 255);
+                }
+                colorDrawable.setAlpha(alpha);
+                actionBar.setBackgroundDrawable(colorDrawable);
+            }
+        });
     }
 
     @Override
