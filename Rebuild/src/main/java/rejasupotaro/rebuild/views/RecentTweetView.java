@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Random;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Tweet;
@@ -16,7 +15,7 @@ import rejasupotaro.rebuild.utils.PicassoHelper;
 import rejasupotaro.rebuild.utils.Timer;
 import rejasupotaro.rebuild.utils.UiAnimations;
 
-public class RecentlyTweetView extends FrameLayout {
+public class RecentTweetView extends FrameLayout {
 
     private static final int SWITCH_TWEET_INTERVAL = 6000;
 
@@ -30,23 +29,23 @@ public class RecentlyTweetView extends FrameLayout {
 
     private int index = 0;
 
-    public RecentlyTweetView(Context context) {
+    public RecentTweetView(Context context) {
         super(context);
         setupView(context);
     }
 
-    public RecentlyTweetView(Context context, AttributeSet attrs) {
+    public RecentTweetView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setupView(context);
     }
 
-    public RecentlyTweetView(Context context, AttributeSet attrs, int defStyle) {
+    public RecentTweetView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setupView(context);
     }
 
     private void setupView(Context context) {
-        rootView = View.inflate(context, R.layout.view_recently_tweet, null);
+        rootView = View.inflate(context, R.layout.view_recent_tweet, null);
         userProfileImage = (ImageView) rootView.findViewById(R.id.user_profile_image);
         userNameTextView = (TextView) rootView.findViewById(R.id.user_name_text);
         tweetTextView = (TextView) rootView.findViewById(R.id.tweet_text);

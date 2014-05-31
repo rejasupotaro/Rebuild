@@ -30,8 +30,8 @@
                 style="@style/RebuildLogText"
                 />
     </LinearLayout>
-    <rejasupotaro.rebuild.views.RecentlyTweetView
-            android:id="@+id/recently_tweet_view"
+    <rejasupotaro.rebuild.views.RecentTweetView
+            android:id="@+id/recent_tweet_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/padding_contents"

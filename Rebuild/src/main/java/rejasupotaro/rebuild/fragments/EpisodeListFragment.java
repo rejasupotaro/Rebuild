@@ -33,7 +33,7 @@ import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
-import rejasupotaro.rebuild.views.RecentlyTweetView;
+import rejasupotaro.rebuild.views.RecentTweetView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 import rx.functions.Action1;
@@ -53,8 +53,8 @@ public class EpisodeListFragment extends RoboFragment {
     @InjectView(R.id.episode_list_view)
     private ListView episodeListView;
 
-    @InjectView(R.id.recently_tweet_view)
-    private RecentlyTweetView recentlyTweetView;
+    @InjectView(R.id.recent_tweet_view)
+    private RecentTweetView recentTweetView;
 
     private OnEpisodeSelectListener listener;
 
@@ -108,7 +108,7 @@ public class EpisodeListFragment extends RoboFragment {
     }
 
     private void setupListViewHeader() {
-        recentlyTweetView.setOnClickListener(
+        recentTweetView.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -162,7 +162,7 @@ public class EpisodeListFragment extends RoboFragment {
                     @Override
                     public void onLoadFinished(Loader<List<Tweet>> listLoader,
                             List<Tweet> tweetList) {
-                        recentlyTweetView.setTweetList(tweetList);
+                        recentTweetView.setTweetList(tweetList);
                     }
 
                     @Override
