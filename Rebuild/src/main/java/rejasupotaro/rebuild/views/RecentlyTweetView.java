@@ -18,6 +18,8 @@ import rejasupotaro.rebuild.utils.UiAnimations;
 
 public class RecentlyTweetView extends FrameLayout {
 
+    private static final int SWITCH_TWEET_INTERVAL = 6000;
+
     private View rootView;
 
     private ImageView userProfileImage;
@@ -62,7 +64,7 @@ public class RecentlyTweetView extends FrameLayout {
                 Tweet tweet = tweetList.get(index++);
                 updateView(tweet);
             }
-        }, 8000).start();
+        }, SWITCH_TWEET_INTERVAL).start();
     }
 
     private void updateView(Tweet tweet) {
