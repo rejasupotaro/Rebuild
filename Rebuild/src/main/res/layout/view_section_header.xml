@@ -10,7 +10,7 @@
             />
     <FrameLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:background="@color/base_color_gray"
+            android:background="@color/base_color1"
             android:orientation="vertical"
             android:padding="@dimen/padding_frame"
             android:layout_width="match_parent"
@@ -19,6 +19,7 @@
         <TextView
                 android:id="@+id/section_header_text"
                 android:layout_gravity="center_vertical"
+                android:textColor="@color/accent_color2"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
