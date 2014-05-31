@@ -6,9 +6,8 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import nirai.JobService;
 import rejasupotaro.rebuild.api.TwitterApiClient;
-import rejasupotaro.rebuild.jobs.UpdateGuestJobRunner;
+import rejasupotaro.rebuild.jobs.UpdateGuestTask;
 import rejasupotaro.rebuild.models.Guest;
 
 public class GuestLoader extends AsyncTaskLoader<List<Guest>> {
@@ -38,7 +37,7 @@ public class GuestLoader extends AsyncTaskLoader<List<Guest>> {
             Guest guest = Guest.findByName(guestName);
             if (!Guest.isEmpty(guest)) {
                 guestList.add(guest);
-                JobService.post(getContext(), UpdateGuestJobRunner.createJob(guestName));
+                new UpdateGuestTask(guestName).execute();
                 continue;
             }
 

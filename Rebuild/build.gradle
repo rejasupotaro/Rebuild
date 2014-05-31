@@ -32,7 +32,6 @@ dependencies {
     compile 'org.twitter4j:twitter4j-core:3.0.5'
     provided 'org.projectlombok:lombok:1.12.2'
     compile 'com.netflix.rxjava:rxjava-android:0.18.+'
-    compile 'jp.joao:nirai:0.1.0'
     compile 'com.joanzapata.android:android-iconify:1.0.+'
 
     androidTestCompile fileTree(dir: 'src/androidTest/libs', include: '*.jar')
@@ -100,6 +99,7 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
+        exclude 'ic_launcher.png'
     }
 
     lintOptions {

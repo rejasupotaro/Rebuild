@@ -21,7 +21,7 @@ public class EpisodeDownloadCompleteNotificaiton {
 
     private static Notification build(Context context, Episode episode) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setSmallIcon(R.drawable.icon);
         builder.setContentTitle(context.getString(R.string.episode_download_completed));
         builder.setContentText(episode.getTitle());
 

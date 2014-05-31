@@ -11,7 +11,7 @@
             />
     <TextView
             android:id="@+id/episode_description_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_contents"
             android:textSize="@dimen/tertiary_text_size"

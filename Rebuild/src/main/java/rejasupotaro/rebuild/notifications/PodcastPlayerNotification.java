@@ -57,7 +57,7 @@ public class PodcastPlayerNotification {
     private static Notification build(Context context, Episode episode, int currentPosition) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
-        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setSmallIcon(R.drawable.icon);
         builder.setContentTitle(episode.getTitle());
         builder.setContentText(StringUtils.removeHtmlTags(episode.getDescription()));
         builder.setProgress(DateUtils.durationToInt(episode.getDuration()), currentPosition, false);
