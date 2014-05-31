@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_contents"
             android:textSize="@dimen/tertiary_text_size"
+            android:background="@color/base_color2"
             />
     <rejasupotaro.rebuild.views.GuestListView
             android:id="@+id/guest_list"

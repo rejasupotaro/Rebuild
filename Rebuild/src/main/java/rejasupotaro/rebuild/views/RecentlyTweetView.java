@@ -22,6 +22,8 @@ public class RecentlyTweetView extends FrameLayout {
 
     private ImageView userProfileImage;
 
+    private TextView userNameTextView;
+
     private TextView tweetTextView;
 
     private int index = 0;
@@ -44,6 +46,7 @@ public class RecentlyTweetView extends FrameLayout {
     private void setupView(Context context) {
         rootView = View.inflate(context, R.layout.view_recently_tweet, null);
         userProfileImage = (ImageView) rootView.findViewById(R.id.user_profile_image);
+        userNameTextView = (TextView) rootView.findViewById(R.id.user_name_text);
         tweetTextView = (TextView) rootView.findViewById(R.id.tweet_text);
         addView(rootView);
     }
@@ -66,6 +69,7 @@ public class RecentlyTweetView extends FrameLayout {
         UiAnimations.fadeIn(rootView, 0, 500);
         UiAnimations.slideLeft(getContext(), rootView, 0, 800);
         PicassoHelper.load(getContext(), userProfileImage, tweet.getUserImageUrl());
+        userNameTextView.setText(tweet.getUserName());
         tweetTextView.setText(tweet.getText());
     }
 }

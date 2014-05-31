@@ -31,7 +31,7 @@
 
     <style name="RebuildLogText">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/base_color2</item>
         <item name="android:shadowDx">8</item>
         <item name="android:shadowDy">8</item>
         <item name="android:shadowRadius">8</item>
@@ -53,7 +53,7 @@
 
     <style name="ActionButton">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/base_color_gray</item>
+        <item name="android:textColor">@color/base_color1</item>
         <item name="android:background">@drawable/action_button_border</item>
         <item name="android:layout_margin">@dimen/padding_frame</item>
         <item name="android:padding">@dimen/padding_contents</item>

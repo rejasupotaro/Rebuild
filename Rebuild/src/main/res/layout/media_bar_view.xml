@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_tool_bar_height"
             android:orientation="horizontal"
-            android:background="@color/base_color_light_gray"
+            android:background="@color/base_color2"
             >
         <FrameLayout
                 android:layout_width="@dimen/common_tool_bar_height"
