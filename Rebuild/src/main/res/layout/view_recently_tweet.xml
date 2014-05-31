@@ -4,7 +4,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/padding_contents"
-        android:background="@drawable/container_dropshadow"
+        android:background="@drawable/container_dropshadow_non_right"
         >
     <ImageView
             android:id="@+id/user_profile_image"
