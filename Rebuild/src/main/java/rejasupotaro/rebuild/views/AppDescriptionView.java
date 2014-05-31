@@ -14,7 +14,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class AppDescriptionView extends LinearLayout {
 
-    private static final String VERSION_NAME = "0.5.0";
+    private static final String VERSION_NAME = "0.8.0";
 
     private TextView copyrightTextView;
 
