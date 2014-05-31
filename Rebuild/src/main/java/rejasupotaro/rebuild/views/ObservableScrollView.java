@@ -9,20 +9,20 @@ import rx.subjects.PublishSubject;
 
 public class ObservableScrollView extends ScrollView {
 
-    private final PublishSubject<ScrollPosition> subject = PublishSubject.create();
+    private final PublishSubject<ScrollPosition> scrollEvent = PublishSubject.create();
 
     public ObservableScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public PublishSubject<ScrollPosition> getScrollSubject() {
-        return subject;
+    public PublishSubject<ScrollPosition> getScrollEvent() {
+        return scrollEvent;
     }
 
     @Override
     protected void onScrollChanged(int x, int y, int oldX, int oldY) {
         super.onScrollChanged(x, y, oldX, oldY);
-        subject.onNext(new ScrollPosition(x, y, oldX, oldY));
+        scrollEvent.onNext(new ScrollPosition(x, y, oldX, oldY));
     }
 
     public static class ScrollPosition {

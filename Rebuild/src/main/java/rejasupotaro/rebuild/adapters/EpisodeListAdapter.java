@@ -10,20 +10,24 @@ import android.widget.TextView;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.events.BusProvider;
-import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
+import rx.subjects.PublishSubject;
 
 public class EpisodeListAdapter extends BindableAdapter<Episode> {
 
     private static class ViewHolder {
+
         TextView titleTextView;
+
         TextView subtitleTextView;
+
         IconTextView episodeDownloadButton;
+
         IconTextView postedAtTextView;
+
         TextView downloadStateText;
 
         public ViewHolder(View view) {
@@ -33,6 +37,12 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
             postedAtTextView = (IconTextView) view.findViewById(R.id.episode_posted_at);
             downloadStateText = (TextView) view.findViewById(R.id.download_state_text);
         }
+    }
+
+    private final PublishSubject<Episode> downloadButtonEvent = PublishSubject.create();
+
+    public PublishSubject<Episode> getDownloadButtonEvent() {
+        return downloadButtonEvent;
     }
 
     public EpisodeListAdapter(Context context, List<Episode> episodeList) {
@@ -72,20 +82,7 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
             @Override
             public void onClick(View v) {
                 UiAnimations.bounceUp(getContext(), v);
-                if (item.isDownloaded()) {
-                    holder.downloadStateText.setVisibility(View.GONE);
-                    item.clearCache();
-                    item.save();
-                    BusProvider.getInstance().post(new ClearEpisodeCacheEvent());
-                } else {
-                    if (EpisodeDownloadService.isDownloading(item)) {
-                        EpisodeDownloadService.cancel(getContext(), item);
-                    } else {
-                        holder.downloadStateText.setVisibility(View.GONE);
-                        holder.downloadStateText.setVisibility(View.VISIBLE);
-                        EpisodeDownloadService.startDownload(getContext(), item);
-                    }
-                }
+                downloadButtonEvent.onNext(item);
             }
         });
         if (EpisodeDownloadService.isDownloading(item)) {

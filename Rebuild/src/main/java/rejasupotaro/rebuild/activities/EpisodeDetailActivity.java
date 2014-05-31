@@ -5,7 +5,6 @@ import com.squareup.otto.Subscribe;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -94,7 +93,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         colorDrawable.setAlpha(0);
         actionBar.setBackgroundDrawable(colorDrawable);
 
-        scrollView.getScrollSubject().subscribe(new Action1<ObservableScrollView.ScrollPosition>() {
+        scrollView.getScrollEvent().subscribe(new Action1<ObservableScrollView.ScrollPosition>() {
             @Override
             public void call(ObservableScrollView.ScrollPosition scrollPosition) {
                 int alpha;
