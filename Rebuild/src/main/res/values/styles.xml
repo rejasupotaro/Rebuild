@@ -31,7 +31,7 @@
 
     <style name="RebuildLogText">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/accent_color2</item>
+        <item name="android:textColor">@color/base_color2</item>
         <item name="android:shadowDx">8</item>
         <item name="android:shadowDy">8</item>
         <item name="android:shadowRadius">8</item>

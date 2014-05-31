@@ -5,6 +5,7 @@
         android:orientation="horizontal"
         android:padding="@dimen/padding_contents"
         android:background="@drawable/container_dropshadow_non_right"
+        android:visibility="gone"
         >
     <ImageView
             android:id="@+id/user_profile_image"
