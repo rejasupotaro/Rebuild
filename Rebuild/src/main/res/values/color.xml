@@ -9,7 +9,14 @@
     <color name="smoke_white">#aaffffff</color>
     <color name="smoke_brown">#66614122</color>
     <color name="brown">#614122</color>
-    <color name="bg_pressed">#6633B5E5</color>
     <color name="navy">#285179</color>
     <color name="indian_red">#cd5c5c</color>
+
+    <color name="base_color1">#f5f5f2</color>
+    <color name="base_color2">#ffffff</color>
+    <color name="accent_color1">#f71625</color>
+    <color name="accent_color2">#383432</color>
+    <color name="main_color1">#2db2fa</color>
+    <color name="pressed_color">#662bd2fa</color>
+    <color name="light_shadow">#66ffffff</color>
 </resources>

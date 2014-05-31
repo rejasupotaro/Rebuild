@@ -13,7 +13,7 @@
             />
     <TextView
             android:id="@+id/show_note_title"
-            android:background="@drawable/gradient_white_shadow"
+            android:background="@drawable/gradient_light_shadow"
             android:padding="@dimen/padding_contents"
             android:layout_gravity="bottom"
             android:textSize="@dimen/quaternary_text_size"
