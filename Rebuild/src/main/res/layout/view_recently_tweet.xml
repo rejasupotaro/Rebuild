@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/quaternary_text_size"
-                android:textColor="@color/accent_color2"
+                android:textColor="@color/main_color1"
                 android:textStyle="bold"
                 />
         <TextView
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:textSize="@dimen/quaternary_text_size"
-                android:textColor="@color/accent_color2"
+                android:textColor="@color/main_color1"
                 android:ellipsize="end"
                 />
     </LinearLayout>

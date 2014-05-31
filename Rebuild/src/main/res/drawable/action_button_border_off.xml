@@ -4,7 +4,7 @@
         >
     <stroke
             android:width="@dimen/action_button_border_width"
-            android:color="@color/base_color_gray"
+            android:color="@color/base_color1"
             />
     <corners
             android:radius="@dimen/action_button_border_radius"
