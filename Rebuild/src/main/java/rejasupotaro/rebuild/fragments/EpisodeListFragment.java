@@ -186,11 +186,7 @@ public class EpisodeListFragment extends RoboFragment {
         mainThreadExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                if (episodeListAdapter.includeEpisode(event.getEpisodeId())) {
-                    episodeListAdapter.notifyDataSetChanged();
-                } else {
-                    requestFeed();
-                }
+                requestFeed();
             }
         });
     }
