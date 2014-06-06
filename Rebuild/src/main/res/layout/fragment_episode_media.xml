@@ -24,7 +24,7 @@
 
             <FrameLayout
                     android:id="@+id/episode_detail_header_cover"
-                    android:background="@color/smoke_black"
+                    android:background="@color/glass_black"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/episode_image_height"
                     />

@@ -10,7 +10,7 @@
             android:radius="@dimen/action_button_border_radius"
             />
     <solid
-            android:color="@color/smoke_white"
+            android:color="@color/glass_white"
             />
 </shape>
 

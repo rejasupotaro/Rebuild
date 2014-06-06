@@ -11,5 +11,5 @@
         android:shadowDx="0"
         android:shadowDy="-1"
         android:shadowRadius="0.1"
-        android:background="@color/smoke_black"
+        android:background="@color/glass_black"
         />

@@ -30,7 +30,7 @@
         <EditText
             android:id="@+id/share_text"
             android:textSize="@dimen/tertiary_text_size"
-            android:textColor="@color/smoke_black"
+            android:textColor="@color/glass_black"
             android:background="@drawable/bg_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

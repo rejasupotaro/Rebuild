@@ -11,6 +11,6 @@
     <color name="dark_gray">#222222</color>
     <color name="gray">#666666</color>
     <color name="light_gray">#bebebe</color>
-    <color name="smoke_black">#aa000000</color>
-    <color name="smoke_white">#aaffffff</color>
+    <color name="glass_black">#aa000000</color>
+    <color name="glass_white">#aaffffff</color>
 </resources>
