@@ -3,6 +3,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/base_color1"
         >
     <include layout="@layout/header_episode_list" />
     <ListView

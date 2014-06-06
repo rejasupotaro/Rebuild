@@ -3,7 +3,7 @@
         android:padding="@dimen/padding_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/base_color1"
+        android:background="@drawable/bg_clickable"
         >
     <LinearLayout
             android:layout_width="match_parent"

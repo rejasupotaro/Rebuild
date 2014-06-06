@@ -5,7 +5,7 @@
     <color name="accent_color1">#ff8700</color>
     <color name="accent_color2">#2db2fa</color>
     <color name="main_color1">#383432</color>
-    <color name="pressed_color">#662bd2fa</color>
+    <color name="pressed_color">#66cccccc</color>
     <color name="light_shadow">#66ffffff</color>
 
     <color name="dark_gray">#222222</color>
