@@ -33,6 +33,7 @@ dependencies {
     provided 'org.projectlombok:lombok:1.12.2'
     compile 'com.netflix.rxjava:rxjava-android:0.18.+'
     compile 'com.joanzapata.android:android-iconify:1.0.+'
+    compile "com.mixpanel.android:mixpanel-android:4.2.1@aar"
 
     androidTestCompile fileTree(dir: 'src/androidTest/libs', include: '*.jar')
     androidTestCompile 'com.squareup:fest-android:1.0.7'
