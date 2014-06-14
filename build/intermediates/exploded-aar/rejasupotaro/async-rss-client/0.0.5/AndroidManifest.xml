@@ -1,0 +1,7 @@
+<!-- From: file:/Users/kentaro-takiguchi/develop/AsyncRssClient/AsyncRssClient/src/main/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="rejasupotaro.asyncrssclient">
+
+    <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="18"/>
+
+    <application android:allowBackup="true"/>
+
+</manifest>

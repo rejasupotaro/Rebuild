@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+   <solid android:color="#44000000" />
+   <stroke android:width="2dp" android:color="#ffffff"/>
+   <corners android:radius="100dp" />
+</shape>
+<!-- From: file:/Users/anlu/Desktop/MixpanelDev/mixpanel-android/src/main/res/drawable/com_mixpanel_android_cta_button_highlight.xml -->

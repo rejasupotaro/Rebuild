@@ -6,7 +6,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.8.+'
+    classpath 'com.android.tools.build:gradle:0.11.+'
     classpath 'com.novoda:gradle-android-test-plugin:0.9.3-SNAPSHOT'
   }
 }
@@ -22,8 +22,8 @@ repositories {
 
 dependencies {
   testCompile project(':Rebuild')
-  testCompile 'org.robospock:robospock:0.4'
+  testCompile 'org.robospock:robospock:0.4.4'
   testCompile fileTree(dir: 'src/test/libs', include: '*.jar')
 }
 
-android.projectUnderTest ':Rebuild'
+//android.projectUnderTest ':Rebuild'
