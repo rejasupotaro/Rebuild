@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import lombok.Cleanup;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.FileUtils;
 
@@ -22,12 +21,14 @@ public class MediaFileManager {
 
     public static String saveMediaToFile(Context context, InputStream inputStream,
             Episode episode) {
+        BufferedInputStream bufferedInputStream = null;
+        FileOutputStream fileOutputStream = null;
         try {
             File destFile = createExternalStoragePrivateFile(context, episode);
 
-            @Cleanup BufferedInputStream bufferedInputStream
+            bufferedInputStream
                     = new BufferedInputStream(inputStream, BUFFER_SIZE);
-            @Cleanup FileOutputStream fileOutputStream = new FileOutputStream(destFile);
+            fileOutputStream = new FileOutputStream(destFile);
 
             int actual;
             byte[] buffer = new byte[BUFFER_SIZE];
@@ -39,6 +40,9 @@ public class MediaFileManager {
         } catch (IOException e) {
             Log.e(TAG, "An error occurred while saving media", e);
             return null;
+        } finally {
+            FileUtils.close(fileOutputStream);
+            FileUtils.close(bufferedInputStream);
         }
     }
 

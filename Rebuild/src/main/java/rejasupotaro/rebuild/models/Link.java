@@ -5,19 +5,23 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
-
-@Data
 public class Link implements Parcelable {
 
     private String title;
 
     private String url;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 
     public Link(String title, String url) {
         this.title = title;

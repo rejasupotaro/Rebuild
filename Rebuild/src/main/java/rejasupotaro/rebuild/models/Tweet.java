@@ -7,11 +7,9 @@ import com.activeandroid.query.Select;
 
 import java.util.Date;
 
-import lombok.Data;
 import rejasupotaro.rebuild.utils.DateUtils;
 import twitter4j.Status;
 
-@Data
 @Table(name = "tweets")
 public class Tweet extends Model {
 
@@ -35,6 +33,34 @@ public class Tweet extends Model {
 
     @Column(name = "retweet_count")
     private int retweetCount;
+
+    public long getTweetId() {
+        return tweetId;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getUserImageUrl() {
+        return userImageUrl;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public int getRetweetCount() {
+        return retweetCount;
+    }
 
     public String getElapsedTimeText() {
         return DateUtils.createdAtToElapsedTimeText(createdAt);

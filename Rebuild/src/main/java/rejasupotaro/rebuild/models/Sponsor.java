@@ -4,9 +4,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import android.text.TextUtils;
 
-import lombok.Data;
-
-@Data
 public class Sponsor {
 
     private static final Sponsor NULL_SPONSOR = new Sponsor("", "");

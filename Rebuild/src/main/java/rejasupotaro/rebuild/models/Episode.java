@@ -15,14 +15,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
 import rejasupotaro.asyncrssclient.MediaEnclosure;
 import rejasupotaro.asyncrssclient.RssItem;
 import rejasupotaro.rebuild.media.MediaFileManager;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 
-@Data
 @Table(name = "episodes")
 public class Episode extends Model implements Parcelable {
 
@@ -58,6 +56,50 @@ public class Episode extends Model implements Parcelable {
 
     @Column(name = "media_local_path")
     private String mediaLocalPath;
+
+    public int getEpisodeId() {
+        return episodeId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Uri getLink() {
+        return  link;
+    }
+
+    public String getPostedAt() {
+        return postedAt;
+    }
+
+    public Uri getEnclosure() {
+        return enclosure;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public String getShowNotes() {
+        return showNotes;
+    }
+
+    public boolean isFavorited() {
+        return isFavorited;
+    }
+
+    public boolean hasPlayed() {
+        return hasPlayed;
+    }
+
+    public String getMediaLocalPath() {
+        return mediaLocalPath;
+    }
 
     public boolean isDownloaded() {
         if (TextUtils.isEmpty(mediaLocalPath)) {
