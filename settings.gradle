@@ -1,1 +1,1 @@
-include ':Rebuild', ':robospock'
+include ':Rebuild', ':robospock', ':commons'
