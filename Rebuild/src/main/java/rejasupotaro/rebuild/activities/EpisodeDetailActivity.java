@@ -57,11 +57,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
-
         BusProvider.getInstance().register(this);
-
         episode = Episode.findById(episodeId);
-        setupActionBar(episode);
+
+        setupActionBar();
 
         episodeMediaFragment = (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(
                 R.id.fragment_episode_media);
@@ -79,19 +78,16 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         super.onDestroy();
     }
 
-    private void setupActionBar(Episode episode) {
+    private void setupActionBar() {
         final ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-
-        String originalTitle = episode.getTitle();
-        int startIndex = originalTitle.indexOf(':');
-        actionBar.setTitle("Episode " + originalTitle.substring(0, startIndex));
 
         final ColorDrawable colorDrawable = new ColorDrawable(
                 getResources().getColor(R.color.dark_gray));
         colorDrawable.setAlpha(0);
         actionBar.setBackgroundDrawable(colorDrawable);
+        actionBar.setTitle("");
 
         scrollView.getScrollEvent().subscribe(new Action1<ObservableScrollView.ScrollPosition>() {
             @Override
