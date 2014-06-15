@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,7 +28,7 @@ import roboguice.inject.InjectView;
 public class MainActivity extends RoboActionBarActivity
         implements EpisodeListFragment.OnEpisodeSelectListener {
 
-    private static final String EXTRA_EPISODE = "extra_episode";
+    private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
     @InjectView(R.id.media_bar)
     private MediaBarView mediaBar;
@@ -38,9 +39,9 @@ public class MainActivity extends RoboActionBarActivity
     @Inject
     private MainThreadExecutor mainThreadExecutor;
 
-    public static Intent createIntent(Context context, int episodeId) {
+    public static Intent createIntent(Context context, String episodeId) {
         Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(EXTRA_EPISODE, episodeId);
+        intent.putExtra(EXTRA_EPISODE_ID, episodeId);
         return intent;
     }
 
@@ -78,8 +79,8 @@ public class MainActivity extends RoboActionBarActivity
             return;
         }
 
-        int episodeId = intent.getIntExtra(EXTRA_EPISODE, 0);
-        if (episodeId == 0) {
+        String episodeId = intent.getStringExtra(EXTRA_EPISODE_ID);
+        if (TextUtils.isEmpty(episodeId)) {
             return;
         }
 
@@ -98,7 +99,8 @@ public class MainActivity extends RoboActionBarActivity
                     public void onClick(Episode episode) {
                         openEpisodeDetailActivity(episode.getEpisodeId());
                     }
-                });
+                }
+        );
     }
 
     @Override
@@ -109,10 +111,15 @@ public class MainActivity extends RoboActionBarActivity
 
     @Override
     public void onSelect(Episode episode) {
-        openEpisodeDetailActivity(episode.getEpisodeId());
+        String episodeId = episode.getEpisodeId();
+        if (TextUtils.isEmpty(episodeId)) {
+            return;
+        }
+
+        openEpisodeDetailActivity(episodeId);
     }
 
-    private void openEpisodeDetailActivity(int episodeId) {
+    private void openEpisodeDetailActivity(String episodeId) {
         startActivity(EpisodeDetailActivity.createIntent(this, episodeId));
         overridePendingTransition(R.anim.slide_up_enter, R.anim.zoom_out);
     }

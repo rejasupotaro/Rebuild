@@ -2,13 +2,13 @@ package rejasupotaro.rebuild.events;
 
 public class DownloadEpisodeCompleteEvent {
 
-    private int episodeId;
+    private String episodeId;
 
-    public int getEpisodeId() {
+    public String getEpisodeId() {
         return episodeId;
     }
 
-    public DownloadEpisodeCompleteEvent(int episodeId) {
+    public DownloadEpisodeCompleteEvent(String episodeId) {
         this.episodeId = episodeId;
     }
 

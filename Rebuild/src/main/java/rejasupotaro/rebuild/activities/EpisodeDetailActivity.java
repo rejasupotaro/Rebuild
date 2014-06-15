@@ -30,7 +30,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
     @InjectExtra(value = EXTRA_EPISODE_ID)
-    private int episodeId;
+    private String episodeId;
 
     @InjectView(R.id.scroll_view)
     private ObservableScrollView scrollView;
@@ -47,7 +47,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @Inject
     private MainThreadExecutor mainThreadExecutor;
 
-    public static Intent createIntent(Context context, int episodeId) {
+    public static Intent createIntent(Context context, String episodeId) {
         Intent intent = new Intent(context, EpisodeDetailActivity.class);
         intent.putExtra(EXTRA_EPISODE_ID, episodeId);
         return intent;

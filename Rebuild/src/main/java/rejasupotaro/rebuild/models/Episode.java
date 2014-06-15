@@ -27,8 +27,8 @@ public class Episode extends Model implements Parcelable {
 
     private static final String TAG = Episode.class.getSimpleName();
 
-    @Column(name = "episode_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    private int episodeId;
+    @Column(name = "eid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private String id;
 
     @Column(name = "title")
     private String title;
@@ -60,8 +60,8 @@ public class Episode extends Model implements Parcelable {
     @Column(name = "media_local_path")
     private String mediaLocalPath;
 
-    public int getEpisodeId() {
-        return episodeId;
+    public String getEpisodeId() {
+        return id;
     }
 
     public String getTitle() {
@@ -140,10 +140,10 @@ public class Episode extends Model implements Parcelable {
         return (title.equals(episode.getTitle()));
     }
 
-    private Episode(int episodeId, String title, String description, Uri link, String postedAt,
+    private Episode(String id, String title, String description, Uri link, String postedAt,
                     Uri enclosure, String duration, String showNotes) {
         super();
-        this.episodeId = episodeId;
+        this.id = id;
         this.title = title;
         this.description = StringUtils.removeNewLines(description);
         this.link = link;
@@ -187,21 +187,21 @@ public class Episode extends Model implements Parcelable {
         return episodeList;
     }
 
-    private static int buildIdFromLink(Uri uri) {
+    private static String buildIdFromLink(Uri uri) {
         String path = uri.getPath();
         String formattedId = path.substring(1);
         if (formattedId.endsWith("/")) {
             formattedId = formattedId.substring(0, formattedId.length() - 1);
         }
-        return Integer.valueOf(formattedId);
+        return formattedId;
     }
 
     public static List<Episode> find() {
-        return new Select().from(Episode.class).orderBy("episode_id DESC").execute();
+        return new Select().from(Episode.class).orderBy("Id ASC").execute();
     }
 
-    public static Episode findById(int episodeId) {
-        return new Select().from(Episode.class).where("episode_id=?", episodeId).executeSingle();
+    public static Episode findById(String episodeId) {
+        return new Select().from(Episode.class).where("eid=?", episodeId).executeSingle();
     }
 
     public static boolean refreshTable(List<Episode> episodeList) {
@@ -219,7 +219,7 @@ public class Episode extends Model implements Parcelable {
 
     private void upsert() {
         Episode episode =
-                new Select().from(Episode.class).where("episode_id=?", episodeId).executeSingle();
+                new Select().from(Episode.class).where("eid=?", id).executeSingle();
         if (episode == null) {
             save();
         } else {
@@ -237,7 +237,7 @@ public class Episode extends Model implements Parcelable {
                         enclosure,
                         duration,
                         showNotes)
-                .where("episode_id=?", episodeId)
+                .where("eid=?", id)
                 .execute();
     }
 
@@ -245,7 +245,7 @@ public class Episode extends Model implements Parcelable {
         this.mediaLocalPath = mediaLocalPath;
         new Update(Episode.class)
                 .set("media_local_path=?", mediaLocalPath)
-                .where("episode_id=?", episodeId)
+                .where("eid=?", id)
                 .execute();
     }
 
@@ -256,7 +256,7 @@ public class Episode extends Model implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(episodeId);
+        dest.writeString(id);
         dest.writeString(title);
         dest.writeString(description);
         dest.writeString(link.toString());
@@ -280,7 +280,7 @@ public class Episode extends Model implements Parcelable {
     };
 
     private Episode(Parcel in) {
-        episodeId = in.readInt();
+        id = in.readString();
         title = in.readString();
         description = in.readString();
         link = Uri.parse(in.readString());

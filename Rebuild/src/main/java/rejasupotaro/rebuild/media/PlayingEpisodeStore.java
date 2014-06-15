@@ -17,7 +17,7 @@ public class PlayingEpisodeStore {
 
         int currentPosition = podcastPlayer.getCurrentPosition();
         PreferenceUtils
-                .saveInt(context, PrefsKey.PLAYING_EPISODE, episode.getEpisodeId());
+                .saveString(context, PrefsKey.PLAYING_EPISODE, episode.getEpisodeId());
         PreferenceUtils.saveInt(context, PrefsKey.CURRENT_POSITION, currentPosition);
     }
 
