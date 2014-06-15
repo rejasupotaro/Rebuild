@@ -1,15 +1,16 @@
 package rejasupotaro.rebuild.models;
 
-import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.text.TextUtils;
-
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.activeandroid.query.Update;
+
+import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ import rejasupotaro.rebuild.utils.StringUtils;
 
 @Table(name = "episodes")
 public class Episode extends Model implements Parcelable {
+
+    private static final String TAG = Episode.class.getSimpleName();
 
     @Column(name = "episode_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private int episodeId;
@@ -172,7 +175,14 @@ public class Episode extends Model implements Parcelable {
     public static List<Episode> newEpisodeFromEntity(List<RssItem> rssItemList) {
         List<Episode> episodeList = new ArrayList<Episode>();
         for (RssItem rssItem : rssItemList) {
-            episodeList.add(newEpisodeFromEntity(rssItem));
+            try {
+                Episode episode = newEpisodeFromEntity(rssItem);
+                if (episode != null) {
+                    episodeList.add(episode);
+                }
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage(), e);
+            }
         }
         return episodeList;
     }
