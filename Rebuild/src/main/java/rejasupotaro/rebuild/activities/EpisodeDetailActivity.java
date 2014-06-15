@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -30,7 +32,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
     @InjectExtra(value = EXTRA_EPISODE_ID)
-    private int episodeId;
+    private String episodeId;
 
     @InjectView(R.id.scroll_view)
     private ObservableScrollView scrollView;
@@ -47,7 +49,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     @Inject
     private MainThreadExecutor mainThreadExecutor;
 
-    public static Intent createIntent(Context context, int episodeId) {
+    public static Intent createIntent(Context context, String episodeId) {
         Intent intent = new Intent(context, EpisodeDetailActivity.class);
         intent.putExtra(EXTRA_EPISODE_ID, episodeId);
         return intent;
@@ -57,11 +59,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
-
         BusProvider.getInstance().register(this);
-
         episode = Episode.findById(episodeId);
-        setupActionBar(episode);
+
+        setupActionBar();
 
         episodeMediaFragment = (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(
                 R.id.fragment_episode_media);
@@ -79,19 +80,19 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         super.onDestroy();
     }
 
-    private void setupActionBar(Episode episode) {
+    private void setupActionBar() {
         final ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-
-        String originalTitle = episode.getTitle();
-        int startIndex = originalTitle.indexOf(':');
-        actionBar.setTitle("Episode " + originalTitle.substring(0, startIndex));
 
         final ColorDrawable colorDrawable = new ColorDrawable(
                 getResources().getColor(R.color.dark_gray));
         colorDrawable.setAlpha(0);
         actionBar.setBackgroundDrawable(colorDrawable);
+        actionBar.setTitle(episode.getTitle());
+        int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
+        final TextView titleTextView = (TextView) findViewById(titleId);
+        titleTextView.setAlpha(0);
 
         scrollView.getScrollEvent().subscribe(new Action1<ObservableScrollView.ScrollPosition>() {
             @Override
@@ -107,6 +108,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 }
                 colorDrawable.setAlpha(alpha);
                 actionBar.setBackgroundDrawable(colorDrawable);
+
+                if (titleTextView != null) {
+                    titleTextView.setAlpha(alpha / 255F);
+                }
             }
         });
     }

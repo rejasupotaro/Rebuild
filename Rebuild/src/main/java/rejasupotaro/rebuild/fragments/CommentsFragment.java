@@ -24,7 +24,7 @@ public class CommentsFragment extends RoboFragment {
 
     private static final String ARGS_KEY_EPISODE_ID = "episode_id";
 
-    private int episodeId;
+    private String episodeId;
 
     @InjectView(R.id.episode_tweet_list)
     private ExtendedListView episodeTweetListView;
@@ -42,12 +42,12 @@ public class CommentsFragment extends RoboFragment {
     public static CommentsFragment newInstance(Episode episode) {
         CommentsFragment fragment = new CommentsFragment();
         Bundle args = new Bundle();
-        args.putInt(ARGS_KEY_EPISODE_ID, episode.getEpisodeId());
+        args.putString(ARGS_KEY_EPISODE_ID, episode.getEpisodeId());
         fragment.setArguments(args);
         return fragment;
     }
 
-    private CommentsFragment() {
+    public CommentsFragment() {
     }
 
     @Override
@@ -64,9 +64,9 @@ public class CommentsFragment extends RoboFragment {
         setupEpisodeTweetList();
     }
 
-    private int getEpisodeId() {
+    private String getEpisodeId() {
         Bundle args = getArguments();
-        return args.getInt(ARGS_KEY_EPISODE_ID);
+        return args.getString(ARGS_KEY_EPISODE_ID);
     }
 
     private void setupEpisodeTweetList() {
@@ -97,7 +97,8 @@ public class CommentsFragment extends RoboFragment {
                         Tweet tweet = episodeTweetListAdapter.getItem(firstVisiblePosition);
                         ((TextView) scrollBarPanel).setText(tweet.getTweetTimeText());
                     }
-                });
+                }
+        );
     }
 
     private void requestEpisodeTweetList(int page, int perPage) {
@@ -119,7 +120,8 @@ public class CommentsFragment extends RoboFragment {
                     public void onError() {
                         moreLoadListener.finish();
                     }
-                });
+                }
+        );
     }
 
 }

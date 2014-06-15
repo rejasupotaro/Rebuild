@@ -48,6 +48,6 @@ public class EpisodeDownloadNotification {
     }
 
     public static int getNotificationId(Episode episode) {
-        return NotificationId.EpisodeDownload + episode.getEpisodeId();
+        return NotificationId.EpisodeDownload;
     }
 }

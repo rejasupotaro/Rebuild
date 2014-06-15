@@ -119,9 +119,7 @@ public class EpisodeMediaFragment extends RoboFragment {
             }
         };
 
-        String originalTitle = episode.getTitle();
-        int startIndex = originalTitle.indexOf(':');
-        episodeTitleTextView.setText(originalTitle.substring(startIndex + 2));
+        episodeTitleTextView.setText(episode.getTitle());
 
         setupMediaPlayAndPauseButton(episode);
         setupSeekBar(episode);

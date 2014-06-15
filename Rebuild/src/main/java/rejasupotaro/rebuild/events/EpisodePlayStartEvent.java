@@ -2,13 +2,13 @@ package rejasupotaro.rebuild.events;
 
 public class EpisodePlayStartEvent {
 
-    private int episodeId;
+    private String episodeId;
 
-    public int getEpisodeId() {
+    public String getEpisodeId() {
         return episodeId;
     }
 
-    public EpisodePlayStartEvent(int episodeId) {
+    public EpisodePlayStartEvent(String episodeId) {
         this.episodeId = episodeId;
     }
 }

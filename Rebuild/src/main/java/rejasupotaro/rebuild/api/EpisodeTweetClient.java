@@ -42,7 +42,7 @@ public class EpisodeTweetClient extends AbstractHttpClient {
         return TAG;
     }
 
-    public void fetch(int episodeId, final int page, final int perPage,
+    public void fetch(String episodeId, final int page, final int perPage,
             final EpisodeTweetResponseHandler responseHandler) {
         if (isRequesting) {
             return;

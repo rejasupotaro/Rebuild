@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.adapters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,10 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
         super(context, episodeList);
     }
 
-    public boolean includeEpisode(int episodeId) {
+    public boolean includeEpisode(String episodeId) {
         for (int i = 0; i < getCount(); i++) {
-            if (episodeId == getItem(i).getEpisodeId()) {
+            Episode episode = getItem(i);
+            if (episode != null && TextUtils.equals(episode.getEpisodeId(), episodeId)) {
                 return true;
             }
         }
