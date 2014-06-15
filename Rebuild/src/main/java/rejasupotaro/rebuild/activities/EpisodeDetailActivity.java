@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -87,7 +89,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 getResources().getColor(R.color.dark_gray));
         colorDrawable.setAlpha(0);
         actionBar.setBackgroundDrawable(colorDrawable);
-        actionBar.setTitle("");
+        actionBar.setTitle(episode.getTitle());
+        int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
+        final TextView titleTextView = (TextView) findViewById(titleId);
+        titleTextView.setAlpha(0);
 
         scrollView.getScrollEvent().subscribe(new Action1<ObservableScrollView.ScrollPosition>() {
             @Override
@@ -103,6 +108,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 }
                 colorDrawable.setAlpha(alpha);
                 actionBar.setBackgroundDrawable(colorDrawable);
+
+                if (titleTextView != null) {
+                    titleTextView.setAlpha(alpha / 255F);
+                }
             }
         });
     }
