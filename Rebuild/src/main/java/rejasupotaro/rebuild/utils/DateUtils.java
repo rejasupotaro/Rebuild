@@ -1,5 +1,8 @@
 package rejasupotaro.rebuild.utils;
 
+import android.util.Log;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +13,8 @@ public final class DateUtils {
 
     public static final String TAG = DateUtils.class.getSimpleName();
 
-    private DateUtils() {}
+    private DateUtils() {
+    }
 
     public static int durationToInt(String duration) {
         String[] dateStructure = duration.split(":");
@@ -28,21 +32,30 @@ public final class DateUtils {
         return DurationFormatter.format(currentTime);
     }
 
+    public static Date pubDateToDate(String source) {
+        try {
+            DateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
+            return format.parse(source);
+        } catch (ParseException e) {
+            Log.e(TAG, e.getMessage(), e);
+            return null;
+        }
+    }
+
     /**
      * FIXME: This is terrible code... I should fix it soon.
-     * @param source pubDate
+     *
+     * @param date pubDate
      * @return output instance of String
      */
-    public static String formatPubDate(String source) {
-        Date date = PubDateParser.parse(source);
-        if (date == null) {
-            return "";
-        }
-
+    public static String dateToString(Date date) {
         int month = date.getMonth() + 1;
         int day = date.getDate();
         int year = 1900 + date.getYear();
-        return monthToName(month) + " " + (day < 10 ? "0" + day : day) + " " + year;
+        Log.e("debugging", date.toString());
+        String dateString = monthToName(month) + " " + (day < 10 ? "0" + day : day) + " " + year;
+        Log.e("debugging", dateString);
+        return dateString;
     }
 
     public static String monthToName(int month) {
@@ -100,7 +113,7 @@ public final class DateUtils {
 
             int seconds = totalSeconds % 60;
             int minutes = (totalSeconds / 60) % 60;
-            int hours   = totalSeconds / 3600;
+            int hours = totalSeconds / 3600;
 
             stringBuilder.setLength(0);
             if (hours > 0) {
@@ -110,12 +123,14 @@ public final class DateUtils {
             }
         }
 
-        private DurationFormatter() {}
+        private DurationFormatter() {
+        }
     }
 
     private static final class PubDateParser {
 
-        private static final SimpleDateFormat FORMAT = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss zzz", Locale.US);
+        private static final SimpleDateFormat FORMAT = new SimpleDateFormat(
+                "EEE, dd MMM yyyy hh:mm:ss zzz", Locale.US);
 
         public static synchronized Date parse(String source) {
             try {
@@ -125,7 +140,8 @@ public final class DateUtils {
             }
         }
 
-        private PubDateParser() {}
+        private PubDateParser() {
+        }
     }
 
     public static String formatTweetTime(Date source) {
@@ -134,12 +150,14 @@ public final class DateUtils {
 
     private static final class TweetTimeFormatter {
 
-        private static final SimpleDateFormat FORMAT = new SimpleDateFormat("hh:mm:ss a", Locale.US);
+        private static final SimpleDateFormat FORMAT = new SimpleDateFormat("hh:mm:ss a",
+                Locale.US);
 
         public static synchronized String format(Date source) {
             return FORMAT.format(source);
         }
 
-        private TweetTimeFormatter() {}
+        private TweetTimeFormatter() {
+        }
     }
 }

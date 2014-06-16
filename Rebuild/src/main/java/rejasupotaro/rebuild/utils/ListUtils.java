@@ -1,7 +1,11 @@
 package rejasupotaro.rebuild.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import rejasupotaro.rebuild.models.Episode;
 
 public final class ListUtils {
 
@@ -47,6 +51,17 @@ public final class ListUtils {
         }
 
         return filteredList;
+    }
+
+    public static List<Episode> orderByPostedAt(List<Episode> episodeList) {
+        Collections.sort(episodeList, new Comparator<Episode>() {
+            @Override
+            public int compare(Episode lhs, Episode rhs) {
+                //return lhs.getPostedAt().compareTo(rhs.getPostedAt());
+                return rhs.getPostedAt().compareTo(lhs.getPostedAt());
+            }
+        });
+        return episodeList;
     }
 
     private ListUtils() {}

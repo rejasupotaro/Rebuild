@@ -49,7 +49,7 @@ public class RssFeedClient extends AbstractHttpClient {
     }
 
     public void request(final EpisodeClientResponseHandler handler) {
-        List<Episode> episodeList = Episode.find();
+        List<Episode> episodeList = ListUtils.orderByPostedAt(Episode.find());
         if (!ListUtils.isEmpty(episodeList)) {
             handler.onSuccess(episodeList);
             requestNetwork(handler, false);
@@ -83,7 +83,7 @@ public class RssFeedClient extends AbstractHttpClient {
         List<Episode> episodeList = Episode.newEpisodeFromEntity(rssItemList);
 
         if (Episode.refreshTable(episodeList) || shouldUpdateListView) {
-            handler.onSuccess(Episode.find());
+            handler.onSuccess(ListUtils.orderByPostedAt(Episode.find()));
         } else {
             // nothing to do
         }

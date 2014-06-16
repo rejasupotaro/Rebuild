@@ -74,7 +74,7 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
 
         holder.titleTextView.setText(item.getTitle());
         holder.subtitleTextView.setText(StringUtils.fromHtml(item.getDescription()).toString());
-        holder.postedAtTextView.setText(String.format("{fa-calendar}  %s", item.getPostedAt()));
+        holder.postedAtTextView.setText(String.format("{fa-calendar}  %s", item.getPostedAtAsString()));
         if (item.isDownloaded()) {
             holder.episodeDownloadButton.setText("{fa-minus}");
         } else {

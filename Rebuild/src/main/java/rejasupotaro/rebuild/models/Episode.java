@@ -14,6 +14,7 @@ import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import rejasupotaro.asyncrssclient.MediaEnclosure;
@@ -40,7 +41,7 @@ public class Episode extends Model implements Parcelable {
     private Uri link;
 
     @Column(name = "posted_at")
-    private String postedAt;
+    private Date postedAt;
 
     @Column(name = "enclosure")
     private Uri enclosure;
@@ -76,8 +77,12 @@ public class Episode extends Model implements Parcelable {
         return  link;
     }
 
-    public String getPostedAt() {
+    public Date getPostedAt() {
         return postedAt;
+    }
+
+    public String getPostedAtAsString() {
+        return DateUtils.dateToString(postedAt);
     }
 
     public Uri getEnclosure() {
@@ -140,14 +145,14 @@ public class Episode extends Model implements Parcelable {
         return (title.equals(episode.getTitle()));
     }
 
-    private Episode(String id, String title, String description, Uri link, String postedAt,
+    private Episode(String id, String title, String description, Uri link, String pubDate,
                     Uri enclosure, String duration, String showNotes) {
         super();
         this.id = id;
         this.title = title;
         this.description = StringUtils.removeNewLines(description);
         this.link = link;
-        this.postedAt = DateUtils.formatPubDate(postedAt);
+        this.postedAt = DateUtils.pubDateToDate(pubDate);
         this.enclosure = enclosure;
         this.duration = duration;
         this.showNotes = showNotes;
@@ -197,7 +202,8 @@ public class Episode extends Model implements Parcelable {
     }
 
     public static List<Episode> find() {
-        return new Select().from(Episode.class).orderBy("Id ASC").execute();
+        List<Episode> episodeList = new Select().from(Episode.class).orderBy("Id ASC").execute();
+        return episodeList;
     }
 
     public static Episode findById(String episodeId) {
@@ -260,7 +266,7 @@ public class Episode extends Model implements Parcelable {
         dest.writeString(title);
         dest.writeString(description);
         dest.writeString(link.toString());
-        dest.writeString(postedAt);
+        dest.writeLong(postedAt.getTime());
         dest.writeString(enclosure == null ? "" : enclosure.toString());
         dest.writeString(duration);
         dest.writeString(showNotes);
@@ -284,7 +290,7 @@ public class Episode extends Model implements Parcelable {
         title = in.readString();
         description = in.readString();
         link = Uri.parse(in.readString());
-        postedAt = in.readString();
+        postedAt = new Date(in.readLong());
         String uriString = in.readString();
         enclosure = (TextUtils.isEmpty(uriString) ? null : Uri.parse(uriString));
         duration = in.readString();

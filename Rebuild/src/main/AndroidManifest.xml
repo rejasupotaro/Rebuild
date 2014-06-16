@@ -18,10 +18,10 @@
                 android:value="rebuild.db"/>
         <meta-data
                 android:name="AA_DB_VERSION"
-                android:value="3"/>
+                android:value="4"/>
         <meta-data
                 android:name="AA_SERIALIZERS"
-                android:value="rejasupotaro.rebuild.serializers.UriTypeSerializer"/>
+                android:value="rejasupotaro.rebuild.serializers.UriTypeSerializer,rejasupotaro.rebuild.serializers.DateTypeSerializer"/>
 
         <activity
                 android:name="rejasupotaro.rebuild.activities.MainActivity"
