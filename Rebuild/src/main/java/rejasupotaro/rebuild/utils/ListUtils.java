@@ -57,7 +57,6 @@ public final class ListUtils {
         Collections.sort(episodeList, new Comparator<Episode>() {
             @Override
             public int compare(Episode lhs, Episode rhs) {
-                //return lhs.getPostedAt().compareTo(rhs.getPostedAt());
                 return rhs.getPostedAt().compareTo(lhs.getPostedAt());
             }
         });
