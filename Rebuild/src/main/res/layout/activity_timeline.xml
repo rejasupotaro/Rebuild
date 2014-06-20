@@ -15,7 +15,6 @@
                 android:id="@+id/tweet_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/padding_frame"
                 />
     </android.support.v4.widget.SwipeRefreshLayout>
 </rejasupotaro.rebuild.views.StateFrameLayout>
