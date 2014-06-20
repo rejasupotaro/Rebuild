@@ -226,25 +226,10 @@ public class Episode extends Model implements Parcelable {
     private void upsert() {
         Episode episode =
                 new Select().from(Episode.class).where("eid=?", id).executeSingle();
-        if (episode == null) {
-            save();
-        } else {
-            update();
+        if (episode != null) {
+            episode.delete();
         }
-    }
-
-    public void update() {
-        new Update(Episode.class)
-                .set("title=?,description=?,link=?,posted_at=?,enclosure=?,duration=?,show_notes=?",
-                        title,
-                        description,
-                        link,
-                        postedAt,
-                        enclosure,
-                        duration,
-                        showNotes)
-                .where("eid=?", id)
-                .execute();
+        save();
     }
 
     public void insertMediaLocalPath(String mediaLocalPath) {
