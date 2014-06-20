@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.test.InstrumentationTestCase;
 
 import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.robotgirl.ActiveAndroidTestCase;
 import rejasupotaro.robotgirl.Definition;
 import rejasupotaro.robotgirl.Factory;
 import rejasupotaro.robotgirl.RobotGirl;

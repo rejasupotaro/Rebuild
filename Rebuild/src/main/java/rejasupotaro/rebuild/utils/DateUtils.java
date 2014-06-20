@@ -52,9 +52,7 @@ public final class DateUtils {
         int month = date.getMonth() + 1;
         int day = date.getDate();
         int year = 1900 + date.getYear();
-        Log.e("debugging", date.toString());
         String dateString = monthToName(month) + " " + (day < 10 ? "0" + day : day) + " " + year;
-        Log.e("debugging", dateString);
         return dateString;
     }
 
