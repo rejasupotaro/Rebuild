@@ -19,6 +19,7 @@ import rejasupotaro.rebuild.models.Guest;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.PicassoHelper;
+import rejasupotaro.rebuild.utils.UiAnimations;
 
 public class GuestListView extends LinearLayout {
 
@@ -62,6 +63,8 @@ public class GuestListView extends LinearLayout {
                             new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
                     addView(createGuestView(guest), params);
                 }
+
+                UiAnimations.fadeIn(GuestListView.this, 100, 300);
             }
         });
     }
