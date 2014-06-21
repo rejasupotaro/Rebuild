@@ -3,6 +3,7 @@ package rejasupotaro.rebuild.api;
 import org.apache.http.Header;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Looper;
 
 import java.util.List;
@@ -77,16 +78,21 @@ public class RssFeedClient extends AbstractHttpClient {
         );
     }
 
-    private void handleSuccessResponse(EpisodeClientResponseHandler handler,
-                                       boolean shouldUpdateListView, RssFeed rssFeed) {
-        List<RssItem> rssItemList = rssFeed.getRssItemList();
-        List<Episode> episodeList = Episode.newEpisodeFromEntity(rssItemList);
+    private void handleSuccessResponse(final EpisodeClientResponseHandler handler,
+                                       final boolean shouldUpdateListView, final RssFeed rssFeed) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                List<RssItem> rssItemList = rssFeed.getRssItemList();
+                List<Episode> episodeList = Episode.newEpisodeFromEntity(rssItemList);
 
-        if (Episode.refreshTable(episodeList) || shouldUpdateListView) {
-            handler.onSuccess(ListUtils.orderByPostedAt(Episode.find()));
-        } else {
-            // nothing to do
-        }
+                if (Episode.refreshTable(episodeList) || shouldUpdateListView) {
+                    handler.onSuccess(ListUtils.orderByPostedAt(Episode.find()));
+                } else {
+                    // nothing to do
+                }
+            }
+        });
     }
 
     private void handleErrorResponse(EpisodeClientResponseHandler handler, Header[] headers,
