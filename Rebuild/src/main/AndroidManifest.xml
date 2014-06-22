@@ -25,10 +25,11 @@
 
         <activity
                 android:name="rejasupotaro.rebuild.activities.MainActivity"
-                android:theme="@style/TransparentActionBarTheme">
+                android:theme="@style/TransparentActionBarTheme"
+                android:launchMode="singleInstance"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -36,42 +37,49 @@
                 android:name=".activities.EpisodeDetailActivity"
                 android:configChanges="orientation|screenSize"
                 android:theme="@style/TransparentActionBarTheme"
-                android:launchMode="singleTask">
+                android:launchMode="singleTask"
+                >
         </activity>
         <activity
                 android:name=".activities.TimelineActivity"
                 android:configChanges="orientation|screenSize"
                 android:label="@string/label_timeline"
-                android:theme="@style/RebuildTheme">
+                android:theme="@style/RebuildTheme"
+                >
         </activity>
         <activity
                 android:name=".activities.SettingsActivity"
                 android:configChanges="orientation|screenSize"
                 android:label="@string/activity_settings"
-                android:theme="@style/RebuildTheme">
+                android:theme="@style/RebuildTheme"
+                >
         </activity>
         <activity
                 android:name=".activities.ReportActivity"
                 android:configChanges="orientation|screenSize"
-                android:theme="@style/Theme.Transparent">
+                android:theme="@style/Theme.Transparent"
+                >
         </activity>
         <activity
                 android:name=".activities.AboutActivity"
                 android:configChanges="orientation|screenSize"
                 android:label="@string/activity_about"
-                android:theme="@style/RebuildTheme">
+                android:theme="@style/RebuildTheme"
+                >
         </activity>
         <activity
                 android:name=".activities.RecentChangesActivity"
                 android:configChanges="orientation|screenSize"
                 android:label="@string/activity_recent_changes"
-                android:theme="@style/RebuildTheme">
+                android:theme="@style/RebuildTheme"
+                >
         </activity>
         <activity
                 android:name=".activities.LicensesActivity"
                 android:configChanges="orientation|screenSize"
                 android:label="@string/activity_licenses"
-                android:theme="@style/RebuildTheme">
+                android:theme="@style/RebuildTheme"
+                >
         </activity>
         <activity
                 android:name="im.dino.dbinspector.activities.DbInspectorActivity"
