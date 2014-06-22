@@ -132,9 +132,15 @@ public class EpisodeListFragment extends RoboFragment {
     private void requestFeed() {
         rssFeedClient.request(new RssFeedClient.EpisodeClientResponseHandler() {
             @Override
-            public void onSuccess(List<Episode> episodeList) {
-                BusProvider.getInstance().post(new LoadEpisodeListCompleteEvent(episodeList));
-                setupEpisodeListView(episodeList);
+            public void onSuccess(final List<Episode> episodeList) {
+                mainThreadExecutor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        BusProvider.getInstance()
+                                .post(new LoadEpisodeListCompleteEvent(episodeList));
+                        setupEpisodeListView(episodeList);
+                    }
+                });
             }
 
             @Override
