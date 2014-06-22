@@ -25,5 +25,11 @@
                     android:targetPackage="rejasupotaro.rebuild"
                     android:targetClass="rejasupotaro.rebuild.activities.LicensesActivity"/>
         </Preference>
+        <Preference android:title="@string/pref_title_dbinspector">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:targetPackage="rejasupotaro.rebuild"
+                    android:targetClass="im.dino.dbinspector.activities.DbInspectorActivity"/>
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -73,6 +73,16 @@
                 android:label="@string/activity_licenses"
                 android:theme="@style/RebuildTheme">
         </activity>
+        <activity
+                android:name="im.dino.dbinspector.activities.DbInspectorActivity"
+                android:label="DB Inspector"
+                android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
+                android:icon="@drawable/ic_launcher_dbinspector">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService"/>
         <service android:name=".services.EpisodeDownloadService"/>
