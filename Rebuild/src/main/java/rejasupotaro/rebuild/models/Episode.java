@@ -65,20 +65,40 @@ public class Episode extends Model implements Parcelable {
         return id;
     }
 
+    public void setEpisodeId(String id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Uri getLink() {
-        return  link;
+        return link;
+    }
+
+    public void setLink(Uri link) {
+        this.link = link;
     }
 
     public Date getPostedAt() {
         return postedAt;
+    }
+
+    public void setPostedAt(Date postedAt) {
+        this.postedAt = postedAt;
     }
 
     public String getPostedAtAsString() {
@@ -89,24 +109,48 @@ public class Episode extends Model implements Parcelable {
         return enclosure;
     }
 
+    public void setEnclosure(Uri enclosure) {
+        this.enclosure = enclosure;
+    }
+
     public String getDuration() {
         return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public String getShowNotes() {
         return showNotes;
     }
 
+    public void setShowNotes(String showNotes) {
+        this.showNotes = showNotes;
+    }
+
     public boolean isFavorited() {
         return isFavorited;
+    }
+
+    public void setIsFavorited(boolean isFavorited) {
+        this.isFavorited = isFavorited;
     }
 
     public boolean hasPlayed() {
         return hasPlayed;
     }
 
+    public void setHasPlayed(boolean hasPlayed) {
+        this.hasPlayed = hasPlayed;
+    }
+
     public String getMediaLocalPath() {
         return mediaLocalPath;
+    }
+
+    public void setMediaLocalPath(String mediaLocalPath) {
+        this.mediaLocalPath = mediaLocalPath;
     }
 
     public boolean isDownloaded() {
@@ -227,9 +271,17 @@ public class Episode extends Model implements Parcelable {
         Episode episode =
                 new Select().from(Episode.class).where("eid=?", id).executeSingle();
         if (episode != null) {
-            episode.delete();
+            episode.setTitle(title);
+            episode.setDescription(description);
+            episode.setLink(link);
+            episode.setPostedAt(postedAt);
+            episode.setEnclosure(enclosure);
+            episode.setDuration(duration);
+            episode.setShowNotes(showNotes);
+            episode.save();
+        } else {
+            save();
         }
-        save();
     }
 
     public void insertMediaLocalPath(String mediaLocalPath) {
