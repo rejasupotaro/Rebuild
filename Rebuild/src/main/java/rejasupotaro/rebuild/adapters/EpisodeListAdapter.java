@@ -12,7 +12,6 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rx.subjects.PublishSubject;
@@ -87,10 +86,11 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
                 downloadButtonEvent.onNext(item);
             }
         });
-        if (EpisodeDownloadService.isDownloading(item)) {
-            holder.downloadStateText.setVisibility(View.VISIBLE);
-        } else {
-            holder.downloadStateText.setVisibility(View.GONE);
-        }
+//        disable temporary...
+//        if (EpisodeDownloadService.isDownloading(item)) {
+//            holder.downloadStateText.setVisibility(View.VISIBLE);
+//        } else {
+//            holder.downloadStateText.setVisibility(View.GONE);
+//        }
     }
 }
