@@ -20,6 +20,8 @@ public class LatestEpisodeListItemView extends FrameLayout {
 
     private IconTextView episodeDownloadButton;
 
+    private SimpleGuestListView simpleGuestListView;
+
     private IconTextView postedAtTextView;
 
     private TextView downloadStateText;
@@ -36,6 +38,7 @@ public class LatestEpisodeListItemView extends FrameLayout {
         titleTextView = (TextView) root.findViewById(R.id.episode_title);
         subtitleTextView = (TextView) root.findViewById(R.id.episode_subtitle);
         episodeDownloadButton = (IconTextView) root.findViewById(R.id.episode_download_button);
+        simpleGuestListView = (SimpleGuestListView) root.findViewById(R.id.simple_guest_list);
         postedAtTextView = (IconTextView) root.findViewById(R.id.episode_posted_at);
         downloadStateText = (TextView) root.findViewById(R.id.download_state_text);
         addView(root);
@@ -44,6 +47,7 @@ public class LatestEpisodeListItemView extends FrameLayout {
     private void setup(final Episode episode, final PublishSubject<Episode> downloadButtonEvent) {
         titleTextView.setText(episode.getTitle());
         subtitleTextView.setText(StringUtils.fromHtml(episode.getDescription()).toString());
+        simpleGuestListView.setup(StringUtils.getGuestNames(episode.getDescription()));
         postedAtTextView.setText(String.format("{fa-calendar}  %s", episode.getPostedAtAsString()));
         if (episode.isDownloaded()) {
             episodeDownloadButton.setText("{fa-minus}");
