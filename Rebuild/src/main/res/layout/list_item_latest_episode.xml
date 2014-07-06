@@ -1,0 +1,87 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_clickable">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/container_dropshadow"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_contents">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/padding_frame"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/episode_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/main_color1"
+                        android:textSize="@dimen/primary_text_size"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/episode_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_contents"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/quaternary_text_size" />
+            </LinearLayout>
+
+            <IconTextView
+                android:id="@+id/episode_download_button"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:background="@drawable/episode_state_button"
+                android:gravity="center"
+                android:text="{fa-download}"
+                android:textColor="@color/accent_color1"
+                android:textSize="28dp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_frame">
+
+            <TextView
+                android:id="@+id/download_state_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|left"
+                android:text="@string/downloading"
+                android:textColor="@color/accent_color1"
+                android:textSize="@dimen/quaternary_text_size"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <IconTextView
+                android:id="@+id/episode_posted_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:textSize="@dimen/quaternary_text_size" />
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

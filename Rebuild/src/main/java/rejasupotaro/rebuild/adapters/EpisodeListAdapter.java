@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.IconTextView;
 import android.widget.TextView;
 
@@ -14,9 +15,10 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
+import rejasupotaro.rebuild.views.LatestEpisodeListItemView;
 import rx.subjects.PublishSubject;
 
-public class EpisodeListAdapter extends BindableAdapter<Episode> {
+public class EpisodeListAdapter extends ArrayAdapter<Episode> {
 
     private static class ViewHolder {
 
@@ -39,6 +41,8 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
         }
     }
 
+    private LayoutInflater inflater;
+
     private final PublishSubject<Episode> downloadButtonEvent = PublishSubject.create();
 
     public PublishSubject<Episode> getDownloadButtonEvent() {
@@ -46,20 +50,29 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
     }
 
     public EpisodeListAdapter(Context context, List<Episode> episodeList) {
-        super(context, episodeList);
+        super(context, -1, episodeList);
+        setup();
     }
 
-    public boolean includeEpisode(String episodeId) {
-        for (int i = 0; i < getCount(); i++) {
-            Episode episode = getItem(i);
-            if (episode != null && TextUtils.equals(episode.getEpisodeId(), episodeId)) {
-                return true;
-            }
-        }
-        return false;
+    private void setup() {
+        inflater = LayoutInflater.from(getContext());
     }
 
     @Override
+    public final View getView(int position, View view, ViewGroup container) {
+        if (position == 0) {
+            return createLatestEpisodeView();
+        }
+
+        view = newView(inflater, position, container);
+        bindView(getItem(position), position, view);
+        return view;
+    }
+
+    private View createLatestEpisodeView() {
+        return new LatestEpisodeListItemView(getContext(), getItem(0), downloadButtonEvent);
+    }
+
     public View newView(LayoutInflater inflater, final int position, ViewGroup container) {
         View view = inflater.inflate(R.layout.list_item_episode, container, false);
         ViewHolder holder = new ViewHolder(view);
@@ -67,7 +80,6 @@ public class EpisodeListAdapter extends BindableAdapter<Episode> {
         return view;
     }
 
-    @Override
     public void bindView(final Episode item, final int position, View view) {
         final ViewHolder holder = (ViewHolder) view.getTag();
 
