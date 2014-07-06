@@ -30,7 +30,7 @@
     <dimen name="list_item_show_note_height">120dp</dimen>
     <dimen name="common_tool_bar_height">56dp</dimen>
     <dimen name="episode_image_height">240dp</dimen>
-    <dimen name="episode_list_header_height">206dp</dimen>
+    <dimen name="episode_list_header_height">184dp</dimen>
 
     <dimen name="action_button_border_radius">24px</dimen>
 </resources>

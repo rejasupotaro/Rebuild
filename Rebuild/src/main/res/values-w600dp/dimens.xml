@@ -4,6 +4,5 @@
     <dimen name="episode_list_header_width">680dp</dimen>
 
     <dimen name="episode_image_height">320dp</dimen>
-    <dimen name="episode_list_header_height">280dp</dimen>
 </resources>
 
