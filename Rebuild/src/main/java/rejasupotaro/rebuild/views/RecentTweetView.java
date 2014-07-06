@@ -53,6 +53,10 @@ public class RecentTweetView extends FrameLayout {
     }
 
     public void setTweetList(final List<Tweet> tweetList) {
+        if (tweetList.size() <= 0) {
+            return;
+        }
+
         new Timer(new Timer.Callback() {
             @Override
             public void tick(long timeMillis) {
