@@ -1,16 +1,17 @@
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_color1"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_episode_list" />
+
+    <ListView
+        android:id="@+id/episode_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/base_color1"
-        >
-    <include layout="@layout/header_episode_list" />
-    <ListView
-            android:id="@+id/episode_list_view"
-            android:divider="@null"
-            android:fadingEdge="none"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+        android:padding="@dimen/spacing_medium"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/spacing_medium"
+        android:fadingEdge="none" />
 </LinearLayout>
