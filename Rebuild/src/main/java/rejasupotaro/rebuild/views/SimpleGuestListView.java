@@ -17,27 +17,24 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.loaders.GuestLoader;
 import rejasupotaro.rebuild.models.Guest;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
-import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
-public class GuestListView extends LinearLayout {
+public class SimpleGuestListView extends LinearLayout {
 
     private static final int REQUEST_GUEST_LIST = 1;
 
     private OnContextExecutor onContextExecutor = new OnContextExecutor();
 
-    private TextView nameTextView;
-
-    public GuestListView(Context context) {
+    public SimpleGuestListView(Context context) {
         super(context);
     }
 
-    public GuestListView(Context context, AttributeSet attrs) {
+    public SimpleGuestListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     public void setup(List<String> guestNameList) {
-        setOrientation(VERTICAL);
+        setOrientation(HORIZONTAL);
         requestGuestList(guestNameList);
     }
 
@@ -49,17 +46,17 @@ public class GuestListView extends LinearLayout {
         onContextExecutor.execute(getContext(), new Runnable() {
             @Override
             public void run() {
-                SectionHeaderView sectionHeaderView = new SectionHeaderView(getContext());
-                sectionHeaderView.setText("Guests");
-                addView(sectionHeaderView);
-
                 for (Guest guest : guestList) {
                     if (Guest.isEmpty(guest)) {
                         continue;
                     }
 
-                    LayoutParams params =
-                            new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                    LayoutParams params = new LayoutParams(
+                            LayoutParams.MATCH_PARENT,
+                            LayoutParams.WRAP_CONTENT,
+                            1);
+                    params.setMargins(0,
+                            getResources().getDimensionPixelSize(R.dimen.spacing_small), 0, 0);
                     addView(createGuestView(guest), params);
                 }
             }
@@ -67,15 +64,7 @@ public class GuestListView extends LinearLayout {
     }
 
     public View createGuestView(final Guest guest) {
-        View view = View.inflate(getContext(), R.layout.list_item_guest, null);
-
-        View twitterProfileButton = view.findViewById(R.id.twitter_profile_button);
-        twitterProfileButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.openTwitterProfile(getContext(), guest.getName());
-            }
-        });
+        View view = View.inflate(getContext(), R.layout.list_item_simple_guest, null);
 
         TextView guestNameText = (TextView) view.findViewById(R.id.guest_name_text);
         guestNameText.setText(guest.getName());
@@ -83,21 +72,6 @@ public class GuestListView extends LinearLayout {
         ImageView profileImageView = (ImageView) view.findViewById(R.id.profile_image);
         PicassoHelper.loadAndCircleTransform(getContext(), profileImageView,
                 guest.getProfileImageUrl());
-
-        TextView tweetsCountText = (TextView) view.findViewById(R.id.tweets_count_text);
-        tweetsCountText.setText(guest.getTweetsCount() + " tweets");
-
-        TextView friendsCountText = (TextView) view.findViewById(R.id.friends_count_text);
-        friendsCountText.setText("following " + guest.getFriendsCount());
-
-        TextView followersCountText = (TextView) view.findViewById(R.id.followers_count_text);
-        followersCountText.setText(guest.getFollowersCount() + " followers");
-
-        TextView descriptionTextView = (TextView) view.findViewById(R.id.description_text);
-        descriptionTextView.setText(guest.getDescription());
-
-        TextView urlTextView = (TextView) view.findViewById(R.id.url_text);
-        urlTextView.setText(guest.getUrl());
 
         return view;
     }
@@ -112,7 +86,7 @@ public class GuestListView extends LinearLayout {
 
                     @Override
                     public void onLoadFinished(Loader<List<Guest>> listLoader,
-                            List<Guest> guestList) {
+                                               List<Guest> guestList) {
                         setupGuestList(guestList);
                     }
 
@@ -120,7 +94,8 @@ public class GuestListView extends LinearLayout {
                     public void onLoaderReset(Loader<List<Guest>> listLoader) {
                         // nothing to do
                     }
-                });
+                }
+        );
     }
 
     public FragmentActivity getActivity() {
@@ -132,3 +107,4 @@ public class GuestListView extends LinearLayout {
         }
     }
 }
+

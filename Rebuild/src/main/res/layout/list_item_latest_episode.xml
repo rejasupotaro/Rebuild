@@ -1,7 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_clickable">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,46 +12,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <rejasupotaro.rebuild.views.ShowNoteView
+                android:id="@+id/show_note"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_on_the_air" />
+
+            <TextView
+                android:id="@+id/episode_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_weight="1"
+                android:textColor="@color/main_color1"
+                android:textSize="@dimen/text_size_subhead"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:descendantFocusability="blocksDescendants"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/episode_subtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/padding_frame"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:id="@+id/episode_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textColor="@color/main_color1"
-                        android:textSize="@dimen/primary_text_size"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/episode_subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/padding_contents"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/quaternary_text_size" />
-            </LinearLayout>
+                android:textColor="@color/gray"
+                android:textSize="@dimen/quaternary_text_size" />
 
             <IconTextView
                 android:id="@+id/episode_download_button"
                 android:layout_width="46dp"
                 android:layout_height="46dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/spacing_small"
                 android:background="@drawable/episode_state_button"
                 android:gravity="center"
                 android:text="{fa-download}"
@@ -60,10 +63,15 @@
                 android:textSize="28dp" />
         </LinearLayout>
 
+        <rejasupotaro.rebuild.views.SimpleGuestListView
+            android:id="@+id/simple_guest_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_frame">
+            android:layout_marginTop="@dimen/spacing_small">
 
             <TextView
                 android:id="@+id/download_state_text"
@@ -84,4 +92,11 @@
                 android:textSize="@dimen/quaternary_text_size" />
         </FrameLayout>
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="right"
+        android:src="@drawable/ribbon" />
+
 </FrameLayout>

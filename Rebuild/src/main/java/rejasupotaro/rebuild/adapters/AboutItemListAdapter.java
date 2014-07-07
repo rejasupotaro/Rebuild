@@ -52,7 +52,7 @@ public class AboutItemListAdapter extends ArrayAdapter<AboutItem> {
 
         if (!TextUtils.isEmpty(item.getImageUrl())) {
             ImageView imageView = (ImageView) view.findViewById(R.id.content_image);
-            PicassoHelper.load(getContext(), imageView, item.getImageUrl());
+            PicassoHelper.loadAndCircleTransform(getContext(), imageView, item.getImageUrl());
         }
 
         if (!TextUtils.isEmpty(item.getText())) {

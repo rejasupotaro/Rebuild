@@ -13,7 +13,7 @@ public abstract class BindableAdapter<T> extends ArrayAdapter<T> {
     private LayoutInflater inflater;
 
     public BindableAdapter(Context context, List<T> episodeList) {
-        super(context, 0, episodeList);
+        super(context, -1, episodeList);
         setup(context);
     }
 
