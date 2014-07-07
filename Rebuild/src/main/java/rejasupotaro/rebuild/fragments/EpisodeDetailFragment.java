@@ -12,7 +12,7 @@ import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.GuestListView;
 import rejasupotaro.rebuild.views.SectionHeaderView;
-import rejasupotaro.rebuild.views.ShowNotesView;
+import rejasupotaro.rebuild.views.ShowNoteListView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -33,11 +33,11 @@ public class EpisodeDetailFragment extends RoboFragment {
     private SectionHeaderView sectionHeaderShowNotesView;
 
     @InjectView(R.id.show_notes)
-    private ShowNotesView showNotesView;
+    private ShowNoteListView showNoteListView;
 
     public void setup(final Episode episode) {
         this.episode = episode;
-        showNotesView.setEpisode(episode);
+        showNoteListView.setEpisode(episode);
     }
 
     @Override

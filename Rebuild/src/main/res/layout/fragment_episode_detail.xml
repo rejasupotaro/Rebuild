@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
-    <rejasupotaro.rebuild.views.ShowNotesView
+    <rejasupotaro.rebuild.views.ShowNoteListView
             android:id="@+id/show_notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

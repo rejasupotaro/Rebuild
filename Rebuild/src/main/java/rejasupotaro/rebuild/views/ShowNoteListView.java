@@ -15,15 +15,15 @@ import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
-public class ShowNotesView extends LinearLayout {
+public class ShowNoteListView extends LinearLayout {
 
-    public ShowNotesView(Context context, AttributeSet attrs) {
+    public ShowNoteListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setup();
     }
 
-    public ShowNotesView(Context context, AttributeSet attrs,
-            int defStyle) {
+    public ShowNoteListView(Context context, AttributeSet attrs,
+                            int defStyle) {
         super(context, attrs, defStyle);
         setup();
     }
