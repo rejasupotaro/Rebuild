@@ -1,40 +1,38 @@
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/episode_list_header_height"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sanfrancisco" />
+
+    <LinearLayout
+        android:id="@+id/app_title_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/episode_list_header_height"
-            android:src="@drawable/sanfrancisco"
-            android:scaleType="centerCrop"
-            />
-    <LinearLayout
-            android:id="@+id/app_title_text"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_contents"
-            android:paddingRight="@dimen/padding_contents"
-            android:layout_marginTop="42dp"
-            >
+        android:layout_marginTop="48dp"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/padding_contents"
+        android:paddingRight="@dimen/padding_contents">
+
         <TextView
-                android:text="@string/app_name"
-                android:textSize="28sp"
-                style="@style/RebuildLogText"
-                />
+            style="@style/RebuildLogText"
+            android:text="@string/app_name"
+            android:textSize="28sp" />
+
         <TextView
-                android:text="@string/rebuild_description"
-                android:textSize="8sp"
-                style="@style/RebuildLogText"
-                />
+            style="@style/RebuildLogText"
+            android:text="@string/rebuild_description"
+            android:textSize="8sp" />
     </LinearLayout>
+
     <rejasupotaro.rebuild.views.RecentTweetView
-            android:id="@+id/recent_tweet_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding_contents"
-            android:layout_marginBottom="@dimen/padding_contents"
-            android:layout_gravity="bottom"
-            />
+        android:id="@+id/recent_tweet_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:layout_marginLeft="@dimen/padding_contents" />
 </FrameLayout>

@@ -1,29 +1,27 @@
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_weight="1"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/site_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_show_note_height"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/show_note_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-    <ImageView
-            android:id="@+id/site_thumbnail"
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_item_show_note_height"
-            />
-    <TextView
-            android:id="@+id/show_note_title"
-            android:background="@drawable/gradient_light_shadow"
-            android:padding="@dimen/padding_contents"
-            android:layout_gravity="bottom"
-            android:textSize="@dimen/quaternary_text_size"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+        android:layout_gravity="bottom"
+        android:background="@drawable/gradient_light_shadow"
+        android:padding="@dimen/padding_contents"
+        android:textSize="@dimen/quaternary_text_size"
+        android:textStyle="bold" />
+
     <View
-            android:background="@drawable/bg_clickable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_clickable" />
 </FrameLayout>
