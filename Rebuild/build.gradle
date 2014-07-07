@@ -40,8 +40,8 @@ dependencies {
 
 
 def versionMajor = 0
-def versionMinor = 8
-def versionPatch = 4
+def versionMinor = 9
+def versionPatch = 0
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 def revisionHash = ["sh",  "-c",  "cd ${project.rootDir} ; git rev-parse --short HEAD"].execute().in.text.trim()
 
