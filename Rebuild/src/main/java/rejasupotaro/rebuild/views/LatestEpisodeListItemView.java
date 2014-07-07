@@ -14,6 +14,8 @@ import rx.subjects.PublishSubject;
 
 public class LatestEpisodeListItemView extends FrameLayout {
 
+    private ShowNoteView showNoteView;
+
     private TextView titleTextView;
 
     private TextView subtitleTextView;
@@ -35,6 +37,7 @@ public class LatestEpisodeListItemView extends FrameLayout {
 
     private void createView() {
         View root = View.inflate(getContext(), R.layout.list_item_latest_episode, null);
+        showNoteView = (ShowNoteView) root.findViewById(R.id.show_note);
         titleTextView = (TextView) root.findViewById(R.id.episode_title);
         subtitleTextView = (TextView) root.findViewById(R.id.episode_subtitle);
         episodeDownloadButton = (IconTextView) root.findViewById(R.id.episode_download_button);
@@ -45,6 +48,7 @@ public class LatestEpisodeListItemView extends FrameLayout {
     }
 
     private void setup(final Episode episode, final PublishSubject<Episode> downloadButtonEvent) {
+        showNoteView.setEpisode(episode);
         titleTextView.setText(episode.getTitle());
         subtitleTextView.setText(StringUtils.fromHtml(episode.getDescription()).toString());
         simpleGuestListView.setup(StringUtils.getGuestNames(episode.getDescription()));

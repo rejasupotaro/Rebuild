@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+        <rejasupotaro.rebuild.views.ShowNoteView
+            android:id="@+id/show_note"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="1"
