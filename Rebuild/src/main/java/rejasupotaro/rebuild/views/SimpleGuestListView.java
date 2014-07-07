@@ -34,7 +34,7 @@ public class SimpleGuestListView extends LinearLayout {
     }
 
     public void setup(List<String> guestNameList) {
-        setOrientation(VERTICAL);
+        setOrientation(HORIZONTAL);
         requestGuestList(guestNameList);
     }
 
@@ -51,8 +51,12 @@ public class SimpleGuestListView extends LinearLayout {
                         continue;
                     }
 
-                    LayoutParams params =
-                            new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                    LayoutParams params = new LayoutParams(
+                            LayoutParams.MATCH_PARENT,
+                            LayoutParams.WRAP_CONTENT,
+                            1);
+                    params.setMargins(0,
+                            getResources().getDimensionPixelSize(R.dimen.spacing_small), 0, 0);
                     addView(createGuestView(guest), params);
                 }
             }

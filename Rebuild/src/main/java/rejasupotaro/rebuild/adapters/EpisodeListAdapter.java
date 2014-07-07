@@ -61,7 +61,7 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
     @Override
     public final View getView(int position, View view, ViewGroup container) {
         if (position == 0) {
-            return createLatestEpisodeView();
+            return createLatestEpisodeView(position);
         }
 
         view = newView(inflater, position, container);
@@ -69,8 +69,8 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
         return view;
     }
 
-    private View createLatestEpisodeView() {
-        return new LatestEpisodeListItemView(getContext(), getItem(0), downloadButtonEvent);
+    private View createLatestEpisodeView(int position) {
+        return new LatestEpisodeListItemView(getContext(), getItem(position), downloadButtonEvent);
     }
 
     public View newView(LayoutInflater inflater, final int position, ViewGroup container) {
