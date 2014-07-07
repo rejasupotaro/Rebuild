@@ -1,90 +1,102 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/container_dropshadow"
-    android:orientation="vertical"
-    android:padding="@dimen/spacing_large">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@drawable/container_dropshadow"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large">
 
-        <rejasupotaro.rebuild.views.ShowNoteView
-            android:id="@+id/show_note"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_on_the_air" />
-
-        <TextView
-            android:id="@+id/episode_title"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/spacing_medium"
-            android:layout_weight="1"
-            android:textColor="@color/main_color1"
-            android:textSize="@dimen/text_size_subhead"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
 
+            <rejasupotaro.rebuild.views.ShowNoteView
+                android:id="@+id/show_note"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_on_the_air" />
+
+            <TextView
+                android:id="@+id/episode_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_weight="1"
+                android:textColor="@color/main_color1"
+                android:textSize="@dimen/text_size_subhead"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/episode_subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/quaternary_text_size" />
+
+            <IconTextView
+                android:id="@+id/episode_download_button"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:background="@drawable/episode_state_button"
+                android:gravity="center"
+                android:text="{fa-download}"
+                android:textColor="@color/accent_color1"
+                android:textSize="28dp" />
+        </LinearLayout>
+
+        <rejasupotaro.rebuild.views.SimpleGuestListView
+            android:id="@+id/simple_guest_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/download_state_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|left"
+                android:text="@string/downloading"
+                android:textColor="@color/accent_color1"
+                android:textSize="@dimen/quaternary_text_size"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <IconTextView
+                android:id="@+id/episode_posted_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:textSize="@dimen/quaternary_text_size" />
+        </FrameLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:descendantFocusability="blocksDescendants"
-        android:orientation="horizontal">
+    <ImageView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="right"
+        android:src="@drawable/ribbon" />
 
-        <TextView
-            android:id="@+id/episode_subtitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/quaternary_text_size" />
-
-        <IconTextView
-            android:id="@+id/episode_download_button"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/spacing_small"
-            android:background="@drawable/episode_state_button"
-            android:gravity="center"
-            android:text="{fa-download}"
-            android:textColor="@color/accent_color1"
-            android:textSize="28dp" />
-    </LinearLayout>
-
-    <rejasupotaro.rebuild.views.SimpleGuestListView
-        android:id="@+id/simple_guest_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <FrameLayout
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/download_state_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left"
-            android:text="@string/downloading"
-            android:textColor="@color/accent_color1"
-            android:textSize="@dimen/quaternary_text_size"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <IconTextView
-            android:id="@+id/episode_posted_at"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:textSize="@dimen/quaternary_text_size" />
-    </FrameLayout>
-</LinearLayout>
+</FrameLayout>
