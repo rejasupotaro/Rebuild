@@ -66,7 +66,8 @@ public class SimpleGuestListView extends LinearLayout {
         guestNameText.setText(guest.getName());
 
         ImageView profileImageView = (ImageView) view.findViewById(R.id.profile_image);
-        PicassoHelper.load(getContext(), profileImageView, guest.getProfileImageUrl());
+        PicassoHelper.loadAndCircleTransform(getContext(), profileImageView,
+                guest.getProfileImageUrl());
 
         return view;
     }

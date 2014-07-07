@@ -15,7 +15,7 @@
             android:layout_height="100dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
-            android:src="@drawable/miyagawa_in_yapc" />
+            android:src="@drawable/bg_on_the_air" />
 
         <TextView
             android:id="@+id/episode_title"
@@ -33,7 +33,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_medium"
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal">
 
@@ -62,7 +62,7 @@
         android:id="@+id/simple_guest_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium" />
+        android:layout_marginTop="@dimen/spacing_small" />
 
     <FrameLayout
         android:layout_width="match_parent"
