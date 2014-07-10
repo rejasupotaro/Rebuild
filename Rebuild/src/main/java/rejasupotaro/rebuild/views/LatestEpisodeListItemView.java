@@ -1,13 +1,17 @@
 package rejasupotaro.rebuild.views;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.IconTextView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.models.Link;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rx.subjects.PublishSubject;
@@ -48,7 +52,15 @@ public class LatestEpisodeListItemView extends FrameLayout {
     }
 
     private void setup(final Episode episode, final PublishSubject<Episode> downloadButtonEvent) {
-        showNoteView.setEpisode(episode);
+        List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
+        if (linkList == null || linkList.size() <= 1) {
+            showNoteView.setVisibility(View.GONE);
+        } else {
+            Link link = linkList.get(1);
+            showNoteView.setLink(link);
+        }
+
+
         titleTextView.setText(episode.getTitle());
         subtitleTextView.setText(StringUtils.fromHtml(episode.getDescription()).toString());
         simpleGuestListView.setup(StringUtils.getGuestNames(episode.getDescription()));

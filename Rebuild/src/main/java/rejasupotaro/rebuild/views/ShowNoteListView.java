@@ -36,17 +36,18 @@ public class ShowNoteListView extends LinearLayout {
         List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
 
         View row = null;
-        View itemView = null;
+        ShowNoteView itemView;
         for (int i = 0; i < linkList.size(); i++) {
             final Link link = linkList.get(i);
 
             if (i % 2 == 0) {
                 row = View.inflate(getContext(), R.layout.list_item_show_note_pair, null);
-                itemView = row.findViewById(R.id.left_item);
+                itemView = (ShowNoteView) row.findViewById(R.id.left_item);
             } else {
-                itemView = row.findViewById(R.id.right_item);
+                itemView = (ShowNoteView) row.findViewById(R.id.right_item);
             }
 
+            itemView.setLink(link);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -60,10 +61,6 @@ public class ShowNoteListView extends LinearLayout {
                     return false;
                 }
             });
-            ImageView siteThumbnailImage = (ImageView) itemView.findViewById(R.id.site_thumbnail);
-            PicassoHelper.loadThumbnail(getContext(), siteThumbnailImage, link.getUrl());
-            TextView showNoteTitleTextView = (TextView) itemView.findViewById(R.id.show_note_title);
-            showNoteTitleTextView.setText(link.getTitle());
 
             if (i % 2 == 1 || i == linkList.size() - 1) {
                 addView(row);

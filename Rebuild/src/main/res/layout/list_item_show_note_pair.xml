@@ -1,20 +1,22 @@
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <rejasupotaro.rebuild.views.ShowNoteView
+        android:id="@+id/left_item"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        >
-    <include
-            android:id="@+id/left_item"
-            layout="@layout/list_item_show_note"
-            />
+        android:layout_weight="1" />
+
     <rejasupotaro.rebuild.views.VerticalSeparator
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            />
-    <include
-            android:id="@+id/right_item"
-            layout="@layout/list_item_show_note"
-            />
+        android:layout_width="1dp"
+        android:layout_height="match_parent" />
+
+    <rejasupotaro.rebuild.views.ShowNoteView
+        android:id="@+id/right_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 </LinearLayout>
 

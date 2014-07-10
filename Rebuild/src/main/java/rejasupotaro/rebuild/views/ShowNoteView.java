@@ -43,4 +43,16 @@ public class ShowNoteView extends FrameLayout {
 
         addView(view);
     }
+
+    public void setLink(Link link) {
+        View view = View.inflate(getContext(), R.layout.list_item_show_note, null);
+
+        ImageView siteThumbnailImage = (ImageView) view.findViewById(R.id.site_thumbnail);
+        PicassoHelper.loadThumbnail(getContext(), siteThumbnailImage, link.getUrl());
+
+        TextView showNoteTitleTextView = (TextView) view.findViewById(R.id.show_note_title);
+        showNoteTitleTextView.setText(link.getTitle());
+
+        addView(view);
+    }
 }
