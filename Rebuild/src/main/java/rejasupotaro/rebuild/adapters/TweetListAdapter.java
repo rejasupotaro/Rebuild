@@ -55,7 +55,8 @@ public class TweetListAdapter extends BindableAdapter<Tweet> {
     public void bindView(Tweet item, int position, View view) {
         ViewHolder holder = (ViewHolder) view.getTag();
 
-        PicassoHelper.load(getContext(), holder.userProfileImageView, item.getUserImageUrl());
+        PicassoHelper.loadAndCircleTransform(getContext(), holder.userProfileImageView,
+                item.getUserImageUrl());
         holder.createdAtTextView.setText(item.getElapsedTimeText());
         holder.userNameTextView.setText(item.getUserName());
         holder.tweetTextView.setText(item.getText());

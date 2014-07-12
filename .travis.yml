@@ -13,4 +13,4 @@ before_install:
   - android list sdk --no-ui --all --extended
 
 script:
-    - TERM=dumb ./gradlew connectedAndroidTestStagingDebug
+    - ./gradlew build connectedCheck

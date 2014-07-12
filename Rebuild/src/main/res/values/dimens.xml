@@ -29,7 +29,7 @@
     <dimen name="quaternary_text_size">12sp</dimen>
 
     <dimen name="episode_posted_at_text_shape_size">60dp</dimen>
-    <dimen name="profile_image_size">56dp</dimen>
+    <dimen name="profile_image_size">46dp</dimen>
 
     <dimen name="action_button_border_width">1dp</dimen>
     <dimen name="episode_list_header_width">380dp</dimen>
