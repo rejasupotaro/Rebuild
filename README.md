@@ -39,12 +39,6 @@ Run tests
 $ ./gradlew connectedInstrumentTestStagingDebug
 ```
 
-### Run unit tests on JVM
-
-```
-$ ./gradlew test
-```
-
 ### Run UI tests and take screenshots
 
 ```
