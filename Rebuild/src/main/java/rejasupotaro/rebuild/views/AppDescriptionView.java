@@ -14,10 +14,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class AppDescriptionView extends LinearLayout {
 
-    private static final String VERSION_NAME = "0.8.0";
-
-    private TextView copyrightTextView;
-
     public AppDescriptionView(Context context) {
         super(context);
         setup(context);
@@ -30,14 +26,9 @@ public class AppDescriptionView extends LinearLayout {
 
     public void setup(Context context) {
         View view = View.inflate(getContext(), R.layout.app_description_view, null);
-        findViews(view);
         setupViews(context, view);
         LinearLayout.LayoutParams layoutParams = new LayoutParams(MATCH_PARENT, WRAP_CONTENT);
         addView(view, layoutParams);
-    }
-
-    private void findViews(View view) {
-        copyrightTextView = (TextView) view.findViewById(R.id.copyright_text);
     }
 
     private void setupViews(final Context context, View view) {
@@ -47,8 +38,6 @@ public class AppDescriptionView extends LinearLayout {
                 IntentUtils.openGitHubRepository(context);
             }
         });
-
-        copyrightTextView.setText(context.getString(R.string.copyright, VERSION_NAME));
     }
 }
 
