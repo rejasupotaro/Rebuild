@@ -18,6 +18,8 @@
     <dimen name="padding_seekbar">8dp</dimen>
     <dimen name="padding_contents">12dp</dimen>
 
+    <dimen name="tile_height">48dp</dimen>
+
     <dimen name="margin_icon_button">6dp</dimen>
 
     <dimen name="ic_button_primary">60dp</dimen>

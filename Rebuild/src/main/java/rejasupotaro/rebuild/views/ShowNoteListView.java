@@ -54,17 +54,9 @@ public class ShowNoteListView extends LinearLayout {
                     IntentUtils.openBrowser(getContext(), link.getUrl());
                 }
             });
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    IntentUtils.sendPostIntent(getContext(), link.getUrl());
-                    return false;
-                }
-            });
 
             if (i % 2 == 1 || i == linkList.size() - 1) {
                 addView(row);
-                addView(new HorizontalSeparator(getContext()));
             }
         }
     }

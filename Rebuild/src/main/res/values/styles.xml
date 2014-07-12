@@ -78,11 +78,11 @@
 
     <style name="AboutListItemHeader">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/tertiary_text_size</item>
+        <item name="android:textSize">@dimen/text_size_subhead</item>
         <item name="android:padding">@dimen/padding_contents</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_height">@dimen/tile_height</item>
     </style>
 
     <style name="ProfileImage">

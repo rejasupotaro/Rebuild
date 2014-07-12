@@ -7,9 +7,9 @@
         >
     <LinearLayout
             android:orientation="vertical"
-            android:paddingTop="@dimen/padding_contents"
-            android:paddingLeft="@dimen/padding_contents"
-            android:paddingRight="@dimen/padding_contents"
+            android:paddingTop="@dimen/spacing_large"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
@@ -21,7 +21,7 @@
                 android:textSize="@dimen/primary_text_size"
                 />
         <rejasupotaro.rebuild.views.VerticalSeparator
-                android:layout_marginTop="@dimen/padding_frame"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 />
@@ -36,8 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/padding_frame"
-                android:layout_margin="@dimen/padding_contents"
+                android:padding="@dimen/spacing_small"
+                android:layout_margin="@dimen/spacing_large"
                 android:layout_weight="3"
                 android:background="@drawable/bg_clickable"
                 >
@@ -50,7 +50,7 @@
                     android:id="@+id/tweets_count_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/padding_frame"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:textStyle="bold"
                     android:textSize="@dimen/tertiary_text_size"
                     />
@@ -73,9 +73,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:paddingTop="@dimen/padding_contents"
-                android:paddingBottom="@dimen/padding_contents"
-                android:paddingRight="@dimen/padding_contents"
+                android:paddingTop="@dimen/spacing_large"
+                android:paddingBottom="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large"
                 android:orientation="vertical"
                 >
             <TextView
@@ -87,7 +87,7 @@
                     />
             <TextView
                     android:id="@+id/description_text"
-                    android:layout_marginLeft="@dimen/padding_contents"
+                    android:layout_marginLeft="@dimen/spacing_large"
                     android:textSize="@dimen/tertiary_text_size"
                     android:autoLink="all"
                     android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
                     />
             <TextView
                     android:text="@string/guest_website_text"
-                    android:layout_marginTop="@dimen/padding_contents"
+                    android:layout_marginTop="@dimen/spacing_large"
                     android:textStyle="bold"
                     android:textSize="@dimen/secondary_text_size"
                     android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
                     />
             <TextView
                     android:id="@+id/url_text"
-                    android:layout_marginLeft="@dimen/padding_contents"
+                    android:layout_marginLeft="@dimen/spacing_large"
                     android:textSize="@dimen/tertiary_text_size"
                     android:autoLink="all"
                     android:layout_width="wrap_content"

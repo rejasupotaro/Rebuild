@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="base_color1">#f5f5f2</color>
-    <color name="base_color2">#ffffff</color>
+    <color name="base_color2">#fafafa</color>
     <color name="accent_color1">#ff8700</color>
     <color name="accent_color2">#2db2fa</color>
     <color name="main_color1">#383432</color>
@@ -11,6 +11,6 @@
     <color name="dark_gray">#222222</color>
     <color name="gray">#666666</color>
     <color name="light_gray">#bebebe</color>
-    <color name="glass_black">#aa000000</color>
+    <color name="glass_black">#99000000</color>
     <color name="glass_white">#aaffffff</color>
 </resources>
