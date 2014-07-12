@@ -57,7 +57,7 @@ public class LatestEpisodeListItemView extends FrameLayout {
             showNoteView.setVisibility(View.GONE);
         } else {
             Link link = linkList.get(1);
-            showNoteView.setLink(link);
+            showNoteView.setLink(link, false);
         }
 
 

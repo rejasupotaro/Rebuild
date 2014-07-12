@@ -26,32 +26,23 @@ public class ShowNoteView extends FrameLayout {
         super(context, attrs, defStyle);
     }
 
-    public void setEpisode(Episode episode) {
-        View view = View.inflate(getContext(), R.layout.list_item_show_note, null);
-        ImageView siteThumbnailImage = (ImageView) view.findViewById(R.id.site_thumbnail);
-        TextView showNoteTitleTextView = (TextView) view.findViewById(R.id.show_note_title);
-
-        List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
-        if (linkList == null || linkList.size() <= 1) {
-            Drawable bg = getResources().getDrawable(R.drawable.bg_on_the_air);
-            siteThumbnailImage.setImageDrawable(bg);
-        } else {
-            Link link = linkList.get(1);
-            PicassoHelper.loadThumbnail(getContext(), siteThumbnailImage, link.getUrl());
-            showNoteTitleTextView.setText(link.getTitle());
-        }
-
-        addView(view);
+    public void setLink(Link link) {
+        setLink(link, true);
     }
 
-    public void setLink(Link link) {
+    public void setLink(Link link, boolean isShowText) {
         View view = View.inflate(getContext(), R.layout.list_item_show_note, null);
 
         ImageView siteThumbnailImage = (ImageView) view.findViewById(R.id.site_thumbnail);
         PicassoHelper.loadThumbnail(getContext(), siteThumbnailImage, link.getUrl());
 
         TextView showNoteTitleTextView = (TextView) view.findViewById(R.id.show_note_title);
-        showNoteTitleTextView.setText(link.getTitle());
+        if (isShowText) {
+            showNoteTitleTextView.setText(link.getTitle());
+            showNoteTitleTextView.setVisibility(View.VISIBLE);
+        } else {
+            showNoteTitleTextView.setVisibility(View.GONE);
+        }
 
         addView(view);
     }
