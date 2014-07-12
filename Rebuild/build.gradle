@@ -38,9 +38,8 @@ dependencies {
     androidTestCompile 'com.squareup:fest-android:1.0.7'
 }
 
-
 def versionMajor = 0
-def versionMinor = 9
+def versionMinor = 10
 def versionPatch = 0
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 def revisionHash = ["sh",  "-c",  "cd ${project.rootDir} ; git rev-parse --short HEAD"].execute().in.text.trim()
