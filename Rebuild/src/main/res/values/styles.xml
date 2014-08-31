@@ -14,15 +14,14 @@
         <item name="windowActionBarOverlay">true</item>
         <item name="android:actionBarStyle">@style/TransparentActionBar</item>
         <item name="actionBarStyle">@style/TransparentActionBar</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="TransparentActionBar"
-           parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="TransparentActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="SlideWindowAnimationStyle"
-           parent="android:Animation.Activity">
+    <style name="SlideWindowAnimationStyle" parent="android:Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_open_exit</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_close_enter</item>
