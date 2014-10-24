@@ -1,7 +1,7 @@
 package rejasupotaro.rebuild.activities;
 
-import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 import javax.inject.Inject;
@@ -22,7 +22,7 @@ public class RecentChangesActivity extends RoboActionBarActivity {
     }
 
     private void setupActionBar() {
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
     }

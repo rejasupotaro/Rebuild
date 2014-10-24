@@ -2,12 +2,11 @@ package rejasupotaro.rebuild.activities;
 
 import com.squareup.otto.Subscribe;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -81,7 +80,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     }
 
     private void setupActionBar() {
-        final ActionBar actionBar = getActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
@@ -90,9 +89,12 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
         colorDrawable.setAlpha(0);
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle(episode.getTitle());
+
         int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
         final TextView titleTextView = (TextView) findViewById(titleId);
-        titleTextView.setAlpha(0);
+        if (titleTextView != null) {
+            titleTextView.setAlpha(0);
+        }
 
         scrollView.getScrollEvent().subscribe(new Action1<ObservableScrollView.ScrollPosition>() {
             @Override

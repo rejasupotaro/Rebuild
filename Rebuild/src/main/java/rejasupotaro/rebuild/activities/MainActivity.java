@@ -2,11 +2,11 @@ package rejasupotaro.rebuild.activities;
 
 import com.squareup.otto.Subscribe;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,9 +56,10 @@ public class MainActivity extends RoboActionBarActivity
     }
 
     private void setupActionBar() {
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
         int transparent = getResources().getColor(android.R.color.transparent);
+        actionBar.setBackgroundDrawable(new ColorDrawable(transparent));
         actionBar.setIcon(new ColorDrawable(transparent));
     }
 
