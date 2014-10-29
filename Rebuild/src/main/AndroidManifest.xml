@@ -36,7 +36,7 @@
         <activity
                 android:name=".activities.EpisodeDetailActivity"
                 android:configChanges="orientation|screenSize"
-                android:theme="@style/TransparentActionBarTheme"
+                android:theme="@style/Theme.AppCompat.NoActionBar"
                 android:launchMode="singleTask"
                 >
         </activity>

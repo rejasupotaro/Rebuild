@@ -1,15 +1,15 @@
 package rejasupotaro.rebuild.activities;
 
-import com.squareup.otto.Subscribe;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
@@ -80,18 +80,17 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     }
 
     private void setupActionBar() {
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        setSupportActionBar(toolbar);
 
         final ColorDrawable colorDrawable = new ColorDrawable(
                 getResources().getColor(R.color.dark_gray));
         colorDrawable.setAlpha(0);
-        actionBar.setBackgroundDrawable(colorDrawable);
-        actionBar.setTitle(episode.getTitle());
+        toolbar.setBackgroundDrawable(colorDrawable);
 
-        int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
-        final TextView titleTextView = (TextView) findViewById(titleId);
+        final TextView titleTextView = (TextView) findViewById(R.id.toolbar_title);
+        titleTextView.setText(episode.getTitle());
         if (titleTextView != null) {
             titleTextView.setAlpha(0);
         }
@@ -109,7 +108,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                     alpha = (int) ((y / 500.0) * 255);
                 }
                 colorDrawable.setAlpha(alpha);
-                actionBar.setBackgroundDrawable(colorDrawable);
+                toolbar.setBackgroundDrawable(colorDrawable);
 
                 if (titleTextView != null) {
                     titleTextView.setAlpha(alpha / 255F);
