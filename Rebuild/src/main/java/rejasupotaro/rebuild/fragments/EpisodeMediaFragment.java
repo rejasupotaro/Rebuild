@@ -1,7 +1,6 @@
 package rejasupotaro.rebuild.fragments;
 
-import com.squareup.otto.Subscribe;
-
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,12 @@ import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
+
 import java.util.List;
 
-import javax.inject.Inject;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.dialogs.EpisodePlayDialog;
 import rejasupotaro.rebuild.events.BusProvider;
@@ -30,47 +31,35 @@ import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.StateFrameLayout;
-import roboguice.fragment.RoboFragment;
-import roboguice.inject.InjectView;
 
-public class EpisodeMediaFragment extends RoboFragment {
+public class EpisodeMediaFragment extends Fragment {
+    @InjectView(R.id.episode_title)
+    TextView episodeTitleTextView;
+    @InjectView(R.id.episode_detail_header_cover)
+    View mediaStartButtonOnImageCover;
+    @InjectView(R.id.media_current_time)
+    TextView mediaCurrentTimeTextView;
+    @InjectView(R.id.media_duration)
+    TextView mediaDurationTextView;
+    @InjectView(R.id.media_play_and_pause_button)
+    CheckBox mediaPlayAndPauseButton;
+    @InjectView(R.id.media_seekbar)
+    SeekBar seekBar;
+    @InjectView(R.id.state_frame_layout)
+    StateFrameLayout stateFrameLayout;
 
     private Episode episode;
-
     private LoadListener loadListener;
-
-    @Inject
-    private OnContextExecutor onContextExecutor;
-
-    @Inject
-    private EpisodePlayDialogHelper episodePlayDialogHelper;
-
-    @InjectView(R.id.episode_title)
-    private TextView episodeTitleTextView;
-
-    @InjectView(R.id.episode_detail_header_cover)
-    private View mediaStartButtonOnImageCover;
-
-    @InjectView(R.id.media_current_time)
-    private TextView mediaCurrentTimeTextView;
-
-    @InjectView(R.id.media_duration)
-    private TextView mediaDurationTextView;
-
-    @InjectView(R.id.media_play_and_pause_button)
-    private CheckBox mediaPlayAndPauseButton;
-
-    @InjectView(R.id.media_seekbar)
-    private SeekBar seekBar;
-
-    @InjectView(R.id.state_frame_layout)
-    private StateFrameLayout stateFrameLayout;
+    private EpisodePlayDialogHelper episodePlayDialogHelper = new EpisodePlayDialogHelper();
+    private OnContextExecutor onContextExecutor = new OnContextExecutor();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         BusProvider.getInstance().register(this);
-        return inflater.inflate(R.layout.fragment_episode_media, container, false);
+        View view = inflater.inflate(R.layout.fragment_episode_media, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     @Override
@@ -169,7 +158,7 @@ public class EpisodeMediaFragment extends RoboFragment {
     private void showEpisodePlayDialog(Episode episode) {
         EpisodePlayDialog dialog
                 = EpisodePlayDialog.newInstance(episode);
-        dialog.show(getActivity().getSupportFragmentManager(), "");
+        dialog.show(getActivity().getFragmentManager(), "");
     }
 
     private void start(final Episode episode) {

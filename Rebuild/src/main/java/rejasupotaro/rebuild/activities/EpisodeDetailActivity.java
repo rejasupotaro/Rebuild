@@ -64,13 +64,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
         setupActionBar();
 
-        episodeMediaFragment = (EpisodeMediaFragment) getSupportFragmentManager().findFragmentById(
-                R.id.fragment_episode_media);
+        episodeMediaFragment = (EpisodeMediaFragment) getFragmentManager().findFragmentById(R.id.fragment_episode_media);
         episodeMediaFragment.setup(episode);
 
-        episodeDetailFragment = (EpisodeDetailFragment) getSupportFragmentManager()
-                .findFragmentById(
-                        R.id.fragment_episode_detail);
+        episodeDetailFragment = (EpisodeDetailFragment) getFragmentManager().findFragmentById(R.id.fragment_episode_detail);
         episodeDetailFragment.setup(episode);
     }
 
