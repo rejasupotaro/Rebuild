@@ -2,29 +2,26 @@ package rejasupotaro.rebuild.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
-import javax.inject.Inject;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.tools.MenuDelegate;
-import roboguice.inject.InjectView;
 
-public class LicensesActivity extends RoboActionBarActivity {
+public class LicensesActivity extends ActionBarActivity {
 
     private static final String LICENSES_FILE_PATH = "file:///android_asset/licenses.html";
 
     @InjectView(R.id.licenses_view)
-    private WebView licensesView;
-
-    @Inject
-    private MenuDelegate menuDelegate;
+    WebView licensesView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_licenses);
+        ButterKnife.inject(this);
         setupActionBar();
         setupLicensesView();
     }
@@ -44,12 +41,13 @@ public class LicensesActivity extends RoboActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                menuDelegate.pressHome();
+                onBackPressed();
                 return true;
             case R.id.action_settings:
-                menuDelegate.pressSettings();
+                startActivity(SettingsActivity.createIntent(this));
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }
