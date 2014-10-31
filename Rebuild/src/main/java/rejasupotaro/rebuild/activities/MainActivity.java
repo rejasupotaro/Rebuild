@@ -1,18 +1,19 @@
 package rejasupotaro.rebuild.activities;
 
-import com.squareup.otto.Subscribe;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import javax.inject.Inject;
+import com.squareup.otto.Subscribe;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.EpisodePlayStartEvent;
@@ -21,23 +22,16 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
-import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.views.MediaBarView;
-import roboguice.inject.InjectView;
 
-public class MainActivity extends RoboActionBarActivity
+public class MainActivity extends ActionBarActivity
         implements EpisodeListFragment.OnEpisodeSelectListener {
-
     private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
     @InjectView(R.id.media_bar)
-    private MediaBarView mediaBar;
+    MediaBarView mediaBar;
 
-    @Inject
-    private MenuDelegate menuDelegate;
-
-    @Inject
-    private MainThreadExecutor mainThreadExecutor;
+    private MainThreadExecutor mainThreadExecutor = new MainThreadExecutor();
 
     public static Intent createIntent(Context context, String episodeId) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -49,7 +43,9 @@ public class MainActivity extends RoboActionBarActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
         BusProvider.getInstance().register(this);
+
         setupActionBar();
         startServices();
         parseIntent(getIntent());
@@ -140,7 +136,7 @@ public class MainActivity extends RoboActionBarActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                menuDelegate.pressSettings();
+                startActivity(SettingsActivity.createIntent(this));
                 return true;
         }
         return super.onOptionsItemSelected(item);

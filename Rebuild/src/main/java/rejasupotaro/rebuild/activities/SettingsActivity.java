@@ -11,13 +11,9 @@ import android.view.MenuItem;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.listener.NotificationEpisodesCheckBoxChangeListener;
-import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.PreferenceUtils;
 
 public class SettingsActivity extends ActionBarActivity {
-
-    private MenuDelegate menuDelegate;
-
     public static Intent createIntent(Context context) {
         return new Intent(context, SettingsActivity.class);
     }
@@ -28,7 +24,6 @@ public class SettingsActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
-        menuDelegate = new MenuDelegate(this);
         setupActionBar();
     }
 
@@ -42,10 +37,10 @@ public class SettingsActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                menuDelegate.pressHome();
+                onBackPressed();
                 return true;
             case R.id.action_settings:
-                menuDelegate.pressSettings();
+                startActivity(SettingsActivity.createIntent(this));
                 return true;
         }
         return super.onOptionsItemSelected(item);
