@@ -1,5 +1,6 @@
 package rejasupotaro.rebuild.fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -7,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
-import roboguice.fragment.RoboFragment;
-import roboguice.inject.InjectView;
 
-public class EpisodeTranscriptFragment extends RoboFragment {
+public class EpisodeTranscriptFragment extends Fragment {
 
     @InjectView(R.id.transcript_text)
-    private TextView transcriptTextView;
+    TextView transcriptTextView;
 
     public static EpisodeTranscriptFragment newInstance() {
         return new EpisodeTranscriptFragment();
@@ -23,7 +24,9 @@ public class EpisodeTranscriptFragment extends RoboFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_episode_transcript, container, false);
+        View view = inflater.inflate(R.layout.fragment_episode_transcript, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     @Override
