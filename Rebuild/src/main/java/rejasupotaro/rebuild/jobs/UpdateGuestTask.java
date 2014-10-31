@@ -7,7 +7,6 @@ import rejasupotaro.rebuild.api.TwitterApiClient;
 import rejasupotaro.rebuild.models.Guest;
 
 public class UpdateGuestTask extends AsyncTask<Void, Void, Void> {
-
     private String guestName;
 
     public UpdateGuestTask(String guestName) {

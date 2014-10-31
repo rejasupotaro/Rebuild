@@ -17,20 +17,17 @@ import rejasupotaro.rebuild.utils.ListUtils;
 import rejasupotaro.rebuild.utils.NetworkUtils;
 
 public class RssFeedClient extends AbstractHttpClient {
-
     private static final String TAG = RssFeedClient.class.getSimpleName();
+    private static final String REBUILD_FEED_URL = "http://feeds.rebuild.fm/rebuildfm";
 
     protected String getTag() {
         return TAG;
     }
 
-    private static final String REBUILD_FEED_URL = "http://feeds.rebuild.fm/rebuildfm";
-
     private static AsyncRssClient client;
 
     public static interface EpisodeClientResponseHandler {
         public void onSuccess(List<Episode> episodeList);
-
         public void onFailure();
     }
 

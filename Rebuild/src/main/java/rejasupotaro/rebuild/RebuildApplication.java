@@ -10,7 +10,6 @@ import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import static rejasupotaro.rebuild.ActivityLifecycleObserver.OnActivityStoppedListener;
 
 public class RebuildApplication extends Application {
-
     private static RebuildApplication instance;
 
     public RebuildApplication() {

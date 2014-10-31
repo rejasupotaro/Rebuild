@@ -10,7 +10,6 @@ import java.util.Formatter;
 import java.util.Locale;
 
 public final class DateUtils {
-
     public static final String TAG = DateUtils.class.getSimpleName();
 
     private DateUtils() {

@@ -17,7 +17,6 @@ import rejasupotaro.rebuild.utils.PicassoHelper;
 import rejasupotaro.rebuild.utils.ViewUtils;
 
 public class AboutItemListAdapter extends ArrayAdapter<AboutItem> {
-
     public AboutItemListAdapter(Context context, List<AboutItem> aboutItemList) {
         super(context, 0, aboutItemList);
     }

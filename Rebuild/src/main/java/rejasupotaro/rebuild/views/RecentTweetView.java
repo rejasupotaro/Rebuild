@@ -16,17 +16,12 @@ import rejasupotaro.rebuild.utils.Timer;
 import rejasupotaro.rebuild.utils.UiAnimations;
 
 public class RecentTweetView extends FrameLayout {
-
     private static final int SWITCH_TWEET_INTERVAL = 6000;
 
     private View rootView;
-
     private ImageView userProfileImage;
-
     private TextView userNameTextView;
-
     private TextView tweetTextView;
-
     private int index = 0;
 
     public RecentTweetView(Context context) {

@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Link implements Parcelable {
-
     private String title;
-
     private String url;
 
     public String getTitle() {

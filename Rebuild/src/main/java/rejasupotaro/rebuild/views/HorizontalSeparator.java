@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import rejasupotaro.rebuild.R;
 
 public class HorizontalSeparator extends View {
-
     public HorizontalSeparator(Context context) {
         super(context);
         setup();

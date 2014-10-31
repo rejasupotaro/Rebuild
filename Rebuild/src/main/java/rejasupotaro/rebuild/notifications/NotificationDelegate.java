@@ -7,7 +7,6 @@ import android.content.Intent;
 import rejasupotaro.rebuild.activities.MainActivity;
 
 public final class NotificationDelegate {
-
     public static PendingIntent getLauchEpisodeDetailIntent(Context context, String episodeId) {
         return PendingIntent.getActivity(context, 0,
                 MainActivity.createIntent(context, episodeId), Intent.FLAG_ACTIVITY_NEW_TASK);

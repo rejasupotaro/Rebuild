@@ -14,9 +14,7 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.FileUtils;
 
 public class MediaFileManager {
-
     private static final String TAG = MediaFileManager.class.getSimpleName();
-
     private static final int BUFFER_SIZE = 23 * 1024;
 
     public static String saveMediaToFile(Context context, InputStream inputStream,

@@ -5,7 +5,6 @@ import com.activeandroid.serializer.TypeSerializer;
 import java.util.Date;
 
 public class DateTypeSerializer extends TypeSerializer {
-
     @Override
     public Class<?> getDeserializedType() {
         return Date.class;

@@ -1,7 +1,6 @@
 package rejasupotaro.rebuild.models;
 
 public enum Developer {
-
     REJASUPOTARO(
             "https://pbs.twimg.com/profile_images/424554842367852544/jRoDtV1R.jpeg",
             "rejasupotaro",
@@ -20,9 +19,7 @@ public enum Developer {
             "https://github.com/hak");
 
     private String imageUrl;
-
     private String name;
-
     private String link;
 
     public String getImageUrl() {

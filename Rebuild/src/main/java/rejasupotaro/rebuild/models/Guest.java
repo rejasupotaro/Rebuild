@@ -9,28 +9,20 @@ import twitter4j.User;
 
 @Table(name = "guests")
 public class Guest extends Model {
-
     @Column(name = "guest_id")
     private long guestId = -1;
-
     @Column(name = "name", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private String name;
-
     @Column(name = "profile_image_url")
     private String profileImageUrl;
-
     @Column(name = "tweets_count")
     private int tweetsCount;
-
     @Column(name = "friends_count")
     private int friendsCount;
-
     @Column(name = "followers_count")
     private int followersCount;
-
     @Column(name = "description")
     private String description;
-
     @Column(name = "url")
     private String url;
 

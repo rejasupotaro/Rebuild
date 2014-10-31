@@ -11,9 +11,7 @@ import rejasupotaro.rebuild.jobs.UpdateGuestTask;
 import rejasupotaro.rebuild.models.Guest;
 
 public class GuestLoader extends AsyncTaskLoader<List<Guest>> {
-
     private List<String> guestNameList = new ArrayList<String>();
-
     private List<Guest> guestList = new ArrayList<Guest>();
 
     public GuestLoader(Context context, List<String> guestNameList) {

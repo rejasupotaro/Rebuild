@@ -19,17 +19,11 @@ import rejasupotaro.rebuild.views.LatestEpisodeListItemView;
 import rx.subjects.PublishSubject;
 
 public class EpisodeListAdapter extends ArrayAdapter<Episode> {
-
     private static class ViewHolder {
-
         TextView titleTextView;
-
         TextView subtitleTextView;
-
         IconTextView episodeDownloadButton;
-
         IconTextView postedAtTextView;
-
         TextView downloadStateText;
 
         public ViewHolder(View view) {
@@ -41,10 +35,8 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
         }
     }
 
-    private LayoutInflater inflater;
-
     private final PublishSubject<Episode> downloadButtonEvent = PublishSubject.create();
-
+    private LayoutInflater inflater;
     public PublishSubject<Episode> getDownloadButtonEvent() {
         return downloadButtonEvent;
     }

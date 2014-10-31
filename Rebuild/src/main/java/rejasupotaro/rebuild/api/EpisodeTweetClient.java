@@ -16,24 +16,16 @@ import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.utils.ListUtils;
 
 public class EpisodeTweetClient extends AbstractHttpClient {
-
     private static final String TAG = EpisodeTweetClient.class.getSimpleName();
-
-    private static final String DATA_URL_BASE
-            = "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/";
-
+    private static final String DATA_URL_BASE = "https://raw.githubusercontent.com/rejasupotaro/episode_timeline/master/data/";
     private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-
     private static final TwitterApiClient twitterApiClient = TwitterApiClient.getInstance();
 
     private List<Long> tweetIds = new ArrayList<Long>();
-
     private boolean isRequesting = false;
 
     public static interface EpisodeTweetResponseHandler {
-
         public void onSuccess(int page, List<Tweet> tweetList);
-
         public void onError();
     }
 

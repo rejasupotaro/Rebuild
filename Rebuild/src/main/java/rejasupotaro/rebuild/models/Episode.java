@@ -25,39 +25,28 @@ import rejasupotaro.rebuild.utils.StringUtils;
 
 @Table(name = "episodes")
 public class Episode extends Model implements Parcelable {
-
     private static final String TAG = Episode.class.getSimpleName();
 
     @Column(name = "eid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private String id;
-
     @Column(name = "title")
     private String title;
-
     @Column(name = "description")
     private String description;
-
     @Column(name = "link")
     private Uri link;
-
     @Column(name = "posted_at")
     private Date postedAt;
-
     @Column(name = "enclosure")
     private Uri enclosure;
-
     @Column(name = "duration")
     private String duration;
-
     @Column(name = "show_notes")
     private String showNotes;
-
     @Column(name = "favorited")
     private boolean isFavorited;
-
     @Column(name = "played")
     private boolean hasPlayed;
-
     @Column(name = "media_local_path")
     private String mediaLocalPath;
 

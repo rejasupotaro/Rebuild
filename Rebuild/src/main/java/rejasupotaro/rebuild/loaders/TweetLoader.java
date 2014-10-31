@@ -10,9 +10,7 @@ import rejasupotaro.rebuild.api.TwitterApiClient;
 import rejasupotaro.rebuild.models.Tweet;
 
 public class TweetLoader extends AsyncTaskLoader<List<Tweet>> {
-
     private List<Tweet> tweetList = new ArrayList<Tweet>();
-
     private boolean isFirstRequest = true;
 
     public TweetLoader(Context context, boolean isFirstRequest) {

@@ -14,7 +14,6 @@ import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 
 public final class Events {
-
     private Events() {
     }
 

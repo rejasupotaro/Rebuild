@@ -10,7 +10,6 @@ import android.widget.TextView;
 import rejasupotaro.rebuild.R;
 
 public class SectionHeaderView extends FrameLayout {
-
     private TextView textView;
 
     public SectionHeaderView(Context context) {

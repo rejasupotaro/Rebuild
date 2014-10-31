@@ -15,7 +15,6 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.NetworkUtils;
 
 public class EpisodeDownloadClient extends AbstractHttpClient {
-
     private static final String TAG = EpisodeDownloadClient.class.getSimpleName();
 
     protected String getTag() {

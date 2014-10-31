@@ -10,8 +10,6 @@ import rx.Observable;
 import rx.functions.Action1;
 
 public final class Properties {
-
-    // no instances of helper class
     private Properties() {
     }
 

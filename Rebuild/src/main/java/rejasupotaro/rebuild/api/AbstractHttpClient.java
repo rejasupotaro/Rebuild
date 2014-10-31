@@ -7,7 +7,6 @@ import android.util.Log;
 import java.io.UnsupportedEncodingException;
 
 public abstract class AbstractHttpClient {
-
     protected abstract String getTag();
 
     protected void dumpError(Header[] headers, byte[] body, Throwable throwable) {

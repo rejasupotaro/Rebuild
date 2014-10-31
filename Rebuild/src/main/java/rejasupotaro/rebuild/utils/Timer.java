@@ -4,15 +4,11 @@ import android.os.Handler;
 import android.os.Message;
 
 public class Timer extends Handler {
-
     private static final int DEFAULT_INTERVAL_MILLIS = 1000;
 
     private boolean isUpdate;
-
     private int instervalMillis = DEFAULT_INTERVAL_MILLIS;
-
     private Callback callback;
-
     private long startTimeMillis;
 
     public Timer(Callback callback) {

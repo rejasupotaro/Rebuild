@@ -8,7 +8,6 @@ import android.widget.ScrollView;
 import rx.subjects.PublishSubject;
 
 public class ObservableScrollView extends ScrollView {
-
     private final PublishSubject<ScrollPosition> scrollEvent = PublishSubject.create();
 
     public ObservableScrollView(Context context, AttributeSet attrs) {

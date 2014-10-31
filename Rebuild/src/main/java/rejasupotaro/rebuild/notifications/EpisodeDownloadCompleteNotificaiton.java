@@ -10,7 +10,6 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
 
 public class EpisodeDownloadCompleteNotificaiton {
-
     public static void notify(Context context, Episode episode) {
         NotificationManager notificationManager
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

@@ -12,25 +12,18 @@ import twitter4j.Status;
 
 @Table(name = "tweets")
 public class Tweet extends Model {
-
     @Column(name = "tweet_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private long tweetId;
-
     @Column(name = "craeted_at")
     private Date createdAt;
-
     @Column(name = "user_image_url")
     private String userImageUrl;
-
     @Column(name = "user_name")
     private String userName;
-
     @Column(name = "text")
     private String text;
-
     @Column(name = "favorite_count")
     private int favoriteCount;
-
     @Column(name = "retweet_count")
     private int retweetCount;
 

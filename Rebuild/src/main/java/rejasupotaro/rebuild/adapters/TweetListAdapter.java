@@ -15,7 +15,6 @@ import rejasupotaro.rebuild.models.Tweet;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class TweetListAdapter extends BindableAdapter<Tweet> {
-
     private static class ViewHolder {
         ImageView userProfileImageView;
         TextView createdAtTextView;

@@ -7,7 +7,6 @@ import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.PreferenceUtils;
 
 public class PlayingEpisodeStore {
-
     public static void save(Context context) {
         PodcastPlayer podcastPlayer = PodcastPlayer.getInstance();
         Episode episode = podcastPlayer.getEpisode();

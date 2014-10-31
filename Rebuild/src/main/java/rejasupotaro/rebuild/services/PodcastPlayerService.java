@@ -8,7 +8,6 @@ import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 
 public class PodcastPlayerService extends Service {
-
     @Override
     public void onCreate() {
         BusProvider.getInstance().register(this);

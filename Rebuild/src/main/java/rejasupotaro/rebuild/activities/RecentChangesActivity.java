@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import rejasupotaro.rebuild.R;
 
 public class RecentChangesActivity extends ActionBarActivity {
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,11 +9,8 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.utils.ViewUtils;
 
 public abstract class MoreLoadListener implements AbsListView.OnScrollListener {
-
     private ListView listView;
-
     private View footerView;
-
     private boolean isFinish = false;
 
     public MoreLoadListener(Context context, ListView listView) {

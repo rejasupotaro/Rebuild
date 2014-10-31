@@ -17,19 +17,12 @@ import rejasupotaro.rebuild.utils.UiAnimations;
 import rx.subjects.PublishSubject;
 
 public class LatestEpisodeListItemView extends FrameLayout {
-
     private ShowNoteView showNoteView;
-
     private TextView titleTextView;
-
     private TextView subtitleTextView;
-
     private IconTextView episodeDownloadButton;
-
     private SimpleGuestListView simpleGuestListView;
-
     private IconTextView postedAtTextView;
-
     private TextView downloadStateText;
 
     public LatestEpisodeListItemView(Context context, Episode episode,

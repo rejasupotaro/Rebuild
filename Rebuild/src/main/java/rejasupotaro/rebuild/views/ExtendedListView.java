@@ -19,27 +19,20 @@ import android.widget.ListView;
 import rejasupotaro.rebuild.R;
 
 public class ExtendedListView extends ListView implements OnScrollListener {
-
     public static interface OnPositionChangedListener {
-
         public void onPositionChanged(ExtendedListView listView, int position, View scrollBarPanel);
     }
 
     private OnScrollListener onScrollListener = null;
-
     private View scrollBarPanel = null;
-
     private int scrollBarPanelPosition = 0;
-
     private OnPositionChangedListener positionChangedListener;
-
     private int lastPosition = -1;
-
     private Animation inAnimation = null;
-
     private Animation outAnimation = null;
-
     private final Handler handler = new Handler();
+    private int widthMeasureSpec;
+    private int heightMeasureSpec;
 
     private final Runnable scrollBarPanelFadeRunnable = new Runnable() {
 
@@ -50,10 +43,6 @@ public class ExtendedListView extends ListView implements OnScrollListener {
             }
         }
     };
-
-    private int widthMeasureSpec;
-
-    private int heightMeasureSpec;
 
     public ExtendedListView(Context context) {
         this(context, null);

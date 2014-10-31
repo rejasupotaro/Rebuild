@@ -1,9 +1,7 @@
 package rejasupotaro.rebuild.models;
 
 public class AboutItem {
-
     public static class AboutItemHeader extends AboutItem {
-
         private String title;
 
         public String getTitle() {
@@ -16,11 +14,8 @@ public class AboutItem {
     }
 
     public static class AboutItemContent extends AboutItem {
-
         private String imageUrl;
-
         private String text;
-
         private String link;
 
         public String getImageUrl() {

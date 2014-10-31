@@ -12,19 +12,14 @@ import rejasupotaro.rebuild.utils.NetworkUtils;
 import rejasupotaro.rebuild.utils.Timer;
 
 public class PodcastPlayer extends MediaPlayer implements MediaPlayer.OnPreparedListener {
-
     public static final String TAG = PodcastPlayer.class.getSimpleName();
 
     private static PodcastPlayer instance;
 
     private Timer timer;
-
     private Episode episode;
-
     private StateChangedListener stateChangedListener;
-
     private PlayerStatus playerStatus = PlayerStatus.STOPPED;
-
     private CurrentTimeListener currentTimeListener;
 
     @Override

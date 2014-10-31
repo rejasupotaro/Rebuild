@@ -12,7 +12,6 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.utils.IntentUtils;
 
 public class ShareEpisodeDialog extends DialogFragment {
-
     private static final String ARGS_SHARE_TEXT = "args_share_text";
 
     public static ShareEpisodeDialog newInstance(String share_text) {

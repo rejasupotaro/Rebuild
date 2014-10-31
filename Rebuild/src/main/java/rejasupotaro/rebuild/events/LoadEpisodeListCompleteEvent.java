@@ -5,7 +5,6 @@ import java.util.List;
 import rejasupotaro.rebuild.models.Episode;
 
 public class LoadEpisodeListCompleteEvent {
-
     private List<Episode> episodeList;
 
     public List<Episode> getEpisodeList() {

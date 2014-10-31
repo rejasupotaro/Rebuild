@@ -5,11 +5,9 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import android.text.TextUtils;
 
 public class Sponsor {
-
     private static final Sponsor NULL_SPONSOR = new Sponsor("", "");
 
     private String text;
-
     private String url;
 
     public String getText() {

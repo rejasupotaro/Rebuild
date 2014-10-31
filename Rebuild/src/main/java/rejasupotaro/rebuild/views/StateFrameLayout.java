@@ -13,15 +13,10 @@ import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.utils.UiAnimations;
 
 public class StateFrameLayout extends FrameLayout {
-
     private AttributeSet attrs;
-
     private View mContentView;
-
     private View mProgressView;
-
     private View mErrorView;
-
     private State mState = State.CONTENT;
 
     public static enum State {

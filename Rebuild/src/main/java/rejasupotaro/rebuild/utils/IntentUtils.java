@@ -9,9 +9,7 @@ import org.apache.http.protocol.HTTP;
 import rejasupotaro.rebuild.models.Episode;
 
 public final class IntentUtils {
-
     private static final String URL_TWITTER = "https://twitter.com/";
-
     private static final String URL_REBUILD = "http://rebuild.fm";
 
     private IntentUtils() {}

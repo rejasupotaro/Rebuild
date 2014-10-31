@@ -21,11 +21,9 @@ import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class GuestListView extends LinearLayout {
-
     private static final int REQUEST_GUEST_LIST = 1;
 
     private OnContextExecutor onContextExecutor = new OnContextExecutor();
-
     private TextView nameTextView;
 
     public GuestListView(Context context) {

@@ -17,13 +17,9 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 
 public class MediaBarView extends FrameLayout {
-
     private View rootView;
-
     private TextView episodeTitleTextView;
-
     private CheckBox mediaPlayAndPauseButton;
-
     private View mediaStopButton;
 
     public MediaBarView(Context context, AttributeSet attrs) {

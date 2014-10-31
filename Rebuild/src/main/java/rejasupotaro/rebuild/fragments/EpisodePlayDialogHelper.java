@@ -12,7 +12,6 @@ public class EpisodePlayDialogHelper {
 
     public interface OnSelectListener {
         public void playNow(Episode episode);
-
         public void startStreaming(Episode episode);
     }
 

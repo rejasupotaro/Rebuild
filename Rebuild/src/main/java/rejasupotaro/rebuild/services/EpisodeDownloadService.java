@@ -15,13 +15,10 @@ import rejasupotaro.rebuild.notifications.EpisodeDownloadCompleteNotificaiton;
 import rejasupotaro.rebuild.notifications.EpisodeDownloadNotification;
 
 public class EpisodeDownloadService extends IntentService {
-
     private static final String TAG = EpisodeDownloadService.class.getSimpleName();
-
     private static final String EXTRA_EPISODE = "extra_episode";
 
     private static List<Episode> downloadingEpisodeList = new ArrayList<Episode>();
-
     private static EpisodeDownloadClient episodeDownloadClient = new EpisodeDownloadClient();
 
     public static Intent createIntent(Context context, Episode episode) {

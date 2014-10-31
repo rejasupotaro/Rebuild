@@ -8,15 +8,11 @@ import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 
 public class ActivityLifecycleObserver implements Application.ActivityLifecycleCallbacks {
-
     private static Object LOCK = new Object();
-
     private static ActivityLifecycleObserver INSTANCE = null;
 
     private int activities = 0;
-
     private boolean isInBackground = false;
-
     private OnActivityStoppedListener onActivityStoppedListener;
 
     public static interface OnActivityStoppedListener {

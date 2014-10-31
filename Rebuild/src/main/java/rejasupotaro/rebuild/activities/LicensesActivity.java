@@ -11,7 +11,6 @@ import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 
 public class LicensesActivity extends ActionBarActivity {
-
     private static final String LICENSES_FILE_PATH = "file:///android_asset/licenses.html";
 
     @InjectView(R.id.licenses_view)

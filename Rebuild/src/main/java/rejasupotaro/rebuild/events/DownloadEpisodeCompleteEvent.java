@@ -1,7 +1,6 @@
 package rejasupotaro.rebuild.events;
 
 public class DownloadEpisodeCompleteEvent {
-
     private String episodeId;
 
     public String getEpisodeId() {

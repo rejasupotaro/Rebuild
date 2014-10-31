@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBarActivity;
 import rejasupotaro.rebuild.R;
 
 public class ReportActivity extends ActionBarActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -19,11 +19,8 @@ import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 
 public class PodcastPlayerNotification {
-
     private static final String ACTION_TOGGLE_PLAYBACK = "action_toggle_playback";
-
     private static final String ACTION_STOP = "action_stop";
-
     private static boolean isInBackground = false;
 
     public static void setIsInBackground(boolean isinb) {

@@ -5,7 +5,6 @@ import android.widget.SeekBar;
 import rejasupotaro.rebuild.media.PodcastPlayer;
 
 public class OnPlayerSeekListener implements SeekBar.OnSeekBarChangeListener {
-
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
     }
