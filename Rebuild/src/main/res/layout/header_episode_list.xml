@@ -34,5 +34,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:layout_marginLeft="@dimen/padding_contents" />
+        android:layout_marginLeft="@dimen/spacing_large" />
 </FrameLayout>
