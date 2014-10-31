@@ -1,26 +1,18 @@
 package rejasupotaro.rebuild.fragments;
 
-import com.google.inject.Inject;
-
 import android.content.Context;
 
-import rejasupotaro.rebuild.Injectable;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
-import roboguice.inject.ContextSingleton;
 
-@ContextSingleton
-public class EpisodePlayDialogHelper implements Injectable {
-
-    @Inject
-    private Context context;
-
+public class EpisodePlayDialogHelper {
     private OnSelectListener onSelectListener;
 
     public interface OnSelectListener {
         public void playNow(Episode episode);
+
         public void startStreaming(Episode episode);
     }
 
@@ -42,7 +34,7 @@ public class EpisodePlayDialogHelper implements Injectable {
         onSelectListener.startStreaming(episode);
     }
 
-    public void startDownload(Episode episode) {
+    public void startDownload(Context context, Episode episode) {
         EpisodeDownloadService.startDownload(context, episode);
     }
 }

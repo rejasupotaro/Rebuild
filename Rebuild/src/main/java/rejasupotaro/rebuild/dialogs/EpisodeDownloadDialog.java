@@ -2,30 +2,23 @@ package rejasupotaro.rebuild.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
-import javax.inject.Inject;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.fragments.EpisodePlayDialogHelper;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.StringUtils;
-import roboguice.fragment.RoboDialogFragment;
 
-public class EpisodeDownloadDialog extends RoboDialogFragment {
-
+public class EpisodeDownloadDialog extends DialogFragment {
     private static final String ARGS_EPISODE = "args_episode";
 
-    @Inject
-    private EpisodePlayDialogHelper episodePlayDialogHelper;
-
+    private EpisodePlayDialogHelper episodePlayDialogHelper = new EpisodePlayDialogHelper();
     private TextView titleTextView;
-
     private TextView messageTextView;
-
     private TextView button;
 
     public static EpisodeDownloadDialog newInstance(Episode episode) {
@@ -101,7 +94,7 @@ public class EpisodeDownloadDialog extends RoboDialogFragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                episodePlayDialogHelper.startDownload(episode);
+                episodePlayDialogHelper.startDownload(getActivity(), episode);
                 dismiss();
             }
         });

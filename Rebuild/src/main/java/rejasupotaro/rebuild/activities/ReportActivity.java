@@ -3,11 +3,11 @@ package rejasupotaro.rebuild.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 import rejasupotaro.rebuild.R;
-import roboguice.activity.RoboFragmentActivity;
 
-public class ReportActivity extends RoboFragmentActivity {
+public class ReportActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

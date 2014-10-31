@@ -2,35 +2,31 @@ package rejasupotaro.rebuild.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.AboutItemListAdapter;
 import rejasupotaro.rebuild.models.AboutItem;
 import rejasupotaro.rebuild.models.Developer;
-import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.AppDescriptionView;
-import roboguice.inject.InjectView;
 
-public class AboutActivity extends RoboActionBarActivity {
-
+public class AboutActivity extends ActionBarActivity {
     @InjectView(R.id.about_item_list)
-    private ListView aboutItemListView;
-
-    @Inject
-    private MenuDelegate menuDelegate;
+    ListView aboutItemListView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        ButterKnife.inject(this);
         setupActionBar();
         setupAboutListItemView();
     }
@@ -63,7 +59,7 @@ public class AboutActivity extends RoboActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                menuDelegate.pressHome();
+                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);

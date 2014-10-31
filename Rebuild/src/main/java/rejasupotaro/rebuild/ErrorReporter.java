@@ -3,19 +3,14 @@ package rejasupotaro.rebuild;
 import android.app.Activity;
 import android.content.Intent;
 
-import javax.inject.Singleton;
-
 import rejasupotaro.rebuild.activities.ReportActivity;
 
-@Singleton
 public class ErrorReporter implements Thread.UncaughtExceptionHandler {
-
     private static final String TAG = ErrorReporter.class.getSimpleName();
 
     private volatile boolean crashing = false;
 
     private Activity activity;
-
     private Thread.UncaughtExceptionHandler mUncaughtExceptionHandler = null;
 
     public void registerActivity(Activity activity) {
@@ -54,8 +49,6 @@ public class ErrorReporter implements Thread.UncaughtExceptionHandler {
     private void handleExcetion() {
         if (activity != null) {
             activity.startActivity(new Intent(activity, ReportActivity.class));
-        } else {
-
         }
     }
 }

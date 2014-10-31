@@ -5,11 +5,7 @@ import android.os.Looper;
 
 import java.util.concurrent.Executor;
 
-import roboguice.inject.ContextSingleton;
-
-@ContextSingleton
 public class MainThreadExecutor implements Executor {
-
     private static final Handler HANDLER = new Handler(Looper.getMainLooper());
 
     @Override

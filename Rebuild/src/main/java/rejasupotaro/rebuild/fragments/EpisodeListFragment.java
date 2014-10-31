@@ -1,23 +1,24 @@
 package rejasupotaro.rebuild.fragments;
 
-import com.google.inject.Inject;
-
-import com.squareup.otto.Subscribe;
-
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.squareup.otto.Subscribe;
+
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.activities.TimelineActivity;
 import rejasupotaro.rebuild.adapters.EpisodeListAdapter;
@@ -34,32 +35,20 @@ import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.views.RecentTweetView;
-import roboguice.fragment.RoboFragment;
-import roboguice.inject.InjectView;
 import rx.functions.Action1;
 
-public class EpisodeListFragment extends RoboFragment {
-
+public class EpisodeListFragment extends Fragment {
     private static final int REQUEST_TWEET_LIST = 1;
 
-    @Inject
-    private RssFeedClient rssFeedClient;
-
-    @InjectView(R.id.app_title_text)
-    private View appTitleTextView;
-
-    private EpisodeListAdapter episodeListAdapter;
-
     @InjectView(R.id.episode_list_view)
-    private ListView episodeListView;
-
+    ListView episodeListView;
     @InjectView(R.id.recent_tweet_view)
-    private RecentTweetView recentTweetView;
+    RecentTweetView recentTweetView;
 
+    private RssFeedClient rssFeedClient = new RssFeedClient();
+    private MainThreadExecutor mainThreadExecutor = new MainThreadExecutor();
+    private EpisodeListAdapter episodeListAdapter;
     private OnEpisodeSelectListener listener;
-
-    @Inject
-    private MainThreadExecutor mainThreadExecutor;
 
     public static interface OnEpisodeSelectListener {
 
@@ -74,9 +63,11 @@ public class EpisodeListFragment extends RoboFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         BusProvider.getInstance().register(this);
-        return inflater.inflate(R.layout.fragment_episode_list, null);
+        View view = inflater.inflate(R.layout.fragment_episode_list, null);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     @Override
@@ -167,7 +158,7 @@ public class EpisodeListFragment extends RoboFragment {
 
                     @Override
                     public void onLoadFinished(Loader<List<Tweet>> listLoader,
-                            List<Tweet> tweetList) {
+                                               List<Tweet> tweetList) {
                         recentTweetView.setTweetList(tweetList);
                     }
 
@@ -193,7 +184,7 @@ public class EpisodeListFragment extends RoboFragment {
             public void call(Episode episode) {
                 EpisodeDownloadDialog dialog
                         = EpisodeDownloadDialog.newInstance(episode);
-                dialog.show(getActivity().getSupportFragmentManager(), "");
+                dialog.show(getActivity().getFragmentManager(), "");
             }
         });
     }

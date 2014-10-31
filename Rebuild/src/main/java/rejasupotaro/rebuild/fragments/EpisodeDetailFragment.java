@@ -1,11 +1,14 @@
 package rejasupotaro.rebuild.fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.utils.StringUtils;
@@ -13,27 +16,20 @@ import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.GuestListView;
 import rejasupotaro.rebuild.views.SectionHeaderView;
 import rejasupotaro.rebuild.views.ShowNoteListView;
-import roboguice.fragment.RoboFragment;
-import roboguice.inject.InjectView;
 
-public class EpisodeDetailFragment extends RoboFragment {
+public class EpisodeDetailFragment extends Fragment {
+    @InjectView(R.id.section_header_description)
+    SectionHeaderView sectionHeaderDescriptionView;
+    @InjectView(R.id.episode_description_text)
+    TextView episodeDescriptionTextView;
+    @InjectView(R.id.guest_list)
+    GuestListView guestListView;
+    @InjectView(R.id.section_header_show_notes)
+    SectionHeaderView sectionHeaderShowNotesView;
+    @InjectView(R.id.show_notes)
+    ShowNoteListView showNoteListView;
 
     private Episode episode;
-
-    @InjectView(R.id.section_header_description)
-    private SectionHeaderView sectionHeaderDescriptionView;
-
-    @InjectView(R.id.episode_description_text)
-    private TextView episodeDescriptionTextView;
-
-    @InjectView(R.id.guest_list)
-    private GuestListView guestListView;
-
-    @InjectView(R.id.section_header_show_notes)
-    private SectionHeaderView sectionHeaderShowNotesView;
-
-    @InjectView(R.id.show_notes)
-    private ShowNoteListView showNoteListView;
 
     public void setup(final Episode episode) {
         this.episode = episode;
@@ -43,7 +39,9 @@ public class EpisodeDetailFragment extends RoboFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_episode_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_episode_detail, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     @Override
