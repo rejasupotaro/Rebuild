@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
@@ -81,8 +82,15 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
     private void setupActionBar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close();
+            }
+        });
 
         final ColorDrawable colorDrawable = new ColorDrawable(
                 getResources().getColor(R.color.dark_gray));
@@ -91,9 +99,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
 
         final TextView titleTextView = (TextView) findViewById(R.id.toolbar_title);
         titleTextView.setText(episode.getTitle());
-        if (titleTextView != null) {
-            titleTextView.setAlpha(0);
-        }
+        titleTextView.setAlpha(0);
 
         scrollView.getScrollEvent().subscribe(new Action1<ObservableScrollView.ScrollPosition>() {
             @Override
@@ -110,9 +116,7 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 colorDrawable.setAlpha(alpha);
                 toolbar.setBackgroundDrawable(colorDrawable);
 
-                if (titleTextView != null) {
-                    titleTextView.setAlpha(alpha / 255F);
-                }
+                titleTextView.setAlpha(alpha / 255F);
             }
         });
     }
@@ -146,8 +150,9 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
             case R.id.action_share:
                 menuDelegate.pressShare(episode);
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Subscribe
