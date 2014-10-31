@@ -1,11 +1,12 @@
 package rejasupotaro.rebuild.activities;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 import rejasupotaro.rebuild.R;
@@ -13,7 +14,7 @@ import rejasupotaro.rebuild.listener.NotificationEpisodesCheckBoxChangeListener;
 import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.PreferenceUtils;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends ActionBarActivity {
 
     private MenuDelegate menuDelegate;
 
@@ -24,23 +25,17 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
         menuDelegate = new MenuDelegate(this);
-
-        addPreferencesFromResource(R.xml.preferences);
-
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-        setUpNotificationEpisodesCheckBox();
+        setupActionBar();
     }
 
-    private void setUpNotificationEpisodesCheckBox() {
-        String key = getString(R.string.pref_key_notification_episodes);
-        CheckBoxPreference checkBox = (CheckBoxPreference) findPreference(key);
-        boolean checkStatus = PreferenceUtils.getBoolean(this, key);
-        checkBox.setChecked(checkStatus);
-        checkBox.setOnPreferenceChangeListener(new NotificationEpisodesCheckBoxChangeListener(this));
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
     }
 
     @Override
@@ -54,5 +49,22 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static class SettingsFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle paramBundle) {
+            super.onCreate(paramBundle);
+            addPreferencesFromResource(R.xml.preferences);
+            setUpNotificationEpisodesCheckBox();
+        }
+
+        private void setUpNotificationEpisodesCheckBox() {
+            String key = getString(R.string.pref_key_notification_episodes);
+            CheckBoxPreference checkBox = (CheckBoxPreference) findPreference(key);
+            boolean checkStatus = PreferenceUtils.getBoolean(getActivity(), key);
+            checkBox.setChecked(checkStatus);
+            checkBox.setOnPreferenceChangeListener(new NotificationEpisodesCheckBoxChangeListener(getActivity()));
+        }
     }
 }
