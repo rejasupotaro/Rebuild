@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,8 +13,8 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
-import javax.inject.Inject;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
@@ -21,33 +22,20 @@ import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
 import rejasupotaro.rebuild.models.Episode;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
-import rejasupotaro.rebuild.tools.MenuDelegate;
+import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.views.ObservableScrollView;
-import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
 import rx.functions.Action1;
 
-public class EpisodeDetailActivity extends RoboActionBarActivity {
-
+public class EpisodeDetailActivity extends ActionBarActivity {
     private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
-    @InjectExtra(value = EXTRA_EPISODE_ID)
-    private String episodeId;
-
     @InjectView(R.id.scroll_view)
-    private ObservableScrollView scrollView;
+    ObservableScrollView scrollView;
 
     private Episode episode;
-
     private EpisodeMediaFragment episodeMediaFragment;
-
     private EpisodeDetailFragment episodeDetailFragment;
-
-    @Inject
-    private MenuDelegate menuDelegate;
-
-    @Inject
-    private MainThreadExecutor mainThreadExecutor;
+    private MainThreadExecutor mainThreadExecutor = new MainThreadExecutor();
 
     public static Intent createIntent(Context context, String episodeId) {
         Intent intent = new Intent(context, EpisodeDetailActivity.class);
@@ -59,7 +47,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
+        ButterKnife.inject(this);
         BusProvider.getInstance().register(this);
+
+        String episodeId = getIntent().getStringExtra(EXTRA_EPISODE_ID);
         episode = Episode.findById(episodeId);
 
         setupActionBar();
@@ -142,10 +133,10 @@ public class EpisodeDetailActivity extends RoboActionBarActivity {
                 close();
                 return true;
             case R.id.action_settings:
-                menuDelegate.pressSettings();
+                startActivity(SettingsActivity.createIntent(this));
                 return true;
             case R.id.action_share:
-                menuDelegate.pressShare(episode);
+                IntentUtils.shareEpisode(this, episode);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

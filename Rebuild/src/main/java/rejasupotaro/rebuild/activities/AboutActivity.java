@@ -19,7 +19,6 @@ import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.AppDescriptionView;
 
 public class AboutActivity extends ActionBarActivity {
-
     @InjectView(R.id.about_item_list)
     ListView aboutItemListView;
 
