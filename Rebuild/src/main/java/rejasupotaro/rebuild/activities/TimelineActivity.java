@@ -5,6 +5,7 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,41 +14,34 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.adapters.TweetListAdapter;
 import rejasupotaro.rebuild.listener.MoreLoadListener;
 import rejasupotaro.rebuild.loaders.TweetLoader;
 import rejasupotaro.rebuild.models.Tweet;
-import rejasupotaro.rebuild.tools.MenuDelegate;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.views.StateFrameLayout;
-import roboguice.inject.InjectView;
 
-public class TimelineActivity extends RoboActionBarActivity {
-
+public class TimelineActivity extends ActionBarActivity {
     private static final int REQUEST_TWEET_LIST = 1;
 
     @InjectView(R.id.state_frame_layout)
-    private StateFrameLayout stateFrameLayout;
-
+    StateFrameLayout stateFrameLayout;
     @InjectView(R.id.swipe_refresh_layout)
-    private SwipeRefreshLayout swipeRefreshLayout;
-
+    SwipeRefreshLayout swipeRefreshLayout;
     @InjectView(R.id.tweet_list)
-    private ListView tweetListView;
+    ListView tweetListView;
 
     private TweetListAdapter tweetListAdapter;
-
-    @Inject
-    private MenuDelegate menuDelegate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+        ButterKnife.inject(this);
 
         setupActionBar();
         setupTweetListView();
@@ -117,7 +111,7 @@ public class TimelineActivity extends RoboActionBarActivity {
 
                     @Override
                     public void onLoadFinished(Loader<List<Tweet>> listLoader,
-                            List<Tweet> tweetList) {
+                                               List<Tweet> tweetList) {
                         addTweetList(tweetList, isFirstRequest);
                         swipeRefreshLayout.setRefreshing(false);
                         isFirstRequest = false;
@@ -154,10 +148,10 @@ public class TimelineActivity extends RoboActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                menuDelegate.pressHome();
+                onBackPressed();
                 break;
             case R.id.action_settings:
-                menuDelegate.pressSettings();
+                startActivity(SettingsActivity.createIntent(this));
                 break;
         }
         return super.onOptionsItemSelected(item);
