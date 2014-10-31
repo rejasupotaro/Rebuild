@@ -1,8 +1,8 @@
 package rejasupotaro.rebuild.activities;
 
+import android.app.LoaderManager;
+import android.content.Loader;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
@@ -108,7 +108,7 @@ public class TimelineActivity extends RoboActionBarActivity {
     private boolean isFirstRequest = true;
 
     private void requestTweetList() {
-        getSupportLoaderManager().restartLoader(REQUEST_TWEET_LIST, null,
+        getLoaderManager().restartLoader(REQUEST_TWEET_LIST, null,
                 new LoaderManager.LoaderCallbacks<List<Tweet>>() {
                     @Override
                     public Loader<List<Tweet>> onCreateLoader(int i, Bundle bundle) {
