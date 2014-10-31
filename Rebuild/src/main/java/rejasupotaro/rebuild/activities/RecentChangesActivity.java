@@ -2,17 +2,12 @@ package rejasupotaro.rebuild.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
-import javax.inject.Inject;
-
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.tools.MenuDelegate;
 
-public class RecentChangesActivity extends RoboActionBarActivity {
-
-    @Inject
-    private MenuDelegate menuDelegate;
+public class RecentChangesActivity extends ActionBarActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +26,7 @@ public class RecentChangesActivity extends RoboActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                menuDelegate.pressHome();
+                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
