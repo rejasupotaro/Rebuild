@@ -81,20 +81,8 @@ public class GuestListView extends LinearLayout {
         PicassoHelper.loadAndCircleTransform(getContext(), profileImageView,
                 guest.getProfileImageUrl());
 
-        TextView tweetsCountText = (TextView) view.findViewById(R.id.tweets_count_text);
-        tweetsCountText.setText(guest.getTweetsCount() + " tweets");
-
-        TextView friendsCountText = (TextView) view.findViewById(R.id.friends_count_text);
-        friendsCountText.setText("following " + guest.getFriendsCount());
-
-        TextView followersCountText = (TextView) view.findViewById(R.id.followers_count_text);
-        followersCountText.setText(guest.getFollowersCount() + " followers");
-
         TextView descriptionTextView = (TextView) view.findViewById(R.id.description_text);
         descriptionTextView.setText(guest.getDescription());
-
-        TextView urlTextView = (TextView) view.findViewById(R.id.url_text);
-        urlTextView.setText(guest.getUrl());
 
         return view;
     }

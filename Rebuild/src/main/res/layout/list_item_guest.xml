@@ -1,114 +1,55 @@
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/base_color2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/twitter_profile_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/base_color2"
-        >
-    <LinearLayout
-            android:orientation="vertical"
-            android:paddingTop="@dimen/spacing_large"
-            android:paddingLeft="@dimen/spacing_large"
-            android:paddingRight="@dimen/spacing_large"
+        android:background="@drawable/bg_clickable"
+        android:orientation="horizontal">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-        <TextView
+            android:layout_margin="@dimen/spacing_large"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_small">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                style="@style/ProfileImage"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
+            android:paddingTop="@dimen/spacing_large">
+
+            <TextView
                 android:id="@+id/guest_name_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="@dimen/primary_text_size"
-                />
-        <rejasupotaro.rebuild.views.VerticalSeparator
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                />
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        <LinearLayout
-                android:id="@+id/twitter_profile_button"
-                android:layout_width="match_parent"
+                android:textSize="@dimen/secondary_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/description_text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/spacing_small"
-                android:layout_margin="@dimen/spacing_large"
-                android:layout_weight="3"
-                android:background="@drawable/bg_clickable"
-                >
-            <ImageView
-                    android:id="@+id/profile_image"
-                    android:layout_gravity="center_horizontal"
-                    style="@style/ProfileImage"
-                    />
-            <TextView
-                    android:id="@+id/tweets_count_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_small"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/tertiary_text_size"
-                    />
-            <TextView
-                    android:id="@+id/friends_count_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/tertiary_text_size"
-                    />
-            <TextView
-                    android:id="@+id/followers_count_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/tertiary_text_size"
-                    />
-        </LinearLayout>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:paddingTop="@dimen/spacing_large"
-                android:paddingBottom="@dimen/spacing_large"
-                android:paddingRight="@dimen/spacing_large"
-                android:orientation="vertical"
-                >
-            <TextView
-                    android:text="@string/guest_profile_text"
-                    android:textSize="@dimen/secondary_text_size"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-            <TextView
-                    android:id="@+id/description_text"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:textSize="@dimen/tertiary_text_size"
-                    android:autoLink="all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-            <TextView
-                    android:text="@string/guest_website_text"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/secondary_text_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-            <TextView
-                    android:id="@+id/url_text"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:textSize="@dimen/tertiary_text_size"
-                    android:autoLink="all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                android:layout_marginTop="@dimen/spacing_xsmall"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:autoLink="all"
+                android:textSize="@dimen/tertiary_text_size" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
