@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.api.TwitterApiClient;
+import rejasupotaro.rebuild.data.GuestNameTable;
 import rejasupotaro.rebuild.data.models.Guest;
 import rejasupotaro.rebuild.jobs.UpdateGuestTask;
 import rx.Observable;
@@ -14,7 +15,13 @@ import rx.schedulers.Schedulers;
 
 public class GuestService {
     public Observable<ArrayList<Guest>> getList(List<String> guestNames) {
-        return Observable.from(guestNames)
+        return Observable.from(addMiyagawaIfNecessary(guestNames))
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String name) {
+                        return GuestNameTable.inquire(name);
+                    }
+                })
                 .map(new Func1<String, Guest>() {
                     @Override
                     public Guest call(String name) {
@@ -47,5 +54,13 @@ public class GuestService {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private List<String> addMiyagawaIfNecessary(List<String> names) {
+        if (names.contains("miyagawa")) {
+            return names;
+        }
+        names.add("miyagawa");
+        return names;
     }
 }
