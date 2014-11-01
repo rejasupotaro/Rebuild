@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.utils.FileUtils;
 
 public class MediaFileManager {

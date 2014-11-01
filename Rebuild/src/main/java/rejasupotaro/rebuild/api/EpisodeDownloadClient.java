@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import rejasupotaro.rebuild.media.MediaFileManager;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.utils.NetworkUtils;
 
 public class EpisodeDownloadClient extends AbstractHttpClient {

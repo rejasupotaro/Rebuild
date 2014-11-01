@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.adapters;
+package rejasupotaro.rebuild.data.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

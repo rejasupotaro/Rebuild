@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.serializers;
+package rejasupotaro.rebuild.data.serializers;
 
 import android.net.Uri;
 

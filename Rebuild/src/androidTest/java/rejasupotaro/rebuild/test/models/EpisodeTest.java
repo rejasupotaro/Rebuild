@@ -3,7 +3,7 @@ package rejasupotaro.rebuild.test.models;
 import android.os.Bundle;
 import android.test.InstrumentationTestCase;
 
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.robotgirl.Definition;
 import rejasupotaro.robotgirl.Factory;
 import rejasupotaro.robotgirl.RobotGirl;

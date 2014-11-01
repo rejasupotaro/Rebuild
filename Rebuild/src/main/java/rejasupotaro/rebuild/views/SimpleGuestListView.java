@@ -14,8 +14,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.loaders.GuestLoader;
-import rejasupotaro.rebuild.models.Guest;
+import rejasupotaro.rebuild.data.loaders.GuestLoader;
+import rejasupotaro.rebuild.data.models.Guest;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 

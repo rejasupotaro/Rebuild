@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.adapters;
+package rejasupotaro.rebuild.data.adapters;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.models.AboutItem;
+import rejasupotaro.rebuild.data.models.AboutItem;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 import rejasupotaro.rebuild.utils.ViewUtils;

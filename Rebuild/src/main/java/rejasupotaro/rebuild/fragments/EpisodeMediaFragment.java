@@ -25,7 +25,7 @@ import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
 import rejasupotaro.rebuild.listener.LoadListener;
 import rejasupotaro.rebuild.listener.OnPlayerSeekListener;
 import rejasupotaro.rebuild.media.PodcastPlayer;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;

@@ -1,7 +1,6 @@
-package rejasupotaro.rebuild.adapters;
+package rejasupotaro.rebuild.data.adapters;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.LatestEpisodeListItemView;

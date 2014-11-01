@@ -4,7 +4,7 @@ import android.content.Context;
 
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 
 public class EpisodePlayDialogHelper {

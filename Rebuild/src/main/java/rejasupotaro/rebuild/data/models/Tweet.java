@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.models;
+package rejasupotaro.rebuild.data.models;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;

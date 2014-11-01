@@ -2,7 +2,7 @@ package rejasupotaro.rebuild.test.models;
 
 import android.test.InstrumentationTestCase;
 
-import rejasupotaro.rebuild.models.Sponsor;
+import rejasupotaro.rebuild.data.models.Sponsor;
 import rejasupotaro.rebuild.test.AssetsUtils;
 
 public class SponsorTest extends InstrumentationTestCase {

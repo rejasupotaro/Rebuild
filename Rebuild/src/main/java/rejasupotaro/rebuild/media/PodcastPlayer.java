@@ -7,7 +7,7 @@ import android.util.Log;
 
 import java.io.IOException;
 
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.utils.NetworkUtils;
 import rejasupotaro.rebuild.utils.Timer;
 

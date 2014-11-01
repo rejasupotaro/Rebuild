@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import rejasupotaro.rebuild.models.Guest;
-import rejasupotaro.rebuild.models.Tweet;
+import rejasupotaro.rebuild.data.models.Guest;
+import rejasupotaro.rebuild.data.models.Tweet;
 
 public class TwitterApiClient {
 

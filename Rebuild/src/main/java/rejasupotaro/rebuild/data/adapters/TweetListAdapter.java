@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.adapters;
+package rejasupotaro.rebuild.data.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.models.Tweet;
+import rejasupotaro.rebuild.data.models.Tweet;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class TweetListAdapter extends BindableAdapter<Tweet> {

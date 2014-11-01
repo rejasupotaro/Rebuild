@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.models;
+package rejasupotaro.rebuild.data.models;
 
 public class AboutItem {
     public static class AboutItemHeader extends AboutItem {

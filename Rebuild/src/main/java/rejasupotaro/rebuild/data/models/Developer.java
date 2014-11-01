@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.models;
+package rejasupotaro.rebuild.data.models;
 
 public enum Developer {
     REJASUPOTARO(

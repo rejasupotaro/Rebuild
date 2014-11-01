@@ -7,8 +7,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-import rejasupotaro.rebuild.events.BusProvider;
-import rejasupotaro.rebuild.models.Episode;
 import rx.Observable;
 import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.fragments.EpisodePlayDialogHelper;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.StringUtils;
 

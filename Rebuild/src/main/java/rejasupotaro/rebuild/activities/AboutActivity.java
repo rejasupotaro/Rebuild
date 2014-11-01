@@ -12,9 +12,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.adapters.AboutItemListAdapter;
-import rejasupotaro.rebuild.models.AboutItem;
-import rejasupotaro.rebuild.models.Developer;
+import rejasupotaro.rebuild.data.adapters.AboutItemListAdapter;
+import rejasupotaro.rebuild.data.models.AboutItem;
+import rejasupotaro.rebuild.data.models.Developer;
 import rejasupotaro.rebuild.utils.ViewUtils;
 import rejasupotaro.rebuild.views.AppDescriptionView;
 

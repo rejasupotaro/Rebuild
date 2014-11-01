@@ -2,7 +2,7 @@ package rejasupotaro.rebuild.events;
 
 import java.util.List;
 
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 
 public class LoadEpisodeListCompleteEvent {
     private List<Episode> episodeList;

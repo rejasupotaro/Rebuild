@@ -3,17 +3,14 @@ package rejasupotaro.rebuild.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.rebuild.models.Link;
+import rejasupotaro.rebuild.data.models.Episode;
+import rejasupotaro.rebuild.data.models.Link;
 import rejasupotaro.rebuild.utils.IntentUtils;
-import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class ShowNoteListView extends LinearLayout {
 

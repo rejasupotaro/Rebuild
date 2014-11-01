@@ -7,7 +7,7 @@ import android.content.Context;
 import android.support.v4.app.NotificationCompat;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 
 public class EpisodeDownloadNotification {
     private static final String ACTION_CANCEL = "action_cancel";

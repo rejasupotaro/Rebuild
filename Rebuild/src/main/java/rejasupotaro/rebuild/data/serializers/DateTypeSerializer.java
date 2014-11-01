@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.serializers;
+package rejasupotaro.rebuild.data.serializers;
 
 import com.activeandroid.serializer.TypeSerializer;
 

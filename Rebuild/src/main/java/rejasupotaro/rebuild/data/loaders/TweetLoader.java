@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.loaders;
+package rejasupotaro.rebuild.data.loaders;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rejasupotaro.rebuild.api.TwitterApiClient;
-import rejasupotaro.rebuild.models.Tweet;
+import rejasupotaro.rebuild.data.models.Tweet;
 
 public class TweetLoader extends AsyncTaskLoader<List<Tweet>> {
     private List<Tweet> tweetList = new ArrayList<Tweet>();

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.models.Tweet;
+import rejasupotaro.rebuild.data.models.Tweet;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 import rejasupotaro.rebuild.utils.Timer;
 import rejasupotaro.rebuild.utils.UiAnimations;

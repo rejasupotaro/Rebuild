@@ -12,7 +12,7 @@ import android.os.AsyncTask;
 import java.util.ArrayList;
 import java.util.List;
 
-import rejasupotaro.rebuild.models.Tweet;
+import rejasupotaro.rebuild.data.models.Tweet;
 import rejasupotaro.rebuild.utils.ListUtils;
 
 public class EpisodeTweetClient extends AbstractHttpClient {

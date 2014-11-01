@@ -4,7 +4,7 @@ import android.test.AndroidTestCase;
 
 import java.util.Date;
 
-import rejasupotaro.rebuild.serializers.DateTypeSerializer;
+import rejasupotaro.rebuild.data.serializers.DateTypeSerializer;
 import rejasupotaro.rebuild.utils.DateUtils;
 
 public class DateTypeSerializerTest extends AndroidTestCase {

@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.models;
+package rejasupotaro.rebuild.data.models;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 

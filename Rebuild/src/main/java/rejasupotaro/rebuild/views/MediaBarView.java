@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.media.PodcastPlayer;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.rx.Events;
 import rejasupotaro.rebuild.utils.UiAnimations;

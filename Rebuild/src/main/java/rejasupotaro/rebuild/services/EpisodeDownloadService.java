@@ -10,7 +10,7 @@ import java.util.List;
 import rejasupotaro.rebuild.api.EpisodeDownloadClient;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.notifications.EpisodeDownloadCompleteNotificaiton;
 import rejasupotaro.rebuild.notifications.EpisodeDownloadNotification;
 

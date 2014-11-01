@@ -1,4 +1,4 @@
-package rejasupotaro.rebuild.loaders;
+package rejasupotaro.rebuild.data.loaders;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import rejasupotaro.rebuild.api.TwitterApiClient;
 import rejasupotaro.rebuild.jobs.UpdateGuestTask;
-import rejasupotaro.rebuild.models.Guest;
+import rejasupotaro.rebuild.data.models.Guest;
 
 public class GuestLoader extends AsyncTaskLoader<List<Guest>> {
     private List<String> guestNameList = new ArrayList<String>();

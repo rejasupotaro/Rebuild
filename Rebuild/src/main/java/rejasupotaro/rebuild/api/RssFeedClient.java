@@ -12,7 +12,7 @@ import rejasupotaro.asyncrssclient.AsyncRssClient;
 import rejasupotaro.asyncrssclient.AsyncRssResponseHandler;
 import rejasupotaro.asyncrssclient.RssFeed;
 import rejasupotaro.asyncrssclient.RssItem;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.utils.ListUtils;
 import rejasupotaro.rebuild.utils.NetworkUtils;
 

@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import rejasupotaro.rebuild.api.TwitterApiClient;
-import rejasupotaro.rebuild.models.Guest;
+import rejasupotaro.rebuild.data.models.Guest;
 
 public class UpdateGuestTask extends AsyncTask<Void, Void, Void> {
     private String guestName;

@@ -1,7 +1,6 @@
 package rejasupotaro.rebuild.views;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.IconTextView;
@@ -10,8 +9,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.models.Episode;
-import rejasupotaro.rebuild.models.Link;
+import rejasupotaro.rebuild.data.models.Episode;
+import rejasupotaro.rebuild.data.models.Link;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rx.subjects.PublishSubject;

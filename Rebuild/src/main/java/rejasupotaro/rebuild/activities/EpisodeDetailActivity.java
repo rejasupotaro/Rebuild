@@ -20,7 +20,7 @@ import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.views.ObservableScrollView;

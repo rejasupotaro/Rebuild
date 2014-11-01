@@ -4,7 +4,7 @@ import android.test.InstrumentationTestCase;
 
 import java.util.List;
 
-import rejasupotaro.rebuild.models.Link;
+import rejasupotaro.rebuild.data.models.Link;
 import rejasupotaro.rebuild.test.AssetsUtils;
 
 public class LinkTest extends InstrumentationTestCase {

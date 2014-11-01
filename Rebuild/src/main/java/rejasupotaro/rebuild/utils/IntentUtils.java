@@ -6,7 +6,7 @@ import android.net.Uri;
 
 import org.apache.http.protocol.HTTP;
 
-import rejasupotaro.rebuild.models.Episode;
+import rejasupotaro.rebuild.data.models.Episode;
 
 public final class IntentUtils {
     private static final String URL_TWITTER = "https://twitter.com/";
