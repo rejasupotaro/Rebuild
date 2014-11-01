@@ -1,6 +1,7 @@
 package rejasupotaro.rebuild.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -182,9 +183,9 @@ public class EpisodeListFragment extends Fragment {
         episodeListAdapter.getDownloadButtonEvent().subscribe(new Action1<Episode>() {
             @Override
             public void call(Episode episode) {
-                EpisodeDownloadDialog dialog
-                        = EpisodeDownloadDialog.newInstance(episode);
-                dialog.show(getActivity().getFragmentManager(), "");
+                AlertDialog dialog
+                        = EpisodeDownloadDialog.newInstance(getActivity(), episode);
+                dialog.show();
             }
         });
     }

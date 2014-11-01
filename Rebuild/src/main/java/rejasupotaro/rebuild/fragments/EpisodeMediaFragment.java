@@ -1,5 +1,6 @@
 package rejasupotaro.rebuild.fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,7 +51,6 @@ public class EpisodeMediaFragment extends Fragment {
 
     private Episode episode;
     private LoadListener loadListener;
-    private EpisodePlayDialogHelper episodePlayDialogHelper = new EpisodePlayDialogHelper();
     private OnContextExecutor onContextExecutor = new OnContextExecutor();
 
     @Override
@@ -65,19 +65,6 @@ public class EpisodeMediaFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        episodePlayDialogHelper.setSelectListener(new EpisodePlayDialogHelper.OnSelectListener() {
-            @Override
-            public void playNow(Episode episode) {
-                start(episode);
-                mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
-            }
-
-            @Override
-            public void startStreaming(Episode episode) {
-                start(episode);
-                mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
-            }
-        });
     }
 
     @Override
@@ -156,9 +143,20 @@ public class EpisodeMediaFragment extends Fragment {
     }
 
     private void showEpisodePlayDialog(Episode episode) {
-        EpisodePlayDialog dialog
-                = EpisodePlayDialog.newInstance(episode);
-        dialog.show(getActivity().getFragmentManager(), "");
+        AlertDialog dialog = EpisodePlayDialog.newInstance(getActivity(), episode, new EpisodePlayDialog.OnSelectListener() {
+            @Override
+            public void playNow(Episode episode) {
+                start(episode);
+                mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
+            }
+
+            @Override
+            public void startStreaming(Episode episode) {
+                start(episode);
+                mediaPlayAndPauseButton.setChecked(!mediaPlayAndPauseButton.isChecked());
+            }
+        });
+        dialog.show();
     }
 
     private void start(final Episode episode) {
