@@ -80,7 +80,7 @@ public class RssFeedClient extends AbstractHttpClient {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                List<RssItem> rssItemList = rssFeed.getRssItemList();
+                List<RssItem> rssItemList = rssFeed.getRssItems();
                 List<Episode> episodeList = Episode.newEpisodeFromEntity(rssItemList);
 
                 if (Episode.refreshTable(episodeList) || shouldUpdateListView) {
