@@ -1,89 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="rejasupotaro.rebuild">
+    package="rejasupotaro.rebuild">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-            android:name="rejasupotaro.rebuild.RebuildApplication"
-            android:allowBackup="true"
-            android:icon="@drawable/icon"
-            android:label="@string/app_name"
-            android:theme="@style/RebuildTheme">
+        android:name="rejasupotaro.rebuild.RebuildApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/RebuildTheme">
 
         <meta-data
-                android:name="AA_DB_NAME"
-                android:value="rebuild.db"/>
+            android:name="AA_DB_NAME"
+            android:value="rebuild.db" />
         <meta-data
-                android:name="AA_DB_VERSION"
-                android:value="4"/>
+            android:name="AA_DB_VERSION"
+            android:value="4" />
         <meta-data
-                android:name="AA_SERIALIZERS"
-                android:value="rejasupotaro.rebuild.serializers.UriTypeSerializer,rejasupotaro.rebuild.serializers.DateTypeSerializer"/>
+            android:name="AA_SERIALIZERS"
+            android:value="rejasupotaro.rebuild.serializers.UriTypeSerializer,rejasupotaro.rebuild.serializers.DateTypeSerializer" />
 
         <activity
-                android:name="rejasupotaro.rebuild.activities.MainActivity"
-                android:theme="@style/TransparentActionBarTheme"
-                android:launchMode="singleInstance"
-                >
+            android:name="rejasupotaro.rebuild.activities.MainActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/TransparentActionBarTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".activities.EpisodeDetailActivity"
-                android:configChanges="orientation|screenSize"
-                android:theme="@style/Theme.AppCompat.NoActionBar"
-                android:launchMode="singleTask"
-                >
-        </activity>
+            android:name=".activities.EpisodeDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/RebuildNoActionBarTheme"></activity>
         <activity
-                android:name=".activities.TimelineActivity"
-                android:configChanges="orientation|screenSize"
-                android:label="@string/label_timeline"
-                android:theme="@style/RebuildTheme"
-                >
-        </activity>
+            android:name=".activities.TimelineActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/label_timeline"
+            android:theme="@style/RebuildTheme"></activity>
         <activity
-                android:name=".activities.SettingsActivity"
-                android:configChanges="orientation|screenSize"
-                android:label="@string/activity_settings"
-                android:theme="@style/RebuildTheme"
-                >
-        </activity>
+            android:name=".activities.SettingsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/activity_settings"
+            android:theme="@style/RebuildTheme"></activity>
         <activity
-                android:name=".activities.ReportActivity"
-                android:configChanges="orientation|screenSize"
-                android:theme="@style/Theme.Transparent"
-                >
-        </activity>
+            android:name=".activities.ReportActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.Transparent"></activity>
         <activity
-                android:name=".activities.AboutActivity"
-                android:configChanges="orientation|screenSize"
-                android:label="@string/activity_about"
-                android:theme="@style/RebuildTheme"
-                >
-        </activity>
+            android:name=".activities.AboutActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/activity_about"
+            android:theme="@style/RebuildTheme"></activity>
         <activity
-                android:name=".activities.RecentChangesActivity"
-                android:configChanges="orientation|screenSize"
-                android:label="@string/activity_recent_changes"
-                android:theme="@style/RebuildTheme"
-                >
-        </activity>
+            android:name=".activities.RecentChangesActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/activity_recent_changes"
+            android:theme="@style/RebuildTheme"></activity>
         <activity
-                android:name=".activities.LicensesActivity"
-                android:configChanges="orientation|screenSize"
-                android:label="@string/activity_licenses"
-                android:theme="@style/RebuildTheme"
-                >
-        </activity>
+            android:name=".activities.LicensesActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/activity_licenses"
+            android:theme="@style/RebuildTheme"></activity>
 
-        <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService"/>
-        <service android:name=".services.EpisodeDownloadService"/>
+        <service android:name="rejasupotaro.rebuild.services.PodcastPlayerService" />
+        <service android:name=".services.EpisodeDownloadService" />
     </application>
 
 </manifest>

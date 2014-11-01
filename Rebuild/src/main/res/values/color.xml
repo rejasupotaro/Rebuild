@@ -8,8 +8,11 @@
     <color name="pressed_color">#66cccccc</color>
     <color name="light_shadow">#66ffffff</color>
 
+    <color name="text_color_light">@android:color/white</color>
+    <color name="text_color_dark">@color/gray</color>
+
     <color name="dark_gray">#222222</color>
-    <color name="gray">#666666</color>
+    <color name="gray">#555555</color>
     <color name="light_gray">#bebebe</color>
     <color name="glass_black">#99000000</color>
     <color name="glass_white">#aaffffff</color>

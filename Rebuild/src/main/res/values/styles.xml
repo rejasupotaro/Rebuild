@@ -4,8 +4,9 @@
         <item name="android:windowAnimationStyle">@style/SlideWindowAnimationStyle</item>
     </style>
 
-    <style name="NoActionBarTheme" parent="RebuildTheme">
+    <style name="RebuildNoActionBarTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <item name="android:textColor">@color/text_color_dark</item>
     </style>
 
     <style name="TransparentActionBarTheme" parent="RebuildTheme">
