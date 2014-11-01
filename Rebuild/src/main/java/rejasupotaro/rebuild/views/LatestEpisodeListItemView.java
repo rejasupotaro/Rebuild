@@ -55,7 +55,7 @@ public class LatestEpisodeListItemView extends FrameLayout {
 
         titleTextView.setText(episode.getTitle());
         subtitleTextView.setText(StringUtils.fromHtml(episode.getDescription()).toString());
-        simpleGuestListView.setup(StringUtils.getGuestNames(episode.getDescription()));
+        simpleGuestListView.setup(StringUtils.getGuestNamesFromTitle(episode.getTitle()));
         postedAtTextView.setText(String.format("{fa-calendar}  %s", episode.getPostedAtAsString()));
         if (episode.isDownloaded()) {
             episodeDownloadButton.setText("{fa-minus}");

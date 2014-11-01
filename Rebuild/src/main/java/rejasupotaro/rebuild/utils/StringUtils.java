@@ -20,13 +20,31 @@ public final class StringUtils {
         return source.replaceAll("\n", "");
     }
 
-    public static List<String> getGuestNames(String source) {
-        List<String> guestNameList = new ArrayList<String>();
+    public static List<String> getGuestNamesFromTitle(String source) {
+        List<String> guestNames = new ArrayList<String>();
+        if (TextUtils.isEmpty(source) || !source.endsWith(")")) {
+            return guestNames;
+        }
+
+        int startIndex = source.lastIndexOf('(');
+        if (startIndex <= 0) {
+            return guestNames;
+        }
+
+        String[] names = source.substring(startIndex + 1, source.length() - 1).split(",");
+        for (String name : names) {
+            guestNames.add(name.trim());
+        }
+        return guestNames;
+    }
+
+    public static List<String> getGuestNamesFromDescription(String source) {
+        List<String> guestNames = new ArrayList<String>();
         if (TextUtils.isEmpty(source)) {
-            return guestNameList;
+            return guestNames;
         }
         if (source.indexOf("@") < 0) {
-            return guestNameList;
+            return guestNames;
         }
 
         String normarizedText = StringUtils.removeHtmlTags(source);
@@ -34,10 +52,10 @@ public final class StringUtils {
         for (int i = 1; i < splitedText.length; i++) {
             String guestName = getTwitterName(splitedText[i]);
             if (!TextUtils.isEmpty(guestName)) {
-                guestNameList.add(guestName);
+                guestNames.add(guestName);
             }
         }
-        return guestNameList;
+        return guestNames;
     }
 
     public static String buildTwitterLinkText(String source) {

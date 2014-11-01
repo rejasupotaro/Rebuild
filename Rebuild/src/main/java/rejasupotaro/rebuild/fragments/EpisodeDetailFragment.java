@@ -2,7 +2,6 @@ package rejasupotaro.rebuild.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,7 @@ public class EpisodeDetailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         setupSectionHeaders();
         ViewUtils.setTweetText(episodeDescriptionTextView, episode.getDescription());
-        guestListView.setup(StringUtils.getGuestNames(episode.getDescription()));
+        guestListView.setup(StringUtils.getGuestNamesFromTitle(episode.getTitle()));
     }
 
     private void setupSectionHeaders() {

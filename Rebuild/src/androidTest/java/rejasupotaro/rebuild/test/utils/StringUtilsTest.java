@@ -28,24 +28,50 @@ public class StringUtilsTest extends AndroidTestCase {
         }
     }
 
-    public void testGetGuestNames() {
+    public void testGetGuestNamesFromTitle() {
         {
-            List<String> guestNameList = StringUtils.getGuestNames("");
+            List<String> guestNameList = StringUtils.getGuestNamesFromTitle("");
             assertNotNull(guestNameList);
             assertTrue(guestNameList.isEmpty());
         }
         {
-            List<String> guestNameList = StringUtils.getGuestNames("xxxxx");
+            List<String> guestNameList = StringUtils.getGuestNamesFromTitle("xxxxx");
             assertNotNull(guestNameList);
             assertTrue(guestNameList.isEmpty());
         }
         {
-            List<String> guestNameList = StringUtils.getGuestNames("舘野祐一さん (@hotchpotch) をゲストに迎えて、Podcast クライアント、モバイルアプリ開発、TestFlight, WhatsApp, iOS セキュリティなどについて話しました。");
+            List<String> guestNameList = StringUtils.getGuestNamesFromTitle("64: Web+DB Press Vol.83 Aftershow (hotchpotch)");
+            assertNotNull(guestNameList);
+            assertEquals(1, guestNameList.size());
+            assertEquals("hotchpotch", guestNameList.get(0));
+        }
+        {
+            List<String> guestNameList = StringUtils.getGuestNamesFromTitle("Aftershow 63: Secret Agent Watch (naan, hak)");
+            assertNotNull(guestNameList);
+            assertEquals(2, guestNameList.size());
+            assertEquals("naan", guestNameList.get(0));
+            assertEquals("hak", guestNameList.get(1));
+        }
+    }
+
+    public void testGetGuestNamesFromDescription() {
+        {
+            List<String> guestNameList = StringUtils.getGuestNamesFromDescription("");
+            assertNotNull(guestNameList);
+            assertTrue(guestNameList.isEmpty());
+        }
+        {
+            List<String> guestNameList = StringUtils.getGuestNamesFromDescription("xxxxx");
+            assertNotNull(guestNameList);
+            assertTrue(guestNameList.isEmpty());
+        }
+        {
+            List<String> guestNameList = StringUtils.getGuestNamesFromDescription("舘野祐一さん (@hotchpotch) をゲストに迎えて、Podcast クライアント、モバイルアプリ開発、TestFlight, WhatsApp, iOS セキュリティなどについて話しました。");
             assertNotNull(guestNameList);
             assertEquals(1, guestNameList.size());
         }
         {
-            List<String> guestNameList = StringUtils.getGuestNames("adamrocker さん (@adamrocker)、 Motohiro Takayamaさん (@mootoh)をゲストに迎えて、Nexus 5, Android 4.4 などについて話しました。");
+            List<String> guestNameList = StringUtils.getGuestNamesFromDescription("adamrocker さん (@adamrocker)、 Motohiro Takayamaさん (@mootoh)をゲストに迎えて、Nexus 5, Android 4.4 などについて話しました。");
             assertNotNull(guestNameList);
             assertEquals(2, guestNameList.size());
         }
