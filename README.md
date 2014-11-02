@@ -12,7 +12,7 @@ Screenshot
 
 ### Current Version (0.10.0)
 
-<img src="https://raw.github.com/rejasupotaro/Rebuild/master/screenshot.png">
+<img src="./images/screenshot.png">
 
 Installation
 ------
@@ -71,4 +71,4 @@ Contributing
 Contributors
 ------
 
-<img src="https://raw.github.com/rejasupotaro/Rebuild/master/contributors.png" width="360">
+<img src="./images/contributors.png" width="360">
