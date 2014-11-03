@@ -77,8 +77,11 @@ public class EpisodeMediaFragment extends Fragment {
     public void setup(final Episode episode) {
         if (episode == null) {
             getActivity().finish();
+            return;
         }
+
         this.episode = episode;
+        episodeTitleTextView.setText(episode.getTitle());
 
         loadListener = new LoadListener() {
             @Override
@@ -95,8 +98,6 @@ public class EpisodeMediaFragment extends Fragment {
                 stateFrameLayout.showContent();
             }
         };
-
-        episodeTitleTextView.setText(episode.getTitle());
 
         setupMediaPlayAndPauseButton(episode);
         setupSeekBar(episode);
@@ -246,6 +247,9 @@ public class EpisodeMediaFragment extends Fragment {
     }
 
     private void updateCurrentTime(int currentPosition) {
+        if (mediaCurrentTimeTextView == null || seekBar == null) {
+            return;
+        }
         mediaCurrentTimeTextView.setText(DateUtils.formatCurrentTime(currentPosition));
         seekBar.setProgress(currentPosition);
     }
