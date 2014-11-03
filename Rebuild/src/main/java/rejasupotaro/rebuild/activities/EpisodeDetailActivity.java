@@ -69,6 +69,8 @@ public class EpisodeDetailActivity extends ActionBarActivity {
     }
 
     private void setupActionBar() {
+        setTitle("");
+
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

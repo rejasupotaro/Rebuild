@@ -17,6 +17,7 @@
         android:layout_gravity="bottom"
         android:background="@drawable/gradient_light_shadow"
         android:padding="@dimen/padding_contents"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/quaternary_text_size"
         android:textStyle="bold" />
 
