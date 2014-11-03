@@ -8,13 +8,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import rejasupotaro.rebuild.R;
-import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.data.models.Episode;
+import rejasupotaro.rebuild.media.PodcastPlayer;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
-import rejasupotaro.rebuild.rx.Events;
 import rejasupotaro.rebuild.utils.UiAnimations;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 public class MediaBarView extends FrameLayout {
     private View rootView;
@@ -41,9 +38,9 @@ public class MediaBarView extends FrameLayout {
     }
 
     private void setupViews() {
-        Events.click(mediaStopButton).subscribe(new Action1<Object>() {
+        mediaStopButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void call(Object o) {
+            public void onClick(View view) {
                 PodcastPlayer.getInstance().stop();
                 hide();
             }
@@ -57,23 +54,16 @@ public class MediaBarView extends FrameLayout {
             mediaPlayAndPauseButton.setChecked(false);
         }
 
-        Events.click(mediaPlayAndPauseButton)
-                .map(new Func1<Object, Boolean>() {
-                    @Override
-                    public Boolean call(Object o) {
-                        return mediaPlayAndPauseButton.isChecked();
-                    }
-                })
-                .subscribe(new Action1<Boolean>() {
-                    @Override
-                    public void call(Boolean isChecked) {
-                        if (isChecked) {
-                            start(episode);
-                        } else {
-                            pause(episode);
-                        }
-                    }
-                });
+        mediaPlayAndPauseButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mediaPlayAndPauseButton.isChecked()) {
+                    start(episode);
+                } else {
+                    pause(episode);
+                }
+            }
+        });
     }
 
     private void start(final Episode episode) {
@@ -117,9 +107,9 @@ public class MediaBarView extends FrameLayout {
             return;
         }
 
-        Events.click(rootView).subscribe(new Action1<Object>() {
+        rootView.setOnClickListener(new OnClickListener() {
             @Override
-            public void call(Object o) {
+            public void onClick(View view) {
                 listener.onClick(episode);
             }
         });
