@@ -11,9 +11,9 @@ import java.util.List;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.data.models.Link;
+import rejasupotaro.rebuild.listener.OnDownloadButtonClickListener;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
-import rx.subjects.PublishSubject;
 
 public class LatestEpisodeListItemView extends FrameLayout {
     private ShowNoteView showNoteView;
@@ -24,11 +24,10 @@ public class LatestEpisodeListItemView extends FrameLayout {
     private IconTextView postedAtTextView;
     private TextView downloadStateText;
 
-    public LatestEpisodeListItemView(Context context, Episode episode,
-                                     PublishSubject<Episode> downloadButtonEvent) {
+    public LatestEpisodeListItemView(Context context, Episode episode, OnDownloadButtonClickListener listener) {
         super(context);
         createView();
-        setup(episode, downloadButtonEvent);
+        setup(episode, listener);
     }
 
     private void createView() {
@@ -43,15 +42,14 @@ public class LatestEpisodeListItemView extends FrameLayout {
         addView(root);
     }
 
-    private void setup(final Episode episode, final PublishSubject<Episode> downloadButtonEvent) {
-        List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
+    private void setup(final Episode episode, final OnDownloadButtonClickListener listener) {
+        final List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
         if (linkList == null || linkList.size() <= 1) {
             showNoteView.setVisibility(View.GONE);
         } else {
             Link link = linkList.get(1);
             showNoteView.setLink(link, false);
         }
-
 
         titleTextView.setText(episode.getTitle());
         subtitleTextView.setText(StringUtils.fromHtml(episode.getDescription()).toString());
@@ -66,7 +64,7 @@ public class LatestEpisodeListItemView extends FrameLayout {
             @Override
             public void onClick(View v) {
                 UiAnimations.bounceUp(getContext(), v);
-                downloadButtonEvent.onNext(episode);
+                listener.onClick(episode);
             }
         });
     }

@@ -12,10 +12,10 @@ import java.util.List;
 
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.data.models.Episode;
+import rejasupotaro.rebuild.listener.OnDownloadButtonClickListener;
 import rejasupotaro.rebuild.utils.StringUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.LatestEpisodeListItemView;
-import rx.subjects.PublishSubject;
 
 public class EpisodeListAdapter extends ArrayAdapter<Episode> {
     private static class ViewHolder {
@@ -34,10 +34,11 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
         }
     }
 
-    private final PublishSubject<Episode> downloadButtonEvent = PublishSubject.create();
     private LayoutInflater inflater;
-    public PublishSubject<Episode> getDownloadButtonEvent() {
-        return downloadButtonEvent;
+    private OnDownloadButtonClickListener listener;
+
+    public void setDownloadButtonClickListener(OnDownloadButtonClickListener listener) {
+        this.listener = listener;
     }
 
     public EpisodeListAdapter(Context context, List<Episode> episodeList) {
@@ -55,16 +56,16 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
             return createLatestEpisodeView(position);
         }
 
-        view = newView(inflater, position, container);
+        view = newView(inflater, container);
         bindView(getItem(position), position, view);
         return view;
     }
 
     private View createLatestEpisodeView(int position) {
-        return new LatestEpisodeListItemView(getContext(), getItem(position), downloadButtonEvent);
+        return new LatestEpisodeListItemView(getContext(), getItem(position), listener);
     }
 
-    public View newView(LayoutInflater inflater, final int position, ViewGroup container) {
+    public View newView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.list_item_episode, container, false);
         ViewHolder holder = new ViewHolder(view);
         view.setTag(holder);
@@ -86,7 +87,7 @@ public class EpisodeListAdapter extends ArrayAdapter<Episode> {
             @Override
             public void onClick(View v) {
                 UiAnimations.bounceUp(getContext(), v);
-                downloadButtonEvent.onNext(item);
+                listener.onClick(item);
             }
         });
 //        disable temporary...

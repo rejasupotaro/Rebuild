@@ -22,21 +22,21 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.activities.TimelineActivity;
-import rejasupotaro.rebuild.data.adapters.EpisodeListAdapter;
 import rejasupotaro.rebuild.api.RssFeedClient;
+import rejasupotaro.rebuild.data.adapters.EpisodeListAdapter;
+import rejasupotaro.rebuild.data.loaders.TweetLoader;
+import rejasupotaro.rebuild.data.models.Episode;
+import rejasupotaro.rebuild.data.models.Tweet;
 import rejasupotaro.rebuild.dialogs.EpisodeDownloadDialog;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
-import rejasupotaro.rebuild.data.loaders.TweetLoader;
-import rejasupotaro.rebuild.data.models.Episode;
-import rejasupotaro.rebuild.data.models.Tweet;
+import rejasupotaro.rebuild.listener.OnDownloadButtonClickListener;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.views.RecentTweetView;
-import rx.functions.Action1;
 
 public class EpisodeListFragment extends Fragment {
     private static final int REQUEST_TWEET_LIST = 1;
@@ -172,19 +172,17 @@ public class EpisodeListFragment extends Fragment {
     }
 
     private boolean shouldShowError() {
-        return (episodeListView == null
-                && episodeListView.getCount() == 0);
+        return (episodeListView == null || episodeListView.getCount() == 0);
     }
 
     public void setupEpisodeListView(List<Episode> episodeList) {
         episodeListAdapter = new EpisodeListAdapter(getActivity(), episodeList);
         episodeListView.setAdapter(episodeListAdapter);
 
-        episodeListAdapter.getDownloadButtonEvent().subscribe(new Action1<Episode>() {
+        episodeListAdapter.setDownloadButtonClickListener(new OnDownloadButtonClickListener() {
             @Override
-            public void call(Episode episode) {
-                AlertDialog dialog
-                        = EpisodeDownloadDialog.newInstance(getActivity(), episode);
+            public void onClick(Episode episode) {
+                AlertDialog dialog = EpisodeDownloadDialog.newInstance(getActivity(), episode);
                 dialog.show();
             }
         });
