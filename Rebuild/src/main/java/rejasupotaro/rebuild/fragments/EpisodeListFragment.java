@@ -83,6 +83,7 @@ public class EpisodeListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         BusProvider.getInstance().unregister(this);
+        ButterKnife.reset(this);
         super.onDestroyView();
     }
 

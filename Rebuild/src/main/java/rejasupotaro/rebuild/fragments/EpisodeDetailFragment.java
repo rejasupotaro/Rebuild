@@ -52,6 +52,12 @@ public class EpisodeDetailFragment extends Fragment {
         guestListView.setup(StringUtils.getGuestNamesFromTitle(episode.getTitle()));
     }
 
+    @Override
+    public void onDestroyView() {
+        ButterKnife.reset(this);
+        super.onDestroyView();
+    }
+
     private void setupSectionHeaders() {
         sectionHeaderDescriptionView.setText("Description");
         sectionHeaderShowNotesView.setText("Show Notes");
