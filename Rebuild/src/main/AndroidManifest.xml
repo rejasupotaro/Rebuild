@@ -24,7 +24,7 @@
             android:value="rejasupotaro.rebuild.serializers.UriTypeSerializer,rejasupotaro.rebuild.serializers.DateTypeSerializer" />
 
         <activity
-            android:name="rejasupotaro.rebuild.activities.MainActivity"
+            android:name=".activities.EpisodeListActivity"
             android:launchMode="singleInstance"
             android:theme="@style/TransparentActionBarTheme">
             <intent-filter>

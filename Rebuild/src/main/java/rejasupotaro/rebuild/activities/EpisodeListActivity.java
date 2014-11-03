@@ -24,7 +24,7 @@ import rejasupotaro.rebuild.services.PodcastPlayerService;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.views.MediaBarView;
 
-public class MainActivity extends ActionBarActivity
+public class EpisodeListActivity extends ActionBarActivity
         implements EpisodeListFragment.OnEpisodeSelectListener {
     private static final String EXTRA_EPISODE_ID = "extra_episode_id";
 
@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity
     private MainThreadExecutor mainThreadExecutor = new MainThreadExecutor();
 
     public static Intent createIntent(Context context, String episodeId) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, EpisodeListActivity.class);
         intent.putExtra(EXTRA_EPISODE_ID, episodeId);
         return intent;
     }
@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_episode_list);
         ButterKnife.inject(this);
         BusProvider.getInstance().register(this);
 
