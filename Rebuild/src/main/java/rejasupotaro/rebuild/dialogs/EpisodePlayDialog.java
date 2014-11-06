@@ -1,14 +1,13 @@
 package rejasupotaro.rebuild.dialogs;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 
 import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
 import rejasupotaro.rebuild.services.EpisodeDownloadService;
 import rejasupotaro.rebuild.utils.StringUtils;
+import uk.me.lewisdeane.ldialogs.CustomDialog;
 
 public class EpisodePlayDialog {
     public interface OnSelectListener {
@@ -16,52 +15,71 @@ public class EpisodePlayDialog {
         public void startStreaming(Episode episode);
     }
 
-    public static AlertDialog newInstance(final Context context, final Episode episode, final OnSelectListener listener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(episode.getTitle());
-        builder.setMessage(StringUtils.removeHtmlTags(episode.getDescription()));
-
+    public static CustomDialog newInstance(final Context context, final Episode episode, final OnSelectListener listener) {
         if (episode.isDownloaded()) {
-            builder.setPositiveButton("PLAY NOW", new DialogInterface.OnClickListener() {
+            return createPlayNowDialog(context, episode, listener);
+        } else {
+            return createStreamingDialog(context, episode, listener);
+        }
+    }
+
+    private static CustomDialog createPlayNowDialog(final Context context, final Episode episode, final OnSelectListener listener) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(context, episode.getTitle(), "PLAY NOW");
+        builder.content(StringUtils.removeHtmlTags(episode.getDescription()));
+        builder.negativeText("CANCEL DOWNLOAD");
+        CustomDialog dialog = builder.build();
+        dialog.setClickListener(new CustomDialog.ClickListener() {
+            @Override
+            public void onConfirmClick() {
+                listener.playNow(episode);
+            }
+
+            @Override
+            public void onCancelClick() {
+                episode.clearCache();
+                episode.save();
+                BusProvider.getInstance().post(new ClearEpisodeCacheEvent());
+            }
+        });
+        return dialog;
+    }
+
+    private static CustomDialog createStreamingDialog(final Context context, final Episode episode, final OnSelectListener listener) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(context, episode.getTitle(), "STREAMING");
+        builder.content(StringUtils.removeHtmlTags(episode.getDescription()));
+
+        if (EpisodeDownloadService.isDownloading(episode)) {
+            builder.negativeText("CANCEL DOWNLOAD");
+        } else {
+            builder.negativeText("DOWNLOAD");
+        }
+
+        CustomDialog dialog = builder.build();
+        if (EpisodeDownloadService.isDownloading(episode)) {
+            dialog.setClickListener(new CustomDialog.ClickListener() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    listener.playNow(episode);
+                public void onConfirmClick() {
+                    listener.startStreaming(episode);
                 }
-            });
-            builder.setNegativeButton("CLEAR CACHE", new DialogInterface.OnClickListener() {
+
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    episode.clearCache();
-                    episode.save();
-                    BusProvider.getInstance().post(new ClearEpisodeCacheEvent());
+                public void onCancelClick() {
+                    EpisodeDownloadService.cancel(context, episode);
                 }
             });
         } else {
-            builder.setPositiveButton("STREAMING", new DialogInterface.OnClickListener() {
+            dialog.setClickListener(new CustomDialog.ClickListener() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+                public void onConfirmClick() {
                     listener.startStreaming(episode);
                 }
+
+                @Override
+                public void onCancelClick() {
+                    EpisodeDownloadService.startDownload(context, episode);
+                }
             });
-            if (EpisodeDownloadService.isDownloading(episode)) {
-                builder.setNegativeButton("CANCEL DOWNLOAD", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        EpisodeDownloadService.cancel(context, episode);
-                    }
-                });
-            } else {
-                builder.setNegativeButton("DOWNLOAD", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        EpisodeDownloadService.startDownload(context, episode);
-                    }
-                });
-            }
         }
-
-        builder.setCancelable(true);
-
-        return builder.create();
+        return dialog;
     }
 }

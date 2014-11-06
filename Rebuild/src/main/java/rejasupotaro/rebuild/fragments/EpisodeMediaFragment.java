@@ -1,6 +1,5 @@
 package rejasupotaro.rebuild.fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.dialogs.EpisodePlayDialog;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.EpisodePlayStartEvent;
@@ -26,12 +26,12 @@ import rejasupotaro.rebuild.events.ReceiveResumeActionEvent;
 import rejasupotaro.rebuild.listener.LoadListener;
 import rejasupotaro.rebuild.listener.OnPlayerSeekListener;
 import rejasupotaro.rebuild.media.PodcastPlayer;
-import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.notifications.PodcastPlayerNotification;
 import rejasupotaro.rebuild.tools.OnContextExecutor;
 import rejasupotaro.rebuild.utils.DateUtils;
 import rejasupotaro.rebuild.utils.UiAnimations;
 import rejasupotaro.rebuild.views.StateFrameLayout;
+import uk.me.lewisdeane.ldialogs.CustomDialog;
 
 public class EpisodeMediaFragment extends Fragment {
     @InjectView(R.id.episode_title)
@@ -145,7 +145,7 @@ public class EpisodeMediaFragment extends Fragment {
     }
 
     private void showEpisodePlayDialog(Episode episode) {
-        AlertDialog dialog = EpisodePlayDialog.newInstance(getActivity(), episode, new EpisodePlayDialog.OnSelectListener() {
+        CustomDialog dialog = EpisodePlayDialog.newInstance(getActivity(), episode, new EpisodePlayDialog.OnSelectListener() {
             @Override
             public void playNow(Episode episode) {
                 start(episode);
