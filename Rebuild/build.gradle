@@ -18,6 +18,9 @@ apply from : "${rootDir}/gradle/gradle-findbugs/findbugs.gradle"
 repositories {
     maven { url 'https://raw.github.com/rejasupotaro/AsyncRssClient/master/AsyncRssClient/repository' }
     maven { url 'https://raw.github.com/rejasupotaro/RobotGirl/master/RobotGirl/repository' }
+    flatDir {
+        dirs 'src/main/libs'
+    }
 }
 
 dependencies {
@@ -33,6 +36,7 @@ dependencies {
     compile 'com.netflix.rxjava:rxjava-android:0.18.4'
     compile 'com.joanzapata.android:android-iconify:1.0.6'
     compile "com.mixpanel.android:mixpanel-android:4.2.1@aar"
+    compile 'uk.me.lewisdeane.ldialogs:ldialogs:1.0@aar'
 
     androidTestCompile fileTree(dir: 'src/androidTest/libs', include: '*.jar')
     androidTestCompile 'com.squareup:fest-android:1.0.7'
