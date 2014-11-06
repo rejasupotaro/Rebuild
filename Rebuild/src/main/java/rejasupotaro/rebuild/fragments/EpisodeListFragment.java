@@ -1,7 +1,6 @@
 package rejasupotaro.rebuild.fragments;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -37,6 +36,7 @@ import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.views.RecentTweetView;
+import uk.me.lewisdeane.ldialogs.CustomDialog;
 
 public class EpisodeListFragment extends Fragment {
     private static final int REQUEST_TWEET_LIST = 1;
@@ -183,7 +183,7 @@ public class EpisodeListFragment extends Fragment {
         episodeListAdapter.setDownloadButtonClickListener(new OnDownloadButtonClickListener() {
             @Override
             public void onClick(Episode episode) {
-                AlertDialog dialog = EpisodeDownloadDialog.newInstance(getActivity(), episode);
+                CustomDialog dialog = EpisodeDownloadDialog.newInstance(getActivity(), episode);
                 dialog.show();
             }
         });
