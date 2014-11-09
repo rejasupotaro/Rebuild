@@ -1,8 +1,9 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:orientation="horizontal">
+    card_view:cardCornerRadius="2dp">
 
     <ImageView
         android:id="@+id/site_thumbnail"
@@ -25,4 +26,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_clickable" />
-</FrameLayout>
+</android.support.v7.widget.CardView>

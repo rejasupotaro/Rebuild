@@ -8,19 +8,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingBottom="@dimen/spacing_xsmall"
-        android:paddingLeft="@dimen/spacing_small"
-        android:paddingRight="@dimen/spacing_xsmall"
-        android:paddingTop="@dimen/spacing_xsmall" />
+        android:paddingBottom="1dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="1dp"
+        android:paddingTop="1dp" />
 
     <rejasupotaro.rebuild.views.ShowNoteView
         android:id="@+id/right_item"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingBottom="@dimen/spacing_xsmall"
-        android:paddingLeft="@dimen/spacing_xsmall"
-        android:paddingRight="@dimen/spacing_small"
-        android:paddingTop="@dimen/spacing_xsmall" />
+        android:paddingBottom="1dp"
+        android:paddingLeft="1dp"
+        android:paddingRight="2dp"
+        android:paddingTop="1dp" />
 </LinearLayout>
 
