@@ -4,7 +4,7 @@
     android:background="@color/base_color1"
     android:orientation="vertical">
 
-    <include layout="@layout/header_episode_list" />
+    <include layout="@layout/list_header_episode" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/episode_list"
