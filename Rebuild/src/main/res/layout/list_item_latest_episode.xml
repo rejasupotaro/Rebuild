@@ -1,11 +1,14 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/spacing_small"
+    card_view:cardCornerRadius="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/container_dropshadow"
         android:orientation="vertical"
         android:padding="@dimen/spacing_large">
 
@@ -97,8 +100,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="right"
-        android:layout_marginTop="-2dp"
-        android:layout_marginRight="-2dp"
+        android:layout_marginRight="-8dp"
+        android:layout_marginTop="-4dp"
         android:src="@drawable/ribbon" />
-
-</FrameLayout>
+</android.support.v7.widget.CardView>

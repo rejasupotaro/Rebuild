@@ -4,14 +4,10 @@
     android:background="@color/base_color1"
     android:orientation="vertical">
 
-    <include layout="@layout/header_episode_list" />
+    <include layout="@layout/list_header_episode" />
 
-    <ListView
-        android:id="@+id/episode_list_view"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/episode_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/spacing_medium"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/spacing_medium"
-        android:fadingEdge="none" />
+        android:layout_height="match_parent" />
 </LinearLayout>
