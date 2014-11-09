@@ -45,6 +45,7 @@ public class SimpleGuestListView extends LinearLayout {
         onContextExecutor.execute(getContext(), new Runnable() {
             @Override
             public void run() {
+                removeAllViews();
                 for (Guest guest : guests) {
                     if (Guest.isEmpty(guest)) {
                         continue;

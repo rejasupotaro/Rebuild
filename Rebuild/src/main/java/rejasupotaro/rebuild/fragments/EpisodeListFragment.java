@@ -7,11 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.squareup.otto.Subscribe;
 
@@ -31,20 +31,17 @@ import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.ClearEpisodeCacheEvent;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.events.LoadEpisodeListCompleteEvent;
-import rejasupotaro.rebuild.listener.OnDownloadButtonClickListener;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
-import rejasupotaro.rebuild.utils.IntentUtils;
-import rejasupotaro.rebuild.utils.ToastUtils;
 import rejasupotaro.rebuild.views.RecentTweetView;
 import uk.me.lewisdeane.ldialogs.CustomDialog;
 
 public class EpisodeListFragment extends Fragment {
     private static final int REQUEST_TWEET_LIST = 1;
 
-    @InjectView(R.id.episode_list_view)
-    ListView episodeListView;
     @InjectView(R.id.recent_tweet_view)
     RecentTweetView recentTweetView;
+    @InjectView(R.id.episode_list)
+    RecyclerView episodeListView;
 
     private RssFeedClient rssFeedClient = new RssFeedClient();
     private MainThreadExecutor mainThreadExecutor = new MainThreadExecutor();
@@ -89,15 +86,22 @@ public class EpisodeListFragment extends Fragment {
 
     private void setupListView() {
         setupListViewHeader();
-        setupListViewFooter();
 
-        episodeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        episodeListView.setHasFixedSize(false);
+        episodeListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        episodeListAdapter = new EpisodeListAdapter(new EpisodeListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Episode episode = (Episode) episodeListView.getItemAtPosition(position);
+            public void onClick(Episode episode) {
                 listener.onSelect(episode);
             }
+
+            @Override
+            public void onDownloadButtonClick(Episode episode) {
+                CustomDialog dialog = EpisodeDownloadDialog.newInstance(getActivity(), episode);
+                dialog.show();
+            }
         });
+        episodeListView.setAdapter(episodeListAdapter);
     }
 
     private void setupListViewHeader() {
@@ -109,17 +113,6 @@ public class EpisodeListFragment extends Fragment {
                     }
                 }
         );
-    }
-
-    private void setupListViewFooter() {
-        View footer = View.inflate(getActivity(), R.layout.footer_episode_list, null);
-        footer.findViewById(R.id.miyagawa_text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.openMiyagawaProfile(getActivity());
-            }
-        });
-        episodeListView.addFooterView(footer, null, false);
     }
 
     private void requestFeed() {
@@ -138,9 +131,7 @@ public class EpisodeListFragment extends Fragment {
 
             @Override
             public void onFailure() {
-                if (shouldShowError()) {
-                    ToastUtils.showNetworkError(getActivity());
-                }
+                // do nothing
             }
         });
     }
@@ -172,21 +163,8 @@ public class EpisodeListFragment extends Fragment {
         );
     }
 
-    private boolean shouldShowError() {
-        return (episodeListView == null || episodeListView.getCount() == 0);
-    }
-
-    public void setupEpisodeListView(List<Episode> episodeList) {
-        episodeListAdapter = new EpisodeListAdapter(getActivity(), episodeList);
-        episodeListView.setAdapter(episodeListAdapter);
-
-        episodeListAdapter.setDownloadButtonClickListener(new OnDownloadButtonClickListener() {
-            @Override
-            public void onClick(Episode episode) {
-                CustomDialog dialog = EpisodeDownloadDialog.newInstance(getActivity(), episode);
-                dialog.show();
-            }
-        });
+    public void setupEpisodeListView(List<Episode> episodes) {
+        episodeListAdapter.setEpisodes(episodes);
     }
 
     @Subscribe

@@ -1,7 +1,8 @@
 package rejasupotaro.rebuild.views;
 
-import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.IconTextView;
 import android.widget.TextView;
@@ -24,14 +25,13 @@ public class LatestEpisodeListItemView extends FrameLayout {
     private IconTextView postedAtTextView;
     private TextView downloadStateText;
 
-    public LatestEpisodeListItemView(Context context, Episode episode, OnDownloadButtonClickListener listener) {
-        super(context);
-        createView();
-        setup(episode, listener);
+    public LatestEpisodeListItemView(ViewGroup parent) {
+        super(parent.getContext());
+        createView(parent);
     }
 
-    private void createView() {
-        View root = View.inflate(getContext(), R.layout.list_item_latest_episode, null);
+    private void createView(ViewGroup parent) {
+        View root = LayoutInflater.from(getContext()).inflate(R.layout.list_item_latest_episode, parent, false);
         showNoteView = (ShowNoteView) root.findViewById(R.id.show_note);
         titleTextView = (TextView) root.findViewById(R.id.episode_title);
         subtitleTextView = (TextView) root.findViewById(R.id.episode_subtitle);
@@ -42,7 +42,7 @@ public class LatestEpisodeListItemView extends FrameLayout {
         addView(root);
     }
 
-    private void setup(final Episode episode, final OnDownloadButtonClickListener listener) {
+    public void bind(final Episode episode, final OnDownloadButtonClickListener listener) {
         final List<Link> linkList = Link.Parser.toLinkList(episode.getShowNotes());
         if (linkList == null || linkList.size() <= 1) {
             showNoteView.setVisibility(View.GONE);
