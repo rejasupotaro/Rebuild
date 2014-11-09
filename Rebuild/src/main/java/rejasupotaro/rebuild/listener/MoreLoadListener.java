@@ -14,7 +14,7 @@ public abstract class MoreLoadListener implements AbsListView.OnScrollListener {
     private boolean isFinish = false;
 
     public MoreLoadListener(Context context, ListView listView) {
-        this(context, listView, View.inflate(context, R.layout.list_item_progress, null));
+        this(context, listView, View.inflate(context, R.layout.list_footer_progress, null));
     }
 
     public MoreLoadListener(Context context, ListView listView, View footerView) {

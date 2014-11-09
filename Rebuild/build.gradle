@@ -39,6 +39,7 @@ dependencies {
     compile 'com.joanzapata.android:android-iconify:1.0.6'
     compile "com.mixpanel.android:mixpanel-android:4.2.1@aar"
     compile 'uk.me.lewisdeane.ldialogs:ldialogs:1.0@aar'
+    compile 'com.github.castorflex.smoothprogressbar:library-circular:1.0.1'
 
     androidTestCompile fileTree(dir: 'src/androidTest/libs', include: '*.jar')
     androidTestCompile 'com.squareup:fest-android:1.0.7'

@@ -10,26 +10,29 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
 import rejasupotaro.rebuild.data.models.Tweet;
 import rejasupotaro.rebuild.utils.PicassoHelper;
 
 public class TweetListAdapter extends BindableAdapter<Tweet> {
-    private static class ViewHolder {
+    public static class ViewHolder {
+        @InjectView(R.id.user_profile_image)
         ImageView userProfileImageView;
+        @InjectView(R.id.created_at_text)
         TextView createdAtTextView;
+        @InjectView(R.id.user_name_text)
         TextView userNameTextView;
+        @InjectView(R.id.tweet_text)
         TextView tweetTextView;
+        @InjectView(R.id.retweet_count_text)
         TextView retweetCountTextView;
+        @InjectView(R.id.favorite_count_text)
         TextView favoriteCountTextView;
 
         public ViewHolder(View view) {
-            userProfileImageView = (ImageView) view.findViewById(R.id.user_profile_image);
-            createdAtTextView = (TextView) view.findViewById(R.id.created_at_text);
-            userNameTextView = (TextView) view.findViewById(R.id.user_name_text);
-            tweetTextView = (TextView) view.findViewById(R.id.tweet_text);
-            retweetCountTextView = (TextView) view.findViewById(R.id.retweet_count_text);
-            favoriteCountTextView = (TextView) view.findViewById(R.id.favorite_count_text);
+            ButterKnife.inject(this, view);
         }
     }
 

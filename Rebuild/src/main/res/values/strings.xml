@@ -7,6 +7,7 @@
     <string name="activity_recent_changes">Recent Changes</string>
     <string name="activity_licenses">OSS Licenses</string>
 
+    <string name="loading">Loading...</string>
     <string name="rebuild_description">A Podcast by Tatsuhiko Miyagawa. Talking about Tech, Software Development and Gadgets.</string>
     <string name="app_description">The best podcast player to listen to Rebuild.fm.</string>
     <string name="copyright">Rebuild.fm for Android, Version %1$s. Copyright © 2013 by rejasupotaro</string>
