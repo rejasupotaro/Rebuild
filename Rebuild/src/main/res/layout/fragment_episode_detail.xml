@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_large"
+        android:textColor="@color/text_color_dark"
         android:textSize="@dimen/tertiary_text_size" />
 
     <rejasupotaro.rebuild.views.VerticalSeparator

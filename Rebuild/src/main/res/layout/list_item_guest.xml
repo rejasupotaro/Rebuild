@@ -39,6 +39,7 @@
                 android:id="@+id/guest_name_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_color_dark"
                 android:textSize="@dimen/secondary_text_size"
                 android:textStyle="bold" />
 
@@ -46,9 +47,10 @@
                 android:id="@+id/description_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xsmall"
                 android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_xsmall"
                 android:autoLink="all"
+                android:textColor="@color/text_color_dark"
                 android:textSize="@dimen/tertiary_text_size" />
         </LinearLayout>
     </LinearLayout>
