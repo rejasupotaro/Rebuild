@@ -1,0 +1,13 @@
+<resources>
+
+    <style name="TransparentActionBarTheme" parent="RebuildTheme">
+        <item name="android:windowAnimationStyle">@style/SlideWindowAnimationStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@color/dark_gray</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+</resources>

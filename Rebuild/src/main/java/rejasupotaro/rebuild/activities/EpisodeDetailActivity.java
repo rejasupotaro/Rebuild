@@ -16,11 +16,11 @@ import com.squareup.otto.Subscribe;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rejasupotaro.rebuild.R;
+import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.events.BusProvider;
 import rejasupotaro.rebuild.events.DownloadEpisodeCompleteEvent;
 import rejasupotaro.rebuild.fragments.EpisodeDetailFragment;
 import rejasupotaro.rebuild.fragments.EpisodeMediaFragment;
-import rejasupotaro.rebuild.data.models.Episode;
 import rejasupotaro.rebuild.tools.MainThreadExecutor;
 import rejasupotaro.rebuild.utils.IntentUtils;
 import rejasupotaro.rebuild.views.ObservableScrollView;
@@ -109,6 +109,11 @@ public class EpisodeDetailActivity extends ActionBarActivity {
                 titleTextView.setAlpha(alpha / 255F);
             }
         });
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            int statusBarHeight = StatusBar.getStatusBarHeight(this);
+//            statusBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight));
+//        }
     }
 
     @Override
