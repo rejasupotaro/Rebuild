@@ -99,3 +99,16 @@
 -dontwarn twitter4j.TwitterAPIMonitor
 -dontwarn twitter4j.internal.**
 -dontwarn twitter4j.Annotation
+
+# Butterknife
+-dontwarn butterknife.internal.**
+-keep class **$$ViewInjector { *; }
+-keepnames class * { @butterknife.InjectView *;}
+
+# OkHttp
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+-dontwarn com.squareup.okhttp.**
+
+# RxJava
+-dontwarn rx.**
