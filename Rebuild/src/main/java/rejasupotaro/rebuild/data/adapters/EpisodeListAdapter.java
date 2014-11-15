@@ -28,6 +28,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void setEpisodes(List<Episode> episodes) {
         this.episodes = episodes;
+        notifyDataSetChanged();
     }
 
     public EpisodeListAdapter(OnItemClickListener onItemClickListener) {
@@ -35,10 +36,10 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-        if (ViewType.isFooter(i)) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (ViewType.isFooter(viewType)) {
             return FooterViewHolder.create(parent);
-        } else if (ViewType.isHeader(i)) {
+        } else if (ViewType.isHeader(viewType)) {
             return HeaderViewHolder.create(parent, onItemClickListener);
         } else {
             return ItemViewHolder.create(parent, onItemClickListener);
@@ -46,19 +47,19 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
-        switch (getItemViewType(i)) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+        switch (getItemViewType(position)) {
             case ViewType.FOOTER: {
                 ((FooterViewHolder) viewHolder).bind();
                 break;
             }
             case ViewType.HEADER: {
-                Episode episode = episodes.get(i);
+                Episode episode = episodes.get(position);
                 ((HeaderViewHolder) viewHolder).bind(episode);
                 break;
             }
             default: {
-                Episode episode = episodes.get(i);
+                Episode episode = episodes.get(position);
                 ((ItemViewHolder) viewHolder).bind(episode);
                 break;
             }
@@ -67,7 +68,7 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return episodes.size() + 1; // items + footer
+        return episodes.size() + (episodes.size() <= 0 ? 0 : 1); // items + footer (if needed)
     }
 
     @Override
