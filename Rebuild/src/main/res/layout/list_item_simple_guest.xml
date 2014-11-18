@@ -19,6 +19,6 @@
         android:layout_marginLeft="@dimen/spacing_medium"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="@dimen/text_size_body" />
+        android:textSize="@dimen/text_size_xsmall" />
 
 </LinearLayout>

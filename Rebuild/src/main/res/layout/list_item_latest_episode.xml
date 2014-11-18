@@ -33,7 +33,7 @@
                 android:layout_marginLeft="@dimen/spacing_medium"
                 android:layout_weight="1"
                 android:textColor="@color/main_color1"
-                android:textSize="@dimen/text_size_subhead"
+                android:textSize="@dimen/text_size_small"
                 android:textStyle="bold" />
 
         </LinearLayout>

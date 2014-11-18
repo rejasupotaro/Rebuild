@@ -59,7 +59,7 @@
 
     <style name="AboutListItemHeader">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_subhead</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:padding">@dimen/padding_contents</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:layout_width">match_parent</item>

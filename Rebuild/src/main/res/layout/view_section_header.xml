@@ -11,5 +11,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textColor="@color/gray"
-        android:textSize="@dimen/text_size_subhead" />
+        android:textSize="@dimen/text_size_small" />
 </FrameLayout>
