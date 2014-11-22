@@ -17,10 +17,6 @@ Screenshot
 Installation
 ------
 
-### GET IT ON Google Play
-
-[![](https://dl.dropboxusercontent.com/u/54255753/blog/201402/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=rejasupotaro.rebuild)
-
 ### Build on local
 
 ```
