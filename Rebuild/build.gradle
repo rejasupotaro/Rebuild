@@ -3,7 +3,7 @@ buildscript {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.2'
+        classpath 'com.android.tools.build:gradle:1.2.3'
         classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
         classpath 'org.notlocalhost.gradle:gradle-calabash-android-plugin:0.1.1'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.9.1'
@@ -78,7 +78,7 @@ android {
     buildTypes {
         debug {
             debuggable true
-            runProguard false
+            minifyEnabled false
             versionNameSuffix '.debug'
         }
 
@@ -86,7 +86,7 @@ android {
             release {
                 signingConfig signingConfigs.release
                 debuggable false
-                runProguard true
+                minifyEnabled true
                 proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
                 proguardFile file('proguard-release.txt')
             }
